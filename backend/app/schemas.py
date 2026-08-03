@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field, field_validator
 
 
 class CreateSessionRequest(BaseModel):
-    length: int = Field(default=40, ge=10, le=120, description="试卷题量，默认 40")
+    length: int = Field(default=50, ge=10, le=120, description="试卷题量，默认 50")
     dimensions: Optional[List[str]] = Field(
         default=None, description="仅覆盖指定维度，默认覆盖全部 10 个核心维度"
     )

@@ -9,7 +9,7 @@
 | `docs/QuestionBankSchema.md`, `question-bank/question_bank_readme.md` | 题库数据结构：单题多维度权重（-5~+5）、12 个场景分类、`must`/`experimental` 特殊分类 |
 | `docs/DimensionSystem.md` | 10 个核心价值维度（self_protection / altruism / freedom / security / privacy / wealth / rule_orientation / pragmatism / collectivism / long_term），维度是连续轴，不代表好坏 |
 | `docs/DataValidation.md` | 题库加载时必须做 schema 校验、权重范围校验（-5~+5，yes/no 不同时为 0，维度不重复） |
-| `docs/QuestionSelection.md` | **禁止**全局随机抽题，必须按维度分层组卷，保证跨用户可比较 |
+| `docs/QuestionSelection.md` | **禁止**全局随机抽题，必须按场景分类 + 难度分层组卷，保证跨用户可比较 |
 | `docs/TestDesign.md` | 测试会话生命周期：创建会话 → 分层抽题 → 作答 Y/N → 计分 → 一致性分析 → 生成结果 |
 | `docs/ScoringAlgorithm.md` | 按权重累加 → 归一化到 0-100 → 一致性分析 |
 | `docs/ResultInterpretation.md` | 结果只描述倾向，不做人格定性；输出矛盾组合分析与"情境依赖"提示 |
@@ -28,7 +28,7 @@ backend/
 │   ├── db.py               # SQLite 持久化 (对应 docs/DatabaseSchema.md)
 │   ├── dimensions.py        # 10 个核心维度的静态元数据 + 矛盾组合表
 │   ├── question_bank.py     # 题库加载 + 校验 (对应 docs/DataValidation.md)
-│   ├── selection.py         # 分层随机组卷 (对应 docs/QuestionSelection.md)
+│   ├── selection.py         # 按场景分类 + 难度分层组卷 (对应 docs/QuestionSelection.md)
 │   ├── scoring.py           # 计分 / 归一化 / 一致性 / 结果解读
 │   ├── schemas.py           # Pydantic 请求/响应模型
 │   └── data/
@@ -90,14 +90,14 @@ python scripts/validate_bank.py
 ### 创建测试会话
 ```
 POST /api/test/session
-Body: {"length": 40, "dimensions": null}   # dimensions 可选，默认覆盖全部 10 维度
--> {"session_id": "...", "question_count": 40}
+Body: {"length": 50, "dimensions": null}   # dimensions 可选，默认覆盖全部 10 维度
+-> {"session_id": "...", "question_count": 50}
 ```
 
 ### 获取下一题
 ```
 GET /api/test/session/{id}/question
--> {"question_id": "Q00001", "content": "...", "type": "YN", "index": 0, "total": 40}
+-> {"question_id": "Q00001", "content": "...", "type": "YN", "index": 0, "total": 50}
 ```
 若已答完全部题目，返回 409。
 
@@ -105,7 +105,7 @@ GET /api/test/session/{id}/question
 ```
 POST /api/test/session/{id}/answer
 Body: {"question_id": "Q00001", "answer": "Y", "duration": 8}
--> {"status": "ok", "answered_count": 1, "total": 40, "completed": false}
+-> {"status": "ok", "answered_count": 1, "total": 50, "completed": false}
 ```
 
 ### 获取结果
@@ -135,9 +135,12 @@ GET /api/test/session/{id}/result
 
 ## 6. 关键设计取舍
 
-- **分层组卷**：每份试卷固定包含相同的一批 `must` 分类"锚定题"
-  （数量为 `min(4, length // 8)`），随后把剩余名额尽量均分到目标维度，
-  逐维度随机抽题，配额缺口自动从题库其余题目回补，全部选出后再整体打乱顺序。
+- **按场景分类 + 难度分层组卷**：默认 50 题 = `must` 5 + `experimental` 1 + 常规 10 类 44。
+  - `must`（40 题）按顺序每 4 题一桶（如 `Q00441-444`）各抽 1 题得 10 个候选，再随机取 5 题作锚定；
+  - `experimental` 固定抽 1 题；
+  - 其余 10 个常规分类随机挑 4 类各抽 5 题、6 类各抽 4 题；
+  - 每个常规分类内再按难度（easy/medium/hard）比例分层采样，某难度不足时用同类
+    其余题目补齐，全部选出后再整体打乱顺序。
   这满足了 `docs/QuestionSelection.md` 里"分层随机、覆盖可比较"的要求，
   同时避免"全局随机抽 N 题"导致维度缺失。
 - **归一化**：`score = (raw - min_possible) / (max_possible - min_possible) * 100`，

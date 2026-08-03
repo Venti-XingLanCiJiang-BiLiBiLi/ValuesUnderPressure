@@ -17,7 +17,7 @@ Response:
 ```json
 {
   "session_id": "xxx",
-  "question_count": 40
+  "question_count": 50
 }
 ```
 

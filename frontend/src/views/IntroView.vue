@@ -2,7 +2,7 @@
 /**
  * IntroView — 开屏介绍页
  * --------------------------------------------------------------------------
- * 选择题量 (20/40/60) → 创建会话 → 跳转 /test
+ * 选择题量 (30/50/70) → 创建会话 → 跳转 /test
  */
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -12,7 +12,7 @@ import { BRAND } from '@/config/branding'
 const router = useRouter()
 const store = useTestStore()
 
-const questionCount = ref(40)
+const questionCount = ref(50)
 const starting = ref(false)
 const localError = ref<string | null>(null)
 
@@ -100,7 +100,7 @@ async function handleStart() {
       </label>
       <div class="grid grid-cols-3 gap-2 mb-6">
         <button
-          v-for="n in [20, 40, 60]"
+          v-for="n in [30, 50, 70]"
           :key="n"
           type="button"
           class="rounded-xl py-3 text-sm font-medium transition-all ring-1"
@@ -113,7 +113,7 @@ async function handleStart() {
         >
           {{ n }} 题
           <span class="block text-xs mt-0.5 opacity-70">
-            {{ n === 20 ? '快速' : n === 40 ? '推荐' : '深入' }}
+            {{ n === 30 ? '快速' : n === 50 ? '推荐' : '深入' }}
           </span>
         </button>
       </div>
