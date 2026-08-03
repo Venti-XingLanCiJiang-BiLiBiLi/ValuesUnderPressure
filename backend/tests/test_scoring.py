@@ -9,7 +9,7 @@
 import pytest
 
 from app.question_bank import QuestionBank
-from app.scoring import _consistency, score_session
+from app.scoring import _consistency, _dimension_confidence, score_session
 
 # 4 道仅覆盖 altruism 的题，权重两两互为反向，方便手算预期值。
 # 单题可能贡献区间 [-3, +3]；4 题全答时 min=-12 / max=+12。
@@ -149,3 +149,67 @@ def test_consistency_low_marks_uncertain(altruism_bank):
     result = score_session(questions, answers)
     assert result.dimensions["altruism"].consistency == 0.0
     assert "altruism" in result.uncertain_dimensions
+
+
+# ---------------------------------------------------------------------------
+# 维度级置信度 confidence
+# ---------------------------------------------------------------------------
+
+FULL_CONSISTENT = {"A1": "N", "A2": "N", "A3": "Y", "A4": "Y"}  # 全答且方向一致
+FULL_CONTRADICT = {"A1": "Y", "A2": "N", "A3": "N", "A4": "Y"}  # 全答但矛盾
+PARTIAL_2Q = {"A1": "Y", "A2": "Y"}  # 只答一半
+
+
+def test_dimension_confidence_in_range(altruism_bank):
+    """维度结果包含 confidence 且范围在 0~1。"""
+    _, questions = altruism_bank
+    r = score_session(questions, FULL_CONSISTENT).dimensions["altruism"]
+    assert 0.0 <= r.confidence <= 1.0
+    # 全答且一致 -> 高置信度
+    assert r.confidence > 0.5
+
+
+def test_dimension_confidence_penalizes_contradiction(altruism_bank):
+    """高度矛盾的回答会拉低 confidence。"""
+    _, questions = altruism_bank
+    consistent = score_session(questions, FULL_CONSISTENT).dimensions["altruism"]
+    contradict = score_session(questions, FULL_CONTRADICT).dimensions["altruism"]
+    assert contradict.confidence < consistent.confidence
+
+
+def test_dimension_confidence_penalizes_few_questions(altruism_bank):
+    """同等作答质量下，题量/权重覆盖不足会拉低 confidence。"""
+    _, questions = altruism_bank
+    full = score_session(questions, FULL_CONSISTENT).dimensions["altruism"]
+    partial = score_session(questions, PARTIAL_2Q).dimensions["altruism"]
+    assert partial.question_count == 2
+    assert full.question_count == 4
+    assert partial.confidence < full.confidence
+
+
+def test_dimension_confidence_quantity_factor():
+    """相同一致性/覆盖下，题量越少 confidence 越低（<5 时自动衰减）。"""
+    low = _dimension_confidence(
+        question_count=2, consistency=0.5, weight_coverage=0.5
+    )
+    high = _dimension_confidence(
+        question_count=8, consistency=0.5, weight_coverage=0.5
+    )
+    assert low < high
+    assert low < 0.5
+
+
+def test_dimension_confidence_zero_when_no_answers():
+    """无作答题目时 confidence 为 0。"""
+    assert _dimension_confidence(question_count=0, consistency=None, weight_coverage=0.0) == 0.0
+
+
+def test_dimension_confidence_bounded_0_1():
+    """confidence 始终落在 0~1。"""
+    for args in (
+        dict(question_count=0, consistency=None, weight_coverage=0.0),
+        dict(question_count=50, consistency=1.0, weight_coverage=1.0),
+        dict(question_count=3, consistency=0.0, weight_coverage=0.2),
+    ):
+        value = _dimension_confidence(**args)
+        assert 0.0 <= value <= 1.0

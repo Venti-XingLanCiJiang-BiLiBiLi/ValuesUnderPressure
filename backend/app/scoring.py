@@ -19,6 +19,8 @@ CONSISTENCY_LOW_THRESHOLD = 0.5
 # >= 60 高分倾向 / <= 40 低分倾向 / 40~60 中间地带
 HIGH_SCORE_THRESHOLD = 60
 LOW_SCORE_THRESHOLD = 40
+# 维度级置信度：低于该题量时 confidence 会按数量因子衰减（样本量不足 -> 低可信）
+MIN_QUESTION_THRESHOLD = 5
 
 
 @dataclass
@@ -33,6 +35,7 @@ class DimensionResult:
     tendency: str  # 描述方向的文字
     description: str
     question_count: int
+    confidence: float  # 0-1，维度级可信度（综合题量 / 一致性 / 权重覆盖）
 
 
 @dataclass
@@ -61,6 +64,16 @@ def score_session(
     max_possible: Dict[str, int] = {}
     signed_contribs: Dict[str, List[int]] = {}
     counts: Dict[str, int] = {}
+
+    # 每个维度在本次试卷中的总权重范围（无论是否作答），
+    # 用于计算“权重覆盖程度”：已作答题目权重区间 / 该维度全部题目权重区间。
+    total_min_possible: Dict[str, int] = {}
+    total_max_possible: Dict[str, int] = {}
+    for q in questions:
+        for w in q.weights:
+            dim = w.dimension
+            total_min_possible[dim] = total_min_possible.get(dim, 0) + min(w.yes, w.no)
+            total_max_possible[dim] = total_max_possible.get(dim, 0) + max(w.yes, w.no)
 
     for q in questions:
         answer = answers.get(q.id)
@@ -109,6 +122,16 @@ def score_session(
 
         tendency, description = _describe(dim, meta, normalized, consistency)
 
+        # 权重覆盖程度：已作答题目权重区间 / 该维度全部题目权重区间（0~1）。
+        total_span = total_max_possible.get(dim, hi) - total_min_possible.get(dim, lo)
+        answered_span = hi - lo
+        weight_coverage = answered_span / total_span if total_span > 0 else 1.0
+        confidence = _dimension_confidence(
+            question_count=counts[dim],
+            consistency=consistency,
+            weight_coverage=weight_coverage,
+        )
+
         dim_results[dim] = DimensionResult(
             dimension=dim,
             name=meta["name"],
@@ -120,6 +143,7 @@ def score_session(
             tendency=tendency,
             description=description,
             question_count=counts[dim],
+            confidence=confidence,
         )
 
     overall_confidence = round(sum(consistencies) / len(consistencies), 2) if consistencies else 0.0
@@ -131,6 +155,30 @@ def score_session(
         conflicts=conflicts,
         uncertain_dimensions=uncertain,
     )
+
+
+def _dimension_confidence(
+    question_count: int,
+    consistency: Optional[float],
+    weight_coverage: float,
+) -> float:
+    """计算单个维度的可信度 (0-1)。
+
+    综合三个信号：
+      1. 权重覆盖程度 weight_coverage（0~1）：已作答题目权重区间占比；
+      2. 作答一致性 consistency（0~1）：方向越稳定可信度越高，
+         样本不足（None）或高度矛盾都会拉低置信度；
+      3. 题目数量 quantity（0~1）：低于 MIN_QUESTION_THRESHOLD 时按比例衰减，
+         实现“该维度题目数量过少 -> confidence 自动降低”。
+
+    权重：0.5 * 覆盖 + 0.3 * 一致性 + 0.2 * 题量。
+    """
+    if question_count <= 0:
+        return 0.0
+    quantity = min(1.0, question_count / MIN_QUESTION_THRESHOLD)
+    consistency_factor = consistency if consistency is not None else 0.0
+    confidence = 0.5 * weight_coverage + 0.3 * consistency_factor + 0.2 * quantity
+    return round(max(0.0, min(1.0, confidence)), 2)
 
 
 def _consistency(contribs: List[int]) -> Optional[float]:
@@ -189,5 +237,10 @@ def _conflict_analysis(dim_results: Dict[str, DimensionResult]) -> List[dict]:
 
 
 def to_api_dimensions(result: TestResult) -> Dict[str, float]:
-    """docs/API.md 中 result 接口的简化字段: {dimension: score}"""
+    """[已废弃] 旧版 result 接口的简化字段 {dimension: score}。
+
+    自维度级置信度上线后，result 接口改为返回完整维度对象
+    （含 confidence / consistency / question_count 等，见 schemas.DimensionScore），
+    本函数保留仅为兼容历史调用，新代码请直接使用 result.dimensions。
+    """
     return {d: r.score for d, r in result.dimensions.items()}

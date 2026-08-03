@@ -5,7 +5,8 @@ SQLite 持久化层。
   - test_sessions 增加 length / dimensions_json / question_ids_json / status 字段，
     用于保存本次试卷的抽题结果，保证"获取下一题"接口在多次请求间保持一致；
   - answers 增加 answered_at；
-  - results 表按维度落一行，同时保存整体 confidence 到 sessions 表。
+  - results 表按维度落一行（含维度级 confidence），同时保存整体 confidence 到 sessions 表；
+  - answer_history 表记录答案修改历史（题目、旧答案、新答案、修改时间）。
 """
 
 from __future__ import annotations
@@ -53,7 +54,18 @@ CREATE TABLE IF NOT EXISTS results (
     dimension TEXT NOT NULL,
     score REAL NOT NULL,
     consistency REAL,
+    confidence REAL,
     PRIMARY KEY (session_id, dimension),
+    FOREIGN KEY (session_id) REFERENCES test_sessions(id)
+);
+
+CREATE TABLE IF NOT EXISTS answer_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id TEXT NOT NULL,
+    question_id TEXT NOT NULL,
+    old_answer TEXT NOT NULL,
+    new_answer TEXT NOT NULL,
+    changed_at TEXT NOT NULL,
     FOREIGN KEY (session_id) REFERENCES test_sessions(id)
 );
 """
@@ -63,6 +75,29 @@ def init_db() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     with get_conn() as conn:
         conn.executescript(SCHEMA)
+        _migrate(conn)
+
+
+def _column_exists(conn: sqlite3.Connection, table: str, column: str) -> bool:
+    rows = conn.execute(f"PRAGMA table_info({table})").fetchall()
+    return any(r["name"] == column for r in rows)
+
+
+def _table_exists(conn: sqlite3.Connection, table: str) -> bool:
+    rows = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name = ?", (table,)
+    ).fetchall()
+    return bool(rows)
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    """对已存在的旧库做增量迁移：为 results 表补 confidence 列。
+
+    CREATE TABLE IF NOT EXISTS 不会给已存在的表加列，因此旧数据库需要 ALTER；
+    用表存在性 + 列存在性双重判断，避免在极旧的库（尚无 results 表）上误执行 ALTER。
+    """
+    if _table_exists(conn, "results") and not _column_exists(conn, "results", "confidence"):
+        conn.execute("ALTER TABLE results ADD COLUMN confidence REAL")
 
 
 @contextmanager
@@ -139,6 +174,47 @@ def get_answers(session_id: str) -> dict:
         return {row["question_id"]: row["answer"] for row in cur.fetchall()}
 
 
+def get_answer(session_id: str, question_id: str) -> Optional[str]:
+    """返回某题当前答案；尚未作答返回 None。"""
+    with get_conn() as conn:
+        cur = conn.execute(
+            "SELECT answer FROM answers WHERE session_id = ? AND question_id = ?",
+            (session_id, question_id),
+        )
+        row = cur.fetchone()
+        return row["answer"] if row else None
+
+
+def record_answer_change(
+    session_id: str, question_id: str, old_answer: str, new_answer: str
+) -> None:
+    """记录一次答案修改（old -> new）。"""
+    with get_conn() as conn:
+        conn.execute(
+            """INSERT INTO answer_history
+               (session_id, question_id, old_answer, new_answer, changed_at)
+               VALUES (?, ?, ?, ?, ?)""",
+            (
+                session_id,
+                question_id,
+                old_answer,
+                new_answer,
+                datetime.datetime.now().isoformat(timespec="seconds"),
+            ),
+        )
+
+
+def get_answer_history(session_id: str) -> List[dict]:
+    """按时间顺序返回该会话的答案修改历史。"""
+    with get_conn() as conn:
+        cur = conn.execute(
+            """SELECT question_id, old_answer, new_answer, changed_at
+               FROM answer_history WHERE session_id = ? ORDER BY id ASC""",
+            (session_id,),
+        )
+        return [dict(row) for row in cur.fetchall()]
+
+
 def save_results(session_id: str, dimension_scores: dict, confidence: float) -> None:
     with get_conn() as conn:
         conn.execute(
@@ -146,9 +222,10 @@ def save_results(session_id: str, dimension_scores: dict, confidence: float) -> 
         )
         for dim, r in dimension_scores.items():
             conn.execute(
-                """INSERT INTO results (session_id, dimension, score, consistency)
-                   VALUES (?, ?, ?, ?)
+                """INSERT INTO results (session_id, dimension, score, consistency, confidence)
+                   VALUES (?, ?, ?, ?, ?)
                    ON CONFLICT(session_id, dimension) DO UPDATE SET
-                     score=excluded.score, consistency=excluded.consistency""",
-                (session_id, dim, r["score"], r["consistency"]),
+                     score=excluded.score, consistency=excluded.consistency,
+                     confidence=excluded.confidence""",
+                (session_id, dim, r["score"], r["consistency"], r.get("confidence")),
             )
