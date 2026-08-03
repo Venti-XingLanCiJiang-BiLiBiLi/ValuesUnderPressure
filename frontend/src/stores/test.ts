@@ -18,6 +18,11 @@ export const useTestStore = defineStore('test', () => {
   const answers = ref<Record<string, AnswerValue>>({})
   const questionStartTime = ref<number>(0)
 
+  // 已显示过的题目缓存（按 index），用于「上一题」回退查看/修改
+  const seenQuestions = ref<Record<number, QuestionResponse>>({})
+  // 顺序答题进度（后端指针：下一个未答题的 index）；回退查看时不回退
+  const progressIndex = ref(0)
+
   // 结果
   const result = ref<ResultResponse | null>(null)
 
@@ -39,6 +44,8 @@ export const useTestStore = defineStore('test', () => {
     currentIndex.value = 0
     currentQuestion.value = null
     answers.value = {}
+    seenQuestions.value = {}
+    progressIndex.value = 0
     result.value = null
     loading.value = false
     error.value = null
@@ -63,6 +70,8 @@ export const useTestStore = defineStore('test', () => {
       if (q.status === 'fulfilled') {
         currentQuestion.value = q.value
         currentIndex.value = q.value.index
+        seenQuestions.value[q.value.index] = q.value
+        progressIndex.value = q.value.index
         questionStartTime.value = Date.now()
       } else {
         // 拉不到题 = 会话已完成
@@ -100,6 +109,8 @@ export const useTestStore = defineStore('test', () => {
     try {
       currentQuestion.value = await testApi.nextQuestion(sessionId.value)
       currentIndex.value = currentQuestion.value.index
+      seenQuestions.value[currentQuestion.value.index] = currentQuestion.value
+      progressIndex.value = currentQuestion.value.index
       questionStartTime.value = Date.now()
     } catch (e) {
       const err = e as ApiError
@@ -131,6 +142,16 @@ export const useTestStore = defineStore('test', () => {
       if (resp.completed) {
         finished.value = true
         await fetchResult()
+      } else if (currentIndex.value < progressIndex.value) {
+        // 回退修改后重新作答：前进到下一题（缓存优先，回到进度点再向后端取）
+        const next = currentIndex.value + 1
+        if (next < progressIndex.value) {
+          currentIndex.value = next
+          currentQuestion.value = seenQuestions.value[next]
+          questionStartTime.value = Date.now()
+        } else {
+          await loadNextQuestion()
+        }
       } else {
         await loadNextQuestion()
       }
@@ -138,6 +159,35 @@ export const useTestStore = defineStore('test', () => {
       error.value = e instanceof ApiError ? e.message : '提交答案失败'
     } finally {
       loading.value = false
+    }
+  }
+
+  /** 是否可以回退到上一题（上一题已显示过且缓存存在）。 */
+  const canGoBack = computed(
+    () => currentIndex.value > 0 && !!seenQuestions.value[currentIndex.value - 1],
+  )
+
+  /** 回退状态（正在查看已答题目）时是否可前进。 */
+  const canGoNext = computed(() => currentIndex.value < progressIndex.value)
+
+  /** 回退到上一题（仅限已显示过、有缓存的题）。 */
+  function goBack() {
+    if (!canGoBack.value || loading.value) return
+    currentIndex.value -= 1
+    currentQuestion.value = seenQuestions.value[currentIndex.value]
+    questionStartTime.value = Date.now()
+  }
+
+  /** 回退状态下前进到下一题（缓存优先，回到进度点则向后端取题）。 */
+  async function goNext() {
+    if (!canGoNext.value || loading.value) return
+    const next = currentIndex.value + 1
+    if (next < progressIndex.value) {
+      currentIndex.value = next
+      currentQuestion.value = seenQuestions.value[next]
+      questionStartTime.value = Date.now()
+    } else {
+      await loadNextQuestion()
     }
   }
 
@@ -177,6 +227,10 @@ export const useTestStore = defineStore('test', () => {
     currentIndex,
     currentQuestion,
     answers,
+    seenQuestions,
+    progressIndex,
+    canGoBack,
+    canGoNext,
     result,
     loading,
     error,
@@ -186,6 +240,8 @@ export const useTestStore = defineStore('test', () => {
     startSession,
     loadNextQuestion,
     submitAnswer,
+    goBack,
+    goNext,
     fetchResult,
     hydrate,
     restoreFromCache,

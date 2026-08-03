@@ -2,7 +2,14 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [1.1.1] - 2026-08-03
+## [1.2.0] - 2026-08-03
+
+### 新增
+
+- **题目页「上一题 / 下一题」导航**（`frontend/src/views/TestView.vue`、`frontend/src/stores/test.ts`）：
+  作答过程中可回退到已答过的题目查看/修改答案（防止误触 Y/N 无法回头）。
+  前端按 index 缓存已显示题目；回退后重新作答会覆盖旧答案并自动前进到下一题，
+  回退状态显示「下一题」可随时回到进度点。进度条显示实际答题进度，不因回退查看而倒退。
 
 ### 修复
 
