@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import json
 import logging
+from contextlib import asynccontextmanager
+from typing import AsyncIterator
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -38,6 +40,29 @@ from .selection import build_test
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("apersonalitytest")
 
+_bank: QuestionBank | None = None
+
+
+def get_bank() -> QuestionBank:
+    global _bank
+    if _bank is None:
+        _bank = load_question_bank()
+    return _bank
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    db.init_db()
+    bank = get_bank()
+    logger.info(
+        "题库就绪: 来源=%s 有效题数=%d 无效题数=%d",
+        bank.source,
+        len(bank.questions),
+        len(bank.invalid),
+    )
+    yield
+
+
 app = FastAPI(
     title="取舍之间 · Values Under Pressure API",
     description=(
@@ -53,11 +78,7 @@ app = FastAPI(
         "- `GET  /api/health` — 服务与题库状态\n\n"
         "接口与数据约定见仓库 `docs/API.md`。"
     ),
-    version="0.1.0",
-    contact={
-        "name": "取舍之间 (Values Under Pressure)",
-        "url": "https://github.com/Venti-XingLanCiJiang-BiLiBiLi/ValuesUnderPressure",
-    },
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -66,27 +87,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-_bank: QuestionBank | None = None
-
-
-def get_bank() -> QuestionBank:
-    global _bank
-    if _bank is None:
-        _bank = load_question_bank()
-    return _bank
-
-
-@app.on_event("startup")
-def on_startup() -> None:
-    db.init_db()
-    bank = get_bank()
-    logger.info(
-        "题库就绪: 来源=%s 有效题数=%d 无效题数=%d",
-        bank.source,
-        len(bank.questions),
-        len(bank.invalid),
-    )
 
 
 @app.get("/api/health")

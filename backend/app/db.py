@@ -18,6 +18,8 @@ import uuid
 from contextlib import contextmanager
 from typing import Iterator, List, Optional
 
+_UTC = datetime.timezone.utc
+
 DB_PATH = os.environ.get(
     "APERSONALITYTEST_DB_PATH",
     os.path.join(os.path.dirname(__file__), "data", "app.db"),
@@ -86,7 +88,7 @@ def create_session(
                VALUES (?, ?, ?, ?, ?, ?, 0, 'in_progress')""",
             (
                 session_id,
-                datetime.datetime.utcnow().isoformat(),
+                datetime.datetime.now(_UTC).isoformat(),
                 question_version,
                 length,
                 json.dumps(dimensions, ensure_ascii=False),
@@ -125,7 +127,7 @@ def save_answer(session_id: str, question_id: str, answer: str, duration: Option
                ON CONFLICT(session_id, question_id) DO UPDATE SET
                  answer=excluded.answer, duration=excluded.duration,
                  answered_at=excluded.answered_at""",
-            (session_id, question_id, answer, duration, datetime.datetime.utcnow().isoformat()),
+            (session_id, question_id, answer, duration, datetime.datetime.now(_UTC).isoformat()),
         )
 
 
