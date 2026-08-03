@@ -61,23 +61,27 @@ def score_session(
     counts: Dict[str, int] = {}
 
     for q in questions:
+        answer = answers.get(q.id)
+        if answer not in ("Y", "N"):
+            # 未作答的题目不参与任何统计：
+            # raw / min / max / 一致性必须基于同一批已作答题目，否则归一化会被
+            # 未作答题目的潜在区间"稀释"，分数不再能正确表示价值倾向强度。
+            continue
         for w in q.weights:
             dim = w.dimension
+            contrib = _contribution(w.yes, w.no, answer)
+
             raw_scores.setdefault(dim, 0)
             min_possible.setdefault(dim, 0)
             max_possible.setdefault(dim, 0)
             signed_contribs.setdefault(dim, [])
             counts.setdefault(dim, 0)
 
+            raw_scores[dim] += contrib
             min_possible[dim] += min(w.yes, w.no)
             max_possible[dim] += max(w.yes, w.no)
-
-            answer = answers.get(q.id)
-            if answer in ("Y", "N"):
-                contrib = _contribution(w.yes, w.no, answer)
-                raw_scores[dim] += contrib
-                signed_contribs[dim].append(contrib)
-                counts[dim] += 1
+            signed_contribs[dim].append(contrib)
+            counts[dim] += 1
 
     dim_results: Dict[str, DimensionResult] = {}
     consistencies: List[float] = []
@@ -130,16 +134,22 @@ def score_session(
 def _consistency(contribs: List[int]) -> Optional[float]:
     """同一维度内多题作答方向的一致程度 (0-1)。
 
-    做法: 把每题贡献值的符号 (>0 / <0 / 0) 与"多数方向"比较，
-    一致占比越高代表该维度价值倾向越稳定；样本 < 2 时无法判断，返回 None。
+    做法: 把每题贡献值按其权重大小进行合成——
+    consistency = |Σ contrib| / Σ|contrib|。
+
+    - 取值 0~1：1 表示所有作答方向完全一致（高一致性），
+      0 表示正负贡献相互抵消（情境依赖/矛盾）；
+    - 贡献绝对值越大，对一致性影响越大（考虑了权重大小，而非只数符号）；
+    - 有效样本 < 2（或总贡献为 0，无信号）时无法判断，返回 None。
     """
     nonzero = [c for c in contribs if c != 0]
     if len(nonzero) < 2:
         return None
-    positive = sum(1 for c in nonzero if c > 0)
-    negative = len(nonzero) - positive
-    majority = max(positive, negative)
-    return round(majority / len(nonzero), 2)
+    total_magnitude = sum(abs(c) for c in nonzero)
+    if total_magnitude == 0:
+        return None
+    aligned = abs(sum(nonzero))
+    return round(aligned / total_magnitude, 2)
 
 
 def _describe(

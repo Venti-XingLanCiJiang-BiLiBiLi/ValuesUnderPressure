@@ -61,6 +61,11 @@ INFO:question_bank:Loaded development fallback question bank: .../app/data/quest
 > `app/data/questions.json` 只是**开发回退样例**（真实题库的子集），
 > 不应把两份正式题库复制到两处——正式数据一律以 `question-bank/questions.json` 为准。
 
+**生产/开发回退行为**：设置环境变量 `APP_ENV=production`（或 `prod`）时，若正式题库
+（`question-bank/questions.json`）缺失，后端会直接报错退出，**禁止静默回退**到开发样例；
+未设置 `APP_ENV`（默认开发环境）时，正式题库缺失才允许回退到 `app/data/questions.json`，
+保证本地/测试环境可启动。
+
 题库加载时会自动执行 `docs/DataValidation.md` 中的规则；不满足规则的题目会被
 跳过并记录原因（见 `/api/health` 或 `scripts/validate_bank.py` 输出），不会导致
 服务整体启动失败。

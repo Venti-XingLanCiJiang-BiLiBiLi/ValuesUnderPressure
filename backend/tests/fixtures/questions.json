@@ -1,0 +1,282 @@
+[
+  {
+    "id": "MU01",
+    "content": "must question 1",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "altruism", "yes": -3, "no": 3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU02",
+    "content": "must question 2",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "self_protection", "yes": 5, "no": -5 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU03",
+    "content": "must question 3",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "freedom", "yes": -2, "no": 2 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU04",
+    "content": "must question 4",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "security", "yes": 4, "no": -4 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU05",
+    "content": "must question 5",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "privacy", "yes": 4, "no": -4 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU06",
+    "content": "must question 6",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "wealth", "yes": -5, "no": 5 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU07",
+    "content": "must question 7",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "rule_orientation", "yes": 3, "no": -3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "MU08",
+    "content": "must question 8",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "medium",
+    "tags": [],
+    "weights": [{ "dimension": "collectivism", "yes": -3, "no": 3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TA1",
+    "content": "altruism q1",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "altruism", "yes": -3, "no": 3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TA2",
+    "content": "altruism q2",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "altruism", "yes": 3, "no": -3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TS1",
+    "content": "self_protection q1",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "self_protection", "yes": 5, "no": -5 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TS2",
+    "content": "self_protection q2",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "self_protection", "yes": -5, "no": 5 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TF1",
+    "content": "freedom q1",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "freedom", "yes": -2, "no": 2 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TF2",
+    "content": "freedom q2",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "freedom", "yes": 2, "no": -2 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TE1",
+    "content": "security q1",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "security", "yes": 4, "no": -4 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TE2",
+    "content": "security q2",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "security", "yes": -4, "no": 4 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TP1",
+    "content": "privacy q1",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "privacy", "yes": 4, "no": -4 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TP2",
+    "content": "privacy q2",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "privacy", "yes": -4, "no": 4 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TW1",
+    "content": "wealth q1",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "wealth", "yes": 5, "no": -5 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TW2",
+    "content": "wealth q2",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "wealth", "yes": -5, "no": 5 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TR1",
+    "content": "rule_orientation q1",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "rule_orientation", "yes": 3, "no": -3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TR2",
+    "content": "rule_orientation q2",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "rule_orientation", "yes": -3, "no": 3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TG1",
+    "content": "pragmatism q1",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "pragmatism", "yes": 2, "no": -2 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TG2",
+    "content": "pragmatism q2",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "pragmatism", "yes": -2, "no": 2 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TC1",
+    "content": "collectivism q1",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "collectivism", "yes": -3, "no": 3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TC2",
+    "content": "collectivism q2",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "collectivism", "yes": 3, "no": -3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TL1",
+    "content": "long_term q1",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "long_term", "yes": 3, "no": -3 }],
+    "metadata": { "version": 1, "status": "active" }
+  },
+  {
+    "id": "TL2",
+    "content": "long_term q2",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [],
+    "weights": [{ "dimension": "long_term", "yes": -3, "no": 3 }],
+    "metadata": { "version": 1, "status": "active" }
+  }
+]

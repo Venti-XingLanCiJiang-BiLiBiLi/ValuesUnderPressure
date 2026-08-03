@@ -196,8 +196,14 @@ def get_result(session_id: str):
     questions = _session_questions(row)
     answers = db.get_answers(session_id)
 
-    if not answers:
-        raise HTTPException(409, "尚未作答任何题目，无法生成结果")
+    # 结果必须基于完整作答：未完成全部题目时返回 409，避免把部分作答
+    # 当作完整画像输出（归一化、一致性都需要完整样本才有效）。
+    if len(answers) < len(questions):
+        raise HTTPException(
+            409,
+            f"测试尚未完成：已作答 {len(answers)}/{len(questions)}，"
+            "请完成所有题目后再获取结果",
+        )
 
     result = score_session(questions, answers)
 

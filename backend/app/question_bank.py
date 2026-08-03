@@ -25,14 +25,25 @@ logger = logging.getLogger("question_bank")
 #   1. 显式传入的 path / 环境变量 QUESTION_BANK_PATH（自定义来源）
 #   2. 生产题库：<repo>/question-bank/questions.json
 #   3. 开发回退：backend/app/data/questions.json（内置样例子集）
+#
+# 生产/开发判定：环境变量 APP_ENV=production|prod 视为生产环境。
+#   - 生产环境禁止静默回退：正式题库缺失时直接抛错，绝不加载开发样例；
+#   - 开发环境（默认）允许回退到内置样例题库。
 PRODUCTION_BANK_PATH = os.path.join(
     os.path.dirname(__file__), "..", "..", "question-bank", "questions.json"
 )
 FALLBACK_BANK_PATH = os.path.join(os.path.dirname(__file__), "data", "questions.json")
 
 
+def _is_production() -> bool:
+    return os.environ.get("APP_ENV", "").strip().lower() in ("production", "prod")
+
+
 def _candidates(path: Optional[str]) -> List[tuple]:
-    """返回 [(kind, path), ...]，kind ∈ {custom, production, fallback}。"""
+    """返回 [(kind, path), ...]，kind ∈ {custom, production, fallback}。
+
+    生产环境下不列入开发回退候选，避免静默 fallback。
+    """
     candidates: List[tuple] = []
     if path:
         candidates.append(("custom", path))
@@ -40,7 +51,8 @@ def _candidates(path: Optional[str]) -> List[tuple]:
     if env_path:
         candidates.append(("custom", env_path))
     candidates.append(("production", PRODUCTION_BANK_PATH))
-    candidates.append(("fallback", FALLBACK_BANK_PATH))
+    if not _is_production():
+        candidates.append(("fallback", FALLBACK_BANK_PATH))
     return candidates
 
 
@@ -124,6 +136,13 @@ def _validate_raw(raw: dict, seen_ids: set) -> List[str]:
 def load_question_bank(path: Optional[str] = None) -> "QuestionBank":
     for kind, candidate in _candidates(path):
         if not candidate or not os.path.isfile(candidate):
+            # 生产环境下不存在的题库来源必须显式报错，禁止静默回退
+            # （回退候选在生产模式下根本不会被列入）。
+            if _is_production():
+                raise FileNotFoundError(
+                    f"[production] 题库文件不存在，禁止回退开发样例: "
+                    f"{candidate or '(未设置 QUESTION_BANK_PATH)'}"
+                )
             continue
         with open(candidate, "r", encoding="utf-8") as f:
             raw_list = json.load(f)

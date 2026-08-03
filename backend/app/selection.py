@@ -23,9 +23,21 @@ DEFAULT_LENGTH = 40
 ANCHOR_COUNT = 4
 
 
-def _anchor_questions(bank: QuestionBank, count: int) -> List[Question]:
-    must_pool = sorted(bank.by_category("must"), key=lambda q: q.id)
-    return must_pool[:count]
+def _anchor_questions(
+    bank: QuestionBank, count: int, rng: random.Random
+) -> List[Question]:
+    """从 must 分类中随机抽取指定数量的锚定题。
+
+    - 锚定题必须是 category == must 的题目；
+    - 使用调用方传入的带 seed 的 rng，保证同 seed 下可复现；
+    - 数量不足时返回全部 must 题。
+    """
+    must_pool = bank.by_category("must")
+    if count <= 0 or not must_pool:
+        return []
+    if count >= len(must_pool):
+        return list(must_pool)
+    return rng.sample(must_pool, count)
 
 
 def build_test(
@@ -36,7 +48,7 @@ def build_test(
 ) -> List[Question]:
     """按维度分层生成一份随机试卷。
 
-    - 每份试卷固定包含相同的"必答"锚定题（category == must），保证跨用户可比较；
+    - 每份试卷从 must 分类中随机抽取一组"锚定题"（可复现，seed 相同则结果相同）；
     - 剩余名额在目标维度间尽量均分配额，逐维度随机抽题；
     - 一题可同时覆盖多个维度，因此实际维度覆盖数通常会超过名义配额；
     - 若某维度候选题不足，缺口自动回补给题量充足的维度。
@@ -49,7 +61,9 @@ def build_test(
     selected: List[Question] = []
     selected_ids = set()
 
-    anchors = _anchor_questions(bank, min(ANCHOR_COUNT, max(0, length // 8)))
+    anchors = _anchor_questions(
+        bank, min(ANCHOR_COUNT, max(0, length // 8)), rng
+    )
     for q in anchors:
         selected.append(q)
         selected_ids.add(q.id)
