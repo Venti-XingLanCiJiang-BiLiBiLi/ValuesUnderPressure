@@ -2,6 +2,46 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [0.5.1] - 2026-08-03
+
+### 新增
+
+- **维度筛选组卷**（`backend/app/selection.py`）：`POST /api/test/session` 的 `dimensions` 参数从"仅 API 兼容保留"变为实际生效。指定维度后仅抽取匹配题目，缺口按常规 → must → experimental 优先级回补。
+
+### 修复
+
+- **`db.py`**：`datetime.datetime.utcnow()` → `datetime.datetime.now(datetime.UTC)`（Python 3.12+ 弃用警告）。
+- **`main.py`**：`@app.on_event("startup")` → `lifespan` context manager（FastAPI 弃用警告）。
+- **`selection.py`** 回补缺口改为三级分层优先级（常规分类 → must → experimental），避免回补时混入 must/experimental 题稀释试卷结构。
+- **`ResultView.vue`** `uncertain_dimensions` 区块文案：标题从"数据不足的维度"改为"作答一致性偏低的维度"，描述从"作答题数过少"改为"作答方向不一致，可能受具体情境影响较大"（该列表实际是由低一致性触发，并非题数少）。
+- **`theme.ts`** `CONSISTENCY_THRESHOLDS.moderate` 从 0.6 改为 0.5，与后端 `scoring.py` 的 `CONSISTENCY_LOW_THRESHOLD` 对齐，消除 DimensionBar"情境依赖"标签与 uncertain_dimensions 列表的不一致。
+- **结果页刷新恢复**（`useSessionRestore.ts` / `test.ts` / `App.vue` / `ResultView.vue`）：测试结果缓存到 sessionStorage，刷新结果页无需后端即可恢复展示。
+
+### 清理
+
+- 删除空目录 `backend/app/routers/`（重构遗留）。
+
+## [0.5.0] - 2026-08-03
+
+### 变更
+
+- **组卷算法重构**（`backend/app/selection.py`）：由「按维度分层」改为「**按场景分类 + 难度分层**」抽题，默认试卷题量由 40 增至 **50 题**。
+  - `must`：40 题按顺序每 4 题一桶（`Q00441-444`、`Q00445-448`…）各抽 1 题，得 10 个候选后再随机取 **5 题**（用于跨用户锚定）。
+  - `experimental`：固定随机抽 **1 题**。
+  - 其余 10 个常规分类：每类随机抽 **4~5 题**（随机挑 4 类各 5 题、6 类各 4 题，合计 44 题）。
+  - 常规分类内**按难度（easy/medium/hard）比例分层采样**（最大余数法）：稀缺难度不过度采样，某难度不足时用同类其余题目补齐。
+- 后端 `POST /api/test/session` 默认题量 40 → **50**；前端默认/推荐题量同步为 **50**。
+- 前端题量选项由 20/40/60 调整为 **30 / 50 / 70**（默认 50，标为「推荐」）。
+
+### 测试
+
+- 重写 `backend/tests/test_selection.py`：覆盖 must 桶抽题、seed 可复现、分类配额（默认 50 = 5 + 1 + 44）、难度分层采样，直接使用正式题库（`question-bank/questions.json`）。
+- 后端完整测试通过（34 项）。
+
+### 文档
+
+- `docs/QuestionSelection.md` 更新为「按场景分类 + 难度分层」组卷说明。
+
 ## [0.4.0] - 2026-08-03
 
 ### 新增
