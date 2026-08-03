@@ -5,6 +5,20 @@ from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, field_validator
 
 
+__all__ = [
+    "AnswersResponse",
+    "AnswerHistoryEntry",
+    "ConflictItem",
+    "CreateSessionRequest",
+    "CreateSessionResponse",
+    "DimensionScore",
+    "QuestionResponse",
+    "ResultResponse",
+    "SubmitAnswerRequest",
+    "SubmitAnswerResponse",
+]
+
+
 class CreateSessionRequest(BaseModel):
     length: int = Field(default=50, ge=10, le=120, description="试卷题量，默认 50")
     dimensions: Optional[List[str]] = Field(
@@ -38,11 +52,32 @@ class SubmitAnswerRequest(BaseModel):
         return v
 
 
+class AnswerHistoryEntry(BaseModel):
+    """答案修改历史记录。"""
+
+    question_id: str
+    old_answer: str
+    new_answer: str
+    changed_at: str
+
+
 class SubmitAnswerResponse(BaseModel):
     status: str
     answered_count: int
     total: int
     completed: bool
+    answer_history: List[AnswerHistoryEntry] = Field(
+        default_factory=list,
+        description="本次会话的答案修改历史（多次提交时累计返回）",
+    )
+
+
+class AnswersResponse(BaseModel):
+    """当前答案 + 修改历史（docs/API.md 答题修改规则）。"""
+
+    session_id: str
+    answers: Dict[str, str]
+    answer_history: List[AnswerHistoryEntry]
 
 
 class DimensionScore(BaseModel):
@@ -53,6 +88,7 @@ class DimensionScore(BaseModel):
     description: str
     consistency: Optional[float]
     question_count: int
+    confidence: float  # 0-1，维度级可信度
 
 
 class ConflictItem(BaseModel):

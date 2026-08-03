@@ -25,6 +25,8 @@ from . import db
 from .dimensions import DIMENSIONS
 from .question_bank import QuestionBank, load_question_bank
 from .schemas import (
+    AnswerHistoryEntry,
+    AnswersResponse,
     ConflictItem,
     CreateSessionRequest,
     CreateSessionResponse,
@@ -72,8 +74,9 @@ app = FastAPI(
         "## 模块\n"
         "- `POST /api/test/session` — 创建测试会话（分层组卷）\n"
         "- `GET  /api/test/session/{id}/question` — 取下一题\n"
-        "- `POST /api/test/session/{id}/answer` — 提交 Y/N 答案\n"
-        "- `GET  /api/test/session/{id}/result` — 拿结果（10 维度 + 矛盾分析）\n"
+        "- `POST /api/test/session/{id}/answer` — 提交 Y/N 答案（允许修改已提交答案，记录历史）\n"
+        "- `GET  /api/test/session/{id}/answers` — 当前答案与修改历史\n"
+        "- `GET  /api/test/session/{id}/result` — 拿结果（10 维度 + 矛盾分析 + 维度置信度）\n"
         "- `GET  /api/dimensions` — 10 个核心维度的元数据\n"
         "- `GET  /api/health` — 服务与题库状态\n\n"
         "接口与数据约定见仓库 `docs/API.md`。"
@@ -175,7 +178,12 @@ def submit_answer(session_id: str, req: SubmitAnswerRequest):
         # 允许对已出现过的题目进行补答/修改，不移动指针
         new_idx = idx
 
+    # 允许修改已提交的答案（价值观测试不是考试）：
+    # 修改不改变答题进度，但必须记录修改历史 answer_history。
+    old_answer = db.get_answer(session_id, req.question_id)
     db.save_answer(session_id, req.question_id, req.answer, req.duration)
+    if old_answer is not None and old_answer != req.answer:
+        db.record_answer_change(session_id, req.question_id, old_answer, req.answer)
 
     answers = db.get_answers(session_id)
     completed = new_idx >= len(questions)
@@ -187,6 +195,22 @@ def submit_answer(session_id: str, req: SubmitAnswerRequest):
         answered_count=len(answers),
         total=len(questions),
         completed=completed,
+        answer_history=[
+            AnswerHistoryEntry(**h) for h in db.get_answer_history(session_id)
+        ],
+    )
+
+
+@app.get("/api/test/session/{session_id}/answers", response_model=AnswersResponse)
+def get_answers(session_id: str):
+    """返回当前答案与修改历史（答题修改规则见 docs/API.md）。"""
+    _session_or_404(session_id)
+    return AnswersResponse(
+        session_id=session_id,
+        answers=db.get_answers(session_id),
+        answer_history=[
+            AnswerHistoryEntry(**h) for h in db.get_answer_history(session_id)
+        ],
     )
 
 
@@ -216,6 +240,7 @@ def get_result(session_id: str):
             description=r.description,
             consistency=r.consistency,
             question_count=r.question_count,
+            confidence=r.confidence,
         )
         for dim, r in result.dimensions.items()
     }
@@ -223,7 +248,11 @@ def get_result(session_id: str):
     db.save_results(
         session_id,
         {
-            dim: {"score": r.score, "consistency": r.consistency}
+            dim: {
+                "score": r.score,
+                "consistency": r.consistency,
+                "confidence": r.confidence,
+            }
             for dim, r in result.dimensions.items()
         },
         result.confidence,

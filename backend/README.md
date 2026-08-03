@@ -105,8 +105,11 @@ GET /api/test/session/{id}/question
 ```
 POST /api/test/session/{id}/answer
 Body: {"question_id": "Q00001", "answer": "Y", "duration": 8}
--> {"status": "ok", "answered_count": 1, "total": 50, "completed": false}
+-> {"status": "ok", "answered_count": 1, "total": 50, "completed": false,
+    "answer_history": []}
 ```
+允许修改已提交的答案：修改不改变进度，但会写入 `answer_history`（旧答案、新答案、修改时间）。
+当前答案与完整修改历史见 `GET /api/test/session/{id}/answers`。
 
 ### 获取结果
 ```
@@ -117,7 +120,7 @@ GET /api/test/session/{id}/result
      "dimensions": {
        "privacy": {"dimension": "privacy", "name": "隐私保护", "score": 82.0,
                     "tendency": "隐私保护", "description": "...",
-                    "consistency": 0.83, "question_count": 4}
+                    "consistency": 0.83, "question_count": 4, "confidence": 0.8}
      },
      "confidence": 0.78,
      "conflicts": [
@@ -127,7 +130,8 @@ GET /api/test/session/{id}/result
      "uncertain_dimensions": []
    }
 ```
-在作答未完成时也可调用，返回基于已作答题目的阶段性结果（`completed=false`）。
+每个维度额外返回 0~1 的 `confidence`（维度级可信度，综合题量 / 一致性 / 权重覆盖）。
+未作答全部题目时返回 HTTP 409，不输出部分画像。
 
 ### 其它
 - `GET /api/health` — 服务与题库加载状态

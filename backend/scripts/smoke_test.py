@@ -43,8 +43,8 @@ def main():
 
     print("\n=== 维度结果 ===")
     for dim, r in result.dimensions.items():
-        print(f"{dim:18s} score={r.score:6.1f} consistency={r.consistency} "
-              f"tendency={r.tendency} n={r.question_count}")
+        print(f"{dim:18s} score={r.score:6.1f} confidence={r.confidence:.2f} "
+              f"consistency={r.consistency} tendency={r.tendency} n={r.question_count}")
 
     print("\n整体置信度:", result.confidence)
     print("矛盾组合:", result.conflicts or "无")
@@ -52,7 +52,10 @@ def main():
 
     db.save_results(
         session_id,
-        {d: {"score": r.score, "consistency": r.consistency} for d, r in result.dimensions.items()},
+        {
+            d: {"score": r.score, "consistency": r.consistency, "confidence": r.confidence}
+            for d, r in result.dimensions.items()
+        },
         result.confidence,
     )
     print("\n结果已写入数据库:", db.DB_PATH)

@@ -41,6 +41,19 @@
 |answer|string|Y/N|
 |duration|int|答题耗时|
 
+> 允许修改：同一 `(session_id, question_id)` 重复提交时以 `UPDATE` 覆盖最新答案，修改记录写入 `answer_history`。
+
+## answer_history
+
+|字段|类型|说明|
+|-|-|-|
+|id|int|自增主键|
+|session_id|string|测试ID|
+|question_id|string|题目|
+|old_answer|string|修改前答案|
+|new_answer|string|修改后答案|
+|changed_at|datetime|修改时间|
+
 ## results
 
 |字段|类型|说明|
@@ -48,6 +61,8 @@
 |session_id|string|测试ID|
 |dimension|string|维度|
 |score|float|得分|
+|consistency|float|一致性 (0~1)|
+|confidence|float|维度级置信度 (0~1)|
 
 ## 3. 版本控制
 

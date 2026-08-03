@@ -29,11 +29,25 @@ export interface SubmitAnswerRequest {
   duration?: number
 }
 
+export interface AnswerHistoryEntry {
+  question_id: string
+  old_answer: string
+  new_answer: string
+  changed_at: string
+}
+
 export interface SubmitAnswerResponse {
   status: string
   answered_count: number
   total: number
   completed: boolean
+  answer_history?: AnswerHistoryEntry[]
+}
+
+export interface AnswersResponse {
+  session_id: string
+  answers: Record<string, AnswerValue>
+  answer_history: AnswerHistoryEntry[]
 }
 
 export interface DimensionScore {
@@ -44,6 +58,8 @@ export interface DimensionScore {
   description: string
   consistency: number | null
   question_count: number
+  /** 维度级可信度 0~1；旧存档可能缺失，消费时请用 `?? 0` 兜底 */
+  confidence?: number
 }
 
 export interface ConflictItem {
@@ -58,7 +74,8 @@ export interface ResultResponse {
   answered_count: number
   total: number
   dimensions: Record<string, DimensionScore>
-  confidence: number
+  /** 整体置信度 0~1；旧存档可能缺失，消费时请用 `?? 0` 兜底 */
+  confidence?: number
   conflicts: ConflictItem[]
   uncertain_dimensions: string[]
 }
