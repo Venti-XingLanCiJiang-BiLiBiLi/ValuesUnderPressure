@@ -1,0 +1,522 @@
+[
+  {
+    "id": "Q00161",
+    "content": "你愿意为了保住自己的全部隐私，拒绝一份需要监控你一切行为的高薪工作吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": 5, "no": -5},
+      {"dimension": "wealth", "yes": -4, "no": 4}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00162",
+    "content": "你愿意为了守护自己的思想自由，拒绝任何形式的记忆共享技术吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": ["privacy", "freedom"],
+    "weights": [
+      {"dimension": "privacy", "yes": 5, "no": -5},
+      {"dimension": "freedom", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00163",
+    "content": "你愿意为了保留个人边界，放弃使用一切会收集你数据的便利服务吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 5, "no": -5},
+      {"dimension": "pragmatism", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00164",
+    "content": "你愿意为了保护自己的身体自主权，拒绝接受任何没有明确告知用途的检查吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": ["privacy", "security"],
+    "weights": [
+      {"dimension": "privacy", "yes": 5, "no": -5},
+      {"dimension": "security", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00165",
+    "content": "你愿意为了不让任何人知道你的过去，拒绝一个需要公开履历的高薪职位吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": 4, "no": -4},
+      {"dimension": "wealth", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00166",
+    "content": "你愿意为了保护家人的隐私，拒绝参加公开的家庭真人秀换取丰厚报酬吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": 4, "no": -4},
+      {"dimension": "wealth", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00167",
+    "content": "你愿意为了守住自己的私密聊天记录，拒绝接受任何形式的网络审查合作吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": ["privacy", "freedom"],
+    "weights": [
+      {"dimension": "privacy", "yes": 4, "no": -4},
+      {"dimension": "freedom", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00168",
+    "content": "你愿意为了保留自己的思想不被窥探，拒绝使用脑机接口带来的巨大便利吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 4, "no": -4},
+      {"dimension": "pragmatism", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00169",
+    "content": "你愿意为了隐藏自己的健康状况，放弃一些需要提供体检记录的优惠福利吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": 3, "no": -3},
+      {"dimension": "wealth", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00170",
+    "content": "你愿意为了保护自己的消费隐私，拒绝使用会收集购物习惯的会员卡吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 3, "no": -3},
+      {"dimension": "pragmatism", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00171",
+    "content": "你愿意为了保住自己的社交隐私，拒绝参加公司要求的社交软件统一绑定吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 3, "no": -3},
+      {"dimension": "collectivism", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00172",
+    "content": "你愿意为了守护家人的私人空间，拒绝安装社区要求的公共监控吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": ["privacy", "security"],
+    "weights": [
+      {"dimension": "privacy", "yes": 3, "no": -3},
+      {"dimension": "security", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00173",
+    "content": "你愿意为了保留自己的浏览记录，拒绝使用需要登录的免费服务吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 2, "no": -2},
+      {"dimension": "pragmatism", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00174",
+    "content": "你愿意为了不让同事知道自己的收入，拒绝参加公开薪资的活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 2, "no": -2},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00175",
+    "content": "你愿意为了保护自己的通讯隐私，放弃一些便捷的通讯工具吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 2, "no": -2},
+      {"dimension": "pragmatism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00176",
+    "content": "你愿意为了守住自己的日记，拒绝和家人共享一切生活细节吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 2, "no": -2},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00177",
+    "content": "你愿意为了少暴露个人信息，不使用社交媒体的分享功能吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 1, "no": -1},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00178",
+    "content": "你愿意为了自己的隐私，不在公共场合谈论自己的私事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 1, "no": -1},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00179",
+    "content": "你愿意为了保留一点神秘感，不向朋友透露全部的生活细节吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 1, "no": -1},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00180",
+    "content": "你愿意为了自己的隐私，不参与同事之间的八卦闲聊吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": 1, "no": -1},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00181",
+    "content": "你愿意为了获得购物优惠，同意商家收集你的购物习惯吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -1, "no": 1},
+      {"dimension": "wealth", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00182",
+    "content": "你愿意为了使用便捷的导航，允许应用读取你的位置信息吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -1, "no": 1},
+      {"dimension": "pragmatism", "yes": 1, "no": -1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00183",
+    "content": "你愿意为了和同事拉近关系，分享一些自己的私事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -1, "no": 1},
+      {"dimension": "collectivism", "yes": 1, "no": -1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00184",
+    "content": "你愿意为了省事，同意网站使用你的浏览记录来优化推荐吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -1, "no": 1},
+      {"dimension": "pragmatism", "yes": 1, "no": -1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00185",
+    "content": "你愿意为了获得免费的定制服务，同意平台分析你的全部数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -2, "no": 2},
+      {"dimension": "pragmatism", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00186",
+    "content": "你愿意为了增加自己的曝光度，公开分享日常生活的全部细节吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -2, "no": 2},
+      {"dimension": "wealth", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00187",
+    "content": "你愿意为了获得工作上的便利，让公司查看你的私人通讯记录吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -2, "no": 2},
+      {"dimension": "wealth", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00188",
+    "content": "你愿意为了更快地融入群体，公开自己的收入情况吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -2, "no": 2},
+      {"dimension": "collectivism", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00189",
+    "content": "你愿意为了获得一笔可观的报酬，公开自己的部分健康记录吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "medium",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -3, "no": 3},
+      {"dimension": "wealth", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00190",
+    "content": "你愿意为了不让家人担心，让家人随时查看你的行踪吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": ["privacy", "security"],
+    "weights": [
+      {"dimension": "privacy", "yes": -3, "no": 3},
+      {"dimension": "security", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00191",
+    "content": "你愿意为了保住自己的工作，接受公司对你电脑的全程监控吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -3, "no": 3},
+      {"dimension": "wealth", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00192",
+    "content": "你愿意为了获得更好的个性化服务，同意机构长期采集你的行为数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "medium",
+    "tags": ["privacy", "pragmatism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -3, "no": 3},
+      {"dimension": "pragmatism", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00193",
+    "content": "你愿意为了换取一份丰厚的遗产，公开自己所有的私密信件吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -4, "no": 4},
+      {"dimension": "wealth", "yes": 4, "no": -4}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00194",
+    "content": "你愿意为了获得更高的社会地位，公开自己的全部财务记录吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -4, "no": 4},
+      {"dimension": "wealth", "yes": 4, "no": -4}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00195",
+    "content": "你愿意为了获得重要的职业机会，让雇主全面审查你的私人生活吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -4, "no": 4},
+      {"dimension": "wealth", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00196",
+    "content": "你愿意为了配合安全部门的检查，接受对所有随身物品和身体的详细检查吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": ["privacy", "security"],
+    "weights": [
+      {"dimension": "privacy", "yes": -4, "no": 4},
+      {"dimension": "security", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00197",
+    "content": "你愿意公开自己全部医疗记录，换取500万元吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -5, "no": 5},
+      {"dimension": "wealth", "yes": 5, "no": -5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00198",
+    "content": "你愿意为了换取巨额财富，允许全程直播自己的私生活一年吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": ["privacy", "wealth"],
+    "weights": [
+      {"dimension": "privacy", "yes": -5, "no": 5},
+      {"dimension": "wealth", "yes": 5, "no": -5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00199",
+    "content": "你愿意为了赢得所有人的信任，公开自己内心最深处的秘密吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": ["privacy", "collectivism"],
+    "weights": [
+      {"dimension": "privacy", "yes": -5, "no": 5},
+      {"dimension": "collectivism", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00200",
+    "content": "你愿意为了换取终身的健康保障，让医疗系统永久保存并分析你的一切身体数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": ["privacy", "security"],
+    "weights": [
+      {"dimension": "privacy", "yes": -5, "no": 5},
+      {"dimension": "security", "yes": 4, "no": -4}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  }
+]

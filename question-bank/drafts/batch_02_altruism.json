@@ -1,0 +1,523 @@
+[
+  {
+    "id": "Q00041",
+    "content": "你愿意把自己的一个肾脏捐给素不相识的陌生人，换取他活下去的机会吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 5, "no": -5},
+      {"dimension": "self_protection", "yes": -5, "no": 5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00042",
+    "content": "你愿意为了拯救一个陌生孩子，放弃自己唯一的购房存款吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": 5, "no": -5},
+      {"dimension": "wealth", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00043",
+    "content": "你愿意用自己十年的寿命，换取一名重病陌生人的康复吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 5, "no": -5},
+      {"dimension": "self_protection", "yes": -5, "no": 5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00044",
+    "content": "你愿意为了救助偏远山区的孩子们，放弃自己在大城市的一切前途吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": ["altruism", "wealth", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 5, "no": -5},
+      {"dimension": "wealth", "yes": -3, "no": 3},
+      {"dimension": "self_protection", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00045",
+    "content": "你愿意为了帮助朋友偿还债务，卖掉自己心爱的汽车吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": 4, "no": -4},
+      {"dimension": "wealth", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00046",
+    "content": "你愿意为了照顾孤寡邻居老人，每天花三小时帮他料理生活吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 4, "no": -4},
+      {"dimension": "self_protection", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00047",
+    "content": "你愿意为了帮同事争取公平待遇，冒着得罪领导的风险替他发声吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection", "rule_orientation"],
+    "weights": [
+      {"dimension": "altruism", "yes": 4, "no": -4},
+      {"dimension": "self_protection", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00048",
+    "content": "你愿意为了给贫困地区的孩子提供教育，长期省吃俭用资助他们吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": ["altruism", "wealth", "long_term"],
+    "weights": [
+      {"dimension": "altruism", "yes": 4, "no": -4},
+      {"dimension": "wealth", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00049",
+    "content": "你愿意为了帮朋友解燃眉之急，把准备用来旅行的钱借给他吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": 3, "no": -3},
+      {"dimension": "wealth", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00050",
+    "content": "你愿意为了照顾生病的同事，替他分担半个月的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 3, "no": -3},
+      {"dimension": "self_protection", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00051",
+    "content": "你愿意为了帮助流浪动物，放弃周末的休息去做志愿者吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 3, "no": -3},
+      {"dimension": "self_protection", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00052",
+    "content": "你愿意为了帮助失学少年重返校园，每月拿出收入的十分之一资助他吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": 3, "no": -3},
+      {"dimension": "wealth", "yes": -3, "no": 3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00053",
+    "content": "你愿意为了帮朋友准备面试，牺牲自己整个周末的时间吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 2, "no": -2},
+      {"dimension": "self_protection", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00054",
+    "content": "你愿意为了帮助新同事熟悉业务，经常加班指导他吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 2, "no": -2},
+      {"dimension": "self_protection", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00055",
+    "content": "你愿意为了帮社区老人团购生活用品，每周多跑几趟路吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 2, "no": -2},
+      {"dimension": "self_protection", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00056",
+    "content": "你愿意为了帮同事解决家庭危机，替他顶几次重要的班吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 2, "no": -2},
+      {"dimension": "self_protection", "yes": -2, "no": 2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00057",
+    "content": "你愿意为了帮朋友查资料，牺牲自己午休的半小时吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 1, "no": -1},
+      {"dimension": "self_protection", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00058",
+    "content": "你愿意为了给邻座同学讲解难题，晚一点去吃饭吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 1, "no": -1},
+      {"dimension": "self_protection", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00059",
+    "content": "你愿意为了陪同事走一段回家的路，自己绕一点远吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 1, "no": -1},
+      {"dimension": "self_protection", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00060",
+    "content": "你愿意为了帮家人跑腿办事，放下手头正玩到一半的游戏吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": 1, "no": -1},
+      {"dimension": "self_protection", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00061",
+    "content": "你愿意为了省下自己的时间，拒绝帮同事传一份无关紧要的话吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -1, "no": 1},
+      {"dimension": "self_protection", "yes": 1, "no": -1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00062",
+    "content": "你愿意为了自己的便利，不帮陌生的路人指路吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -1, "no": 1},
+      {"dimension": "self_protection", "yes": 1, "no": -1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00063",
+    "content": "你愿意为了少一点麻烦，不参加同事们组织的爱心捐赠吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "collectivism"],
+    "weights": [
+      {"dimension": "altruism", "yes": -1, "no": 1},
+      {"dimension": "collectivism", "yes": -1, "no": 1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00064",
+    "content": "你愿意为了自己的安静，拒绝听朋友倾诉他的烦恼吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -1, "no": 1},
+      {"dimension": "self_protection", "yes": 1, "no": -1}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00065",
+    "content": "你愿意为了自己周末的休息，拒绝帮朋友搬家吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -2, "no": 2},
+      {"dimension": "self_protection", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00066",
+    "content": "你愿意为了省下开支，拒绝给慈善机构捐款吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": -2, "no": 2},
+      {"dimension": "wealth", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00067",
+    "content": "你愿意为了自己的工作效率，拒绝教新同事繁琐的流程吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -2, "no": 2},
+      {"dimension": "self_protection", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00068",
+    "content": "你愿意为了不耽误自己下班，拒绝帮同事临时处理紧急事务吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -2, "no": 2},
+      {"dimension": "self_protection", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00069",
+    "content": "你愿意为了自己的职业发展，拒绝长期帮助处于低谷的同事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -3, "no": 3},
+      {"dimension": "self_protection", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00070",
+    "content": "你愿意为了保住自己的存款，拒绝为患病的远方亲戚分担医药费吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": -3, "no": 3},
+      {"dimension": "wealth", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00071",
+    "content": "你愿意为了自己的清闲，拒绝接替生病的同事半个月的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -3, "no": 3},
+      {"dimension": "self_protection", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00072",
+    "content": "你愿意为了自己的计划不受影响，拒绝帮助朋友紧急处理危机吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -3, "no": 3},
+      {"dimension": "self_protection", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00073",
+    "content": "你愿意为了守住自己的财富，拒绝资助兄弟姐妹的大学学费吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": -4, "no": 4},
+      {"dimension": "wealth", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00074",
+    "content": "你愿意为了自己的事业，拒绝照顾失去劳动能力的亲人吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -4, "no": 4},
+      {"dimension": "self_protection", "yes": 4, "no": -4}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00075",
+    "content": "你愿意为了保住自己轻松的生活，拒绝抚养失去双亲的侄子吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": -4, "no": 4},
+      {"dimension": "wealth", "yes": 3, "no": -3}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00076",
+    "content": "你愿意为了自己的自由，拒绝长期照顾患病的朋友吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": ["altruism", "freedom"],
+    "weights": [
+      {"dimension": "altruism", "yes": -4, "no": 4},
+      {"dimension": "freedom", "yes": 2, "no": -2}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00077",
+    "content": "你愿意为了自己家人的安稳，拒绝收留正在躲避危险的陌生人吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -5, "no": 5},
+      {"dimension": "self_protection", "yes": 5, "no": -5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00078",
+    "content": "你愿意为了保住自己的饭碗，拒绝帮助公司里被集体排挤的同事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection", "collectivism"],
+    "weights": [
+      {"dimension": "altruism", "yes": -5, "no": 5},
+      {"dimension": "self_protection", "yes": 4, "no": -4}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00079",
+    "content": "你愿意为了自己的心理健康，彻底断绝与长期索取你帮助的人的联系吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": ["altruism", "self_protection"],
+    "weights": [
+      {"dimension": "altruism", "yes": -5, "no": 5},
+      {"dimension": "self_protection", "yes": 5, "no": -5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  },
+  {
+    "id": "Q00080",
+    "content": "你愿意为了自己晚年无忧，把所有积蓄都留给自己而拒绝任何捐赠吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": ["altruism", "wealth"],
+    "weights": [
+      {"dimension": "altruism", "yes": -5, "no": 5},
+      {"dimension": "wealth", "yes": 5, "no": -5}
+    ],
+    "metadata": {"version": 1, "status": "draft"}
+  }
+]

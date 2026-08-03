@@ -1,0 +1,10830 @@
+[
+  {
+    "id": "Q00001",
+    "content": "你愿意为了守住自己的全部积蓄，放弃资助一名贫困学生完成学业吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00002",
+    "content": "你愿意为了自己的人身安全，拒绝深夜送迷路的陌生人回家吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00003",
+    "content": "你愿意为了自己家庭的财务安全，拒绝把积蓄借给创业失败的老友吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00004",
+    "content": "你愿意为了自己的职业前途，拒绝陪好友辞职去外地闯荡吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "altruism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00005",
+    "content": "你愿意为了确保自己的晋升机会，放弃花时间指导新入职的同事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00006",
+    "content": "你愿意为了自己的健康，拒绝为公司连续熬夜冲刺项目吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00007",
+    "content": "你愿意为了给自己留足应急资金，拒绝为兄弟姐妹的大额支出分担费用吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00008",
+    "content": "你愿意为了保住自己的名誉，拒绝替团队的错误决定公开背锅吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00009",
+    "content": "你愿意为了自己的休息时间，退出朋友们都在参加的无偿公益活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00010",
+    "content": "你愿意为了自己的职业稳定，不向领导推荐比你优秀的朋友吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00011",
+    "content": "你愿意为了守住自己仅有的休息日，拒绝替生病的同事连续顶班三天吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00012",
+    "content": "你愿意为了自己少担风险，拒绝为朋友的贷款做担保人吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00013",
+    "content": "你愿意为了减少自己的麻烦，不接手同事临时拜托的棘手任务吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00014",
+    "content": "你愿意为了自己的时间，取消已报名的志愿活动去处理私事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00015",
+    "content": "你愿意为了自己的平静生活，不过问好友的烦恼以免卷入其中吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00016",
+    "content": "你愿意为了自己的业余爱好，缺席公司的年度集体团建吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00017",
+    "content": "你愿意为了自己充足的睡眠，拒绝参加深夜的应酬聚会吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00018",
+    "content": "你愿意为了少出力气，在团队任务中只完成自己分内的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00019",
+    "content": "你愿意为了自己的面子，不让任何人知道你曾经的失败吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "privacy"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00020",
+    "content": "你愿意为了保住自己的奖金，不把项目功劳分给合作的同事吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00021",
+    "content": "你愿意为了帮朋友搬家，放弃自己周末半天的空闲时间吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00022",
+    "content": "你愿意为了参加朋友的婚礼，推迟自己原定的健身计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00023",
+    "content": "你愿意为了帮同事解决一个小麻烦，绕远路帮他取一份文件吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00024",
+    "content": "你愿意为了照顾亲友的情绪，减少一些自己独处的时间吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00025",
+    "content": "你愿意为了帮朋友渡过难关，降低自己的生活标准半年吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00026",
+    "content": "你愿意为了团队的项目进度，牺牲自己的休息时间补上队友的缺口吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00027",
+    "content": "你愿意为了亲友的紧急需求，推迟自己筹备已久的旅行计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00028",
+    "content": "你愿意为了帮助新同事尽快上手，无偿分享自己积累的经验和人脉吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00029",
+    "content": "你愿意为了不让朋友失望，放弃自己原定的独立计划去陪他吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00030",
+    "content": "你愿意为了帮同事保住项目，承担一部分原本不属于你的工作吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00031",
+    "content": "你愿意为了家人生活得更好，接受一份更辛苦但收入更高的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00032",
+    "content": "你愿意为了集体在谈判中争取到更好条件，主动让步自己的一份利益吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00033",
+    "content": "你愿意为了照顾年迈的父母，放弃大城市的升职机会回到家乡吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00034",
+    "content": "你愿意为了保住朋友的秘密，让自己承受被冤枉的后果吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00035",
+    "content": "你愿意为了帮助灾区重建，捐出自己近半年的积蓄吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00036",
+    "content": "你愿意为了团队按期交付，连续数周牺牲自己的健康来赶工吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00037",
+    "content": "你愿意用自己全部积蓄，救助一名素不相识的重病陌生人吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00038",
+    "content": "你愿意为了拯救十名陌生人，让自己承担重伤的风险吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00039",
+    "content": "你愿意为了帮全村度过旱灾，牺牲自己一整年的收成吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00040",
+    "content": "你愿意为了救一名溺水儿童，跳入不熟悉且有危险的水域吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00041",
+    "content": "你愿意把自己的一个肾脏捐给素不相识的陌生人，换取他活下去的机会吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00042",
+    "content": "你愿意为了拯救一个陌生孩子，放弃自己唯一的购房存款吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00043",
+    "content": "你愿意用自己十年的寿命，换取一名重病陌生人的康复吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00044",
+    "content": "你愿意为了救助偏远山区的孩子们，放弃自己在大城市的一切前途吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00045",
+    "content": "你愿意为了帮助朋友偿还债务，卖掉自己心爱的汽车吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00046",
+    "content": "你愿意为了照顾孤寡邻居老人，每天花三小时帮他料理生活吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00047",
+    "content": "你愿意为了帮同事争取公平待遇，冒着得罪领导的风险替他发声吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00048",
+    "content": "你愿意为了给贫困地区的孩子提供教育，长期省吃俭用资助他们吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00049",
+    "content": "你愿意为了帮朋友解燃眉之急，把准备用来旅行的钱借给他吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00050",
+    "content": "你愿意为了照顾生病的同事，替他分担半个月的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00051",
+    "content": "你愿意为了帮助流浪动物，放弃周末的休息去做志愿者吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00052",
+    "content": "你愿意为了帮助失学少年重返校园，每月拿出收入的十分之一资助他吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00053",
+    "content": "你愿意为了帮朋友准备面试，牺牲自己整个周末的时间吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00054",
+    "content": "你愿意为了帮助新同事熟悉业务，经常加班指导他吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00055",
+    "content": "你愿意为了帮社区老人团购生活用品，每周多跑几趟路吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00056",
+    "content": "你愿意为了帮同事解决家庭危机，替他顶几次重要的班吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00057",
+    "content": "你愿意为了帮朋友查资料，牺牲自己午休的半小时吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00058",
+    "content": "你愿意为了给邻座同学讲解难题，晚一点去吃饭吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00059",
+    "content": "你愿意为了陪同事走一段回家的路，自己绕一点远吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00060",
+    "content": "你愿意为了帮家人跑腿办事，放下手头正玩到一半的游戏吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00061",
+    "content": "你愿意为了省下自己的时间，拒绝帮同事传一份无关紧要的话吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00062",
+    "content": "你愿意为了自己的便利，不帮陌生的路人指路吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00063",
+    "content": "你愿意为了少一点麻烦，不参加同事们组织的爱心捐赠吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00064",
+    "content": "你愿意为了自己的安静，拒绝听朋友倾诉他的烦恼吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00065",
+    "content": "你愿意为了自己周末的休息，拒绝帮朋友搬家吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00066",
+    "content": "你愿意为了省下开支，拒绝给慈善机构捐款吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00067",
+    "content": "你愿意为了自己的工作效率，拒绝教新同事繁琐的流程吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00068",
+    "content": "你愿意为了不耽误自己下班，拒绝帮同事临时处理紧急事务吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00069",
+    "content": "你愿意为了自己的职业发展，拒绝长期帮助处于低谷的同事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00070",
+    "content": "你愿意为了保住自己的存款，拒绝为患病的远方亲戚分担医药费吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00071",
+    "content": "你愿意为了自己的清闲，拒绝接替生病的同事半个月的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00072",
+    "content": "你愿意为了自己的计划不受影响，拒绝帮助朋友紧急处理危机吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00073",
+    "content": "你愿意为了守住自己的财富，拒绝资助兄弟姐妹的大学学费吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00074",
+    "content": "你愿意为了自己的事业，拒绝照顾失去劳动能力的亲人吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00075",
+    "content": "你愿意为了保住自己轻松的生活，拒绝抚养失去双亲的侄子吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00076",
+    "content": "你愿意为了自己的自由，拒绝长期照顾患病的朋友吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00077",
+    "content": "你愿意为了自己家人的安稳，拒绝收留正在躲避危险的陌生人吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00078",
+    "content": "你愿意为了保住自己的饭碗，拒绝帮助公司里被集体排挤的同事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00079",
+    "content": "你愿意为了自己的心理健康，彻底断绝与长期索取你帮助的人的联系吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00080",
+    "content": "你愿意为了自己晚年无忧，把所有积蓄都留给自己而拒绝任何捐赠吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00081",
+    "content": "你愿意为了拥有完全不受约束的人生，放弃高薪但管制严格的职位吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00082",
+    "content": "你愿意为了自由安排自己的生活，拒绝任何外部对你的监督和考核吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00083",
+    "content": "你愿意为了保住自己选择职业的自由，拒绝一份保障终身但限制你转行的合同吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00084",
+    "content": "你愿意为了随心所欲地生活，放弃社会提供的全套保障福利吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00085",
+    "content": "你愿意为了自由创业，放弃一份收入可观但规定死板的稳定工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00086",
+    "content": "你愿意为了按自己的方式生活，拒绝家人为你安排好的人生规划吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00087",
+    "content": "你愿意为了保留随时旅行的自由，放弃买房安定的计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00088",
+    "content": "你愿意为了自主决定自己的工作内容，拒绝服从公司一切形式的强制安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00089",
+    "content": "你愿意为了自由安排自己的时间，放弃晋升但需要频繁出差的机会吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00090",
+    "content": "你愿意为了保留选择职业的自由，拒绝一份绑定多年的高薪合同吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00091",
+    "content": "你愿意为了自由表达自己的观点，不加入要求统一口径的团队吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00092",
+    "content": "你愿意为了自主安排休假，拒绝参加集体统一安排的旅行吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00093",
+    "content": "你愿意为了自由安排自己的周末，拒绝参加单位要求的集体活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00094",
+    "content": "你愿意为了自由选择自己的生活方式，不理会家人对你作息的要求吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00095",
+    "content": "你愿意为了自主选择工作地点，拒绝服从公司的统一分配吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00096",
+    "content": "你愿意为了自由支配自己的收入，不按家人的建议存钱吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00097",
+    "content": "你愿意为了自由安排自己的晚餐，拒绝同事发起的统一聚餐吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00098",
+    "content": "你愿意为了自由决定自己的穿着，不遵守公司的着装要求吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00099",
+    "content": "你愿意为了自由安排自己的午休，拒绝参加午间的集体活动吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00100",
+    "content": "你愿意为了自由选择自己的出行方式，不按照家人规划的路线出行吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00101",
+    "content": "你愿意为了上班更方便，接受公司对打卡时间的严格要求吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00102",
+    "content": "你愿意为了获得补贴，接受统一安排的工作岗位吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00103",
+    "content": "你愿意为了少操心，让别人帮你决定每天的行程吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00104",
+    "content": "你愿意为了融入集体，放弃自己独特的穿衣风格吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00105",
+    "content": "你愿意为了获得稳定的收入，接受一份严格管控你时间的工作吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00106",
+    "content": "你愿意为了减少选择带来的压力，让别人替你决定重要的人生方向吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00107",
+    "content": "你愿意为了获得更多的福利，接受公司对员工生活的统一管理吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00108",
+    "content": "你愿意为了家庭和睦，放弃自己远行的自由定居在家人身边吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00109",
+    "content": "你愿意为了获得终身的稳定保障，接受单位对你的全面统一安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00110",
+    "content": "你愿意为了让孩子进入更好的学校，接受严格限制自由的管理制度吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00111",
+    "content": "你愿意为了高额的报酬，接受一份限制你言论自由的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00112",
+    "content": "你愿意为了集体的高度团结，放弃个人表达意见的自由吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00113",
+    "content": "你愿意为了换取丰厚的退休保障，接受政府对你生活的长期统一规划吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00114",
+    "content": "你愿意为了家庭的稳定，放弃自己追求梦想的职业自由吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00115",
+    "content": "你愿意为了获得大额的财富，接受一份终身限制你行动自由的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00116",
+    "content": "你愿意为了获得绝对的安全保障，同意让权威机构安排你的一切生活吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00117",
+    "content": "你愿意接受政府永久监控你的行动，以换取犯罪率下降90%吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security",
+      "privacy"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00118",
+    "content": "你愿意为了换取终身的全面保障，永久放弃选择自己生活方式的权利吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00119",
+    "content": "你愿意为了集体的最大利益，永久放弃自己独立做决定的权利吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00120",
+    "content": "你愿意为了换取出入绝对安全的环境，接受完全由别人安排的人生吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00121",
+    "content": "你愿意为了绝对的安全，接受生活在一个被严格管制的小区里吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00122",
+    "content": "你愿意为了确保自己永远不会失业，接受一份收入封顶但绝对稳定的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00123",
+    "content": "你愿意为了防范一切风险，放弃所有可能带来收益的投资机会吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00124",
+    "content": "你愿意为了获得全面的安全保障，同意接受政府对你生活的长期监管吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00125",
+    "content": "你愿意为了生活的稳定，拒绝一个高风险但可能暴富的机会吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00126",
+    "content": "你愿意为了确保家人的平安，放弃自由出入高风险地区的权利吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00127",
+    "content": "你愿意为了减少意外受伤的风险，拒绝参加刺激的极限运动吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00128",
+    "content": "你愿意为了获得稳定的职业保障，放弃自由创业的机会吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00129",
+    "content": "你愿意为了安稳的生活，放弃一个需要冒险但可能改变人生的机会吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00130",
+    "content": "你愿意为了减少健康风险，放弃一些自己喜欢的重口味食物吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00131",
+    "content": "你愿意为了确保出行安全，放弃自驾的便利改乘公共交通吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00132",
+    "content": "你愿意为了获得稳定的收入，拒绝一份业绩波动大的高提成工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00133",
+    "content": "你愿意为了生活的稳定，放弃一份需要频繁搬家的高薪工作吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00134",
+    "content": "你愿意为了确保财产安全，放弃一些高风险的投资收益吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00135",
+    "content": "你愿意为了家人的安心，减少自己冒险出行的次数吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00136",
+    "content": "你愿意为了工作的稳定，接受一份收入一般但不会裁员的职位吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00137",
+    "content": "你愿意为了安全起见，提前做好详尽的出行计划吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00138",
+    "content": "你愿意为了减少意外，定期进行繁琐的安全检查吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00139",
+    "content": "你愿意为了稳妥，选择熟悉的餐馆而不是尝试新开的一家吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00140",
+    "content": "你愿意为了财产安全，花时间设置复杂的密码吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "privacy"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00141",
+    "content": "你愿意为了尝鲜，尝试一家没有任何评价的新餐厅吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00142",
+    "content": "你愿意为了节省时间，不仔细查看合同内容就签字吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00143",
+    "content": "你愿意为了办事方便，偶尔不走正规流程吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00144",
+    "content": "你愿意为了效率，在赶时间的时候忽略一些安全步骤吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00145",
+    "content": "你愿意为了更高的收益，投资一个风险较高的项目吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00146",
+    "content": "你愿意为了追求刺激，参加有一定风险的户外活动吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00147",
+    "content": "你愿意为了职业发展的突破，跳槽到一家不稳定的初创公司吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00148",
+    "content": "你愿意为了节省生活成本，接受一处有安全隐患但便宜的住所吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00149",
+    "content": "你愿意为了快速致富，把全部积蓄投入高风险的投资中吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00150",
+    "content": "你愿意为了自由的冒险，放弃稳定但平淡的舒适生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00151",
+    "content": "你愿意为了抓住转瞬即逝的机会，在没有充分准备的情况下行动吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00152",
+    "content": "你愿意为了追求事业上的突破，长期承受巨大的压力和不确定性吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00153",
+    "content": "你愿意为了可能实现财富自由，赌上自己全部的积蓄吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00154",
+    "content": "你愿意为了自由的生活，放弃所有的稳定保障，过上漂泊不定的日子吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00155",
+    "content": "你愿意为了体验极致的冒险，承担可能危及生命的风险吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00156",
+    "content": "你愿意为了追求个人的突破，拒绝一切让你安稳的常规安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00157",
+    "content": "你愿意为了换取巨额财富，让自己长期处于高风险的环境中吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00158",
+    "content": "你愿意为了完全自由的人生，彻底放弃所有的安全保障吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00159",
+    "content": "你愿意为了追求激动人心的经历，把自己的生命安全置于巨大的不确定性中吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00160",
+    "content": "你愿意为了一个微小但巨大的机会，承担倾家荡产的风险吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00161",
+    "content": "你愿意为了保住自己的全部隐私，拒绝一份需要监控你一切行为的高薪工作吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00162",
+    "content": "你愿意为了守护自己的思想自由，拒绝任何形式的记忆共享技术吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00163",
+    "content": "你愿意为了保留个人边界，放弃使用一切会收集你数据的便利服务吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00164",
+    "content": "你愿意为了保护自己的身体自主权，拒绝接受任何没有明确告知用途的检查吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00165",
+    "content": "你愿意为了不让任何人知道你的过去，拒绝一个需要公开履历的高薪职位吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00166",
+    "content": "你愿意为了保护家人的隐私，拒绝参加公开的家庭真人秀换取丰厚报酬吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00167",
+    "content": "你愿意为了守住自己的私密聊天记录，拒绝接受任何形式的网络审查合作吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00168",
+    "content": "你愿意为了保留自己的思想不被窥探，拒绝使用脑机接口带来的巨大便利吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00169",
+    "content": "你愿意为了隐藏自己的健康状况，放弃一些需要提供体检记录的优惠福利吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00170",
+    "content": "你愿意为了保护自己的消费隐私，拒绝使用会收集购物习惯的会员卡吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00171",
+    "content": "你愿意为了保住自己的社交隐私，拒绝参加公司要求的社交软件统一绑定吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00172",
+    "content": "你愿意为了守护家人的私人空间，拒绝安装社区要求的公共监控吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00173",
+    "content": "你愿意为了保留自己的浏览记录，拒绝使用需要登录的免费服务吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00174",
+    "content": "你愿意为了不让同事知道自己的收入，拒绝参加公开薪资的活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00175",
+    "content": "你愿意为了保护自己的通讯隐私，放弃一些便捷的通讯工具吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00176",
+    "content": "你愿意为了守住自己的日记，拒绝和家人共享一切生活细节吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00177",
+    "content": "你愿意为了少暴露个人信息，不使用社交媒体的分享功能吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00178",
+    "content": "你愿意为了自己的隐私，不在公共场合谈论自己的私事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00179",
+    "content": "你愿意为了保留一点神秘感，不向朋友透露全部的生活细节吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00180",
+    "content": "你愿意为了自己的隐私，不参与同事之间的八卦闲聊吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00181",
+    "content": "你愿意为了获得购物优惠，同意商家收集你的购物习惯吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00182",
+    "content": "你愿意为了使用便捷的导航，允许应用读取你的位置信息吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00183",
+    "content": "你愿意为了和同事拉近关系，分享一些自己的私事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00184",
+    "content": "你愿意为了省事，同意网站使用你的浏览记录来优化推荐吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00185",
+    "content": "你愿意为了获得免费的定制服务，同意平台分析你的全部数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00186",
+    "content": "你愿意为了增加自己的曝光度，公开分享日常生活的全部细节吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00187",
+    "content": "你愿意为了获得工作上的便利，让公司查看你的私人通讯记录吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00188",
+    "content": "你愿意为了更快地融入群体，公开自己的收入情况吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00189",
+    "content": "你愿意为了获得一笔可观的报酬，公开自己的部分健康记录吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00190",
+    "content": "你愿意为了不让家人担心，让家人随时查看你的行踪吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00191",
+    "content": "你愿意为了保住自己的工作，接受公司对你电脑的全程监控吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00192",
+    "content": "你愿意为了获得更好的个性化服务，同意机构长期采集你的行为数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00193",
+    "content": "你愿意为了换取一份丰厚的遗产，公开自己所有的私密信件吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00194",
+    "content": "你愿意为了获得更高的社会地位，公开自己的全部财务记录吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00195",
+    "content": "你愿意为了获得重要的职业机会，让雇主全面审查你的私人生活吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00196",
+    "content": "你愿意为了配合安全部门的检查，接受对所有随身物品和身体的详细检查吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00197",
+    "content": "你愿意公开自己全部医疗记录，换取500万元吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00198",
+    "content": "你愿意为了换取巨额财富，允许全程直播自己的私生活一年吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00199",
+    "content": "你愿意为了赢得所有人的信任，公开自己内心最深处的秘密吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00200",
+    "content": "你愿意为了换取终身的健康保障，让医疗系统永久保存并分析你的一切身体数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "security",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00201",
+    "content": "你愿意为了换取巨额财富，放弃自己的健康长寿吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00202",
+    "content": "你愿意为了巨大的财富，永久放弃自己最重要的爱好吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00203",
+    "content": "你愿意为了赚取巨额金钱，接受一份剥夺你所有个人时间的工作吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00204",
+    "content": "你愿意为了成为顶级富豪，牺牲与家人朋友的所有亲密关系吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00205",
+    "content": "你愿意为了获得高额的收入，放弃一份自己真正热爱的工作吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00206",
+    "content": "你愿意为了积攒更多财富，长期减少和家人的团聚吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00207",
+    "content": "你愿意为了加快财富积累，放弃自己创业的梦想安心打工吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00208",
+    "content": "你愿意为了赚更多的钱，牺牲自己大部分锻炼身体的时间吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00209",
+    "content": "你愿意为了获得更高的薪水，接受一份自己完全不感兴趣的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00210",
+    "content": "你愿意为了省下开支，放弃和朋友们的定期聚会吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00211",
+    "content": "你愿意为了多赚一些钱，放弃自己的业余爱好时间吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00212",
+    "content": "你愿意为了攒钱买房，推迟自己的结婚计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00213",
+    "content": "你愿意为了存下更多的钱，减少外出游玩的次数吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00214",
+    "content": "你愿意为了获得加班费，放弃周末的休息时间吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00215",
+    "content": "你愿意为了获得理财收益，花大量时间研究投资吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00216",
+    "content": "你愿意为了省钱，购买更便宜但质量稍差的商品吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00217",
+    "content": "你愿意为了省一点钱，多走一段路去买更便宜的东西吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00218",
+    "content": "你愿意为了获得积分返利，一直选择固定的商家消费吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00219",
+    "content": "你愿意为了省钱，每天在家做饭而不是点外卖吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00220",
+    "content": "你愿意为了赚一些零花钱，接下额外的兼职工作吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00221",
+    "content": "你愿意为了享受当下的生活，放弃一些未来的储蓄计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00222",
+    "content": "你愿意为了生活的方便，多花钱购买省时的服务吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00223",
+    "content": "你愿意为了体验新鲜事物，花掉一些计划之外的钱吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00224",
+    "content": "你愿意为了帮助他人，放弃一些本可以攒下来的钱吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00225",
+    "content": "你愿意为了追求真正热爱的事业，接受收入的大幅下降吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00226",
+    "content": "你愿意为了获得更多的自由时间，放弃高薪但异常忙碌的工作吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00227",
+    "content": "你愿意为了帮助朋友，把自己的积蓄借给他而不计较能否收回吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00228",
+    "content": "你愿意为了体验丰富的人生，花掉大部分积蓄去周游世界吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00229",
+    "content": "你愿意为了陪伴家人，放弃一份高薪但常年出差的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00230",
+    "content": "你愿意为了内心的安宁，放弃高收入的职业转做公益事业吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00231",
+    "content": "你愿意为了追求自己向往的生活方式，接受清贫但自由的日子吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00232",
+    "content": "你愿意为了帮助有需要的人，常年捐出自己收入的十分之三吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00233",
+    "content": "你愿意为了追随热爱的事业，放弃实现财富自由的机会吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00234",
+    "content": "你愿意为了家人的幸福，放弃自己全部的未来财富积累吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00235",
+    "content": "你愿意为了精神的充实，选择过一种几乎不需要金钱的生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00236",
+    "content": "你愿意为了帮助整个社区发展，捐出自己大部分的财产吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00237",
+    "content": "你愿意为了拯救他人的生命，放弃自己全部的财富吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00238",
+    "content": "你愿意为了追求人生的意义，把全部家产用于公益事业吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00239",
+    "content": "你愿意为了过上完全自由的生活，彻底放弃对财富的追求吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00240",
+    "content": "你愿意为了和家人共度珍贵的时光，放弃自己所有的金钱吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00241",
+    "content": "你愿意为了遵守规则，放弃一个需要轻微违规才能获得的巨大机会吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00242",
+    "content": "你愿意为了维护程序的公正，即使明知会拖延关键救援也坚持按流程办事吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00243",
+    "content": "你愿意为了遵守法律，即使自己蒙受重大损失也绝不走捷径吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00244",
+    "content": "你愿意为了坚持原则，拒绝一个能改变命运但不符合规则的机会吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00245",
+    "content": "你愿意为了遵守排队的规则，放弃一次插队就能获得的宝贵机会吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00246",
+    "content": "你愿意为了按规定办事，忍受繁琐的流程耽误大量时间吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00247",
+    "content": "你愿意为了维护制度的公平，举报违规操作的同事而得罪他吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00248",
+    "content": "你愿意为了遵守与人的约定，即使对方先违约你也坚持履行自己的承诺吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "altruism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00249",
+    "content": "你愿意为了遵守交通规则，放弃赶时间抄近道的便利吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00250",
+    "content": "你愿意为了按规定流程办事，多花几天时间办理业务吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00251",
+    "content": "你愿意为了公平起见，拒绝接受本可以合理得到的特殊待遇吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00252",
+    "content": "你愿意为了维护规则的严肃性，即使牺牲个人小利也绝不破例吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00253",
+    "content": "你愿意为了遵守公司规定，放弃一些方便但有违规定的做法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00254",
+    "content": "你愿意为了按规定如实纳税，放弃一些可以合理避税的操作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00255",
+    "content": "你愿意为了遵守考试规则，即使周围的人都作弊你也不作弊吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00256",
+    "content": "你愿意为了维护公共秩序，主动遵守并提醒他人遵守规则吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00257",
+    "content": "你愿意为了遵守约定，即使有点不方便也准时赴约吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00258",
+    "content": "你愿意为了按规定填写各种表格，多花几分钟时间吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00259",
+    "content": "你愿意为了遵守小区管理规定，不把电动车推到楼上充电吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00260",
+    "content": "你愿意为了遵守图书馆的规则，即使没人看见也不占座吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00261",
+    "content": "你愿意为了节省时间，在人少的路口偶尔闯一下红灯吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00262",
+    "content": "你愿意为了图方便，偶尔抄一下违规的近路吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00263",
+    "content": "你愿意为了尽快完成工作，偶尔简化一些不必要的流程吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00264",
+    "content": "你愿意为了节省软件费用，偶尔使用盗版软件吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00265",
+    "content": "你愿意为了赶时间，在人行道上违规停一会儿车吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00266",
+    "content": "你愿意为了顺利通过审核，稍微虚报一些申请材料吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00267",
+    "content": "你愿意为了帮朋友的忙，替他在未出席的会议上签名吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00268",
+    "content": "你愿意为了办事效率，跳过一些要求签字确认的环节吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00269",
+    "content": "你愿意为了获得高额回报，参与一些打擦边球但不太违法的操作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00270",
+    "content": "你愿意为了尽快解决家人的困难，托关系走后门办事吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00271",
+    "content": "你愿意为了完成业绩目标，夸大产品的效果来促成交易吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00272",
+    "content": "你愿意为了获得竞争优势，借鉴别人未公开的方案而不打招呼吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00273",
+    "content": "你愿意为了挽救家人的生命，采取违法的手段获取急需的药品吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00274",
+    "content": "你愿意为了巨大的经济利益，隐瞒产品存在的安全隐患吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00275",
+    "content": "你愿意为了个人利益，故意钻制度的漏洞吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00276",
+    "content": "你愿意为了帮助整个群体，带头违反一条不合理的规定吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00277",
+    "content": "你愿意为了拯救众多人的生命，违反法律采取行动吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "altruism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00278",
+    "content": "你愿意为了获得巨额财富，参与完全违法的行为吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00279",
+    "content": "你愿意为了推翻不公的制度，不惜采取激烈的手段吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00280",
+    "content": "你愿意为了自己认定的正义，彻底无视现有的法律规则吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00281",
+    "content": "你愿意为了确保现实收益，放弃看似崇高但短期没有回报的理想吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00282",
+    "content": "你愿意为了立刻获得实际的好处，放弃可能损害现实利益的原则吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00283",
+    "content": "你愿意为了获得实实在在的利益，接受一些道德上有争议的安排吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00284",
+    "content": "你愿意为了眼前的现实利益，放弃长远的规划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "long_term",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00285",
+    "content": "你愿意为了确保项目能够落地，放弃其中不切实际的理想化部分吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00286",
+    "content": "你愿意为了实际的收益，接受一份收入可观但你并不认同其价值观的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00287",
+    "content": "你愿意为了现实中的成功，放弃自己曾经坚持的理想抱负吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00288",
+    "content": "你愿意为了得到实际的结果，不再坚持那些无法量化的原则吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00289",
+    "content": "你愿意为了尽快解决问题，接受一个不太完美但切实可行的方案吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00290",
+    "content": "你愿意为了实际的效果，放弃一个理想化但难以实现的方案吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00291",
+    "content": "你愿意为了获得现实的回报，改变自己原本坚持的发展方向吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00292",
+    "content": "你愿意为了现实的需要，暂时放下自己一直追求的梦想吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00293",
+    "content": "你愿意为了尽快完成工作，优先处理最紧急而不是最重要的事情吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00294",
+    "content": "你愿意为了节省成本，放弃一些质量更高但价格昂贵的方案吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00295",
+    "content": "你愿意为了实际收益，接受一个短期见效的计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00296",
+    "content": "你愿意为了不浪费时间，放弃一些理论上很好但实践起来困难的想法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00297",
+    "content": "你愿意为了效率，选择最直接简单的办法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00298",
+    "content": "你愿意为了省事，接受一个够用但并非最优的解决方案吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00299",
+    "content": "你愿意为了实际方便，放弃一些繁琐但规范的做法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00300",
+    "content": "你愿意为了当下的便利，不去纠结事情的长远影响吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00301",
+    "content": "你愿意为了坚持自己的理想，放弃一些现实的便利吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00302",
+    "content": "你愿意为了追求更好的方案，多花一些时间和精力吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00303",
+    "content": "你愿意为了坚守原则，放弃一些实际的小利益吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00304",
+    "content": "你愿意为了长远的规划，暂时忍受一些当下的不便吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00305",
+    "content": "你愿意为了坚持自己认为对的事情，即使短期内看不到任何好处吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00306",
+    "content": "你愿意为了追求理想，接受一段经济上比较困难的时期吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00307",
+    "content": "你愿意为了原则问题，放弃一次现实中的晋升机会吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00308",
+    "content": "你愿意为了做正确的事情，承担额外的风险和责任吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00309",
+    "content": "你愿意为了坚持自己的信念，放弃高收入的现实生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00310",
+    "content": "你愿意为了维护公平正义，牺牲自己的现实利益吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00311",
+    "content": "你愿意为了长远的价值，拒绝眼前巨大的诱惑吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00312",
+    "content": "你愿意为了守护自己认定的原则，即使付出惨重的代价也在所不惜吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00313",
+    "content": "你愿意为了理想中的世界，放弃现实中已经取得的一切成就吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00314",
+    "content": "你愿意为了追求正义，即使自己穷困潦倒也绝不妥协吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00315",
+    "content": "你愿意为了长远的目标，长期忍受现实的艰苦吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "long_term",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00316",
+    "content": "你愿意为了自己相信的价值，放弃所有的现实回报吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00317",
+    "content": "你愿意为了一个看似不可能实现的远大理想，赌上自己的一生吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00318",
+    "content": "你愿意为了坚持绝对的正义，即使毁灭自己的现实生活也不退缩吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00319",
+    "content": "你愿意为了崇高的信念，完全无视现实条件的种种限制吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "long_term",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00320",
+    "content": "你愿意为了纯粹理想主义的追求，彻底放弃一切物质保障吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00321",
+    "content": "你愿意为了整个社区的安危，让自己承担最大的风险吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00322",
+    "content": "你愿意为了集体的长远发展，牺牲自己全部的个人财富吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00323",
+    "content": "你愿意为了大多数人的利益，放弃自己至关重要的个人机会吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00324",
+    "content": "你愿意为了整个社会的利益，牺牲自己的个人自由吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00325",
+    "content": "你愿意为了帮助社区建设，放弃自己个人发展的好机会吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00326",
+    "content": "你愿意为了团队的成功，牺牲自己晋升的机会吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00327",
+    "content": "你愿意为了全村人的福祉，承担自己个人的经济损失吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00328",
+    "content": "你愿意为了集体的统一，放弃自己表达异议的自由吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00329",
+    "content": "你愿意为了团队的利益，放弃一些个人的休息时间吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00330",
+    "content": "你愿意为了班级的荣誉，承担额外的准备工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00331",
+    "content": "你愿意为了社区的环境改善，接受一些个人生活上的不便吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00332",
+    "content": "你愿意为了公司的共同目标，放弃自己的一些个人想法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00333",
+    "content": "你愿意为了集体的活动，调整自己原本的个人安排吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00334",
+    "content": "你愿意为了团队的士气，主动做一些额外的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00335",
+    "content": "你愿意为了社区的共同利益，多承担一些公共事务吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00336",
+    "content": "你愿意为了群体的和谐，暂时放下自己的坚持吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00337",
+    "content": "你愿意为了拍好集体的合影，多等几分钟吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00338",
+    "content": "你愿意为了团队的氛围，参与一些自己不太感兴趣的集体活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00339",
+    "content": "你愿意为了公共区域的整洁，多收拾一下自己的东西吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00340",
+    "content": "你愿意为了集体讨论的效率，跟随大家达成一致的意见吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00341",
+    "content": "你愿意为了自己的时间，不参加集体安排的合影活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00342",
+    "content": "你愿意为了自己的便利，不参与公共区域的轮值打扫吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00343",
+    "content": "你愿意为了自己的舒适，在集体活动中提前离场吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00344",
+    "content": "你愿意为了自己的节奏，不迁就团队的统一安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00345",
+    "content": "你愿意为了个人的发展，缺席重要的集体活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00346",
+    "content": "你愿意为了自己的利益，不参与社区的共同建设吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00347",
+    "content": "你愿意为了个人的效率，不配合团队的协作流程吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00348",
+    "content": "你愿意为了自己的自由，拒绝接受集体的统一安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00349",
+    "content": "你愿意为了自己的职业前途，离开需要你留守的团队吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00350",
+    "content": "你愿意为了个人的财富，拒绝为集体分担经济负担吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00351",
+    "content": "你愿意为了自己的独立，不参与集体的任何义务活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00352",
+    "content": "你愿意为了自己的利益，在集体决策中坚持己见吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00353",
+    "content": "你愿意为了个人的成功，不顾团队整体的存亡吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00354",
+    "content": "你愿意为了自己的利益，背叛信任你的集体吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00355",
+    "content": "你愿意为了个人的自由，彻底脱离集体的一切约束吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00356",
+    "content": "你愿意为了自己的财富，牺牲集体的共同利益吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00357",
+    "content": "你愿意为了保全自己，牺牲整个集体的利益吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00358",
+    "content": "你愿意为了个人的绝对自由，完全无视集体的一切安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00359",
+    "content": "你愿意为了自己的财富，让整个集体陷入困境吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00360",
+    "content": "你愿意为了个人利益的最大化，彻底抛弃所有的集体责任吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00361",
+    "content": "你愿意为了三十年后安定的生活，忍受现在长期的艰苦吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00362",
+    "content": "你愿意为了子孙后代的未来，放弃自己当下的所有享受吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00363",
+    "content": "你愿意为了一个五十年后造福人类的目标，倾尽自己的一生吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00364",
+    "content": "你愿意为了长期的事业目标，牺牲自己全部的短期娱乐吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00365",
+    "content": "你愿意为了未来的职业发展，坚持学习几年枯燥但有用的技能吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00366",
+    "content": "你愿意为了长远的身体健康，长期坚持规律但有些乏味的锻炼吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00367",
+    "content": "你愿意为了十年后的财务自由，放弃现在的高消费生活吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00368",
+    "content": "你愿意为了长期的人际信任，拒绝眼前的短期利益吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00369",
+    "content": "你愿意为了提升自己，坚持每天学习而不急于看到效果吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00370",
+    "content": "你愿意为了未来的保障，定期储蓄而不是及时行乐吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00371",
+    "content": "你愿意为了长期的目标，放弃一些当下的娱乐吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00372",
+    "content": "你愿意为了长远的信誉，拒绝一次能快速获利但会损害形象的机会吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00373",
+    "content": "你愿意为了健康长寿，现在就开始注意饮食和作息吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00374",
+    "content": "你愿意为了未来的发展，投资自己的教育和培训吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00375",
+    "content": "你愿意为了长期的积累，现在就开始规划自己的退休生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00376",
+    "content": "你愿意为了长期的合作关系，放弃一次性的高额回报吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00377",
+    "content": "你愿意为了长远的利益，现在开始多存一点钱吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00378",
+    "content": "你愿意为了以后的工作，现在多学一点东西吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00379",
+    "content": "你愿意为了长期的身体健康，现在开始少吃一点甜食吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00380",
+    "content": "你愿意为了长期的友谊，现在多花一些心思维护关系吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00381",
+    "content": "你愿意为了眼前的快乐，推迟自己的长期计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00382",
+    "content": "你愿意为了当下的舒适，不坚持锻炼身体吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00383",
+    "content": "你愿意为了立刻的满足，花掉本应存下来的钱吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00384",
+    "content": "你愿意为了此刻的心情，不做长远的打算吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00385",
+    "content": "你愿意为了享受当下，放弃为退休生活做的储蓄吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00386",
+    "content": "你愿意为了及时行乐，选择轻松但没有长远发展的工作吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00387",
+    "content": "你愿意为了眼前的便利，破坏自己长期坚持的健康习惯吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00388",
+    "content": "你愿意为了快速的回报，放弃需要长期坚持的投资吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00389",
+    "content": "你愿意为了眼前的巨大收益，透支自己未来的健康吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00390",
+    "content": "你愿意为了立刻的成功，放弃需要长期积累的真正实力吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00391",
+    "content": "你愿意为了当下的满足，花光所有的积蓄而不考虑未来吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00392",
+    "content": "你愿意为了短期的业绩，牺牲公司长远的发展吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00393",
+    "content": "你愿意为了眼前的巨额财富，牺牲自己一生的长期健康吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00394",
+    "content": "你愿意为了立即的成就，放弃所有需要长期坚持的事情吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00395",
+    "content": "你愿意为了当下的享乐，彻底不管未来的生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00396",
+    "content": "你愿意为了短期的高收益，毁掉多年积累的长期声誉吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00397",
+    "content": "你愿意为了现在的极致享乐，赌上自己全部的未来吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00398",
+    "content": "你愿意为了眼前的巨大利益，牺牲子孙后代的未来吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00399",
+    "content": "你愿意为了此刻的满足，彻底放弃对人生长远的任何规划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00400",
+    "content": "你愿意为了短期的大丰收，耗尽所有长期可持续的资源吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  }
+]
