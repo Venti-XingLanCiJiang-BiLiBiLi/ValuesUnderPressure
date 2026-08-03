@@ -21,7 +21,7 @@
 | --- | --- |
 | 前端 | Vue 3 · TypeScript · Vite · TailwindCSS · Pinia · Vue Router |
 | 后端 | FastAPI · SQLite |
-| 部署 | GitHub Actions → GitHub Pages（前端静态站点） |
+| 部署 | Docker |
 
 ## 项目结构
 
