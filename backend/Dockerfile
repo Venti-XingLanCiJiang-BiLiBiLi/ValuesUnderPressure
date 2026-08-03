@@ -18,8 +18,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # 1) 依赖清单先行，利用 Docker 层缓存
+#    PIP_INDEX_URL：pip 镜像源，构建时可覆盖（默认官方源）。
+#    国内云服务器直连 pypi.org 下载 pydantic_core 等 wheel 极易超时，
+#    建议改为阿里云/清华源：
+#      docker compose build --build-arg PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
+#    或直接修改 docker-compose.yml 中该 ARG 的默认值。
+ARG PIP_INDEX_URL=https://pypi.org/simple
 COPY backend/requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -i "$PIP_INDEX_URL" -r requirements.txt
 
 # 2) 后端代码
 COPY backend/app /app/app
