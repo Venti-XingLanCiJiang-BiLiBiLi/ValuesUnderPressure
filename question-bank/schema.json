@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://apersonalitytest.dev/schemas/question-bank.schema.json",
+  "title": "aPersonalityTest 题库 Schema",
+  "description": "正式题库 question-bank/questions.json 的数据结构定义。顶层为题目数组，每题影响一个或多个人格维度。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "content", "type", "category", "difficulty", "weights"],
+    "additionalProperties": true,
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^Q\\d{5}$",
+        "description": "全局唯一题目 ID，例如 Q00001"
+      },
+      "content": {
+        "type": "string",
+        "minLength": 1,
+        "description": "题目文本，作答只允许 Y / N"
+      },
+      "type": {
+        "const": "YN",
+        "description": "题目类型，当前固定为 YN（二选一）"
+      },
+      "category": {
+        "type": "string",
+        "enum": [
+          "personal_boundary",
+          "privacy",
+          "freedom",
+          "safety",
+          "wealth",
+          "morality",
+          "social",
+          "future",
+          "risk",
+          "control",
+          "must",
+          "experimental"
+        ],
+        "description": "场景分类，共 12 类；must 为每张试卷固定出现的锚定题"
+      },
+      "difficulty": {
+        "type": "string",
+        "enum": ["easy", "medium", "hard"],
+        "description": "难度：easy / medium / hard"
+      },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "检索、过滤与统计分析的标签，可与 weights.dimension 不一致"
+      },
+      "weights": {
+        "type": "array",
+        "minItems": 1,
+        "description": "多维影响权重。一个问题可同时影响多个人格维度，每条权重对应一个维度。",
+        "items": {
+          "type": "object",
+          "required": ["dimension", "yes", "no"],
+          "additionalProperties": false,
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "enum": [
+                "self_protection",
+                "altruism",
+                "freedom",
+                "security",
+                "privacy",
+                "wealth",
+                "rule_orientation",
+                "pragmatism",
+                "collectivism",
+                "long_term"
+              ],
+              "description": "受影响的人格维度 ID（10 个核心维度之一）"
+            },
+            "yes": {
+              "type": "integer",
+              "minimum": -5,
+              "maximum": 5,
+              "description": "用户答 Y 时对该维度的得分贡献（可为正、负或 0）"
+            },
+            "no": {
+              "type": "integer",
+              "minimum": -5,
+              "maximum": 5,
+              "description": "用户答 N 时对该维度的得分贡献（可为正、负或 0）"
+            }
+          }
+        },
+        "description": "权重规则：同一题内 dimension 不能重复；yes 与 no 不能同时为 0；值域 -5 ~ +5 整数"
+      },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "数据结构版本号，用于追踪 schema 变化"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["draft", "active", "experimental", "deprecated"],
+            "description": "题目生命周期状态"
+          }
+        },
+        "required": ["version", "status"]
+      }
+    }
+  }
+}
