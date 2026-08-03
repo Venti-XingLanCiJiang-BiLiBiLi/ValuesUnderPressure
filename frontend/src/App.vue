@@ -21,18 +21,23 @@ const route = useRoute()
 useTheme() // 副作用：mount 时初始化主题
 
 const store = useTestStore()
-const { tryRestore } = useSessionRestore()
+const { tryRestore, loadCachedResult } = useSessionRestore()
 
 onMounted(async () => {
-  // 仅在用户首次进入 / 或 /test 时尝试恢复（避免在 /result 时误覆盖）
   if (route.name === 'intro' || route.name === 'test') {
+    // 尝试恢复进行中的答题会话
     const restored = await tryRestore()
     if (restored) {
-      // 把 store 状态注水（Pinia 在 setup 中是响应式的）
       store.hydrate({
         sessionId: restored.sessionId,
         total: restored.total,
       })
+    }
+  } else if (route.name === 'result') {
+    // 结果页刷新：从 sessionStorage 恢复缓存结果（无需后端）
+    const cached = loadCachedResult()
+    if (cached) {
+      store.restoreFromCache(cached.sessionId, cached.result)
     }
   }
 })

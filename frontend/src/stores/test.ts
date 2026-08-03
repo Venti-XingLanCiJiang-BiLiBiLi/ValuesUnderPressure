@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { testApi, ApiError } from '@/api/client'
+import { useSessionRestore } from '@/composables/useSessionRestore'
 import type { AnswerValue, DimensionScore, QuestionResponse, ResultResponse } from '@/types/api'
 
 /**
@@ -75,7 +76,7 @@ export const useTestStore = defineStore('test', () => {
     }
   }
 
-  async function startSession(length = 40) {
+  async function startSession(length = 50) {
     reset()
     loading.value = true
     error.value = null
@@ -145,11 +146,23 @@ export const useTestStore = defineStore('test', () => {
     error.value = null
     try {
       result.value = await testApi.getResult(sessionId.value)
+      // 缓存结果到 sessionStorage，刷新结果页时无需后端即可恢复
+      const { persistResult, persist } = useSessionRestore()
+      persistResult(sessionId.value, result.value)
+      persist(sessionId.value, total.value, true)
     } catch (e) {
       error.value = e instanceof ApiError ? e.message : '获取结果失败'
     } finally {
       loading.value = false
     }
+  }
+
+  /** 从缓存的 sessionStorage 直接恢复结果（无需后端 API，用于刷新结果页）。 */
+  function restoreFromCache(sid: string, cachedResult: ResultResponse) {
+    sessionId.value = sid
+    total.value = cachedResult.total
+    result.value = cachedResult
+    finished.value = true
   }
 
   // 用于结果页：稳定排序的维度列表
@@ -176,6 +189,7 @@ export const useTestStore = defineStore('test', () => {
     submitAnswer,
     fetchResult,
     hydrate,
+    restoreFromCache,
     reset,
   }
 })

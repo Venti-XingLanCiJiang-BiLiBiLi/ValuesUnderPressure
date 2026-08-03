@@ -17,12 +17,27 @@ import LoadingState from '@/components/LoadingState.vue'
 
 const router = useRouter()
 const store = useTestStore()
-const { clear } = useSessionRestore()
+const { clear, loadCachedResult } = useSessionRestore()
 
-onMounted(() => {
-  if (!store.sessionId || !store.result) {
-    router.replace({ name: 'intro' })
+onMounted(async () => {
+  // 已有结果，直接展示
+  if (store.sessionId && store.result) return
+
+  // 尝试从 sessionStorage 恢复缓存结果（App.vue 可能已处理，这里做兜底）
+  const cached = loadCachedResult()
+  if (cached) {
+    store.restoreFromCache(cached.sessionId, cached.result)
+    return
   }
+
+  // 有 sessionId 但无结果 → 尝试从后端拉取（可能仍在后端存储中）
+  if (store.sessionId && !store.result) {
+    await store.fetchResult()
+    if (store.result) return
+  }
+
+  // 无法恢复 → 回到首页
+  router.replace({ name: 'intro' })
 })
 
 const showShareHint = ref(false)
@@ -130,10 +145,10 @@ async function copyLink() {
              dark:border-ink-700 dark:bg-ink-900/60"
     >
       <h3 class="font-serif text-base font-semibold text-ink-900 dark:text-ink-100 mb-2">
-        数据不足的维度
+        作答一致性偏低的维度
       </h3>
       <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
-        以下维度作答题数过少，结果仅供参考：
+        以下维度在不同题目间的作答方向不一致，可能受具体情境影响较大：
         <span class="text-ink-900 dark:text-ink-100 font-medium ml-1">
           {{ store.result.uncertain_dimensions.join('、') }}
         </span>

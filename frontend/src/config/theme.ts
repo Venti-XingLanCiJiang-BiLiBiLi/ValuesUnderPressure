@@ -32,13 +32,13 @@ export const SCORE_THRESHOLDS = {
 /**
  * 一致性阈值：用于结果页一致性标签
  * - >= 0.8: 稳定倾向（绿）
- * - >= 0.6: 较为稳定（中性）
- * - <  0.6: 情境依赖（琥珀）
+ * - >= 0.5: 较为稳定（中性）—— 与后端 scoring.py CONSISTENCY_LOW_THRESHOLD 对齐
+ * - <  0.5: 情境依赖（琥珀）
  * - null:  数据不足（灰）
  */
 export const CONSISTENCY_THRESHOLDS = {
   stable: 0.8,
-  moderate: 0.6,
+  moderate: 0.5,
 } as const
 
 /** 动画时长（毫秒） */
