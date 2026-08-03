@@ -63,7 +63,7 @@ function quit() {
         </span>
       </div>
       <ProgressBar
-        :current="store.currentIndex"
+        :current="store.progressIndex"
         :total="store.total"
         :show-label="false"
       />
@@ -136,6 +136,28 @@ function quit() {
         >
           最后一题
         </p>
+
+        <!-- 导航：误触后回退查看/修改，回退状态下可前进回进度点 -->
+        <div class="mt-6 flex items-center justify-center gap-3">
+          <button
+            v-if="store.canGoBack"
+            type="button"
+            class="btn-ghost !px-4 !py-2 text-sm"
+            :disabled="store.loading"
+            @click="store.goBack()"
+          >
+            ← 上一题
+          </button>
+          <button
+            v-if="store.canGoNext"
+            type="button"
+            class="btn-ghost !px-4 !py-2 text-sm"
+            :disabled="store.loading"
+            @click="store.goNext()"
+          >
+            下一题 →
+          </button>
+        </div>
       </article>
     </Transition>
 
