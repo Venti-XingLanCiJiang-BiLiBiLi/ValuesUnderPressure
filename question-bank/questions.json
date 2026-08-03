@@ -10826,5 +10826,1085 @@
       "version": 1,
       "status": "draft"
     }
+  },
+  {
+    "id": "Q00401",
+    "content": "你愿意为了保住对自己身体的决定权，拒绝任何未经你同意的医疗干预吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00402",
+    "content": "你愿意为了拥有独立思考的自由，拒绝任何形式的强制思想灌输吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00403",
+    "content": "你愿意为了自由的创作，拒绝任何限制创作主题的巨额资助机会吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00404",
+    "content": "你愿意为了自由探索人生的可能性，拒绝一份规划好你三十年发展路径的工作吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00405",
+    "content": "你愿意为了自主决定每天做什么，放弃一份高薪但行程完全被安排的工作吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00406",
+    "content": "你愿意为了自由选择自己的伴侣，拒绝家里安排的婚事吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00407",
+    "content": "你愿意为了自由表达自己的想法，拒绝加入任何限制发言的团体吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00408",
+    "content": "你愿意为了自由选择居住的城市，放弃一份需要固定驻守的工作吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00409",
+    "content": "你愿意为了自由选择办公的方式，拒绝公司统一要求坐班的规定吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00410",
+    "content": "你愿意为了自由选择学习的方向，不按家人安排好的专业就读吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00411",
+    "content": "你愿意为了自由规划创业的方向，拒绝加入一个要求你服从整体规划的大型平台吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00412",
+    "content": "你愿意为了自由选择消费的方式，拒绝所有需要长期绑定的会员制度吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00413",
+    "content": "你愿意为了自由布置自己的房间，不按家人的统一要求来安排吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00414",
+    "content": "你愿意为了自由选择工作的方法，拒绝公司统一的管理模板吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00415",
+    "content": "你愿意为了自由决定每天吃什么，不参加单位统一的供餐安排吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00416",
+    "content": "你愿意为了自由安排学习的节奏，不按培训班固定的进度走吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00417",
+    "content": "你愿意为了自由布置自己的工位，不遵守办公室统一的桌面规范吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00418",
+    "content": "你愿意为了自由选择通勤的方式，不参加单位组织的统一班车吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00419",
+    "content": "你愿意为了自由决定听什么音乐，不使用单位统一播放的背景音乐系统吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00420",
+    "content": "你愿意为了自由选择说话的方式，不遵守团队严格的发言规范吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00421",
+    "content": "你愿意为了不纠结，让同伴帮你挑选今天要看的电影吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00422",
+    "content": "你愿意为了获得团体的福利，接受统一安排的行程吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00423",
+    "content": "你愿意为了省事，直接沿用朋友推荐的旅行攻略而不做任何修改吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00424",
+    "content": "你愿意为了配合集体，放弃自己与众不同的想法吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00425",
+    "content": "你愿意为了生活的稳定，接受父母对你职业的安排吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00426",
+    "content": "你愿意为了获得公司提供的免费住房，接受公司安排你的居住和通勤方式吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00427",
+    "content": "你愿意为了减少做决定的时间，直接采纳别人现成的计划吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00428",
+    "content": "你愿意为了得到群体的认可，不再坚持自己与众不同的选择吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00429",
+    "content": "你愿意为了获得带薪的终身休假，把安排休假时间的权利交给公司统一管理吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00430",
+    "content": "你愿意为了年迈的父母有人照料，接受把自己大部分时间固定在家乡的安排吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00431",
+    "content": "你愿意为了高额的报酬，接受一份严格限制你业余爱好的工作吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00432",
+    "content": "你愿意为了团队的统一行动，放弃自己独立做决定的权利吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00433",
+    "content": "你愿意为了获得一项重大疾病的免费终身治疗，接受医院对你全部生活方式的长期约束吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00434",
+    "content": "你愿意为了伴侣不再离开你，放弃自己独立做重大决定的权利吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00435",
+    "content": "你愿意为了获得巨额财富，接受一份要求你放弃所有私人生活的精英合同吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00436",
+    "content": "你愿意为了得到一份终生不用工作的保障收入，接受由系统安排你每天的生活吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00437",
+    "content": "你愿意为了获得一台能替你打理一切的智能管家，交出对日常生活的全部决定权吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00438",
+    "content": "你愿意为了让自己深爱的人永远不离开，接受对方对你一切选择的控制吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00439",
+    "content": "你愿意为了换取一项造福全人类的技术，自愿放弃自己这一生的所有选择权作为试验对象吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "Q00440",
+    "content": "你愿意为了获得一个永远不会出错的人生规划，把人生的所有选择权都交给算法吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
   }
 ]

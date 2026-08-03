@@ -35,9 +35,13 @@ CATEGORIES = {
 }
 DIFFICULTIES = {"easy", "medium", "hard"}
 WEIGHT_BUCKETS = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]
-EXPECTED_TOTAL = 400
-EXPECTED_PER_DIM = 40
-EXPECTED_PER_BUCKET = 4
+EXPECTED_TOTAL = 440
+# 各维度期望题数；batch_11 补齐 freedom 分类后，freedom 维度题池翻倍为 80
+EXPECTED_PER_DIM = {dim: 40 for dim in DIMENSIONS}
+EXPECTED_PER_DIM["freedom"] = 80
+# 各维度每个主权重桶的期望题数
+EXPECTED_PER_BUCKET = {dim: {b: 4 for b in WEIGHT_BUCKETS} for dim in DIMENSIONS}
+EXPECTED_PER_BUCKET["freedom"] = {b: 8 for b in WEIGHT_BUCKETS}
 
 BATCH_ORDER = [
     "batch_01_self_protection.json",
@@ -50,6 +54,7 @@ BATCH_ORDER = [
     "batch_08_pragmatism.json",
     "batch_09_collectivism.json",
     "batch_10_long_term.json",
+    "batch_11_freedom.json",
 ]
 
 errors = []
@@ -173,7 +178,7 @@ def main():
         for b in WEIGHT_BUCKETS:
             v = buckets[dim][b]
             subtotal += v
-            mark = " " if v == EXPECTED_PER_BUCKET else "!"
+            mark = " " if v == EXPECTED_PER_BUCKET[dim][b] else "!"
             row += f"{v:>5}{mark}"
         total_per_dim[dim] = subtotal
         row += f"   {subtotal}"
@@ -184,13 +189,15 @@ def main():
     print(f"总题数: {grand_total} (期望 {EXPECTED_TOTAL})")
     print()
 
-    # 断言各维度桶数 = 4，各维度总数 = 40
+    # 断言各维度桶数与总数符合配置
     for dim in DIMENSIONS:
         for b in WEIGHT_BUCKETS:
-            if buckets[dim][b] != EXPECTED_PER_BUCKET:
-                error(f"{dim} 权重桶 {b}: 期望 {EXPECTED_PER_BUCKET} 题, 实际 {buckets[dim][b]} 题")
-        if total_per_dim[dim] != EXPECTED_PER_DIM:
-            error(f"{dim}: 期望 {EXPECTED_PER_DIM} 题, 实际 {total_per_dim[dim]} 题")
+            exp = EXPECTED_PER_BUCKET[dim][b]
+            if buckets[dim][b] != exp:
+                error(f"{dim} 权重桶 {b}: 期望 {exp} 题, 实际 {buckets[dim][b]} 题")
+        exp_total = EXPECTED_PER_DIM[dim]
+        if total_per_dim[dim] != exp_total:
+            error(f"{dim}: 期望 {exp_total} 题, 实际 {total_per_dim[dim]} 题")
 
     if grand_total != EXPECTED_TOTAL:
         error(f"总题数 {grand_total} != {EXPECTED_TOTAL}")
