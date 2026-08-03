@@ -216,3 +216,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ValuesUnderPressure —— 题库生成工作目录（临时/中间产物）
+# 后端仅消费 question-bank/questions.json 正式题库。
+# 以下目录为生成题库时的中间文件与本地工具，不入库（本地磁盘仍保留，可随时重新生成题库）。
+question-bank/drafts/
+question-bank/tools/
+
+# ValuesUnderPressure —— 运行时生成的 SQLite 数据库（不入库）
+backend/app/data/app.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ValuesUnderPressure —— 运行时生成的前端打包产物（不入库）
+frontend.zip

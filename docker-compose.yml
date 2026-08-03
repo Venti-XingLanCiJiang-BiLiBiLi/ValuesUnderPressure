@@ -1,0 +1,64 @@
+# ============================================================================
+# VUP 一键部署编排 (Docker Compose)
+# ----------------------------------------------------------------------------
+# 用法（云服务器上，仓库根目录）：
+#   ./deploy/deploy.sh                 # 推荐：拉取 + 构建 + 启动 + 健康检查
+#   docker compose up -d --build       # 或直接手工执行
+#
+# 访问：http://<服务器IP>:${VUP_PORT:-8080}
+# 数据：SQLite 持久化在命名卷 vup-data，容器重建/升级不丢数据
+# 配置：复制 deploy/.env.example 为 .env 后按需修改
+# ============================================================================
+name: vup
+
+services:
+  # --------------------------------------------------------------------------
+  # 后端：FastAPI + SQLite
+  # --------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: vup-backend:latest
+    environment:
+      # 生产环境：正式题库缺失时禁止回退到开发样例题库
+      APP_ENV: ${APP_ENV:-production}
+      APERSONALITYTEST_DB_PATH: /data/app.db
+      QUESTION_BANK_PATH: /question-bank/questions.json
+    volumes:
+      - vup-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request,sys; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3); sys.exit(0)"
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    # 仅内网可达，不直接暴露端口（由前端 Nginx 反代）
+    expose:
+      - "8000"
+
+  # --------------------------------------------------------------------------
+  # 前端：Nginx 托管静态文件 + 反代 /api 到后端（唯一对外入口）
+  # --------------------------------------------------------------------------
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        # 默认 /api 同源反代；前后端分离部署时通过 .env 覆盖
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
+    image: vup-frontend:latest
+    ports:
+      - "${VUP_PORT:-8080}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  vup-data:
