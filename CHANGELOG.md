@@ -2,6 +2,26 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.0.0] - 2026-08-03
+
+### 新增
+
+- **一键部署（Docker Compose）**：前后端容器化，单命令部署到云服务器或本地 Docker Desktop。
+  - `backend/Dockerfile`：Python 3.11-slim 镜像，打包后端代码与正式题库（`question-bank/questions.json`），`APP_ENV=production` 禁止回退开发样例题库；SQLite 数据落盘于命名卷。
+  - `frontend/Dockerfile` + `frontend/nginx.conf`：多阶段构建（Node 22 构建 Vite 产物 → Nginx 托管），同源反代 `/api` 到后端，Vue Router history 回退，单端口暴露、无跨域。
+  - `docker-compose.yml`：编排 `backend` + `frontend`，数据持久化于命名卷 `vup-data`，内置健康检查，容器重建/升级不丢数据。
+  - `deploy/` 目录：`deploy.sh`（Linux 云服务器）、`deploy.ps1`（Windows + Docker Desktop 本地自测）、`backup.sh`（数据库备份，保留最近 14 份）、`wait-docker.ps1`（等待引擎就绪）、`.env.example`（部署配置样例）。
+  - 根 `README.md` 新增「一键部署（Docker Compose）」章节，含 Linux 部署、Windows 本地自测与定时备份说明。
+
+### 变更
+
+- 项目正式发布 **1.0.0**：`frontend/package.json` 版本号 `0.1.0` → `1.0.0`。
+- `frontend/tsconfig.json`：移除已弃用的 `baseUrl`，`paths` 改用 `"@/*": ["./src/*"]`（无 `baseUrl` 时相对 tsconfig 目录解析），消除 TypeScript 6/7 弃用警告。
+
+### 说明
+
+- 构建镜像需能访问 Docker Hub；国内网络不可达时，请在 Docker daemon 中配置镜像加速器（如 DaoCloud `https://docker.m.daocloud.io`）。
+
 ## [0.5.1] - 2026-08-03
 
 ### 新增

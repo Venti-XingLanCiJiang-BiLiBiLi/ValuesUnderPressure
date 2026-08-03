@@ -1,0 +1,19 @@
+# ============================================================================
+# 行尾规则（Line Ending）
+# ----------------------------------------------------------------------------
+# 仓库默认 LF。Windows 上 core.autocrlf=true 会在 checkout 时把 LF 转 CRLF，
+# 导致 Dockerfile / shell 脚本在 Linux 容器构建时因 CRLF 失败（Known pitfall）。
+# 这里强制部署关键文件始终 LF（无论工作区在哪个平台）。
+# ============================================================================
+* text=auto
+
+# 部署 / 容器相关：必须 LF（Linux 构建环境）
+*.sh                  text eol=lf
+Dockerfile*           text eol=lf
+*.dockerignore        text eol=lf
+docker-compose*.yml   text eol=lf
+docker-compose*.yaml  text eol=lf
+*.conf                text eol=lf
+
+# 服务单元 / 其它 Linux 配置文件
+*.service             text eol=lf

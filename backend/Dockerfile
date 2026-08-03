@@ -1,0 +1,43 @@
+# ============================================================================
+# VUP 后端镜像 (FastAPI + SQLite)
+# ----------------------------------------------------------------------------
+# 构建上下文必须是【仓库根目录】（后端需要 question-bank/questions.json）：
+#   docker build -f backend/Dockerfile .
+#   docker compose build backend
+#
+# 题库路径约定：backend/app/question_bank.py 中
+#   PRODUCTION_BANK_PATH = <backend>/../question-bank/questions.json
+#   即镜像内 /app/app/../../question-bank/questions.json = /question-bank/questions.json
+# 因此把正式题库 COPY 到 /question-bank/questions.json 与代码逻辑完全一致。
+# ============================================================================
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# 1) 依赖清单先行，利用 Docker 层缓存
+COPY backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 2) 后端代码
+COPY backend/app /app/app
+
+# 3) 正式题库（500 题，与代码分离）
+COPY question-bank/questions.json /question-bank/questions.json
+
+# 4) 生产运行环境
+ENV APP_ENV=production \
+    APERSONALITYTEST_DB_PATH=/data/app.db \
+    QUESTION_BANK_PATH=/question-bank/questions.json
+
+# SQLite 数据卷挂载点（docker-compose 中挂载命名卷 vup-data:/data）
+VOLUME /data
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD python -c "import urllib.request,sys; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3); sys.exit(0)" || exit 1
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

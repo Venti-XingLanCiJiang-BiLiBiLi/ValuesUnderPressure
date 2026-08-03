@@ -73,6 +73,72 @@ npm run dev
 - 访问地址：<https://Venti-XingLanCiJiang-BiLiBiLi.github.io/ValuesUnderPressure/>
 - 注意：GitHub Pages 是**纯静态托管，不含后端**。未配置 `VITE_API_BASE_URL` 时仅能浏览页面；完整功能需另行部署后端（Render / Railway / VPS 等）并用该变量指向后端地址，详见 `frontend/README.md`。
 
+## 一键部署（Docker Compose，推荐）
+
+适合自有云服务器（VPS）。前后端打包为两个容器，Nginx 同时托管前端静态文件并反代 `/api` 到后端，**同源部署、单端口暴露、无跨域**；SQLite 数据保存在命名卷中，升级/重启不丢失。
+
+```
+ValuesUnderPressure/
+├── docker-compose.yml        # 编排：backend + frontend
+├── backend/Dockerfile        # Python 3.11 + 后端 + 正式题库
+├── frontend/Dockerfile       # 多阶段：Node 构建 → Nginx 托管
+├── frontend/nginx.conf       # 静态托管 + /api 反代 + history 回退
+└── deploy/
+    ├── deploy.sh             # 一键部署（Linux 云服务器）
+    ├── deploy.ps1            # 一键部署（Windows + Docker Desktop 本地自测）
+    ├── backup.sh             # 数据库备份（保留最近 14 份）
+    └── .env.example          # 部署配置样例
+```
+
+### 首次部署
+
+```bash
+# 1. 云服务器安装 Docker（若已装可跳过）
+curl -fsSL https://get.docker.com | sh
+
+# 2. 克隆仓库并一键部署
+git clone https://github.com/Venti-XingLanCiJiang-BiLiBiLi/ValuesUnderPressure.git
+cd ValuesUnderPressure
+./deploy/deploy.sh
+```
+
+访问 `http://<服务器IP>:8080`（端口可在 `.env` 的 `VUP_PORT` 修改，默认 8080）。
+API 文档在 `http://<服务器IP>:8080/docs`，健康检查在 `/api/health`。
+
+### Windows 本地自测（Docker Desktop）
+
+与 Linux 脚本等价的 Windows 版，适合先在本地验证整套编排：
+
+```powershell
+.\deploy\deploy.ps1 -NoPull -Open   # 构建 + 启动 + 健康检查 + 打开浏览器
+```
+
+参数：`-NoPull` 跳过 git pull（本地自测常用）、`-NoCache` 强制重新构建、
+`-Logs` 部署后跟进日志、`-Open` 部署后自动打开浏览器。
+端口同样由 `.env` 的 `VUP_PORT` 控制（默认 8080）。
+
+> 若遇到 PowerShell 执行策略限制（`SecurityError`），用 Bypass 方式运行：
+> `powershell -NoProfile -ExecutionPolicy Bypass -File .\deploy\deploy.ps1 -NoPull -Open`
+
+### 日常升级 / 维护
+
+```bash
+./deploy/deploy.sh            # 代码更新后重新构建并滚动升级
+./deploy/backup.sh            # 手动备份数据库到 backups/
+docker compose logs -f        # 查看日志
+docker compose down           # 停止（数据仍保留在卷中）
+```
+
+定时备份（可选）：
+
+```bash
+crontab -e
+0 3 * * * /path/to/ValuesUnderPressure/deploy/backup.sh >> /var/log/vup-backup.log 2>&1
+```
+
+> 前端构建默认 `VITE_API_BASE_URL=/api`（同源反代）。仅当采用前后端分离部署时才在 `.env`
+> 里覆盖 `VITE_API_BASE_URL=https://你的后端域名/api`，详见 `deploy/.env.example`。
+
 ## 测试与校验
 
 ```bash
