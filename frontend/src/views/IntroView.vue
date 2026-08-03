@@ -7,14 +7,35 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
+import { useArchives } from '@/composables/useArchives'
 import { BRAND } from '@/config/branding'
+import type { DimensionScore, ResultResponse } from '@/types/api'
 
 const router = useRouter()
 const store = useTestStore()
+const { archives, deleteArchive } = useArchives()
 
 const questionCount = ref(50)
 const starting = ref(false)
 const localError = ref<string | null>(null)
+
+/** 格式化存档时间戳为 "YYYY-MM-DD HH:mm"。 */
+function formatDate(ts: number) {
+  const d = new Date(ts)
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`
+}
+
+/** 取存档结果中分数最高的前 3 个维度（用于列表快速预览）。 */
+function topDimensions(result: ResultResponse): DimensionScore[] {
+  return Object.values(result.dimensions)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+}
+
+function viewArchive(sessionId: string) {
+  router.push({ name: 'archive', params: { sessionId } })
+}
 
 async function handleStart() {
   starting.value = true
@@ -146,7 +167,76 @@ async function handleStart() {
       </p>
     </div>
 
-    <p class="mt-8 text-center text-xs text-ink-500 dark:text-ink-400">
+    <!-- ============================== 存档 ============================== -->
+    <div v-if="archives.length > 0" class="mt-10 animate-fade-in">
+      <div class="flex items-baseline justify-between gap-3 mb-3">
+        <h2 class="font-serif text-xl font-semibold text-ink-900 dark:text-ink-100">
+          📁 我的存档
+        </h2>
+        <span class="text-xs text-ink-500 dark:text-ink-400">
+          {{ archives.length }} 条 · 仅保存在本机
+        </span>
+      </div>
+      <div class="space-y-3">
+        <div
+          v-for="a in archives"
+          :key="a.sessionId"
+          class="card p-4 sm:p-5 flex items-center gap-4"
+        >
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="text-xs font-mono text-ink-500 dark:text-ink-400 tabular-nums">
+                {{ formatDate(a.savedAt) }}
+              </span>
+              <span class="text-xs text-ink-400 dark:text-ink-500">·</span>
+              <span class="text-xs text-ink-500 dark:text-ink-400">
+                {{ a.result.answered_count }} 题 · 置信度
+                {{ Math.round((a.result.confidence ?? 0) * 100) }}%
+              </span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span
+                v-for="dim in topDimensions(a.result)"
+                :key="dim.dimension"
+                class="inline-flex items-center gap-1 rounded-full bg-ink-100 px-2.5 py-0.5 text-xs
+                       text-ink-700 dark:bg-ink-800 dark:text-ink-200"
+              >
+                {{ dim.name }}
+                <span class="font-mono text-ink-500 dark:text-ink-400">
+                  {{ Math.round(dim.score) }}
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              class="btn-primary !px-4 !py-2 text-sm"
+              @click="viewArchive(a.sessionId)"
+            >
+              查看
+            </button>
+            <button
+              type="button"
+              class="btn-ghost !px-3 !py-2 text-sm text-red-600 hover:bg-red-50
+                     dark:text-red-400 dark:hover:bg-red-950/40"
+              :title="`删除 ${formatDate(a.savedAt)} 的存档`"
+              @click="deleteArchive(a.sessionId)"
+            >
+              删除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p
+      v-else
+      class="mt-8 text-center text-xs text-ink-400 dark:text-ink-500"
+    >
+      完成一次测试后，结果会自动保存为本地存档，方便以后回顾。
+    </p>
+
+    <p class="mt-4 text-center text-xs text-ink-500 dark:text-ink-400">
       本测试不需要登录，答案仅用于生成你的结果。
     </p>
   </section>

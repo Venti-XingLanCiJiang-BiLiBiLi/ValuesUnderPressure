@@ -2,6 +2,28 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.1.0] - 2026-08-03
+
+### 新增
+
+- **本地存档功能**（`frontend/`）：
+  - 新增 `frontend/src/composables/useArchives.ts`：测试完成后结果自动保存到浏览器 **localStorage**（按 session 去重、最新在前、最多保留 50 条），仅存本机、不上传服务器，便于长期回顾。
+  - 首页（`IntroView.vue`）新增「📁 我的存档」区块：按时间列出历史结果（题数 / 置信度 / 分数最高 3 维），可一键「查看」或「删除」。
+  - 新增存档查看页 `/archive/:sessionId`（`frontend/src/views/ArchiveView.vue`）：完整展示单次结果（概览三卡 / 10 维度 / 矛盾分析 / 不确定维度），支持返回首页与删除存档。
+  - 结果渲染抽成共享组件 `ResultContent.vue`，结果页与存档页复用，保证两处展示一致。
+
+### 变更
+
+- **结果页维度展示改版**（`frontend/src/components/ResultContent.vue`、`DimensionBar.vue`、`config/theme.ts`）：
+  - 排序由「原始分降序」改为「偏离中间值 50 的绝对值（`|score-50|`）降序」，倾向越极端排越前。
+  - 条形图由「长度=原始分」改为**以 50 为中线向左右两侧展开的对称条形图**：低分向左、高分向右，条长表示偏离程度，越贴近 50 条越短、越极端越长；渐变方向让远离中线的尖端颜色最深。
+  - 配色阈值调整：>60 蓝色渐变（高分倾向）、<40 粉色渐变（低分倾向）、40~60 灰色渐变（中间）。
+- 项目版本号 `1.0.0` → `1.1.0`（`frontend/package.json`）。
+
+### 说明
+
+- 存档依赖浏览器本地存储，清理浏览器站点数据会一并清除；多设备间不互通。
+
 ## [1.0.0] - 2026-08-03
 
 ### 新增

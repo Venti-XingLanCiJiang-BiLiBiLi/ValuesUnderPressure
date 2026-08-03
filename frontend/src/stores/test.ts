@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { testApi, ApiError } from '@/api/client'
 import { useSessionRestore } from '@/composables/useSessionRestore'
-import type { AnswerValue, DimensionScore, QuestionResponse, ResultResponse } from '@/types/api'
+import { useArchives } from '@/composables/useArchives'
+import type { AnswerValue, QuestionResponse, ResultResponse } from '@/types/api'
 
 /**
  * 测试会话 store
@@ -150,6 +151,11 @@ export const useTestStore = defineStore('test', () => {
       const { persistResult, persist } = useSessionRestore()
       persistResult(sessionId.value, result.value)
       persist(sessionId.value, total.value, true)
+      // 答完自动存档到 localStorage，首页可查看
+      if (result.value.completed) {
+        const { saveArchive } = useArchives()
+        saveArchive(result.value)
+      }
     } catch (e) {
       error.value = e instanceof ApiError ? e.message : '获取结果失败'
     } finally {
@@ -165,12 +171,6 @@ export const useTestStore = defineStore('test', () => {
     finished.value = true
   }
 
-  // 用于结果页：稳定排序的维度列表
-  const sortedDimensions = computed<DimensionScore[]>(() => {
-    if (!result.value) return []
-    return Object.values(result.value.dimensions).sort((a, b) => b.score - a.score)
-  })
-
   return {
     sessionId,
     total,
@@ -183,7 +183,6 @@ export const useTestStore = defineStore('test', () => {
     finished,
     progress,
     answeredCount,
-    sortedDimensions,
     startSession,
     loadNextQuestion,
     submitAnswer,
