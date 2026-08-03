@@ -13,6 +13,17 @@
 - type 必须为 YN
 - weights 至少包含一个维度
 - dimension 必须存在于 dimensions.json
+- metadata.version 必须存在且为正整数
+- metadata.status 必须为合法状态
+
+### metadata.status 合法值
+
+| status | 含义 |
+| --- | --- |
+| draft | 草稿，未进入正式测试 |
+| active | 正式启用 |
+| experimental | 实验运行，可单独控制 |
+| deprecated | 已废弃，不再组卷 |
 
 ## 3. 权重校验
 
