@@ -1,5 +1,5 @@
 """
-aPersonalityTest 后端服务
+取舍之间 (Values Under Pressure, VUP) 后端服务
 
 严格对齐仓库内文档定义的开发目标:
   docs/TestDesign.md      -> 会话生命周期 (创建会话 -> 分层抽题 -> 作答 -> 计分 -> 结果)
@@ -39,9 +39,25 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("apersonalitytest")
 
 app = FastAPI(
-    title="aPersonalityTest API",
-    description="基于 Y/N 极端情境题的价值排序测试后端",
+    title="取舍之间 · Values Under Pressure API",
+    description=(
+        "取舍之间 (Values Under Pressure, VUP) — "
+        "基于 Y/N 极端价值冲突场景的价值观压力测试后端。\n\n"
+        "**核心理念**：结果只描述倾向，不做人格定性；允许不同情境下出现矛盾。\n\n"
+        "## 模块\n"
+        "- `POST /api/test/session` — 创建测试会话（分层组卷）\n"
+        "- `GET  /api/test/session/{id}/question` — 取下一题\n"
+        "- `POST /api/test/session/{id}/answer` — 提交 Y/N 答案\n"
+        "- `GET  /api/test/session/{id}/result` — 拿结果（10 维度 + 矛盾分析）\n"
+        "- `GET  /api/dimensions` — 10 个核心维度的元数据\n"
+        "- `GET  /api/health` — 服务与题库状态\n\n"
+        "接口与数据约定见仓库 `docs/API.md`。"
+    ),
     version="0.1.0",
+    contact={
+        "name": "取舍之间 (Values Under Pressure)",
+        "url": "https://github.com/Venti-XingLanCiJiang-BiLiBiLi/ValuesUnderPressure",
+    },
 )
 
 app.add_middleware(

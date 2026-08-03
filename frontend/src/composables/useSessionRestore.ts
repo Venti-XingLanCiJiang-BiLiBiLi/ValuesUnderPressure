@@ -1,0 +1,98 @@
+/**
+ * 答题进度恢复 composable
+ * ============================================================================
+ * 刷新页面 / 关闭浏览器再打开时，自动恢复上次的 session_id。
+ *
+ * 工作机制：
+ * 1. 创建会话成功后，把 session_id + 已答题目数写入 sessionStorage
+ * 2. 应用启动时（App.vue onMounted），读 sessionStorage 尝试恢复
+ * 3. 如果后端还能查到该会话（GET /question 成功），自动跳到 /test
+ * 4. 如果会话已失效（404/409），清空缓存回到开屏
+ *
+ * 用 sessionStorage 而不是 localStorage：
+ * - 关闭浏览器标签页即清除（更符合"测试是临时任务"的语义）
+ * - 不跨标签页共享（避免多窗口互相覆盖）
+ * ============================================================================
+ */
+
+import { ref } from 'vue'
+import { testApi, ApiError } from '@/api/client'
+
+const STORAGE_KEY = 'quxu:session'
+
+interface PersistedSession {
+  sessionId: string
+  total: number
+  savedAt: number
+}
+
+function read(): PersistedSession | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY)
+    if (!raw) return null
+    const data = JSON.parse(raw) as PersistedSession
+    // 24 小时过期 — 防止用户几天前的中断会话被错误恢复
+    if (Date.now() - data.savedAt > 24 * 60 * 60 * 1000) return null
+    return data
+  } catch {
+    return null
+  }
+}
+
+export function useSessionRestore() {
+  const restoring = ref(false)
+  const restoreError = ref<string | null>(null)
+
+  function persist(sessionId: string, total: number) {
+    const data: PersistedSession = { sessionId, total, savedAt: Date.now() }
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    } catch {
+      // ignore
+    }
+  }
+
+  function clear() {
+    try {
+      sessionStorage.removeItem(STORAGE_KEY)
+    } catch {
+      // ignore
+    }
+  }
+
+  /**
+   * 尝试恢复上次的会话。返回是否成功。
+   * 调用方根据结果决定是否跳转到 /test。
+   */
+  async function tryRestore(): Promise<PersistedSession | null> {
+    const data = read()
+    if (!data) return null
+    restoring.value = true
+    restoreError.value = null
+    try {
+      // 探活：向后端要下一题
+      const q = await testApi.nextQuestion(data.sessionId)
+      // 成功 — 顺便更新 total（防止题库版本变化）
+      persist(q.total === data.total ? data.sessionId : data.sessionId, q.total)
+      return { ...data, total: q.total }
+    } catch (e) {
+      // 会话已失效 / 已完成 — 清缓存
+      if (e instanceof ApiError && (e.status === 404 || e.status === 409)) {
+        clear()
+        return null
+      }
+      restoreError.value = e instanceof ApiError ? e.message : '恢复失败'
+      return null
+    } finally {
+      restoring.value = false
+    }
+  }
+
+  return {
+    restoring,
+    restoreError,
+    persist,
+    clear,
+    tryRestore,
+  }
+}

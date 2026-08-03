@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://apersonalitytest.dev/schemas/question-bank.schema.json",
-  "title": "aPersonalityTest 题库 Schema",
+  "title": "ValuesUnderPressure 题库 Schema",
   "description": "正式题库 question-bank/questions.json 的数据结构定义。顶层为题目数组，每题影响一个或多个人格维度。",
   "type": "array",
   "items": {

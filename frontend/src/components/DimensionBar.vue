@@ -1,0 +1,93 @@
+<script setup lang="ts">
+/**
+ * DimensionBar — 单个维度评分条
+ * --------------------------------------------------------------------------
+ * 显示：排名 #、维度名、分数 (0-100)、条形可视化、倾向文案、一致性标签。
+ *
+ * 配色策略：
+ * - score >= SCORE_THRESHOLDS.high (70) → 暖色（高分倾向）
+ * - score <= SCORE_THRESHOLDS.low  (30) → 冷色（低分倾向）
+ * - 其他                              → 中性色
+ *
+ * 一致性配色：
+ * - >= 0.8 : 稳定倾向（绿）
+ * - >= 0.6 : 较为稳定（中性）
+ * - <  0.6 : 情境依赖（琥珀）
+ * - null   : 数据不足（灰）
+ */
+import { computed } from 'vue'
+import type { DimensionScore } from '@/types/api'
+import { SCORE_THRESHOLDS, CONSISTENCY_THRESHOLDS } from '@/config/theme'
+
+const props = defineProps<{ dim: DimensionScore; rank?: number }>()
+
+const barWidth = computed(() => `${Math.max(0, Math.min(100, props.dim.score))}%`)
+
+const barColor = computed(() => {
+  const s = props.dim.score
+  if (s >= SCORE_THRESHOLDS.high) return 'from-ember-500 to-ember-400'
+  if (s <= SCORE_THRESHOLDS.low) return 'from-ink-600 to-ink-500 dark:from-ink-500 dark:to-ink-400'
+  return 'from-ink-500 to-ink-400 dark:from-ink-400 dark:to-ink-300'
+})
+
+const consistencyText = computed(() => {
+  const c = props.dim.consistency
+  if (c === null || c === undefined) return '数据不足'
+  if (c >= CONSISTENCY_THRESHOLDS.stable) return '稳定倾向'
+  if (c >= CONSISTENCY_THRESHOLDS.moderate) return '较为稳定'
+  return '情境依赖'
+})
+
+const consistencyColor = computed(() => {
+  const c = props.dim.consistency
+  if (c === null || c === undefined) return 'text-ink-400'
+  if (c >= CONSISTENCY_THRESHOLDS.stable) return 'text-emerald-600 dark:text-emerald-400'
+  if (c >= CONSISTENCY_THRESHOLDS.moderate) return 'text-ink-600 dark:text-ink-300'
+  return 'text-amber-600 dark:text-amber-400'
+})
+</script>
+
+<template>
+  <div class="card p-5">
+    <div class="flex items-baseline justify-between mb-2 gap-3">
+      <div class="flex items-baseline gap-2 min-w-0">
+        <span v-if="rank" class="text-xs font-mono text-ink-400 tabular-nums">#{{ rank }}</span>
+        <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 truncate">
+          {{ dim.name }}
+        </h3>
+      </div>
+      <span class="font-mono text-2xl tabular-nums text-ink-900 dark:text-ink-100">
+        {{ Math.round(dim.score) }}
+      </span>
+    </div>
+
+    <div class="h-3 w-full rounded-full bg-ink-100 dark:bg-ink-800 overflow-hidden mb-3">
+      <div
+        class="h-full bg-gradient-to-r transition-all duration-700 ease-out"
+        :class="barColor"
+        :style="{ width: barWidth }"
+      />
+    </div>
+
+    <p class="text-sm text-ink-700 dark:text-ink-300 leading-relaxed mb-3">
+      {{ dim.description }}
+    </p>
+
+    <div class="flex items-center justify-between text-xs">
+      <span class="inline-flex items-center gap-1.5">
+        <span class="text-ink-500 dark:text-ink-400">倾向</span>
+        <span class="font-medium text-ink-800 dark:text-ink-200">{{ dim.tendency }}</span>
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="text-ink-500 dark:text-ink-400">一致性</span>
+        <span class="font-medium" :class="consistencyColor">
+          {{ consistencyText
+          }}<span
+            v-if="dim.consistency !== null"
+            class="ml-0.5 text-ink-400"
+          >{{ Math.round(dim.consistency * 100) }}%</span>
+        </span>
+      </span>
+    </div>
+  </div>
+</template>
