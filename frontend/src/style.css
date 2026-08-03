@@ -42,17 +42,18 @@
     @apply dark:bg-ink-100 dark:text-ink-900 dark:hover:bg-white;
   }
 
+  /* 作答按钮：Y = 赞同（绿）、N = 反对（红），两钮视觉对等，均无默认选中态 */
   .btn-y {
-    @apply btn bg-ember-500 text-white hover:bg-ember-600 active:scale-[0.98] shadow-md shadow-ember-500/20;
+    @apply btn bg-emerald-500 text-white hover:bg-emerald-600 active:scale-[0.98] shadow-md shadow-emerald-500/20;
   }
 
   .btn-n {
-    @apply btn bg-white text-ink-900 ring-1 ring-ink-300 hover:bg-ink-100 hover:ring-ink-400 active:scale-[0.98];
-    @apply dark:bg-ink-800 dark:text-ink-100 dark:ring-ink-600 dark:hover:bg-ink-700 dark:hover:ring-ink-500;
+    @apply btn bg-red-500 text-white hover:bg-red-600 active:scale-[0.98] shadow-md shadow-red-500/20;
   }
 
+  /* 幽灵按钮无底色，需带边框保证浅色/深色下都清晰可见 */
   .btn-ghost {
-    @apply btn text-ink-700 hover:bg-ink-100;
-    @apply dark:text-ink-200 dark:hover:bg-ink-800;
+    @apply btn text-ink-700 ring-1 ring-ink-300 hover:bg-ink-100 hover:ring-ink-400;
+    @apply dark:text-ink-200 dark:ring-ink-600 dark:hover:bg-ink-800 dark:hover:ring-ink-500;
   }
 }

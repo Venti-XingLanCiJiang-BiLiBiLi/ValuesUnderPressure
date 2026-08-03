@@ -2,6 +2,26 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.1.1] - 2026-08-03
+
+### 修复
+
+- **一致性（置信度）算法过于敏感且有误**（`backend/app/scoring.py`、`backend/tests/test_scoring.py`）：
+  一致性从「按贡献权重大小加权」改为「按作答方向符号统计」：对每个维度记录每题方向，
+  比较各题方向代数和与绝对值代数和的差距（`|Σ sign| / n`）。不受单题权重大小影响，
+  避免「9 题 8 同向」这类稳定作答因大权重反向题被误判为情境依赖，整体置信度不再被异常拉低。
+- **倾向分类阈值残留 70/30**（`backend/README.md`）：矛盾分析文案中「高分区间（≥70）」
+  改为「≥60」，与 `scoring.py` 的 `HIGH_SCORE_THRESHOLD=60` / `LOW_SCORE_THRESHOLD=40` 对齐。
+- **深色/浅色模式下按钮不可见**（`frontend/src/style.css`）：`btn-ghost` 增加 `ring` 边框
+  （浅色 `ring-ink-300` / 深色 `ring-ink-600`），删除存档、复制链接等无底色按钮在两种主题下均可辨认。
+- **题目页选项配色**（`frontend/src/style.css`）：作答按钮改为「Y = 绿色（赞同）」、
+  「N = 红色（反对）」，两钮视觉对等、均无默认选中态。
+
+### 变更
+
+- `frontend/src/components/DimensionBar.vue`：修正一致性配色注释（`0.6` → `0.5`），
+  与 `theme.ts` 的 `CONSISTENCY_THRESHOLDS` 及后端 `CONSISTENCY_LOW_THRESHOLD` 对齐。
+
 ## [1.1.0] - 2026-08-03
 
 ### 新增
