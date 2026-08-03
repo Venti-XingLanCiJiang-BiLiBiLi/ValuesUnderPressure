@@ -6,13 +6,15 @@
 
 校验项 (对应 docs/DataValidation.md):
   - 总题数 / 每维度题数
-  - 每个 (维度, 主权重桶) 的题数 (目标: 10 桶 x 4 题 = 40/维度)
-  - id 唯一且连续 (Q00001..Q00400)
+  - 每个 (维度, 主权重桶) 的题数 (目标: 10 桶 x 4 题 = 40/维度, freedom=80)
+  - id 唯一且连续 (Q00001..Q00500)
   - type 必须为 YN
-  - category / difficulty 取值合法
+  - category / difficulty 取值合法 (含 must / experimental)
   - 权重范围 -5..5, yes/no 不同时为 0, 同题同维度不重复
   - dimension 必须在合法维度集合内
   - content 非空且无重复
+  - must 分类: 40 题, 5 个主权重桶各 8 题, 主维度随意
+  - experimental 分类: 20 题, 不分桶
 """
 
 import json
@@ -32,16 +34,24 @@ DIMENSIONS = {
 CATEGORIES = {
     "personal_boundary", "privacy", "freedom", "safety", "wealth",
     "morality", "social", "future", "risk", "control",
+    "must", "experimental",
 }
 DIFFICULTIES = {"easy", "medium", "hard"}
 WEIGHT_BUCKETS = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]
-EXPECTED_TOTAL = 440
+EXPECTED_TOTAL = 500
 # 各维度期望题数；batch_11 补齐 freedom 分类后，freedom 维度题池翻倍为 80
 EXPECTED_PER_DIM = {dim: 40 for dim in DIMENSIONS}
 EXPECTED_PER_DIM["freedom"] = 80
 # 各维度每个主权重桶的期望题数
 EXPECTED_PER_BUCKET = {dim: {b: 4 for b in WEIGHT_BUCKETS} for dim in DIMENSIONS}
 EXPECTED_PER_BUCKET["freedom"] = {b: 8 for b in WEIGHT_BUCKETS}
+
+# must 分类（必答）：40 题, 5 个主权重桶各 8 题, 主维度随意
+MUST_TOTAL = 40
+MUST_BUCKETS = [-5, -3, -1, 3, 5]
+MUST_PER_BUCKET = 8
+# experimental 分类（实验性）：20 题, 不分桶
+EXP_TOTAL = 20
 
 BATCH_ORDER = [
     "batch_01_self_protection.json",
@@ -55,7 +65,13 @@ BATCH_ORDER = [
     "batch_09_collectivism.json",
     "batch_10_long_term.json",
     "batch_11_freedom.json",
+    "batch_12_must.json",
+    "batch_13_experimental.json",
 ]
+
+# 核心批次 (01-11): 按维度/主权重桶结构化校验
+# 特殊批次 (12-13): must / experimental 单独校验
+CORE_BATCHES = BATCH_ORDER[:11]
 
 errors = []
 
@@ -154,20 +170,26 @@ def main():
         dup_c = [c for c in set(contents) if contents.count(c) > 1]
         error(f"content 重复 ({len(dup_c)}): {dup_c[:5]}")
 
-    # 逐题校验
-    buckets = {d: {b: 0 for b in WEIGHT_BUCKETS} for d in DIMENSIONS}
+    # 逐题校验（所有题目）
     for q in questions:
-        res = validate_question(q)
-        if res:
-            primary, bucket = res
-            if bucket in buckets.get(primary, {}):
-                buckets[primary][bucket] += 1
-            else:
-                error(f"{q.get('id')}: 主维度/桶不合法 {primary}/{bucket}")
+        validate_question(q)
 
-    # 汇总统计
+    core_questions = [q for q in questions if q["_batch"] in CORE_BATCHES]
+    special_questions = [q for q in questions if q["_batch"] not in CORE_BATCHES]
+
+    # 核心批次: 按 (维度, 主权重桶) 统计
+    buckets = {d: {b: 0 for b in WEIGHT_BUCKETS} for d in DIMENSIONS}
+    for q in core_questions:
+        primary = q["weights"][0]["dimension"]
+        bucket = q["weights"][0]["yes"]
+        if bucket in buckets.get(primary, {}):
+            buckets[primary][bucket] += 1
+        else:
+            error(f"{q.get('id')}: 主维度/桶不合法 {primary}/{bucket}")
+
+    # 汇总统计（核心批次）
     print("=" * 60)
-    print("每个 (维度, 主权重桶) 的题数:")
+    print("每个 (维度, 主权重桶) 的题数（核心批次 01-11）:")
     print("=" * 60)
     header = "维度".ljust(18) + "".join(str(b).rjust(6) for b in WEIGHT_BUCKETS) + "   合计"
     print(header)
@@ -184,12 +206,11 @@ def main():
         row += f"   {subtotal}"
         print(row)
     print("-" * 60)
-
-    grand_total = sum(total_per_dim.values())
-    print(f"总题数: {grand_total} (期望 {EXPECTED_TOTAL})")
+    core_total = sum(total_per_dim.values())
+    print(f"核心批次总题数: {core_total}")
     print()
 
-    # 断言各维度桶数与总数符合配置
+    # 断言核心批次各维度桶数与总数符合配置
     for dim in DIMENSIONS:
         for b in WEIGHT_BUCKETS:
             exp = EXPECTED_PER_BUCKET[dim][b]
@@ -199,6 +220,36 @@ def main():
         if total_per_dim[dim] != exp_total:
             error(f"{dim}: 期望 {exp_total} 题, 实际 {total_per_dim[dim]} 题")
 
+    # 特殊批次: must（必答, 40 题, 5 桶各 8 题, 主维度随意）
+    must_qs = [q for q in special_questions if q["_batch"] == "batch_12_must.json"]
+    if len(must_qs) != MUST_TOTAL:
+        error(f"must 分类: 期望 {MUST_TOTAL} 题, 实际 {len(must_qs)}")
+    must_buckets = {b: 0 for b in MUST_BUCKETS}
+    for q in must_qs:
+        if q.get("category") != "must":
+            error(f"{q.get('id')}: must 分类应为 'must'")
+        b = q["weights"][0]["yes"]
+        if b in must_buckets:
+            must_buckets[b] += 1
+        else:
+            error(f"{q.get('id')}: must 主权重桶不合法 -> {b}")
+    for b in MUST_BUCKETS:
+        if must_buckets[b] != MUST_PER_BUCKET:
+            error(f"must 桶 {b}: 期望 {MUST_PER_BUCKET} 题, 实际 {must_buckets[b]} 题")
+    print(f"must 分类: {len(must_qs)} 题, 桶分布 {dict(sorted(must_buckets.items()))}")
+
+    # 特殊批次: experimental（实验性, 20 题, 不分桶）
+    exp_qs = [q for q in special_questions if q["_batch"] == "batch_13_experimental.json"]
+    if len(exp_qs) != EXP_TOTAL:
+        error(f"experimental 分类: 期望 {EXP_TOTAL} 题, 实际 {len(exp_qs)}")
+    for q in exp_qs:
+        if q.get("category") != "experimental":
+            error(f"{q.get('id')}: experimental 分类应为 'experimental'")
+    print(f"experimental 分类: {len(exp_qs)} 题（不分桶）")
+
+    grand_total = len(questions)
+    print(f"总题数: {grand_total} (期望 {EXPECTED_TOTAL})")
+    print()
     if grand_total != EXPECTED_TOTAL:
         error(f"总题数 {grand_total} != {EXPECTED_TOTAL}")
 
