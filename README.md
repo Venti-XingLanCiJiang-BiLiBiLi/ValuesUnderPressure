@@ -4,8 +4,7 @@
 
 通过 Y/N 二选一作答，测量用户在 10 个核心价值维度上的底线与优先级。**不是 MBTI / 人格分类测试**——结果只描述倾向，不做人格定性判断，允许不同情境下出现矛盾。
 
-> 仓库：`ValuesUnderPressure` · 在线体验：<https://Venti-XingLanCiJiang-BiLiBiLi.github.io/ValuesUnderPressure/>
-
+> 仓库：`ValuesUnderPressure`
 ## 功能特性
 
 - **10 个核心价值维度**：自我保护 🛡️ / 利他 🤝 / 自由 🕊️ / 安全 🔒 / 隐私 👁️ / 财富 💰 / 规则 ⚖️ / 务实 🎯 / 集体 👥 / 长期 🌱
