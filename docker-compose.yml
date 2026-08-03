@@ -19,6 +19,10 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
+      args:
+        # pip 镜像源：国内云服务器直连 pypi.org 下载 pydantic_core 等会超时，
+        # 默认走阿里云镜像；如不需要可在 .env 中设置 PIP_INDEX_URL 覆盖。
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://mirrors.aliyun.com/pypi/simple/}
     image: vup-backend:latest
     environment:
       # 生产环境：正式题库缺失时禁止回退到开发样例题库
