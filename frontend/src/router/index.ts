@@ -22,6 +22,11 @@ const router = createRouter({
       component: () => import('@/views/ResultView.vue'),
     },
     {
+      path: '/archive/:sessionId',
+      name: 'archive',
+      component: () => import('@/views/ArchiveView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFoundView.vue'),

@@ -19,14 +19,14 @@ export type ThemeMode = 'light' | 'dark' | 'system'
 export const THEME_STORAGE_KEY = 'quxu:theme'
 
 /**
- * 评分阈值：用于结果页维度条配色
- * - score >= HIGH_THRESHOLD: 暖色（高分倾向）
- * - score <= LOW_THRESHOLD: 冷色（低分倾向）
- * - 其他: 中性色
+ * 评分阈值：用于结果页维度条配色（按偏离中间值 50 的程度）
+ * - score > HIGH_THRESHOLD (60): 高分 → 蓝色渐变
+ * - score < LOW_THRESHOLD  (40): 低分 → 粉色渐变
+ * - 40 ~ 60: 中间 → 灰色渐变
  */
 export const SCORE_THRESHOLDS = {
-  high: 70,
-  low: 30,
+  high: 60,
+  low: 40,
 } as const
 
 /**

@@ -87,18 +87,24 @@ frontend/
     ├── stores/
     │   └── test.ts            # Pinia store：会话/进度/答案/结果
     ├── router/
-    │   └── index.ts           # 路由：/ (开屏) → /test → /result
+    │   └── index.ts           # 路由：/ (开屏) → /test → /result → /archive/:sessionId
     ├── types/
     │   └── api.ts             # 与后端 schemas.py 1:1 对应的 TS 类型
+    ├── composables/
+    │   ├── useSessionRestore.ts # 会话进度恢复（sessionStorage）
+    │   ├── useArchives.ts       # 本地存档（localStorage，答完自动保存）
+    │   └── useTheme.ts          # 主题切换
     ├── components/
     │   ├── ProgressBar.vue    # 进度条
     │   ├── DimensionBar.vue   # 单维度条 + 一致性标记
     │   ├── ConflictCard.vue   # 矛盾组合提示
+    │   ├── ResultContent.vue  # 结果内容渲染（结果页/存档页复用）
     │   └── LoadingState.vue   # 加载态
     └── views/
-        ├── IntroView.vue      # 开屏 + 题量选择
+        ├── IntroView.vue      # 开屏 + 题量选择 + 存档列表
         ├── TestView.vue       # 逐题 Y/N + 过渡动画
         ├── ResultView.vue     # 维度画像 + 矛盾分析
+        ├── ArchiveView.vue    # 本地存档查看 / 删除
         └── NotFoundView.vue
 ```
 
