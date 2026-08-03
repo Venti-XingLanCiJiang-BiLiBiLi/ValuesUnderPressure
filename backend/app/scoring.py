@@ -15,8 +15,10 @@ from .dimensions import DIMENSIONS, CONFLICT_PAIRS
 from .question_bank import Question
 
 CONSISTENCY_LOW_THRESHOLD = 0.5
-HIGH_SCORE_THRESHOLD = 70
-LOW_SCORE_THRESHOLD = 30
+# 倾向分类阈值与前端 bar 颜色阈值（frontend/src/config/theme.ts SCORE_THRESHOLDS）对齐：
+# >= 60 高分倾向 / <= 40 低分倾向 / 40~60 中间地带
+HIGH_SCORE_THRESHOLD = 60
+LOW_SCORE_THRESHOLD = 40
 
 
 @dataclass
