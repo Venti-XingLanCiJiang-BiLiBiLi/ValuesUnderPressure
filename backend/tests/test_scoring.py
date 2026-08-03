@@ -3,7 +3,8 @@
 覆盖修复点：
   1. min/max possible 只基于已作答题目计算（与 raw 同基准），
      保证 score 0-100 正确表示价值倾向强度；
-  2. 一致性从"符号统计"改为"按权重大小合成"，输出 0~1，样本不足返回 None。
+  2. 一致性按"作答方向符号"统计：对每维比较各题方向代数和
+     （|Σ sign|）与绝对值代数和（n）的差距，输出 0~1，样本不足返回 None。
 """
 import pytest
 
@@ -109,15 +110,19 @@ def test_normalization_score_bounded_0_100(altruism_bank):
 # ---------------------------------------------------------------------------
 
 
-def test_consistency_magnitude_weighted():
-    """一致性应体现权重大小，而非只数符号。"""
+def test_consistency_direction_based():
+    """一致性按作答方向（符号）统计，不受权重大小影响。"""
     assert _consistency([5, 5]) == 1.0        # 完全一致
     assert _consistency([5, -5]) == 0.0       # 完全抵消
     assert _consistency([1, 1, -1, -1]) == 0.0
-    # 幅度加权：|7|/9≈0.78；旧的符号统计会给 2/4=0.5
-    assert _consistency([5, 3, -1]) == round(7 / 9, 2)
-    # 大权重对一致性影响更大
-    assert _consistency([5, -1, -1]) == round(3 / 7, 2)
+    # 各题方向代数和 vs 绝对值代数和：|Σ sign| / n
+    assert _consistency([5, 3, -1]) == round(1 / 3, 2)    # 2 同 1 反
+    assert _consistency([5, -1, -1]) == round(1 / 3, 2)   # 1 同 2 反
+    # 权重大小不放大敏感度：大权重反向也只算一个方向
+    assert _consistency([5, -5, -1]) == round(1 / 3, 2)
+    assert _consistency([5, 5, -1]) == round(1 / 3, 2)
+    # 8/9 同向不应被判为情境依赖（修复"过于敏感"）
+    assert _consistency([5, 5, 5, 5, 5, 5, 5, 5, -5]) == round(7 / 9, 2)
 
 
 def test_consistency_insufficient_samples():

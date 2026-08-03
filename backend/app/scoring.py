@@ -136,22 +136,22 @@ def score_session(
 def _consistency(contribs: List[int]) -> Optional[float]:
     """同一维度内多题作答方向的一致程度 (0-1)。
 
-    做法: 把每题贡献值按其权重大小进行合成——
-    consistency = |Σ contrib| / Σ|contrib|。
+    做法: 记录每题对该维度的作答方向（正贡献取 +1，负贡献取 -1），
+    对每个维度比较各题方向的"代数和 |Σ sign|"与"绝对值代数和 Σ|sign|=n"
+    的差距：consistency = |Σ sign| / n。
 
-    - 取值 0~1：1 表示所有作答方向完全一致（高一致性），
-      0 表示正负贡献相互抵消（情境依赖/矛盾）；
-    - 贡献绝对值越大，对一致性影响越大（考虑了权重大小，而非只数符号）；
-    - 有效样本 < 2（或总贡献为 0，无信号）时无法判断，返回 None。
+    - 取值 0~1：1 表示所有作答方向完全一致（稳定倾向），
+      0 表示同向与反向相互抵消（情境依赖/矛盾）；
+    - 只按方向（符号）统计，不受单题权重大小影响，
+      避免个别大权重题反向时被过度放大而误判"情境依赖"（过于敏感）；
+    - 有效样本 < 2（无信号）时无法判断，返回 None。
     """
-    nonzero = [c for c in contribs if c != 0]
-    if len(nonzero) < 2:
+    signs = [1 if c > 0 else -1 for c in contribs if c != 0]
+    if len(signs) < 2:
         return None
-    total_magnitude = sum(abs(c) for c in nonzero)
-    if total_magnitude == 0:
-        return None
-    aligned = abs(sum(nonzero))
-    return round(aligned / total_magnitude, 2)
+    aligned = abs(sum(signs))  # 各题方向代数和
+    total = len(signs)         # 各题方向绝对值代数和（每项 |sign| = 1）
+    return round(aligned / total, 2)
 
 
 def _describe(

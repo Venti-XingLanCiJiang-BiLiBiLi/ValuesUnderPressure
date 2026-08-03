@@ -13,10 +13,10 @@
  * - score < SCORE_THRESHOLDS.low  (40) → 粉色渐变（低分倾向）
  * - 40 ~ 60                            → 灰色渐变（中间）
  *
- * 一致性配色：
+ * 一致性配色（与 config/theme.ts CONSISTENCY_THRESHOLDS 对齐）：
  * - >= 0.8 : 稳定倾向（绿）
- * - >= 0.6 : 较为稳定（中性）
- * - <  0.6 : 情境依赖（琥珀）
+ * - >= 0.5 : 较为稳定（中性）
+ * - <  0.5 : 情境依赖（琥珀）
  * - null   : 数据不足（灰）
  */
 import { computed } from 'vue'
