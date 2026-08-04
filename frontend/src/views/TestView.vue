@@ -11,6 +11,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useSessionRestore } from '@/composables/useSessionRestore'
+import { useKeyboardShortcuts } from '@/composables/useKeyboardShortcuts'
 import ProgressBar from '@/components/ProgressBar.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { AnswerValue } from '@/types/api'
@@ -28,6 +29,20 @@ onMounted(async () => {
 
 const question = computed(() => store.currentQuestion)
 const isLast = computed(() => store.currentIndex === store.total - 1)
+
+// #22：当前题是否已答（用于按钮 aria-pressed 状态）
+const answered = computed(() =>
+  question.value ? store.answers[question.value.question_id] : undefined,
+)
+
+// #19：答题键盘快捷键（Y/N 作答，↑/Backspace 上一题，↓ 下一题）
+// 内部已由 choose / goBack / goNext 处理 loading 状态
+useKeyboardShortcuts({
+  onYes: () => choose('Y'),
+  onNo: () => choose('N'),
+  onBack: () => store.goBack(),
+  onNext: () => store.goNext(),
+})
 
 async function choose(answer: AnswerValue) {
   if (store.loading) return
@@ -56,7 +71,7 @@ function confirmQuit() {
 </script>
 
 <template>
-  <section class="mx-auto max-w-3xl px-6 py-8 sm:py-12">
+  <section role="main" aria-label="价值观压力测试" class="mx-auto max-w-3xl px-6 py-8 sm:py-12">
     <!-- ============================== 顶部进度 ============================== -->
     <div class="mb-8">
       <div class="flex items-center justify-between mb-3">
@@ -103,6 +118,8 @@ function confirmQuit() {
         v-if="question"
         :key="question.question_id"
         class="card p-8 sm:p-12 relative"
+        aria-live="polite"
+        aria-atomic="true"
       >
         <div class="text-center mb-8">
           <p class="text-xs uppercase tracking-[0.25em] text-ink-400 dark:text-ink-500 mb-4">
@@ -115,11 +132,13 @@ function confirmQuit() {
           </h2>
         </div>
 
-        <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+        <div role="group" aria-label="作答选项" class="grid sm:grid-cols-2 gap-3 sm:gap-4">
           <button
             type="button"
             class="btn-y min-h-[88px] text-lg flex-col gap-1"
             :disabled="store.loading"
+            aria-label="选择是"
+            :aria-pressed="answered === 'Y'"
             @click="choose('Y')"
           >
             <span class="text-2xl font-semibold">Y</span>
@@ -129,6 +148,8 @@ function confirmQuit() {
             type="button"
             class="btn-n min-h-[88px] text-lg flex-col gap-1"
             :disabled="store.loading"
+            aria-label="选择否"
+            :aria-pressed="answered === 'N'"
             @click="choose('N')"
           >
             <span class="text-2xl font-semibold">N</span>
@@ -148,12 +169,13 @@ function confirmQuit() {
         </p>
 
         <!-- 导航：误触后回退查看/修改，回退状态下可前进回进度点 -->
-        <div class="mt-6 flex items-center justify-center gap-3">
+        <nav aria-label="题目导航" class="mt-6 flex items-center justify-center gap-3">
           <button
             v-if="store.canGoBack"
             type="button"
             class="btn-ghost !px-4 !py-2 text-sm"
             :disabled="store.loading"
+            aria-label="返回上一题"
             @click="store.goBack()"
           >
             ← 上一题
@@ -163,10 +185,22 @@ function confirmQuit() {
             type="button"
             class="btn-ghost !px-4 !py-2 text-sm"
             :disabled="store.loading"
+            aria-label="下一题"
             @click="store.goNext()"
           >
             下一题 →
           </button>
+        </nav>
+
+        <!-- #19：键盘快捷键视觉提示（语义由按钮 aria-label 提供，视觉提示对读屏隐藏） -->
+        <div
+          class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-ink-400 dark:text-ink-500"
+          aria-hidden="true"
+        >
+          <span><kbd class="kbd">Y</kbd> 是</span>
+          <span><kbd class="kbd">N</kbd> 否</span>
+          <span><kbd class="kbd">↑</kbd> 上一题</span>
+          <span><kbd class="kbd">↓</kbd> 下一题</span>
         </div>
       </article>
     </Transition>

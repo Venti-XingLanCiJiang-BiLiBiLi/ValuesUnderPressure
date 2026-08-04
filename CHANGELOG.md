@@ -2,6 +2,25 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.9] - 2026-08-04
+
+### 新增
+
+- **前端添加键盘快捷键（对应 issue #19）**（新增 `frontend/src/composables/useKeyboardShortcuts.ts`、`frontend/src/views/TestView.vue`、`frontend/src/style.css`）：
+  - 新增 `useKeyboardShortcuts` composable：答题页全局监听 keydown，`Y / →` 选是、`N / ←` 选否、`↑ / Backspace` 上一题、`↓` 下一题；
+  - 规则：焦点在输入框不触发、长按连发（`e.repeat`）不触发、`preventDefault` 避免 Backspace 触发浏览器后退；
+  - `TestView` 接入快捷键并新增视觉提示（`kbd` 键帽样式，`Y/N/↑/↓` 提示条，对读屏隐藏）。
+
+### 变更
+
+- **前端可访问性（A11y）增强（对应 issue #22）**（`frontend/src/views/TestView.vue`、`frontend/src/components/ProgressBar.vue`）：
+  - 答题主区加 `role="main"` + `aria-label`；
+  - 进度条（`ProgressBar`）加 `role="progressbar"` + `aria-valuenow/aria-valuemax/aria-label`，读屏可感知当前进度；
+  - 题目卡加 `aria-live="polite"` + `aria-atomic="true"`，切题时读屏自动播报；
+  - 作答按钮组加 `role="group"` + `aria-label`，Y/N 按钮加 `aria-label` + `aria-pressed`（反映已选状态）；
+  - 导航区改为 `<nav aria-label="题目导航">`，上一题/下一题按钮补 `aria-label`。
+- 项目版本号升至 **1.4.9**（`frontend/package.json`、`backend/pyproject.toml`）。
+
 ## [1.4.8] - 2026-08-04
 
 ### 重构
