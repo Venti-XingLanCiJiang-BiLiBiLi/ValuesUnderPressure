@@ -133,6 +133,16 @@ def test_consistency_insufficient_samples():
     assert _consistency([0, 0]) is None
 
 
+def test_consistency_zero_contribution_excluded():
+    """c==0 无方向贡献不计入一致性样本（#25 设计决策）。"""
+    # [0,5,5] -> 有效样本 [5,5]，方向一致 -> 1.0
+    assert _consistency([0, 5, 5]) == 1.0
+    # [0,5,-5] -> 有效样本 [5,-5]，方向抵消 -> 0.0
+    assert _consistency([0, 5, -5]) == 0.0
+    # [0,0] -> 无有效样本 -> None
+    assert _consistency([0, 0]) is None
+
+
 def test_consistency_output_range():
     for contribs in ([5, 4], [5, -4], [3, 1, -2], [1, 2, 3, -6]):
         value = _consistency(contribs)

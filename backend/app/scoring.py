@@ -194,6 +194,8 @@ def _consistency(contribs: List[int]) -> Optional[float]:
       避免个别大权重题反向时被过度放大而误判"情境依赖"（过于敏感）；
     - 有效样本 < 2（无信号）时无法判断，返回 None。
     """
+    # c == 0 表示该题对当前维度无方向性贡献（如 yes=0, no=5 权重设计），
+    # 不计入一致性样本。这避免了"中性贡献"被错误地归入正/负方向。
     signs = [1 if c > 0 else -1 for c in contribs if c != 0]
     if len(signs) < 2:
         return None
