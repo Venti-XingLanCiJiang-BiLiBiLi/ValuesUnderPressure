@@ -103,6 +103,14 @@ onMounted(async () => {
       <div class="mx-auto max-w-3xl px-6 text-center text-xs text-ink-500 dark:text-ink-400">
         <p>{{ BRAND.name }} · {{ BRAND.nameEn }}</p>
         <p class="mt-1">{{ BRAND.footerNote }}</p>
+        <nav class="mt-3 flex items-center justify-center gap-4" aria-label="页脚链接">
+          <RouterLink
+            to="/privacy"
+            class="text-ink-500 hover:text-ember-500 transition-colors dark:text-ink-400 dark:hover:text-ember-400"
+          >
+            隐私政策
+          </RouterLink>
+        </nav>
       </div>
     </footer>
   </div>
