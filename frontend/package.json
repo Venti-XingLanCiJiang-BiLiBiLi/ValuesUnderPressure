@@ -1,6 +1,6 @@
 {
   "name": "quxu-frontend",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "private": true,
   "type": "module",
   "description": "取舍之间 (Values Under Pressure) - 价值观压力测试前端",

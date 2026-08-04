@@ -2,6 +2,28 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.4] - 2026-08-04
+
+### 新增
+
+- **结构化日志与监控（对应 issue #24）**（`backend/app/main.py`、`backend/requirements.txt`）：
+  - 新增 JSON 结构化日志：设置 `JSON_LOGS=1` 时经 `python-json-logger`（`JsonFormatter`）输出 JSON 格式日志，便于 ELK / 集中日志采集；未开启或依赖缺失时回退为纯文本格式；
+  - 日志初始化收敛到 `init_logging()`，在应用 `lifespan` 启动时统一配置 handler 并跨热重载去重；模块级 logger 先于 lifespan 定义，避免 `reload_bank` 等被直接调用时报 `NameError`。
+- **CORS 生产环境配置收紧（对应 issue #11）**（`backend/app/main.py`、`docker-compose.yml`、`deploy/.env.example`）：
+  - CORS 来源改为环境驱动：`CORS_ALLOWED_ORIGINS`（逗号分隔）显式配置；未配置时非生产环境（`ENV != production`）默认放开 `*`，生产环境默认严格（空列表）并记录 warning；
+  - 容器间服务互访通常不带 `Origin` 请求头，不受 CORSMiddleware 限制，Docker 内部互访不受影响。
+
+### 变更
+
+- **部署脚本生产检查**（`deploy/deploy.sh`、`deploy/deploy.ps1`）：检测到 `ENV/APP_ENV=production` 且 `CORS_ALLOWED_ORIGINS` 或 `ADMIN_TOKEN` 未设置时输出警告，提示可能影响可用性与安全性。
+- **部署配置变量**（`docker-compose.yml`、`deploy/.env.example`）：后端服务新增 `ENV`（与 `APP_ENV` 同步）、`CORS_ALLOWED_ORIGINS`、`JSON_LOGS`、`ADMIN_TOKEN` 环境变量，生产部署可按需配置。
+- **后端 CI 冒烟流水线**（新增 `.github/workflows/backend-smoke.yml`）：push / pull_request 命中 `backend/**` 时安装依赖（含 pytest）并运行完整后端测试套件。
+- 项目版本号升至 **1.4.4**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 修复
+
+- **`backend/app/main.py` 代码规范修复**（本地复现 CI 时发现并修正）：修复 ruff 告警——import 块排序（I001）、移除废弃且未使用的 `typing.List`（UP035 / F401）、`setattr` 常量属性改为直接赋值（B010）、导入块与注释之间补空行；修复后 ruff 与 mypy 均通过。
+
 ## [1.4.3] - 2026-08-04
 
 ### 新增
