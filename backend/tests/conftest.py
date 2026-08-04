@@ -24,6 +24,6 @@ from app import db
 
 
 @pytest.fixture(scope="session", autouse=True)
-def _init_test_db():
-    db.init_db()
+async def _init_test_db():
+    await db.init_db()
     yield

@@ -5,6 +5,7 @@
 
 用于在无法安装 web 框架依赖的环境中，验证 selection / scoring / db 模块的正确性。
 """
+import asyncio
 import os
 import random
 import sys
@@ -26,8 +27,8 @@ from app.scoring import score_session
 from app.selection import build_test, coverage_report
 
 
-def main():
-    db.init_db()
+async def main():
+    await db.init_db()
     bank = load_bucket_bank()
     print(f"题库: 版本={bank.version()}, 索引组数={len(bank.groups())}, 总题数={bank.total_questions()}")
 
@@ -35,7 +36,7 @@ def main():
     print(f"本次试卷题量: {len(questions)}")
     print("维度覆盖:", coverage_report(questions))
 
-    session_id = db.create_session(
+    session_id = await db.create_session(
         bank.version(), len(questions), [], [q.id for q in questions]
     )
     print("session_id:", session_id)
@@ -43,11 +44,11 @@ def main():
     rnd = random.Random(7)
     for i, q in enumerate(questions):
         answer = rnd.choice(["Y", "N"])
-        db.save_answer(session_id, q.id, answer, duration=rnd.randint(2, 15))
-        db.advance_pointer(session_id, i + 1)
-    db.mark_completed(session_id)
+        await db.save_answer(session_id, q.id, answer, duration=rnd.randint(2, 15))
+        await db.advance_pointer(session_id, i + 1)
+    await db.mark_completed(session_id)
 
-    answers = db.get_answers(session_id)
+    answers = await db.get_answers(session_id)
     result = score_session(questions, answers)
 
     print("\n=== 维度结果 ===")
@@ -59,7 +60,7 @@ def main():
     print("矛盾组合:", result.conflicts or "无")
     print("情境依赖(低一致性)维度:", result.uncertain_dimensions or "无")
 
-    db.save_results(
+    await db.save_results(
         session_id,
         {
             d: {"score": r.score, "consistency": r.consistency, "confidence": r.confidence}
@@ -71,4 +72,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

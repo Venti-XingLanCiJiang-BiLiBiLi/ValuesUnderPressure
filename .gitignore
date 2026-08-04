@@ -238,3 +238,4 @@ TODO
 .vscode
 backend/ruff_errors.txt
 AGENTS.md
+backend/bandit-report.json

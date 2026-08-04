@@ -1,5 +1,5 @@
 """
-SQLite 持久化层。
+SQLite 持久化层（异步，基于 aiosqlite）。
 
 表结构参考 docs/DatabaseSchema.md，并做了落地调整：
   - test_sessions 增加 length / dimensions_json / question_ids_json / status 字段，
@@ -7,6 +7,9 @@ SQLite 持久化层。
   - answers 增加 answered_at；
   - results 表按维度落一行（含维度级 confidence），同时保存整体 confidence 到 sessions 表；
   - answer_history 表记录答案修改历史（题目、旧答案、新答案、修改时间）。
+
+异步化说明（#8）：所有函数均为 async，沿用"每函数一次连接"的短连接模式，
+避免跨请求共享连接；由事件循环串行调度，规避 SQLite 并发写锁竞争。
 """
 
 from __future__ import annotations
@@ -16,8 +19,10 @@ import json
 import os
 import sqlite3
 import uuid
-from collections.abc import Iterator
-from contextlib import contextmanager
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
+import aiosqlite
 
 _UTC = datetime.UTC
 
@@ -71,52 +76,56 @@ CREATE TABLE IF NOT EXISTS answer_history (
 """
 
 
-def init_db() -> None:
+async def init_db() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-    with get_conn() as conn:
-        conn.executescript(SCHEMA)
-        _migrate(conn)
+    async with get_conn() as conn:
+        await conn.executescript(SCHEMA)
+        await _migrate(conn)
 
 
-def _column_exists(conn: sqlite3.Connection, table: str, column: str) -> bool:
-    rows = conn.execute(f"PRAGMA table_info({table})").fetchall()
+async def _column_exists(conn: aiosqlite.Connection, table: str, column: str) -> bool:
+    cur = await conn.execute(f"PRAGMA table_info({table})")
+    rows = await cur.fetchall()
     return any(r["name"] == column for r in rows)
 
 
-def _table_exists(conn: sqlite3.Connection, table: str) -> bool:
-    rows = conn.execute(
+async def _table_exists(conn: aiosqlite.Connection, table: str) -> bool:
+    cur = await conn.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name = ?", (table,)
-    ).fetchall()
+    )
+    rows = await cur.fetchall()
     return bool(rows)
 
 
-def _migrate(conn: sqlite3.Connection) -> None:
+async def _migrate(conn: aiosqlite.Connection) -> None:
     """对已存在的旧库做增量迁移：为 results 表补 confidence 列。
 
     CREATE TABLE IF NOT EXISTS 不会给已存在的表加列，因此旧数据库需要 ALTER；
     用表存在性 + 列存在性双重判断，避免在极旧的库（尚无 results 表）上误执行 ALTER。
     """
-    if _table_exists(conn, "results") and not _column_exists(conn, "results", "confidence"):
-        conn.execute("ALTER TABLE results ADD COLUMN confidence REAL")
+    if await _table_exists(conn, "results") and not await _column_exists(
+        conn, "results", "confidence"
+    ):
+        await conn.execute("ALTER TABLE results ADD COLUMN confidence REAL")
 
 
-@contextmanager
-def get_conn() -> Iterator[sqlite3.Connection]:
-    conn = sqlite3.connect(DB_PATH)
+@asynccontextmanager
+async def get_conn() -> AsyncIterator[aiosqlite.Connection]:
+    conn = await aiosqlite.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     try:
         yield conn
-        conn.commit()
+        await conn.commit()
     finally:
-        conn.close()
+        await conn.close()
 
 
-def create_session(
+async def create_session(
     question_version: str, length: int, dimensions: list[str], question_ids: list[str]
 ) -> str:
     session_id = uuid.uuid4().hex
-    with get_conn() as conn:
-        conn.execute(
+    async with get_conn() as conn:
+        await conn.execute(
             """INSERT INTO test_sessions
                (id, created_at, question_version, length, dimensions_json,
                 question_ids_json, current_index, status)
@@ -133,30 +142,30 @@ def create_session(
     return session_id
 
 
-def get_session(session_id: str) -> sqlite3.Row | None:
-    with get_conn() as conn:
-        cur = conn.execute("SELECT * FROM test_sessions WHERE id = ?", (session_id,))
-        return cur.fetchone()
+async def get_session(session_id: str) -> sqlite3.Row | None:
+    async with get_conn() as conn:
+        cur = await conn.execute("SELECT * FROM test_sessions WHERE id = ?", (session_id,))
+        return await cur.fetchone()
 
 
-def advance_pointer(session_id: str, new_index: int) -> None:
-    with get_conn() as conn:
-        conn.execute(
+async def advance_pointer(session_id: str, new_index: int) -> None:
+    async with get_conn() as conn:
+        await conn.execute(
             "UPDATE test_sessions SET current_index = ? WHERE id = ?",
             (new_index, session_id),
         )
 
 
-def mark_completed(session_id: str) -> None:
-    with get_conn() as conn:
-        conn.execute(
+async def mark_completed(session_id: str) -> None:
+    async with get_conn() as conn:
+        await conn.execute(
             "UPDATE test_sessions SET status = 'completed' WHERE id = ?", (session_id,)
         )
 
 
-def save_answer(session_id: str, question_id: str, answer: str, duration: int | None) -> None:
-    with get_conn() as conn:
-        conn.execute(
+async def save_answer(session_id: str, question_id: str, answer: str, duration: int | None) -> None:
+    async with get_conn() as conn:
+        await conn.execute(
             """INSERT INTO answers (session_id, question_id, answer, duration, answered_at)
                VALUES (?, ?, ?, ?, ?)
                ON CONFLICT(session_id, question_id) DO UPDATE SET
@@ -166,31 +175,32 @@ def save_answer(session_id: str, question_id: str, answer: str, duration: int | 
         )
 
 
-def get_answers(session_id: str) -> dict:
-    with get_conn() as conn:
-        cur = conn.execute(
+async def get_answers(session_id: str) -> dict:
+    async with get_conn() as conn:
+        cur = await conn.execute(
             "SELECT question_id, answer FROM answers WHERE session_id = ?", (session_id,)
         )
-        return {row["question_id"]: row["answer"] for row in cur.fetchall()}
+        rows = await cur.fetchall()
+        return {row["question_id"]: row["answer"] for row in rows}
 
 
-def get_answer(session_id: str, question_id: str) -> str | None:
+async def get_answer(session_id: str, question_id: str) -> str | None:
     """返回某题当前答案；尚未作答返回 None。"""
-    with get_conn() as conn:
-        cur = conn.execute(
+    async with get_conn() as conn:
+        cur = await conn.execute(
             "SELECT answer FROM answers WHERE session_id = ? AND question_id = ?",
             (session_id, question_id),
         )
-        row = cur.fetchone()
+        row = await cur.fetchone()
         return row["answer"] if row else None
 
 
-def record_answer_change(
+async def record_answer_change(
     session_id: str, question_id: str, old_answer: str, new_answer: str
 ) -> None:
     """记录一次答案修改（old -> new）。"""
-    with get_conn() as conn:
-        conn.execute(
+    async with get_conn() as conn:
+        await conn.execute(
             """INSERT INTO answer_history
                (session_id, question_id, old_answer, new_answer, changed_at)
                VALUES (?, ?, ?, ?, ?)""",
@@ -204,24 +214,25 @@ def record_answer_change(
         )
 
 
-def get_answer_history(session_id: str) -> list[dict]:
+async def get_answer_history(session_id: str) -> list[dict]:
     """按时间顺序返回该会话的答案修改历史。"""
-    with get_conn() as conn:
-        cur = conn.execute(
+    async with get_conn() as conn:
+        cur = await conn.execute(
             """SELECT question_id, old_answer, new_answer, changed_at
                FROM answer_history WHERE session_id = ? ORDER BY id ASC""",
             (session_id,),
         )
-        return [dict(row) for row in cur.fetchall()]
+        rows = await cur.fetchall()
+        return [dict(row) for row in rows]
 
 
-def save_results(session_id: str, dimension_scores: dict, confidence: float) -> None:
-    with get_conn() as conn:
-        conn.execute(
+async def save_results(session_id: str, dimension_scores: dict, confidence: float) -> None:
+    async with get_conn() as conn:
+        await conn.execute(
             "UPDATE test_sessions SET confidence = ? WHERE id = ?", (confidence, session_id)
         )
         for dim, r in dimension_scores.items():
-            conn.execute(
+            await conn.execute(
                 """INSERT INTO results (session_id, dimension, score, consistency, confidence)
                    VALUES (?, ?, ?, ?, ?)
                    ON CONFLICT(session_id, dimension) DO UPDATE SET
