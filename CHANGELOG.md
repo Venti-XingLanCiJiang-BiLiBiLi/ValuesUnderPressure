@@ -2,6 +2,17 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.1] - 2026-08-04
+
+### 变更
+
+- **`questions.json` 标记 `@deprecated`（保留兼容）**：
+  - 前后端正常运行已不依赖版本目录内的 `questions.json`（抽题走分桶索引 `questions.index.json`），将其标记为**合并产物/构建快照**，仅用于全量校验（`scripts/validate_bank.py`）、分桶索引缺失时的开发回退；
+  - 后端旧接口 `load_question_bank` / `QuestionBank` 标注 `@deprecated`，调用时发出 `DeprecationWarning`（功能保留：`validate_bank.py`、`test_question_bank.py` 仍可用）；`load_bucket_bank()` 的 `questions.json` 回退分支标注 deprecated 注释；
+  - 文档（`question-bank/question_bank_readme.md`、`backend/README.md`、根 `README.md`）同步标注 `@deprecated` 与「非抽题运行时数据源」。
+- **前端 health 类型修正**（`frontend/src/types/api.ts`）：`HealthResponse` 由旧字段 `question_bank_source` / `invalid_questions` 改为与后端一致的 `question_bank_version` / `groups` / `active_questions`。
+- **修复 Pylance 类型告警**（`backend/app/question_bank.py`）：`metadata.version` 判空后比较，消除 "None 不支持 <" 编译告警。
+
 ## [1.4.0] - 2026-08-04
 
 ### 变更

@@ -15,14 +15,15 @@
 | --- | --- |
 | `v1/` | **题库版本 v1**（当前正式版本）：包含分桶源文件、构建脚本与合并产物 |
 | `v1/questions/` | **分桶源文件**（按主维度分目录，每桶 4 题；`freedom` 每桶 8 题拆 2 桶；`must` 40 题拆 10 桶；`experimental` 20 题不分桶），随仓库入库 |
-| `v1/questions.json` | **正式题库**（500 题，`Q00001`~`Q00500`），合并产物，后端唯一数据源 |
-| `v1/questions.index.json` | **分桶索引**（结构记录）：各组题数、桶（bank）数、每桶数量与文件位置，随仓库入库 |
+| `v1/questions.json` | **合并产物 / 构建快照**（`@deprecated`，500 题，`Q00001`~`Q00500`）：仅用于全量校验（`validate_bank.py`）与分桶索引缺失时的开发回退；**非抽题运行时数据源**（前后端正常运行不依赖它） |
+| `v1/questions.index.json` | **分桶索引（抽题主数据源）**：记录各组题数、桶（bank）数、每桶数量与文件位置；后端按此懒加载桶文件 |
 | `v1/build_questions.py` | 合并 + 校验脚本（入库），从 `questions/` 构建 `questions.json` 与 `questions.index.json` |
 | `templates/` | **范例题库框架**：与版本目录同构的模板框架，演示分层分桶 + 构建脚本 + 索引（全占位数据，可直接复制为新版本骨架） |
 | `schema.json` | 题目数据结构规范（版本无关的字段约束） |
 | `drafts/` | 历史中间批次源文件（**已废弃，本地保留，不入库**，已加入 `.gitignore`） |
 
-> 后端请只依赖题库版本的 `questions.json`（当前为 `v1/questions.json`）。维护题库时**不要直接改 `questions.json`**，而是编辑对应版本 `questions/` 下的桶文件，再运行该版本下的 `python build_questions.py` 重新生成。
+> 后端**抽题**依赖分桶索引 `questions.index.json`（懒加载桶文件）；`questions.json` 为合并快照，仅用于全量校验（`scripts/validate_bank.py`）与索引缺失时的开发回退，**不是抽题数据源**。
+> 维护题库时**不要直接改 `questions.json`**，而是编辑对应版本 `questions/` 下的桶文件，再运行该版本下的 `python build_questions.py` 重新生成（同时产出 `questions.json` 与 `questions.index.json`）。
 
 ### 1.1 版本目录结构
 

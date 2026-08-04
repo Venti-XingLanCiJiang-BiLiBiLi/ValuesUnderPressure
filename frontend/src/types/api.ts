@@ -88,7 +88,10 @@ export interface DimensionMeta {
 
 export interface HealthResponse {
   status: string
-  question_bank_source: string
+  /** 题库版本（如 v1），对应 question-bank/<版本>/ 目录 */
+  question_bank_version: string
+  /** 分桶索引组数（维度组 + must + experimental） */
+  groups: number
+  /** 当前题库版本总题数（来自分桶索引） */
   active_questions: number
-  invalid_questions: number
 }

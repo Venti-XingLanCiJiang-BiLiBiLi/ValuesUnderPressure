@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import warnings
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
@@ -104,12 +105,12 @@ def build_virtual_index(raw_list: List[dict], bucket_size: int = 4) -> dict:
         "groups": index_groups,
     }
 
-# 后端按题库版本目录加载合并题库 question-bank/<version>/questions.json（全量数据源，
-# 主要用于统计/回退）。抽题主数据源是分桶索引 questions.index.json（见 BucketBank）。
-# 若正式题库不存在（例如本地/测试环境），则回退到内置样例题库
-# backend/app/data/questions.json，保证服务在没有完整题库文件时依然可以启动。
-#
-# 读取优先级：
+# [DEPRECATED] 旧的全量题库加载路径（QuestionBank / load_question_bank 专用）。
+# 抽题主数据源已改为分桶索引 questions.index.json（BucketBank / load_bucket_bank），
+# 正常运行时（前后端）不再加载 questions.json。保留仅为兼容：
+#   - scripts/validate_bank.py 全量校验、tests/test_question_bank.py；
+#   - load_bucket_bank 在分桶索引缺失时的开发回退。
+# 读取优先级（仅旧接口 load_question_bank 使用）：
 #   1. 显式传入的 path / 环境变量 QUESTION_BANK_PATH（自定义来源）
 #   2. 生产题库：<repo>/question-bank/<version>/questions.json（version 由
 #      QUESTION_BANK_VERSION 控制，默认 v1）
@@ -212,7 +213,8 @@ def _validate_raw(raw: dict, seen_ids: set) -> List[str]:
             errors.append(f"[{qid}] yes 和 no 不能同时为 0")
 
     metadata = raw.get("metadata") or {}
-    if not isinstance(metadata.get("version"), int) or metadata.get("version") < 1:
+    version = metadata.get("version")
+    if not isinstance(version, int) or version < 1:
         errors.append(f"[{qid}] metadata.version 必须为正整数")
     if metadata.get("status") not in VALID_STATUS:
         errors.append(f"[{qid}] metadata.status 非法: {metadata.get('status')}")
@@ -221,6 +223,17 @@ def _validate_raw(raw: dict, seen_ids: set) -> List[str]:
 
 
 def load_question_bank(path: Optional[str] = None) -> "QuestionBank":
+    """[DEPRECATED] 全量加载合并题库 questions.json 的旧接口（@deprecated）。
+
+    已被 load_bucket_bank()（基于分桶索引懒加载）取代，正常运行时不再使用。
+    保留兼容：scripts/validate_bank.py 全量校验、tests/test_question_bank.py、
+    以及无 index 时的开发回退。新代码请改用 load_bucket_bank()。
+    """
+    warnings.warn(
+        "load_question_bank 已弃用（@deprecated），请改用 load_bucket_bank()",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     for kind, candidate in _candidates(path):
         if not candidate or not os.path.isfile(candidate):
             # 生产环境下不存在的题库来源必须显式报错，禁止静默回退
@@ -272,6 +285,12 @@ def _to_question(raw: dict) -> Optional[Question]:
 
 
 class QuestionBank:
+    """[DEPRECATED] 全量加载的题库对象（@deprecated）。
+
+    已被 BucketBank（基于分桶索引懒加载）取代。仅用于旧接口 load_question_bank、
+    全量校验与测试兼容。新代码请使用 BucketBank。
+    """
+
     def __init__(self, questions: List[Question], invalid: List[str], source: str):
         self.questions = questions
         self.invalid = invalid  # 校验失败被剔除的原因列表（仅记录，不阻断启动）
@@ -344,6 +363,8 @@ def load_bucket_bank(path: Optional[str] = None) -> "BucketBank":
     if os.path.isfile(index_path):
         logger.info("Loaded bank index: %s", index_path)
         return BucketBank.from_index_file(index_path)
+    # [DEPRECATED] 开发回退：索引缺失时从合并题库 questions.json 构建虚拟索引
+    # （questions.json 已标记 @deprecated，仅作兼容/开发便利；生产环境不会走到这里）
     full_path = os.path.join(bank_dir, "questions.json")
     if os.path.isfile(full_path):
         logger.warning("未找到分桶索引 %s，回退为从 %s 构建虚拟索引", index_path, full_path)

@@ -40,8 +40,8 @@ ValuesUnderPressure/
 
 **题库是数据，不是代码。**
 
-- 正式题库独立存放于 `question-bank/v1/questions.json`（500 题，`Q00001`~`Q00500`），后端与前端统一从此读取，避免在代码库中维护多份副本。
-- 题库按版本文件夹 + 主维度**分桶管理**：题库版本 `v1/` 内含分桶源文件 `v1/questions/`（每桶 4 题，随仓库入库），由 `v1/build_questions.py` 合并生成 `v1/questions.json`；分桶索引见 `v1/questions.index.json`。范例题库框架（与版本目录同构，全占位数据，可复制为新版本骨架）见 `templates/`。维护题库时编辑分桶文件后重新运行构建脚本。
+- 正式题库按版本目录存放于 `question-bank/v1/`，**前后端抽题依赖分桶索引** `v1/questions.index.json`（记录各组题数/桶数/每桶数量/文件位置，懒加载桶文件）；`v1/questions.json`（合并产物/构建快照）已标记 `@deprecated`——**前后端正常运行都不依赖它**，仅保留兼容（全量校验 `scripts/validate_bank.py`、分桶索引缺失时的开发回退、旧接口 `load_question_bank`）。
+- 题库按版本文件夹 + 主维度**分桶管理**：题库版本 `v1/` 内含分桶源文件 `v1/questions/`（每桶 4 题，随仓库入库），由 `v1/build_questions.py` 合并生成 `v1/questions.json` 与 `v1/questions.index.json`。范例题库框架（与版本目录同构，全占位数据，可复制为新版本骨架）见 `templates/`。维护题库时编辑分桶文件后重新运行构建脚本。
 - 题目格式定义见 `question-bank/schema.json`（每个问题可同时影响多个维度，支持 yes/no 双向、正负权重）。
 - 题目结构说明见 `question-bank/question_bank_readme.md`。
 - `backend/app/data/questions.json` 仅为**开发环境回退样例**（真实题库的子集），用于正式题库缺失时让服务可启动；它不是正式题库。

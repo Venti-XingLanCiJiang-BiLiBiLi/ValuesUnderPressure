@@ -45,12 +45,17 @@ backend/
 后端抽题**依赖分桶索引** `question-bank/<version>/questions.index.json`（结构记录：
 各组题数 / 桶数 / 每桶数量 / 文件位置），按需懒加载桶文件，不再全量加载 `questions.json`。
 
+> `@deprecated`：版本目录内的 `questions.json`（合并产物/构建快照）已被分桶索引取代，
+> **前后端正常运行都不依赖它**。仅保留兼容：`scripts/validate_bank.py` 全量校验、
+> 分桶索引缺失时的开发回退，以及旧接口 `load_question_bank` / `QuestionBank`（测试用）。
+> 后端抽题入口为 `load_bucket_bank()` / `BucketBank`。
+
 `app/question_bank.py` 加载抽题数据源（`load_bucket_bank`）的优先级：
 
 1. 显式传入的 `path` 或环境变量 `QUESTION_BANK_PATH`（自定义/测试题库文件，构建虚拟索引）；
 2. **正式路径**：`question-bank/<QUESTION_BANK_VERSION>/questions.index.json`
    （分桶索引；`QUESTION_BANK_VERSION` 默认 `v1`，可由 Docker/环境变量控制）；
-3. **开发回退**：同版本目录的 `questions.json`（构建虚拟索引）或 `app/data/questions.json`。
+3. **开发回退**（`@deprecated`）：同版本目录的 `questions.json`（构建虚拟索引）或 `app/data/questions.json`。
 
 启动时日志会明确标注加载来源：
 
