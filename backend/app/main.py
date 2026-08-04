@@ -15,14 +15,16 @@ from __future__ import annotations
 
 import json
 import logging
+import os
+import threading
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import db
-from .dimensions import DIMENSIONS
+from .dimensions import DIMENSIONS, reload_dimensions
 from .question_bank import BucketBank, load_bucket_bank
 from .schemas import (
     AnswerHistoryEntry,
@@ -43,12 +45,19 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("apersonalitytest")
 
 _bank: BucketBank | None = None
+_bank_lock = threading.Lock()
+# 保留备用：模块级缓存 ADMIN_TOKEN，供后续其它 admin 接口复用。
+# 当前 reload_bank 的鉴权在函数内实时读取环境变量（便于测试动态注入）。
+ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
 
 
 def get_bank() -> BucketBank:
     global _bank
     if _bank is None:
-        _bank = load_bucket_bank()
+        new_bank = load_bucket_bank()
+        with _bank_lock:
+            if _bank is None:
+                _bank = new_bank
     return _bank
 
 
@@ -109,6 +118,42 @@ def list_dimensions():
         dim: {"name": meta["name"], "description": meta["description"], "direction": meta["direction"]}
         for dim, meta in DIMENSIONS.items()
     }
+
+
+@app.post("/api/admin/reload-bank")
+def reload_bank(x_admin_token: str = Header(...)):
+    """热更新题库（#14）。需要 X-Admin-Token 请求头鉴权。
+
+    注意：热更新后，已创建的活跃会话可能因题库变化而缺少题目
+    （_session_questions 已过滤 None，但文档应明确此行为）。
+    """
+    token = os.environ.get("ADMIN_TOKEN", "")
+    if not token or x_admin_token != token:
+        raise HTTPException(403, "Invalid admin token")
+
+    global _bank
+    try:
+        new_bank = load_bucket_bank()
+        with _bank_lock:
+            _bank = new_bank
+        # 维度元数据与题库同源存放（question-bank/<version>/dimensions.json），
+        # 热更新题库时一并重载，保持「题库 + 维度」一致。
+        reload_dimensions()
+        logger.info(
+            "题库热更新成功: version=%s groups=%d active_questions=%d",
+            new_bank.version(),
+            len(new_bank.groups()),
+            new_bank.total_questions(),
+        )
+        return {
+            "ok": True,
+            "version": new_bank.version(),
+            "groups": len(new_bank.groups()),
+            "active_questions": new_bank.total_questions(),
+        }
+    except Exception as e:
+        logger.error("题库热更新失败: %s", e)
+        raise HTTPException(500, f"Reload failed: {e}")
 
 
 # ---------------------------------------------------------------------------
