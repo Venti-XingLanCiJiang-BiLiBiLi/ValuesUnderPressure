@@ -28,7 +28,9 @@ services:
       # 生产环境：正式题库缺失时禁止回退到开发样例题库
       APP_ENV: ${APP_ENV:-production}
       APERSONALITYTEST_DB_PATH: /data/app.db
-      QUESTION_BANK_PATH: /question-bank/questions.json
+      # 题库版本（对应 question-bank/<版本>/ 目录，默认 v1）。
+      # 后端抽题依赖该版本目录下的 questions.index.json 分桶索引（懒加载桶文件）。
+      QUESTION_BANK_VERSION: ${QUESTION_BANK_VERSION:-v1}
     volumes:
       - vup-data:/data
     restart: unless-stopped

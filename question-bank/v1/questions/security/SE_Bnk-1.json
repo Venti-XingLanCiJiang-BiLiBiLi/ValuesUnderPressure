@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00141",
+    "content": "你愿意为了尝鲜，尝试一家没有任何评价的新餐厅吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00142",
+    "content": "你愿意为了节省时间，不仔细查看合同内容就签字吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00143",
+    "content": "你愿意为了办事方便，偶尔不走正规流程吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00144",
+    "content": "你愿意为了效率，在赶时间的时候忽略一些安全步骤吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

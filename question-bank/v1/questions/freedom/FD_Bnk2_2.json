@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00413",
+    "content": "你愿意为了自由布置自己的房间，不按家人的统一要求来安排吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00414",
+    "content": "你愿意为了自由选择工作的方法，拒绝公司统一的管理模板吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00415",
+    "content": "你愿意为了自由决定每天吃什么，不参加单位统一的供餐安排吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00416",
+    "content": "你愿意为了自由安排学习的节奏，不按培训班固定的进度走吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

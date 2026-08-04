@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00177",
+    "content": "你愿意为了少暴露个人信息，不使用社交媒体的分享功能吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00178",
+    "content": "你愿意为了自己的隐私，不在公共场合谈论自己的私事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00179",
+    "content": "你愿意为了保留一点神秘感，不向朋友透露全部的生活细节吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00180",
+    "content": "你愿意为了自己的隐私，不参与同事之间的八卦闲聊吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

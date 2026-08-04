@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00441",
+    "content": "你愿意为了彻底保护自己的隐私，放弃使用一切会联网的智能设备吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00442",
+    "content": "你愿意为了自己的健康，拒绝为任何集体长期透支身体吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "hard",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00443",
+    "content": "你愿意为了终身的成长，放弃所有即时满足的娱乐吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00444",
+    "content": "你愿意为了遵守规则，即使所有人都违规也绝不破例吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

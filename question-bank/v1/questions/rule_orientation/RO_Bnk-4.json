@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00273",
+    "content": "你愿意为了挽救家人的生命，采取违法的手段获取急需的药品吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00274",
+    "content": "你愿意为了巨大的经济利益，隐瞒产品存在的安全隐患吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00275",
+    "content": "你愿意为了个人利益，故意钻制度的漏洞吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00276",
+    "content": "你愿意为了帮助整个群体，带头违反一条不合理的规定吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "rule_orientation",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

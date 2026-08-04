@@ -23,7 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import db
 from .dimensions import DIMENSIONS
-from .question_bank import QuestionBank, load_question_bank
+from .question_bank import BucketBank, load_bucket_bank
 from .schemas import (
     AnswerHistoryEntry,
     AnswersResponse,
@@ -42,13 +42,13 @@ from .selection import build_test
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("apersonalitytest")
 
-_bank: QuestionBank | None = None
+_bank: BucketBank | None = None
 
 
-def get_bank() -> QuestionBank:
+def get_bank() -> BucketBank:
     global _bank
     if _bank is None:
-        _bank = load_question_bank()
+        _bank = load_bucket_bank()
     return _bank
 
 
@@ -57,10 +57,10 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     db.init_db()
     bank = get_bank()
     logger.info(
-        "题库就绪: 来源=%s 有效题数=%d 无效题数=%d",
-        bank.source,
-        len(bank.questions),
-        len(bank.invalid),
+        "题库就绪: 版本=%s 索引组数=%d 总题数=%d",
+        bank.version(),
+        len(bank.groups()),
+        bank.total_questions(),
     )
     yield
 
@@ -97,9 +97,9 @@ def health():
     bank = get_bank()
     return {
         "status": "ok",
-        "question_bank_source": bank.source,
-        "active_questions": len(bank.active_questions()),
-        "invalid_questions": len(bank.invalid),
+        "question_bank_version": bank.version(),
+        "groups": len(bank.groups()),
+        "active_questions": bank.total_questions(),
     }
 
 

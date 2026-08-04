@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00089",
+    "content": "你愿意为了自由安排自己的时间，放弃晋升但需要频繁出差的机会吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00090",
+    "content": "你愿意为了保留选择职业的自由，拒绝一份绑定多年的高薪合同吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00091",
+    "content": "你愿意为了自由表达自己的观点，不加入要求统一口径的团队吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00092",
+    "content": "你愿意为了自主安排休假，拒绝参加集体统一安排的旅行吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

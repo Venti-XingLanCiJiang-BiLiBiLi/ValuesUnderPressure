@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00181",
+    "content": "你愿意为了获得购物优惠，同意商家收集你的购物习惯吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00182",
+    "content": "你愿意为了使用便捷的导航，允许应用读取你的位置信息吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00183",
+    "content": "你愿意为了和同事拉近关系，分享一些自己的私事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00184",
+    "content": "你愿意为了省事，同意网站使用你的浏览记录来优化推荐吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

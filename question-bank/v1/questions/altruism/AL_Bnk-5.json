@@ -1,0 +1,111 @@
+[
+  {
+    "id": "Q00077",
+    "content": "你愿意为了自己家人的安稳，拒绝收留正在躲避危险的陌生人吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00078",
+    "content": "你愿意为了保住自己的饭碗，拒绝帮助公司里被集体排挤的同事吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00079",
+    "content": "你愿意为了自己的心理健康，彻底断绝与长期索取你帮助的人的联系吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00080",
+    "content": "你愿意为了自己晚年无忧，把所有积蓄都留给自己而拒绝任何捐赠吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00253",
+    "content": "你愿意为了遵守公司规定，放弃一些方便但有违规定的做法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00254",
+    "content": "你愿意为了按规定如实纳税，放弃一些可以合理避税的操作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00255",
+    "content": "你愿意为了遵守考试规则，即使周围的人都作弊你也不作弊吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00256",
+    "content": "你愿意为了维护公共秩序，主动遵守并提醒他人遵守规则吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

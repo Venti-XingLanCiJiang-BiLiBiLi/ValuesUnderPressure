@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00329",
+    "content": "你愿意为了团队的利益，放弃一些个人的休息时间吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00330",
+    "content": "你愿意为了班级的荣誉，承担额外的准备工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00331",
+    "content": "你愿意为了社区的环境改善，接受一些个人生活上的不便吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00332",
+    "content": "你愿意为了公司的共同目标，放弃自己的一些个人想法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

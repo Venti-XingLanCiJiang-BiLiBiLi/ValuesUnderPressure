@@ -9,15 +9,15 @@
 | `docs/QuestionBankSchema.md`, `question-bank/question_bank_readme.md` | 题库数据结构：单题多维度权重（-5~+5）、12 个场景分类、`must`/`experimental` 特殊分类 |
 | `docs/DimensionSystem.md` | 10 个核心价值维度（self_protection / altruism / freedom / security / privacy / wealth / rule_orientation / pragmatism / collectivism / long_term），维度是连续轴，不代表好坏 |
 | `docs/DataValidation.md` | 题库加载时必须做 schema 校验、权重范围校验（-5~+5，yes/no 不同时为 0，维度不重复） |
-| `docs/QuestionSelection.md` | **禁止**全局随机抽题，必须按场景分类 + 难度分层组卷，保证跨用户可比较 |
-| `docs/TestDesign.md` | 测试会话生命周期：创建会话 → 分层抽题 → 作答 Y/N → 计分 → 一致性分析 → 生成结果 |
+| `docs/QuestionSelection.md` | **禁止**全局随机抽题，必须按分桶索引桶驱动组卷，保证跨用户可比较 |
+| `docs/TestDesign.md` | 测试会话生命周期：创建会话 → 桶驱动组卷 → 作答 Y/N → 计分 → 一致性分析 → 生成结果 |
 | `docs/ScoringAlgorithm.md` | 按权重累加 → 归一化到 0-100 → 一致性分析 |
 | `docs/ResultInterpretation.md` | 结果只描述倾向，不做人格定性；输出矛盾组合分析与"情境依赖"提示 |
 | `docs/DatabaseSchema.md` | sessions / answers / results 持久化表结构，题库版本可追溯 |
 | `docs/API.md` | REST 接口形状：创建会话 / 取题 / 提交答案 / 取结果 |
 | `docs/Analytics.md`, `docs/Calibration.md` | （后续迭代方向，未在本次后端中实现，见下方"未覆盖范围"） |
 
-据此，本后端实现了一个可运行的 **FastAPI + SQLite** 服务，完整覆盖题库加载校验、分层组卷、作答、计分与结果解读的闭环。
+据此，本后端实现了一个可运行的 **FastAPI + SQLite** 服务，完整覆盖题库加载校验、桶驱动组卷、作答、计分与结果解读的闭环。
 
 ## 2. 目录结构
 
@@ -27,8 +27,8 @@ backend/
 │   ├── main.py            # FastAPI 路由 (对应 docs/API.md)
 │   ├── db.py               # SQLite 持久化 (对应 docs/DatabaseSchema.md)
 │   ├── dimensions.py        # 10 个核心维度的静态元数据 + 矛盾组合表
-│   ├── question_bank.py     # 题库加载 + 校验 (对应 docs/DataValidation.md)
-│   ├── selection.py         # 按场景分类 + 难度分层组卷 (对应 docs/QuestionSelection.md)
+│   ├── question_bank.py     # 题库加载（分桶索引 + 按需加载桶）+ 校验 (docs/DataValidation.md)
+│   ├── selection.py         # 桶驱动随机组卷（依赖分桶索引）(对应 docs/QuestionSelection.md)
 │   ├── scoring.py           # 计分 / 归一化 / 一致性 / 结果解读
 │   ├── schemas.py           # Pydantic 请求/响应模型
 │   └── data/
@@ -41,30 +41,37 @@ backend/
 
 ## 3. 题库读取（题库与代码分离）
 
-**正式题库独立存放于仓库根目录 `question-bank/questions.json`**（500 题，`Q00001`~`Q00500`），
-后端只读取该文件，不在 `backend` 内维护正式题库副本。
+**正式题库按版本目录独立存放于仓库根目录 `question-bank/<version>/`**（当前 `v1/`，500 题）。
+后端抽题**依赖分桶索引** `question-bank/<version>/questions.index.json`（结构记录：
+各组题数 / 桶数 / 每桶数量 / 文件位置），按需懒加载桶文件，不再全量加载 `questions.json`。
 
-`app/question_bank.py` 按以下优先级加载题库：
+> `@deprecated`：版本目录内的 `questions.json`（合并产物/构建快照）已被分桶索引取代，
+> **前后端正常运行都不依赖它**。仅保留兼容：`scripts/validate_bank.py` 全量校验、
+> 分桶索引缺失时的开发回退，以及旧接口 `load_question_bank` / `QuestionBank`（测试用）。
+> 后端抽题入口为 `load_bucket_bank()` / `BucketBank`。
 
-1. 显式传入的 `path` 或环境变量 `QUESTION_BANK_PATH`（自定义来源）；
-2. **生产题库**：`../../question-bank/questions.json`（相对 `backend/app`，即仓库正式题库）；
-3. **开发回退**：`app/data/questions.json`（内置样例子集，正式题库缺失时保证服务可启动）。
+`app/question_bank.py` 加载抽题数据源（`load_bucket_bank`）的优先级：
+
+1. 显式传入的 `path` 或环境变量 `QUESTION_BANK_PATH`（自定义/测试题库文件，构建虚拟索引）；
+2. **正式路径**：`question-bank/<QUESTION_BANK_VERSION>/questions.index.json`
+   （分桶索引；`QUESTION_BANK_VERSION` 默认 `v1`，可由 Docker/环境变量控制）；
+3. **开发回退**（`@deprecated`）：同版本目录的 `questions.json`（构建虚拟索引）或 `app/data/questions.json`。
 
 启动时日志会明确标注加载来源：
 
 ```text
-INFO:question_bank:Loaded production question bank: .../question-bank/questions.json (500 题)
+INFO:question_bank:Loaded bank index: .../question-bank/v1/questions.index.json
 # 或
-INFO:question_bank:Loaded development fallback question bank: .../app/data/questions.json (40 题)
+INFO:question_bank:Loaded bucket bank from custom file: .../tests/fixtures/questions.json
 ```
 
-> `app/data/questions.json` 只是**开发回退样例**（真实题库的子集），
-> 不应把两份正式题库复制到两处——正式数据一律以 `question-bank/questions.json` 为准。
+> `QUESTION_BANK_VERSION` 控制题库版本（默认 `v1`）；`app/data/questions.json` 只是
+> **开发回退样例**（真实题库的子集），不应把正式题库复制到两处——正式数据一律以
+> `question-bank/<version>/` 为准。
 
-**生产/开发回退行为**：设置环境变量 `APP_ENV=production`（或 `prod`）时，若正式题库
-（`question-bank/questions.json`）缺失，后端会直接报错退出，**禁止静默回退**到开发样例；
-未设置 `APP_ENV`（默认开发环境）时，正式题库缺失才允许回退到 `app/data/questions.json`，
-保证本地/测试环境可启动。
+**生产/开发回退行为**：设置环境变量 `APP_ENV=production`（或 `prod`）时，若版本分桶索引
+缺失，后端会直接报错退出，**禁止静默回退**到开发样例；未设置 `APP_ENV`（默认开发环境）
+时才允许回退（同版本 `questions.json` 或 `app/data/questions.json`），保证本地/测试可启动。
 
 题库加载时会自动执行 `docs/DataValidation.md` 中的规则；不满足规则的题目会被
 跳过并记录原因（见 `/api/health` 或 `scripts/validate_bank.py` 输出），不会导致
@@ -139,13 +146,14 @@ GET /api/test/session/{id}/result
 
 ## 6. 关键设计取舍
 
-- **按场景分类 + 难度分层组卷**：默认 50 题 = `must` 5 + `experimental` 1 + 常规 10 类 44。
-  - `must`（40 题）按顺序每 4 题一桶（如 `Q00441-444`）各抽 1 题得 10 个候选，再随机取 5 题作锚定；
-  - `experimental` 固定抽 1 题；
-  - 其余 10 个常规分类随机挑 4 类各抽 5 题、6 类各抽 4 题；
-  - 每个常规分类内再按难度（easy/medium/hard）比例分层采样，某难度不足时用同类
-    其余题目补齐，全部选出后再整体打乱顺序。
-  这满足了 `docs/QuestionSelection.md` 里"分层随机、覆盖可比较"的要求，
+- **桶驱动组卷（依赖分桶索引）**：默认 50 题 = `must` 5 + `experimental` 1 + 常规 10 维度 44。
+  - 抽题只读取分桶索引 `questions.index.json`（各组题数 / 桶数 / 每桶数量 / 文件位置），按需懒加载桶文件，不加载全量题库；
+  - `must`（10 桶 40 题）桶驱动抽 5 题作锚定；`experimental`（不分桶 20 题）固定抽 1 题；
+  - 其余 10 个维度组随机挑 4 维各抽 5 题、6 维各抽 4 题；
+  - 每个维度组内「先抽 k = min(n, m) 桶 → 候选不足重复抽桶 → 桶内随机取题不重复」；
+  - 组内题数不足（d < n）按 fallback 补齐（维度组 → must → experimental）；整卷最后去重校验；
+  - 不再按难度（easy/medium/hard）分层抽取。
+  这满足了 `docs/QuestionSelection.md` 里"桶驱动随机、覆盖可比较"的要求，
   同时避免"全局随机抽 N 题"导致维度缺失。
 - **归一化**：`score = (raw - min_possible) / (max_possible - min_possible) * 100`，
   其中 `min_possible` / `max_possible` 按**本次试卷实际抽中的题目**动态计算，

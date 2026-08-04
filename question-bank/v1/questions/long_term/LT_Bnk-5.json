@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00397",
+    "content": "你愿意为了现在的极致享乐，赌上自己全部的未来吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00398",
+    "content": "你愿意为了眼前的巨大利益，牺牲子孙后代的未来吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00399",
+    "content": "你愿意为了此刻的满足，彻底放弃对人生长远的任何规划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "freedom",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00400",
+    "content": "你愿意为了短期的大丰收，耗尽所有长期可持续的资源吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

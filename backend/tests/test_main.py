@@ -11,13 +11,13 @@ from fastapi import HTTPException
 
 from app import db
 from app.main import get_answers, get_result, submit_answer
-from app.question_bank import load_question_bank
+from app.question_bank import load_bucket_bank
 from app.schemas import SubmitAnswerRequest
 from app.selection import build_test
 
 
 def _create_session(seed: int, answered_count: int):
-    bank = load_question_bank()
+    bank = load_bucket_bank()
     questions = build_test(bank, length=10, seed=seed)
     sid = db.create_session(
         bank.version(), len(questions), [], [q.id for q in questions]

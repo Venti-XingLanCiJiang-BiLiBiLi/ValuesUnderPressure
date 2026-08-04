@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00305",
+    "content": "你愿意为了坚持自己认为对的事情，即使短期内看不到任何好处吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00306",
+    "content": "你愿意为了追求理想，接受一段经济上比较困难的时期吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00307",
+    "content": "你愿意为了原则问题，放弃一次现实中的晋升机会吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00308",
+    "content": "你愿意为了做正确的事情，承担额外的风险和责任吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

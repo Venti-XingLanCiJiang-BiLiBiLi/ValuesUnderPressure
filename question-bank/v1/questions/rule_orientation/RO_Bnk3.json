@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00249",
+    "content": "你愿意为了遵守交通规则，放弃赶时间抄近道的便利吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00250",
+    "content": "你愿意为了按规定流程办事，多花几天时间办理业务吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00251",
+    "content": "你愿意为了公平起见，拒绝接受本可以合理得到的特殊待遇吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00252",
+    "content": "你愿意为了维护规则的严肃性，即使牺牲个人小利也绝不破例吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

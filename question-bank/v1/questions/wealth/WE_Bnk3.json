@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00209",
+    "content": "你愿意为了获得更高的薪水，接受一份自己完全不感兴趣的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00210",
+    "content": "你愿意为了省下开支，放弃和朋友们的定期聚会吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00211",
+    "content": "你愿意为了多赚一些钱，放弃自己的业余爱好时间吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00212",
+    "content": "你愿意为了攒钱买房，推迟自己的结婚计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00189",
+    "content": "你愿意为了获得一笔可观的报酬，公开自己的部分健康记录吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00190",
+    "content": "你愿意为了不让家人担心，让家人随时查看你的行踪吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "security",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00191",
+    "content": "你愿意为了保住自己的工作，接受公司对你电脑的全程监控吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00192",
+    "content": "你愿意为了获得更好的个性化服务，同意机构长期采集你的行为数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

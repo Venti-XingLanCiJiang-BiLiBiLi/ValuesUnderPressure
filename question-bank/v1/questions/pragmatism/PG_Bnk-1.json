@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00301",
+    "content": "你愿意为了坚持自己的理想，放弃一些现实的便利吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "long_term",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00302",
+    "content": "你愿意为了追求更好的方案，多花一些时间和精力吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00303",
+    "content": "你愿意为了坚守原则，放弃一些实际的小利益吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00304",
+    "content": "你愿意为了长远的规划，暂时忍受一些当下的不便吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

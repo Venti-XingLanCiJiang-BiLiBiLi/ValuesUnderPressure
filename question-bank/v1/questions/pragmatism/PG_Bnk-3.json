@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00309",
+    "content": "你愿意为了坚持自己的信念，放弃高收入的现实生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00310",
+    "content": "你愿意为了维护公平正义，牺牲自己的现实利益吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00311",
+    "content": "你愿意为了长远的价值，拒绝眼前巨大的诱惑吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "long_term",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00312",
+    "content": "你愿意为了守护自己认定的原则，即使付出惨重的代价也在所不惜吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

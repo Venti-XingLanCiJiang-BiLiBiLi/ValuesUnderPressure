@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00205",
+    "content": "你愿意为了获得高额的收入，放弃一份自己真正热爱的工作吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00206",
+    "content": "你愿意为了积攒更多财富，长期减少和家人的团聚吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00207",
+    "content": "你愿意为了加快财富积累，放弃自己创业的梦想安心打工吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00208",
+    "content": "你愿意为了赚更多的钱，牺牲自己大部分锻炼身体的时间吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "wealth",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

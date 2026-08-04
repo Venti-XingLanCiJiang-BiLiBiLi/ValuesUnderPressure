@@ -1,0 +1,721 @@
+{
+  "version": 1,
+  "description": "题库分桶索引：记录各组题数、桶（bank）数与每桶数量、文件位置。后端仍以 questions.json（合并产物）为唯一数据源。",
+  "generated_at": "2026-08-04T01:13:42.925815+00:00",
+  "total_questions": 500,
+  "groups": [
+    {
+      "name": "altruism",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/altruism/AL_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/altruism/AL_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "collectivism",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/collectivism/CO_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/collectivism/CO_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "freedom",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 20,
+      "question_count": 80,
+      "files": [
+        {
+          "path": "questions/freedom/FD_Bnk-1_1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-1_2.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-2_1.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-2_2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-3_1.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-3_2.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-4_1.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-4_2.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-5_1.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk-5_2.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk1_1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk1_2.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk2_1.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk2_2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk3_1.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk3_2.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk4_1.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk4_2.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk5_1.json",
+          "bucket": "5",
+          "questions": 4
+        },
+        {
+          "path": "questions/freedom/FD_Bnk5_2.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "long_term",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/long_term/LT_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/long_term/LT_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "pragmatism",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/pragmatism/PG_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/pragmatism/PG_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "privacy",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/privacy/PR_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/privacy/PR_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "rule_orientation",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/rule_orientation/RO_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/rule_orientation/RO_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "security",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/security/SE_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/security/SE_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "self_protection",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/self_protection/SP_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/self_protection/SP_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "wealth",
+      "type": "dimension",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/wealth/WE_Bnk-1.json",
+          "bucket": "-1",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk-2.json",
+          "bucket": "-2",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk-3.json",
+          "bucket": "-3",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk-4.json",
+          "bucket": "-4",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk-5.json",
+          "bucket": "-5",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk1.json",
+          "bucket": "1",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk2.json",
+          "bucket": "2",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk3.json",
+          "bucket": "3",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk4.json",
+          "bucket": "4",
+          "questions": 4
+        },
+        {
+          "path": "questions/wealth/WE_Bnk5.json",
+          "bucket": "5",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "must",
+      "type": "must",
+      "bucket_size": 4,
+      "bucket_count": 10,
+      "question_count": 40,
+      "files": [
+        {
+          "path": "questions/must/Must_Bnk01.json",
+          "bucket": "01",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk02.json",
+          "bucket": "02",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk03.json",
+          "bucket": "03",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk04.json",
+          "bucket": "04",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk05.json",
+          "bucket": "05",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk06.json",
+          "bucket": "06",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk07.json",
+          "bucket": "07",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk08.json",
+          "bucket": "08",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk09.json",
+          "bucket": "09",
+          "questions": 4
+        },
+        {
+          "path": "questions/must/Must_Bnk10.json",
+          "bucket": "10",
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "name": "experimental",
+      "type": "experimental",
+      "bucket_size": 20,
+      "bucket_count": 1,
+      "question_count": 20,
+      "files": [
+        {
+          "path": "questions/experimental/Exp_Bnk01.json",
+          "bucket": "01",
+          "questions": 20
+        }
+      ]
+    }
+  ]
+}

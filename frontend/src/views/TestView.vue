@@ -7,11 +7,12 @@
  * - 切题时左右滑入/滑出过渡
  * - 答完自动跳 /result
  */
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useSessionRestore } from '@/composables/useSessionRestore'
 import ProgressBar from '@/components/ProgressBar.vue'
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { AnswerValue } from '@/types/api'
 
 const router = useRouter()
@@ -36,12 +37,21 @@ async function choose(answer: AnswerValue) {
   }
 }
 
+const showQuitConfirm = ref(false)
+
 function quit() {
-  if (confirm('当前进度会丢失，确定退出本次测试？')) {
-    clear()
-    store.reset()
-    router.push({ name: 'intro' })
-  }
+  showQuitConfirm.value = true
+}
+
+function cancelQuit() {
+  showQuitConfirm.value = false
+}
+
+function confirmQuit() {
+  clear()
+  store.reset()
+  showQuitConfirm.value = false
+  router.push({ name: 'intro' })
 }
 </script>
 
@@ -169,5 +179,13 @@ function quit() {
     >
       {{ store.error }}
     </p>
+    <ConfirmDialog
+      v-model:show="showQuitConfirm"
+      title="退出测试"
+      message="当前进度会丢失，确定退出本次测试？"
+      confirmText="退出"
+      cancelText="取消"
+      @confirm="confirmQuit"
+    />
   </section>
 </template>

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00081",
+    "content": "你愿意为了拥有完全不受约束的人生，放弃高薪但管制严格的职位吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00082",
+    "content": "你愿意为了自由安排自己的生活，拒绝任何外部对你的监督和考核吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00083",
+    "content": "你愿意为了保住自己选择职业的自由，拒绝一份保障终身但限制你转行的合同吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00084",
+    "content": "你愿意为了随心所欲地生活，放弃社会提供的全套保障福利吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

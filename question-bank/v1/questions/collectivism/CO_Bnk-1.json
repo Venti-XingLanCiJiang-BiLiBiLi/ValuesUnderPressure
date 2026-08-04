@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00341",
+    "content": "你愿意为了自己的时间，不参加集体安排的合影活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00342",
+    "content": "你愿意为了自己的便利，不参与公共区域的轮值打扫吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00343",
+    "content": "你愿意为了自己的舒适，在集体活动中提前离场吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00344",
+    "content": "你愿意为了自己的节奏，不迁就团队的统一安排吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

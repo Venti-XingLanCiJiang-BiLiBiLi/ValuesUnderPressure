@@ -12,15 +12,15 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from app import db  # noqa: E402
-from app.question_bank import load_question_bank  # noqa: E402
+from app.question_bank import load_bucket_bank  # noqa: E402
 from app.scoring import score_session  # noqa: E402
 from app.selection import build_test, coverage_report  # noqa: E402
 
 
 def main():
     db.init_db()
-    bank = load_question_bank()
-    print(f"题库: {bank.source}, 有效题数: {len(bank.questions)}, 无效: {len(bank.invalid)}")
+    bank = load_bucket_bank()
+    print(f"题库: 版本={bank.version()}, 索引组数={len(bank.groups())}, 总题数={bank.total_questions()}")
 
     questions = build_test(bank, length=30, seed=7)
     print(f"本次试卷题量: {len(questions)}")

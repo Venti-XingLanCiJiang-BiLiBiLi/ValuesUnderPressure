@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00021",
+    "content": "你愿意为了帮朋友搬家，放弃自己周末半天的空闲时间吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00022",
+    "content": "你愿意为了参加朋友的婚礼，推迟自己原定的健身计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00023",
+    "content": "你愿意为了帮同事解决一个小麻烦，绕远路帮他取一份文件吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00024",
+    "content": "你愿意为了照顾亲友的情绪，减少一些自己独处的时间吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

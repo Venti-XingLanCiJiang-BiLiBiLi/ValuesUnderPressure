@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00373",
+    "content": "你愿意为了健康长寿，现在就开始注意饮食和作息吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00374",
+    "content": "你愿意为了未来的发展，投资自己的教育和培训吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00375",
+    "content": "你愿意为了长期的积累，现在就开始规划自己的退休生活吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00376",
+    "content": "你愿意为了长期的合作关系，放弃一次性的高额回报吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

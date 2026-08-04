@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00121",
+    "content": "你愿意为了绝对的安全，接受生活在一个被严格管制的小区里吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00122",
+    "content": "你愿意为了确保自己永远不会失业，接受一份收入封顶但绝对稳定的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00123",
+    "content": "你愿意为了防范一切风险，放弃所有可能带来收益的投资机会吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00124",
+    "content": "你愿意为了获得全面的安全保障，同意接受政府对你生活的长期监管吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

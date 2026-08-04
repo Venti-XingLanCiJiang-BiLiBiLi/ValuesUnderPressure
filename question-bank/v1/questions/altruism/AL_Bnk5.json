@@ -1,0 +1,116 @@
+[
+  {
+    "id": "Q00041",
+    "content": "你愿意把自己的一个肾脏捐给素不相识的陌生人，换取他活下去的机会吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00042",
+    "content": "你愿意为了拯救一个陌生孩子，放弃自己唯一的购房存款吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00043",
+    "content": "你愿意用自己十年的寿命，换取一名重病陌生人的康复吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00044",
+    "content": "你愿意为了救助偏远山区的孩子们，放弃自己在大城市的一切前途吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "altruism",
+      "wealth",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

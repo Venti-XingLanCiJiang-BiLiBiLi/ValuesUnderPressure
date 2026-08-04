@@ -2,6 +2,51 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.1] - 2026-08-04
+
+### 变更
+
+- **`questions.json` 标记 `@deprecated`（保留兼容）**：
+  - 前后端正常运行已不依赖版本目录内的 `questions.json`（抽题走分桶索引 `questions.index.json`），将其标记为**合并产物/构建快照**，仅用于全量校验（`scripts/validate_bank.py`）、分桶索引缺失时的开发回退；
+  - 后端旧接口 `load_question_bank` / `QuestionBank` 标注 `@deprecated`，调用时发出 `DeprecationWarning`（功能保留：`validate_bank.py`、`test_question_bank.py` 仍可用）；`load_bucket_bank()` 的 `questions.json` 回退分支标注 deprecated 注释；
+  - 文档（`question-bank/question_bank_readme.md`、`backend/README.md`、根 `README.md`）同步标注 `@deprecated` 与「非抽题运行时数据源」。
+- **前端 health 类型修正**（`frontend/src/types/api.ts`）：`HealthResponse` 由旧字段 `question_bank_source` / `invalid_questions` 改为与后端一致的 `question_bank_version` / `groups` / `active_questions`。
+- **修复 Pylance 类型告警**（`backend/app/question_bank.py`）：`metadata.version` 判空后比较，消除 "None 不支持 <" 编译告警。
+
+- **前端：优化作答按钮与退出确认交互**：
+  - 调整 `Y/N` 作答按钮在浅色与深色模式下的配色与阴影，降低饱和度和高亮感以避免视觉暗示；相关样式位于 `frontend/src/style.css`（调整 `.btn-y` / `.btn-n`），并对深色模式进一步降低不透明度与阴影强度以减轻视觉冲击；
+  - 将页面中使用的系统 `confirm()` 替换为可复用的应用内确认对话组件 `frontend/src/components/ConfirmDialog.vue`，并在 `frontend/src/views/TestView.vue` 中使用该组件以统一样式与交互；
+  - 这些改动旨在提升可访问性与视觉中性，文件变更包括：`frontend/src/style.css`、`frontend/src/views/TestView.vue`、`frontend/src/components/ConfirmDialog.vue`。
+
+## [1.4.0] - 2026-08-04
+
+### 变更
+
+- **后端抽题改为桶驱动，依赖分桶索引**（`backend/app/selection.py`、`backend/app/question_bank.py`、`backend/app/main.py`）：
+  - 新增 `BucketBank`：基于 `questions.index.json`（分桶索引）的懒加载题库，按需读取桶文件，不再全量加载 `questions.json`；新增 `load_bucket_bank()` 作为抽题主数据源；
+  - 抽题算法改为「先抽桶、再在桶内随机取题」：某组（m 桶、d 题）抽 n 题时，先抽 `k = min(n, m)` 桶，候选不足 n 题时重复抽桶补充，桶内取题不重复；组内题数不足（d < n）按 fallback 补齐（维度组 → must → experimental）；整卷最后校验重复题并按 fallback 重抽；
+  - **放弃难度分层抽取**（移除 `_split_quota_by_difficulty` / `DIFFICULTY_ORDER` 及对应测试）；
+  - 组卷按分桶索引的维度组分配配额（默认 50 题 = must 5 + experimental 1 + 常规 10 维度 44，随机 4 维抽 5 题、6 维抽 4 题）。
+- **题库版本控制**（`backend/Dockerfile`、`docker-compose.yml`、`deploy/.env.example`）：
+  - 新增环境变量 `QUESTION_BANK_VERSION` 控制题库版本（默认 `v1`，对应 `question-bank/<版本>/` 目录）；Dockerfile 改为 COPY `question-bank/v1` 到镜像，生产由版本键决定加载哪个版本的分桶索引；
+  - `docker-compose.yml` / `deploy/.env.example` 同步增加 `QUESTION_BANK_VERSION` 配置。
+- **文档同步**：`docs/QuestionSelection.md`（桶驱动抽题算法，移除难度分层）、`backend/README.md`、仓库根 `README.md`。
+
+## [1.3.0] - 2026-08-04
+
+### 变更
+
+- **题库分文件管理**（`question-bank/`，对应 issue #21）：将单文件 254KB 的 `questions.json`（500 题）按主维度拆分到分桶目录（每桶 4 题）：
+  - 常规 9 维度每目录 10 个桶文件（`{ABBR}_Bnk{权重}.json`，每桶 4 题）；`freedom` 每权重桶 8 题，拆 2 个 4 题桶文件（`FD_Bnk{权重}_1/2.json`）；
+  - `must` 40 题按 `Q00441~Q00480` 顺序每 4 题一桶（`Must_Bnk01~10.json`，对应后端 `MUST_BUCKET_SIZE=4` 抽样）；`experimental` 20 题不分桶（`Exp_Bnk01.json`）；
+  - 新增 `questions.index.json`：分桶索引（结构记录），记录各组题数、桶数、每桶数量与文件位置；
+  - 减少版本控制冲突、便于运营按桶维护与后续按需加载（先加载 `must` 再懒加载常规题）；
+  - 历史批次目录 `question-bank/drafts/` 标记废弃（保留本地，不入库）。
+- **题库版本文件夹管理**（`question-bank/`）：将题库改为按版本目录组织：
+  - 新建 `question-bank/v1/` 作为题库版本 v1，将 `questions/`（分桶源文件）、`build_questions.py`、`questions.json`、`questions.index.json` 全部移入 `v1/`；构建脚本基于 `__file__` 定位，移动后路径自动正确，`v1/questions.json` 内容与格式不变；
+  - 新建范例题库框架 `question-bank/templates/`（与版本目录同构）：`templates/questions/` 分层分桶源文件（2 维度 x 2 桶 x 2 题，全为占位数据）、`templates/build_questions.py`（模板构建脚本，可调整 `DIMENSIONS` / `EXPECTED_PER_BUCKET` / `ID_PREFIX` 等常量）、`templates/questions.json` 与 `templates/questions.index.json`（合并产物 + 分桶索引）；可复制为新版本骨架；
+  - 前端/后端读取 `question-bank/questions.json` 的路径更新属后续任务（本版仅完成题库结构改造与文档）。
+
 ## [1.2.0] - 2026-08-03
 
 ### 新增

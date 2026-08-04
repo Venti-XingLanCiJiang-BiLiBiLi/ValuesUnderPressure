@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00457",
+    "content": "你愿意为了获得一份小礼物，允许商家获取你的部分个人信息吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00458",
+    "content": "你愿意为了省心，让别人安排你的一部分周末活动吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "security",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00459",
+    "content": "你愿意为了帮同事的忙，牺牲自己的一点休息时间吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00460",
+    "content": "你愿意为了买下心仪已久的东西，花掉一部分应急存款吗？",
+    "type": "YN",
+    "category": "must",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "security",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

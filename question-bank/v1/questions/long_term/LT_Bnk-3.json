@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00389",
+    "content": "你愿意为了眼前的巨大收益，透支自己未来的健康吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00390",
+    "content": "你愿意为了立刻的成功，放弃需要长期积累的真正实力吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00391",
+    "content": "你愿意为了当下的满足，花光所有的积蓄而不考虑未来吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00392",
+    "content": "你愿意为了短期的业绩，牺牲公司长远的发展吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

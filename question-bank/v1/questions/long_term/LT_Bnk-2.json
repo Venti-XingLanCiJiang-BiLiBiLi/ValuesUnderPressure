@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00385",
+    "content": "你愿意为了享受当下，放弃为退休生活做的储蓄吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00386",
+    "content": "你愿意为了及时行乐，选择轻松但没有长远发展的工作吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00387",
+    "content": "你愿意为了眼前的便利，破坏自己长期坚持的健康习惯吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00388",
+    "content": "你愿意为了快速的回报，放弃需要长期坚持的投资吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

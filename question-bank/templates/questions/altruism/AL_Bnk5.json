@@ -1,0 +1,44 @@
+[
+  {
+    "id": "T00007",
+    "content": "占位题 7：这是一道用于演示模板分桶结构的占位题目，请替换为真实的 Y/N 价值冲突题目。",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  },
+  {
+    "id": "T00008",
+    "content": "占位题 8：这是一道用于演示模板分桶结构的占位题目，请替换为真实的 Y/N 价值冲突题目。",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 5,
+        "no": -5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "draft"
+    }
+  }
+]

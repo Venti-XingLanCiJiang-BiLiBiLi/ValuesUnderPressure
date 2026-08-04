@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00293",
+    "content": "你愿意为了尽快完成工作，优先处理最紧急而不是最重要的事情吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00294",
+    "content": "你愿意为了节省成本，放弃一些质量更高但价格昂贵的方案吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00295",
+    "content": "你愿意为了实际收益，接受一个短期见效的计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00296",
+    "content": "你愿意为了不浪费时间，放弃一些理论上很好但实践起来困难的想法吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "pragmatism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

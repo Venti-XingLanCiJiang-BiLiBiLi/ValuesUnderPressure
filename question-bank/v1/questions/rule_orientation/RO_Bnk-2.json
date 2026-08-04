@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00265",
+    "content": "你愿意为了赶时间，在人行道上违规停一会儿车吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00266",
+    "content": "你愿意为了顺利通过审核，稍微虚报一些申请材料吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00267",
+    "content": "你愿意为了帮朋友的忙，替他在未出席的会议上签名吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "altruism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00268",
+    "content": "你愿意为了办事效率，跳过一些要求签字确认的环节吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]
