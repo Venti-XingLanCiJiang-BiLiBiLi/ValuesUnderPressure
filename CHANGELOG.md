@@ -2,6 +2,33 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.3] - 2026-08-04
+
+### 新增
+
+- **题库版本 manifest 机制**（`backend/app/manifest.py`、`backend/scripts/generate_manifest.py`）：
+  - 每个题库版本目录新增 `manifest.json`，记录 `schema_version` / `bank_version` / `questions_file` / `dimensions_file` / `questions_sha256` / `dimensions_sha256`，确保 `questions.json` 与 `dimensions.json` 永远属于同一题库版本，避免「题库版本与维度定义不匹配」导致测评结果错误；
+  - 校验项：文件存在 / `schema_version` 一致 / 文件名引用 / `questions.json` 与 `dimensions.json` 的 sha256 校验，失败抛 `ManifestError`（含修复建议）；
+  - 新增生成脚本 `scripts/generate_manifest.py`（自动计算 sha256，默认处理 `QUESTION_BANK_VERSION` 指向的版本目录）；`question-bank/v1/` 与 `question-bank/templates/` 均已生成 `manifest.json`。
+- **生产环境维度元数据一致性保护**（`backend/app/dimensions.py`）：`APP_ENV=production|prod` 下 `dimensions.json` **缺失**（`FileNotFoundError`）或**损坏**（JSON 非法/结构不符，`RuntimeError`）时禁止回退内置默认，直接抛错（含当前题库版本、缺失/损坏文件路径与修复建议）；开发环境保持回退行为不变。
+- **manifest 接入运行时加载**（`backend/app/question_bank.py`）：生产环境加载版本目录题库（`load_bucket_bank`）前强制 `validate_manifest`，失败即拒绝加载，覆盖启动（`get_bank`）与热更新（`/api/admin/reload-bank`）两条路径；自定义 `QUESTION_BANK_PATH` 与开发环境不强制，保持测试与回退便利。
+
+### 变更
+
+- **production 判定统一收敛**：`APP_ENV=production|prod` 判定从 `question_bank.py` 抽到共享模块 `backend/app/bank_paths.py` 的 `is_production()`（`question_bank` 保留 `_is_production` 别名兼容），`dimensions` 与 `question_bank` 共用同一判定来源，消除重复配置。
+- **`scripts/validate_bank.py` 默认优先验证 manifest**：先校验版本目录 `manifest.json`（缺失输出明确错误并返回非零退出码），再全量校验 manifest 引用的 `questions.json`；传单个 `questions.json` 文件仍走旧行为。
+- **`build_questions.py` 联动生成 manifest**（`question-bank/v1/`、`question-bank/templates/`）：生成 `questions.json` 后自动产出 `manifest.json`（复用 `app.manifest.build_manifest` 唯一实现），保证「改了题库不会忘更新 manifest」。
+- **`build_manifest` 收敛到核心模块**：从 `scripts/generate_manifest.py` 移至 `backend/app/manifest.py`，供生成脚本与题库构建脚本复用。
+- 项目版本号升至 **1.4.3**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `docs/DataValidation.md`：新增第 6 节「题库版本一致性校验（manifest.json）」；
+- `docs/DimensionSystem.md`：补充维度元数据在生产环境缺失/损坏时禁止回退的行为；
+- `docs/QuestionBankSchema.md`：新增「题库版本清单（manifest.json）」结构与字段说明；
+- `backend/README.md`：更新生产/开发回退行为、维度元数据同源与 manifest 运行时校验说明；
+- `question-bank/question_bank_readme.md`：补充 `manifest.json` 目录结构、文件表与维护流程。
+
 ## [1.4.2] - 2026-08-04
 
 ### 新增
