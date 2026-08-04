@@ -33,6 +33,9 @@ line-length = 100
 "app/main.py" = ["BLE001"]
 # 测试夹具使用 dict() 关键字风格，可读性优先
 "tests/*" = ["C408"]
+# scripts/ 通过 `python scripts/*.py` 调用（CI 亦然）；Windows 无法设置 Unix
+# 执行位，保留 shebang 便于 Unix 上 chmod 后直接执行，故豁免 EXE001
+"scripts/*" = ["EXE001"]
 
 # ---------------------------------------------------------------------------
 # mypy
