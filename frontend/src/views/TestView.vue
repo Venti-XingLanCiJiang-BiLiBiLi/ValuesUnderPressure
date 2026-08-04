@@ -12,6 +12,7 @@ import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useSessionRestore } from '@/composables/useSessionRestore'
 import ProgressBar from '@/components/ProgressBar.vue'
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { AnswerValue } from '@/types/api'
 
 const router = useRouter()
@@ -178,17 +179,13 @@ function confirmQuit() {
     >
       {{ store.error }}
     </p>
-    <!-- ============================== 退出确认对话框 ============================== -->
-    <div v-if="showQuitConfirm" class="fixed inset-0 z-50 flex items-center justify-center">
-      <div class="absolute inset-0 bg-black/40" @click="cancelQuit" />
-      <div class="card p-6 relative z-10 w-full max-w-sm">
-        <h3 class="text-lg font-medium text-ink-900 dark:text-ink-50 mb-2">退出测试</h3>
-        <p class="text-sm text-ink-700 dark:text-ink-300 mb-4">当前进度会丢失，确定退出本次测试？</p>
-        <div class="flex justify-end gap-3">
-          <button type="button" class="btn-ghost px-4 py-2" @click="cancelQuit">取消</button>
-          <button type="button" class="btn-n px-4 py-2" @click="confirmQuit">退出</button>
-        </div>
-      </div>
-    </div>
+    <ConfirmDialog
+      v-model:show="showQuitConfirm"
+      title="退出测试"
+      message="当前进度会丢失，确定退出本次测试？"
+      confirmText="退出"
+      cancelText="取消"
+      @confirm="confirmQuit"
+    />
   </section>
 </template>

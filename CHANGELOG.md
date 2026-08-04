@@ -13,6 +13,11 @@
 - **前端 health 类型修正**（`frontend/src/types/api.ts`）：`HealthResponse` 由旧字段 `question_bank_source` / `invalid_questions` 改为与后端一致的 `question_bank_version` / `groups` / `active_questions`。
 - **修复 Pylance 类型告警**（`backend/app/question_bank.py`）：`metadata.version` 判空后比较，消除 "None 不支持 <" 编译告警。
 
+- **前端：优化作答按钮与退出确认交互**：
+  - 调整 `Y/N` 作答按钮在浅色与深色模式下的配色与阴影，降低饱和度和高亮感以避免视觉暗示；相关样式位于 `frontend/src/style.css`（调整 `.btn-y` / `.btn-n`），并对深色模式进一步降低不透明度与阴影强度以减轻视觉冲击；
+  - 将页面中使用的系统 `confirm()` 替换为可复用的应用内确认对话组件 `frontend/src/components/ConfirmDialog.vue`，并在 `frontend/src/views/TestView.vue` 中使用该组件以统一样式与交互；
+  - 这些改动旨在提升可访问性与视觉中性，文件变更包括：`frontend/src/style.css`、`frontend/src/views/TestView.vue`、`frontend/src/components/ConfirmDialog.vue`。
+
 ## [1.4.0] - 2026-08-04
 
 ### 变更
