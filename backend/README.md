@@ -73,6 +73,18 @@ INFO:question_bank:Loaded bucket bank from custom file: .../tests/fixtures/quest
 缺失，后端会直接报错退出，**禁止静默回退**到开发样例；未设置 `APP_ENV`（默认开发环境）
 时才允许回退（同版本 `questions.json` 或 `app/data/questions.json`），保证本地/测试可启动。
 
+**维度元数据同源**：维度定义（`GET /api/dimensions` 返回的中文标签）存放在
+`question-bank/<version>/dimensions.json`。生产环境（`APP_ENV=production|prod`）下该文件
+**缺失或损坏**时后端直接抛错退出（含题库版本、路径与修复建议），**禁止回退**内置默认，
+避免题库版本与维度定义不匹配导致测评结果错误；开发环境仍回退内置默认以方便本地启动。
+
+**题库版本一致性（manifest）**：每个版本目录带 `manifest.json`，记录 `questions.json` /
+`dimensions.json` 的 sha256（生成：`python scripts/generate_manifest.py`，或运行各版本
+`build_questions.py` 自动联动）。生产环境加载版本目录题库（`load_bucket_bank`）前**强制
+校验 manifest**，失败即拒绝加载（覆盖启动与热更新 `/api/admin/reload-bank`）；自定义
+`QUESTION_BANK_PATH` 与开发环境不强制。校验逻辑见 `backend/app/manifest.py` 与
+`docs/DataValidation.md` 第 6 节。
+
 题库加载时会自动执行 `docs/DataValidation.md` 中的规则；不满足规则的题目会被
 跳过并记录原因（见 `/api/health` 或 `scripts/validate_bank.py` 输出），不会导致
 服务整体启动失败。

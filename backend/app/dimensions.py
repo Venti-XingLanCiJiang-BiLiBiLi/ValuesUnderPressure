@@ -6,7 +6,9 @@
 **数据源（单一数据源）**：维度元数据（英文 ID → 中文 name/description/direction/
 high/low 等）存放在题库版本目录 `question-bank/<QUESTION_BANK_VERSION>/dimensions.json`，
 与题目同版本管理、随题库统一调用。本模块启动时从该文件加载 `DIMENSIONS`；
-文件缺失/非法时回退到内置 `_DEFAULT_DIMENSIONS`（仅开发/测试兜底，正式数据以题库为准）。
+开发/测试环境文件缺失/非法时回退到内置 `_DEFAULT_DIMENSIONS`（仅开发/测试兜底，
+正式数据以题库为准）；**生产环境（APP_ENV=production|prod）dimensions.json 缺失
+或损坏（JSON 非法/结构不符）时禁止回退并直接抛错**，避免题库版本与维度定义不匹配。
 `reload_dimensions()` 可在运行时重载（配合题库热更新 #14），保持「题库 + 维度元数据」
 同源一致。
 
@@ -20,7 +22,7 @@ import json
 import logging
 import os
 
-from .bank_paths import resolve_bank_dir
+from .bank_paths import is_production, resolve_bank_dir
 
 logger = logging.getLogger("dimensions")
 
@@ -124,10 +126,20 @@ def _validate_meta(raw: dict) -> None:
 def _load_dimensions() -> None:
     """从当前题库版本目录的 dimensions.json 加载维度元数据，就地更新 DIMENSIONS。
 
-    失败（文件缺失 / JSON 非法 / 结构不符）时回退内置默认，保证运行不中断。
+    开发/测试环境：文件缺失 / JSON 非法 / 结构不符时回退内置默认，保证运行不中断。
+    生产环境（APP_ENV=production|prod）：dimensions.json **缺失或损坏**时禁止回退，
+    直接抛错，避免题库版本与维度定义不匹配导致测评结果错误。
     """
     global DIMENSIONS
     path = os.path.join(resolve_bank_dir(), "dimensions.json")
+    if not os.path.isfile(path) and is_production():
+        bank_version = os.path.basename(os.path.normpath(resolve_bank_dir()))
+        raise FileNotFoundError(
+            f"[production] 维度元数据文件缺失，禁止回退内置默认: {path}\n"
+            f"当前题库版本: {bank_version}\n"
+            "修复建议: 确保该版本目录存在 dimensions.json，且与 questions.json 属于同一"
+            "题库版本；可运行 python scripts/generate_manifest.py 生成 manifest.json 并校验一致性。"
+        )
     try:
         with open(path, "r", encoding="utf-8") as f:
             raw = json.load(f)
@@ -136,6 +148,15 @@ def _load_dimensions() -> None:
         DIMENSIONS.update(raw)
         logger.info("已从题库加载维度元数据: %s（%d 个维度）", path, len(raw))
     except Exception as e:  # noqa: BLE001
+        if is_production():
+            # 生产环境：文件存在但 JSON 非法 / 结构不符同样禁止回退，直接抛错
+            bank_version = os.path.basename(os.path.normpath(resolve_bank_dir()))
+            raise RuntimeError(
+                f"[production] 维度元数据文件损坏，禁止回退内置默认: {path}: {e}\n"
+                f"当前题库版本: {bank_version}\n"
+                "修复建议: 修复 dimensions.json 的 JSON/结构，或恢复与题库同版本的 "
+                "dimensions.json 后重新生成 manifest（scripts/generate_manifest.py）。"
+            ) from e
         logger.warning("加载题库维度元数据失败，回退内置默认: %s", e)
         DIMENSIONS.clear()
         DIMENSIONS.update(_DEFAULT_DIMENSIONS)

@@ -31,6 +31,14 @@
 - 前端结果页/首页的维度中文标签均来自后端返回，不单独维护副本；
 - 修改维度名称、描述或方向时，只需改 `question-bank/<version>/dimensions.json`。
 
+**加载失败处理**（`backend/app/dimensions.py`）：
+
+- 开发/测试环境（默认 / `APP_ENV=development`）：`dimensions.json` 缺失、JSON 非法
+  或结构不符时回退内置默认维度，保证本地/测试可启动；
+- **生产环境**（`APP_ENV=production|prod`）：`dimensions.json` **缺失或损坏**时
+  **禁止回退内置默认**，直接抛错（含当前题库版本、文件路径与修复建议），避免题库
+  版本与维度定义不匹配导致测评结果错误。
+
 ```json
 {
   "privacy": {
