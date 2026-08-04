@@ -156,6 +156,12 @@ GET /api/test/session/{id}/result
 - `GET /api/health` — 服务与题库加载状态
 - `GET /api/dimensions` — 10 个核心维度的说明
 
+### 限流（防滥用，对应 issue #9）
+所有 API 按客户端 IP 限流（slowapi，内存存储，单实例部署）：`POST /api/test/session`
+10 次/分钟、`POST /api/test/session/{id}/answer` 60 次/分钟、`GET /api/health` 100 次/分钟、
+只读接口 120 次/分钟、`POST /api/admin/reload-bank` 10 次/分钟（叠加 token 鉴权）。
+超限返回 HTTP 429。客户端 IP 优先取 Nginx 注入的 `X-Real-IP`（回退 `X-Forwarded-For` / 直连地址）。
+
 ## 6. 关键设计取舍
 
 - **桶驱动组卷（依赖分桶索引）**：默认 50 题 = `must` 5 + `experimental` 1 + 常规 10 维度 44。

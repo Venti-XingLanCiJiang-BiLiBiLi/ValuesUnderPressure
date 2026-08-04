@@ -2,6 +2,36 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.5] - 2026-08-04
+
+### 重构
+
+- **后端路由模块化拆分（对应 issue #15）**（`backend/app/main.py`、新增 `backend/app/bank_state.py`、`backend/app/routers/`）：
+  - `main.py` 瘦身为入口（日志初始化 / lifespan / CORS / 路由挂载），业务路由按域拆分到 `app/routers/`：`meta.py`（健康检查 / 维度元数据）、`admin.py`（题库热更新）、`sessions.py`（测试流程）；
+  - 共享题库实例状态抽到 `app/bank_state.py`（`get_bank()` / `set_bank()`），供各路由复用并支持热更新替换；
+  - `main.py` 保留 re-export（`get_answers` / `get_result` / `submit_answer` / `reload_bank`）以兼容既有测试导入路径。
+
+### 新增
+
+- **后端数据库异步化（对应 issue #8）**（`backend/app/db.py`、`backend/app/routers/sessions.py`、`backend/scripts/smoke_test.py`、`backend/tests/`）：
+  - 持久化层由同步 `sqlite3` 迁移到 `aiosqlite`，全部 db 函数改为 `async def`，沿用「每函数一次连接」短连接模式，由事件循环串行调度，规避 SQLite 并发写锁竞争；
+  - 测试流程路由全部改为 `async def` 并 `await` 数据库调用；`smoke_test.py` 以 `asyncio.run` 驱动；
+  - 测试适配：`pytest.ini` 启用 `asyncio_mode = auto`，`conftest.py` 与 `test_main.py` 异步化。
+- **API 限流与防滥用（对应 issue #9）**（新增 `backend/app/rate_limit.py`、`backend/app/main.py`、`backend/app/routers/*`、`frontend/nginx.conf`、`backend/requirements.txt`）：
+  - 集成 slowapi（内存存储），按客户端真实 IP 限流；限流键优先取 Nginx 注入的 `X-Real-IP`，回退 `X-Forwarded-For` / `client.host`（避免反代下所有用户共用一个限流桶）；
+  - 限流阈值：`POST /api/test/session` 10 次/分钟、`POST /api/test/session/{id}/answer` 60 次/分钟、`GET /api/health` 100 次/分钟、只读接口 120 次/分钟、`POST /api/admin/reload-bank` 10 次/分钟（叠加 token 鉴权）；
+  - 超限返回 HTTP 429（slowapi 默认 `_rate_limit_exceeded_handler`）；
+  - Nginx 增加请求体大小限制 `client_max_body_size 1M`。
+
+### 变更
+
+- 项目版本号升至 **1.4.5**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `docs/API.md`：新增「限流（Rate Limiting）」说明（阈值与 429 行为）；
+- `backend/README.md`：补充 API 限流说明。
+
 ## [1.4.4] - 2026-08-04
 
 ### 新增

@@ -172,3 +172,20 @@ Response:
 - 权重调整
 - 数据分析
 - 版本发布
+
+---
+
+## 4. 限流（Rate Limiting）
+
+后端基于 slowapi 对 API 做按客户端 IP 的限流（内存存储，单实例部署），超限返回 HTTP 429。
+
+| 接口 | 限流 |
+|------|------|
+| `POST /api/test/session` | 10 次 / 分钟 |
+| `POST /api/test/session/{id}/answer` | 60 次 / 分钟 |
+| `GET /api/health` | 100 次 / 分钟 |
+| `GET /api/dimensions`、`GET /api/test/session/{id}/question`、`/answers`、`/result` | 120 次 / 分钟 |
+| `POST /api/admin/reload-bank` | 10 次 / 分钟（叠加 `X-Admin-Token` 鉴权） |
+
+> 客户端 IP 取自 Nginx 反代注入的 `X-Real-IP`（回退 `X-Forwarded-For` / 直连地址）；
+> 阈值如需调整，见 `backend/app/routers/` 中各端点上的 `@limiter.limit(...)`。
