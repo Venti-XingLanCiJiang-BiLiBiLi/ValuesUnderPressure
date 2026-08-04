@@ -7,7 +7,7 @@
  * - 切题时左右滑入/滑出过渡
  * - 答完自动跳 /result
  */
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useSessionRestore } from '@/composables/useSessionRestore'
@@ -36,12 +36,21 @@ async function choose(answer: AnswerValue) {
   }
 }
 
+const showQuitConfirm = ref(false)
+
 function quit() {
-  if (confirm('当前进度会丢失，确定退出本次测试？')) {
-    clear()
-    store.reset()
-    router.push({ name: 'intro' })
-  }
+  showQuitConfirm.value = true
+}
+
+function cancelQuit() {
+  showQuitConfirm.value = false
+}
+
+function confirmQuit() {
+  clear()
+  store.reset()
+  showQuitConfirm.value = false
+  router.push({ name: 'intro' })
 }
 </script>
 
@@ -169,5 +178,17 @@ function quit() {
     >
       {{ store.error }}
     </p>
+    <!-- ============================== 退出确认对话框 ============================== -->
+    <div v-if="showQuitConfirm" class="fixed inset-0 z-50 flex items-center justify-center">
+      <div class="absolute inset-0 bg-black/40" @click="cancelQuit" />
+      <div class="card p-6 relative z-10 w-full max-w-sm">
+        <h3 class="text-lg font-medium text-ink-900 dark:text-ink-50 mb-2">退出测试</h3>
+        <p class="text-sm text-ink-700 dark:text-ink-300 mb-4">当前进度会丢失，确定退出本次测试？</p>
+        <div class="flex justify-end gap-3">
+          <button type="button" class="btn-ghost px-4 py-2" @click="cancelQuit">取消</button>
+          <button type="button" class="btn-n px-4 py-2" @click="confirmQuit">退出</button>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
