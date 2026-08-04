@@ -13,6 +13,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import os
 from collections.abc import AsyncIterator
@@ -92,7 +93,29 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
         len(bank.groups()),
         bank.total_questions(),
     )
-    yield
+    # #10: 启动后台定期清理任务（Session 过期与数据清理），随应用关闭取消。
+    cleanup_task = asyncio.create_task(_periodic_cleanup())
+    try:
+        yield
+    finally:
+        cleanup_task.cancel()
+
+
+async def _periodic_cleanup() -> None:
+    """后台定期清理过期 session（issue #10）。
+
+    启动后立即执行一次，之后每 CLEANUP_INTERVAL_HOURS（默认 3）小时清理一次；
+    单次异常不中断循环，记录日志后继续等待下一周期。
+    """
+    interval = float(os.environ.get("CLEANUP_INTERVAL_HOURS", "3")) * 3600
+    while True:
+        try:
+            deleted = await db.cleanup_expired_sessions()
+            if deleted > 0:
+                logger.info("已清理 %d 条过期 session", deleted)
+        except Exception:
+            logger.exception("定期清理过期 session 失败")
+        await asyncio.sleep(interval)
 
 
 app = FastAPI(

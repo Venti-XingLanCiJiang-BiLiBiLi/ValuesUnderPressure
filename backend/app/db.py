@@ -10,6 +10,12 @@ SQLite 持久化层（异步，基于 aiosqlite）。
 
 异步化说明（#8）：所有函数均为 async，沿用"每函数一次连接"的短连接模式，
 避免跨请求共享连接；由事件循环串行调度，规避 SQLite 并发写锁竞争。
+
+过期与清理（#10）：
+  - test_sessions.expires_at 记录过期时间；create_session 默认 now + SESSION_TTL_DAYS 天，
+    完成时 mark_completed 延长到 now + COMPLETED_SESSION_TTL_DAYS 天（已完成结果长期保留）；
+  - cleanup_expired_sessions() 删除过期 session 及其关联数据（answers/results/answer_history），
+    供后台定期清理任务调用（见 main.py _periodic_cleanup）。
 """
 
 from __future__ import annotations
@@ -26,6 +32,12 @@ import aiosqlite
 
 _UTC = datetime.UTC
 
+# 过期策略（可环境变量覆盖）：
+#   SESSION_TTL_DAYS           进行中/默认 session 过期天数（默认 3）
+#   COMPLETED_SESSION_TTL_DAYS 已完成 session 的延长保留天数（默认 15）
+SESSION_TTL_DAYS = int(os.environ.get("SESSION_TTL_DAYS", "3"))
+COMPLETED_SESSION_TTL_DAYS = int(os.environ.get("COMPLETED_SESSION_TTL_DAYS", "15"))
+
 DB_PATH = os.environ.get(
     "APERSONALITYTEST_DB_PATH",
     os.path.join(os.path.dirname(__file__), "data", "app.db"),
@@ -41,7 +53,8 @@ CREATE TABLE IF NOT EXISTS test_sessions (
     question_ids_json TEXT NOT NULL,
     current_index INTEGER NOT NULL DEFAULT 0,
     status TEXT NOT NULL DEFAULT 'in_progress',
-    confidence REAL
+    confidence REAL,
+    expires_at TEXT
 );
 
 CREATE TABLE IF NOT EXISTS answers (
@@ -98,15 +111,46 @@ async def _table_exists(conn: aiosqlite.Connection, table: str) -> bool:
 
 
 async def _migrate(conn: aiosqlite.Connection) -> None:
-    """对已存在的旧库做增量迁移：为 results 表补 confidence 列。
+    """对已存在的旧库做增量迁移。
 
     CREATE TABLE IF NOT EXISTS 不会给已存在的表加列，因此旧数据库需要 ALTER；
-    用表存在性 + 列存在性双重判断，避免在极旧的库（尚无 results 表）上误执行 ALTER。
+    用表存在性 + 列存在性双重判断，避免在极旧的库（尚无对应表）上误执行 ALTER。
     """
+    # 已有迁移：results 补 confidence 列（#16 维度级置信度）
     if await _table_exists(conn, "results") and not await _column_exists(
         conn, "results", "confidence"
     ):
         await conn.execute("ALTER TABLE results ADD COLUMN confidence REAL")
+
+    # #10：test_sessions 补 expires_at 列（Session 过期与数据清理）
+    if await _table_exists(conn, "test_sessions") and not await _column_exists(
+        conn, "test_sessions", "expires_at"
+    ):
+        await conn.execute("ALTER TABLE test_sessions ADD COLUMN expires_at TEXT")
+        # 历史行回填：NULL expires_at 按 created_at + SESSION_TTL_DAYS 计算
+        cur = await conn.execute(
+            "SELECT id, created_at FROM test_sessions WHERE expires_at IS NULL"
+        )
+        rows = await cur.fetchall()
+        now = datetime.datetime.now(_UTC)
+        for r in rows:
+            try:
+                created = datetime.datetime.fromisoformat(r["created_at"])
+            except ValueError:
+                created = now
+            exp = created + datetime.timedelta(days=SESSION_TTL_DAYS)
+            await conn.execute(
+                "UPDATE test_sessions SET expires_at = ? WHERE id = ?",
+                (exp.isoformat(), r["id"]),
+            )
+
+    # 索引（IF NOT EXISTS 幂等，新旧库皆安全）
+    await conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_sessions_expires ON test_sessions(expires_at)"
+    )
+    await conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_sessions_status ON test_sessions(status)"
+    )
 
 
 @asynccontextmanager
@@ -121,18 +165,28 @@ async def get_conn() -> AsyncIterator[aiosqlite.Connection]:
 
 
 async def create_session(
-    question_version: str, length: int, dimensions: list[str], question_ids: list[str]
+    question_version: str,
+    length: int,
+    dimensions: list[str],
+    question_ids: list[str],
+    expires_at: str | None = None,
 ) -> str:
+    """创建测试会话。默认 expires_at = now + SESSION_TTL_DAYS 天（可传入覆盖）。"""
     session_id = uuid.uuid4().hex
+    if expires_at is None:
+        expires_at = (
+            datetime.datetime.now(_UTC) + datetime.timedelta(days=SESSION_TTL_DAYS)
+        ).isoformat()
     async with get_conn() as conn:
         await conn.execute(
             """INSERT INTO test_sessions
-               (id, created_at, question_version, length, dimensions_json,
+               (id, created_at, expires_at, question_version, length, dimensions_json,
                 question_ids_json, current_index, status)
-               VALUES (?, ?, ?, ?, ?, ?, 0, 'in_progress')""",
+               VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'in_progress')""",
             (
                 session_id,
                 datetime.datetime.now(_UTC).isoformat(),
+                expires_at,
                 question_version,
                 length,
                 json.dumps(dimensions, ensure_ascii=False),
@@ -157,9 +211,20 @@ async def advance_pointer(session_id: str, new_index: int) -> None:
 
 
 async def mark_completed(session_id: str) -> None:
+    """标记完成并延长过期时间（已完成结果长期保留，默认 +COMPLETED_SESSION_TTL_DAYS 天）。"""
     async with get_conn() as conn:
         await conn.execute(
-            "UPDATE test_sessions SET status = 'completed' WHERE id = ?", (session_id,)
+            """UPDATE test_sessions
+               SET status = 'completed',
+                   expires_at = ?
+               WHERE id = ?""",
+            (
+                (
+                    datetime.datetime.now(_UTC)
+                    + datetime.timedelta(days=COMPLETED_SESSION_TTL_DAYS)
+                ).isoformat(),
+                session_id,
+            ),
         )
 
 
@@ -224,6 +289,30 @@ async def get_answer_history(session_id: str) -> list[dict]:
         )
         rows = await cur.fetchall()
         return [dict(row) for row in rows]
+
+
+async def cleanup_expired_sessions(cutoff: str | None = None) -> int:
+    """删除所有已过期的 session 及其关联数据，返回删除的 session 数。
+
+    expires_at 为 UTC ISO-8601 文本，同格式下字符串比较等价于时间比较；
+    表外键未启用 ON DELETE CASCADE，故需按 session_id 逐表删除关联数据。
+    """
+    if cutoff is None:
+        cutoff = datetime.datetime.now(_UTC).isoformat()
+    async with get_conn() as conn:
+        cur = await conn.execute(
+            "SELECT id FROM test_sessions WHERE expires_at < ?", (cutoff,)
+        )
+        rows = await cur.fetchall()
+        session_ids = [r["id"] for r in rows]
+        for sid in session_ids:
+            await conn.execute(
+                "DELETE FROM answer_history WHERE session_id = ?", (sid,)
+            )
+            await conn.execute("DELETE FROM answers WHERE session_id = ?", (sid,))
+            await conn.execute("DELETE FROM results WHERE session_id = ?", (sid,))
+            await conn.execute("DELETE FROM test_sessions WHERE id = ?", (sid,))
+    return len(session_ids)
 
 
 async def save_results(session_id: str, dimension_scores: dict, confidence: float) -> None:
