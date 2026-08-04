@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00433",
+    "content": "你愿意为了获得一项重大疾病的免费终身治疗，接受医院对你全部生活方式的长期约束吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00434",
+    "content": "你愿意为了伴侣不再离开你，放弃自己独立做重大决定的权利吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00435",
+    "content": "你愿意为了获得巨额财富，接受一份要求你放弃所有私人生活的精英合同吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00436",
+    "content": "你愿意为了得到一份终生不用工作的保障收入，接受由系统安排你每天的生活吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

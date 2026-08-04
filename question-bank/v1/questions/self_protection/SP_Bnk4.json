@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00005",
+    "content": "你愿意为了确保自己的晋升机会，放弃花时间指导新入职的同事吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00006",
+    "content": "你愿意为了自己的健康，拒绝为公司连续熬夜冲刺项目吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00007",
+    "content": "你愿意为了给自己留足应急资金，拒绝为兄弟姐妹的大额支出分担费用吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "altruism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00008",
+    "content": "你愿意为了保住自己的名誉，拒绝替团队的错误决定公开背锅吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "self_protection",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "self_protection",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

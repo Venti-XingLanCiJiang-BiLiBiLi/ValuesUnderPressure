@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00221",
+    "content": "你愿意为了享受当下的生活，放弃一些未来的储蓄计划吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "long_term",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00222",
+    "content": "你愿意为了生活的方便，多花钱购买省时的服务吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00223",
+    "content": "你愿意为了体验新鲜事物，花掉一些计划之外的钱吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00224",
+    "content": "你愿意为了帮助他人，放弃一些本可以攒下来的钱吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "wealth",
+      "altruism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

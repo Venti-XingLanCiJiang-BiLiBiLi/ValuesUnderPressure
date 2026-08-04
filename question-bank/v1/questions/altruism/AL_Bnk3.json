@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00049",
+    "content": "你愿意为了帮朋友解燃眉之急，把准备用来旅行的钱借给他吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00050",
+    "content": "你愿意为了照顾生病的同事，替他分担半个月的工作吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00051",
+    "content": "你愿意为了帮助流浪动物，放弃周末的休息去做志愿者吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00052",
+    "content": "你愿意为了帮助失学少年重返校园，每月拿出收入的十分之一资助他吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "medium",
+    "tags": [
+      "altruism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

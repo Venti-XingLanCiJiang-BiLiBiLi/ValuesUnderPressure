@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00361",
+    "content": "你愿意为了三十年后安定的生活，忍受现在长期的艰苦吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00362",
+    "content": "你愿意为了子孙后代的未来，放弃自己当下的所有享受吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00363",
+    "content": "你愿意为了一个五十年后造福人类的目标，倾尽自己的一生吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -5,
+        "no": 5
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00364",
+    "content": "你愿意为了长期的事业目标，牺牲自己全部的短期娱乐吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "long_term",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "long_term",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

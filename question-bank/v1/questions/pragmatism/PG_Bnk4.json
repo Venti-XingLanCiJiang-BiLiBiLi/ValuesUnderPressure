@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00285",
+    "content": "你愿意为了确保项目能够落地，放弃其中不切实际的理想化部分吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00286",
+    "content": "你愿意为了实际的收益，接受一份收入可观但你并不认同其价值观的工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00287",
+    "content": "你愿意为了现实中的成功，放弃自己曾经坚持的理想抱负吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "long_term"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "long_term",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00288",
+    "content": "你愿意为了得到实际的结果，不再坚持那些无法量化的原则吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "hard",
+    "tags": [
+      "pragmatism",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "pragmatism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

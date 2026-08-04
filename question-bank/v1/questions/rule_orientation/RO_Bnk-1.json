@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00261",
+    "content": "你愿意为了节省时间，在人少的路口偶尔闯一下红灯吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00262",
+    "content": "你愿意为了图方便，偶尔抄一下违规的近路吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00263",
+    "content": "你愿意为了尽快完成工作，偶尔简化一些不必要的流程吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00264",
+    "content": "你愿意为了节省软件费用，偶尔使用盗版软件吗？",
+    "type": "YN",
+    "category": "morality",
+    "difficulty": "easy",
+    "tags": [
+      "rule_orientation",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "wealth",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

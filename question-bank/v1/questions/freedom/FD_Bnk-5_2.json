@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00437",
+    "content": "你愿意为了获得一台能替你打理一切的智能管家，交出对日常生活的全部决定权吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00438",
+    "content": "你愿意为了让自己深爱的人永远不离开，接受对方对你一切选择的控制吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00439",
+    "content": "你愿意为了换取一项造福全人类的技术，自愿放弃自己这一生的所有选择权作为试验对象吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00440",
+    "content": "你愿意为了获得一个永远不会出错的人生规划，把人生的所有选择权都交给算法吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": -5,
+        "no": 5
+      },
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00417",
+    "content": "你愿意为了自由布置自己的工位，不遵守办公室统一的桌面规范吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00418",
+    "content": "你愿意为了自由选择通勤的方式，不参加单位组织的统一班车吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00419",
+    "content": "你愿意为了自由决定听什么音乐，不使用单位统一播放的背景音乐系统吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00420",
+    "content": "你愿意为了自由选择说话的方式，不遵守团队严格的发言规范吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "easy",
+    "tags": [
+      "freedom",
+      "rule_orientation"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "rule_orientation",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

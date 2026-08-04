@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00129",
+    "content": "你愿意为了安稳的生活，放弃一个需要冒险但可能改变人生的机会吗？",
+    "type": "YN",
+    "category": "risk",
+    "difficulty": "medium",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00130",
+    "content": "你愿意为了减少健康风险，放弃一些自己喜欢的重口味食物吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00131",
+    "content": "你愿意为了确保出行安全，放弃自驾的便利改乘公共交通吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "freedom",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00132",
+    "content": "你愿意为了获得稳定的收入，拒绝一份业绩波动大的高提成工作吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "security",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "security",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

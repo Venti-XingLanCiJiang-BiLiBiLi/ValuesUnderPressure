@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00405",
+    "content": "你愿意为了自主决定每天做什么，放弃一份高薪但行程完全被安排的工作吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00406",
+    "content": "你愿意为了自由选择自己的伴侣，拒绝家里安排的婚事吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00407",
+    "content": "你愿意为了自由表达自己的想法，拒绝加入任何限制发言的团体吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "hard",
+    "tags": [
+      "freedom",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00408",
+    "content": "你愿意为了自由选择居住的城市，放弃一份需要固定驻守的工作吗？",
+    "type": "YN",
+    "category": "freedom",
+    "difficulty": "medium",
+    "tags": [
+      "freedom",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "freedom",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

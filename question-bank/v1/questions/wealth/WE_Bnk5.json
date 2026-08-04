@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00201",
+    "content": "你愿意为了换取巨额财富，放弃自己的健康长寿吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "security",
+        "yes": -4,
+        "no": 4
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00202",
+    "content": "你愿意为了巨大的财富，永久放弃自己最重要的爱好吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00203",
+    "content": "你愿意为了赚取巨额金钱，接受一份剥夺你所有个人时间的工作吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00204",
+    "content": "你愿意为了成为顶级富豪，牺牲与家人朋友的所有亲密关系吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "wealth",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "wealth",
+        "yes": 5,
+        "no": -5
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

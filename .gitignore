@@ -217,9 +217,10 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# ValuesUnderPressure —— 题库生成工作目录（临时/中间产物）
-# 后端仅消费 question-bank/questions.json 正式题库。
-# 以下目录为生成题库时的中间文件与本地工具，不入库（本地磁盘仍保留，可随时重新生成题库）。
+# ValuesUnderPressure —— 题库历史中间产物（不入库）
+# 题库按版本文件夹管理：分桶源文件位于 question-bank/v1/questions/（随仓库入库），
+# 由 question-bank/v1/build_questions.py 合并生成 question-bank/v1/questions.json。
+# drafts/ 为版本化改造前的历史批次文件（已废弃，本地保留）。
 question-bank/drafts/
 question-bank/tools/
 
@@ -234,3 +235,4 @@ frontend.zip
 
 #开发用临时文件
 TODO
+.vscode

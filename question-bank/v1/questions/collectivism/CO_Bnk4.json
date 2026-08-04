@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00325",
+    "content": "你愿意为了帮助社区建设，放弃自己个人发展的好机会吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00326",
+    "content": "你愿意为了团队的成功，牺牲自己晋升的机会吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00327",
+    "content": "你愿意为了全村人的福祉，承担自己个人的经济损失吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "wealth",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00328",
+    "content": "你愿意为了集体的统一，放弃自己表达异议的自由吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": 4,
+        "no": -4
+      },
+      {
+        "dimension": "freedom",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

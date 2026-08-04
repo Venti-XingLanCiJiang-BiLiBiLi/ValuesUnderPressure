@@ -9,14 +9,60 @@
 
 ## 1. 文件与数据来源
 
+题库采用**版本文件夹 + 分桶管理**：每个题库版本一个文件夹（如 `v1/`），版本内题目按主维度拆分到 `questions/` 目录下的多个桶文件（每桶 4 题），由版本内构建脚本合并校验后生成该版本的正式题库 `questions.json`。
+
 | 文件 | 说明 |
 | --- | --- |
-| `questions.json` | **正式题库**（500 题，`Q00001`~`Q00500`），后端唯一数据源 |
-| `drafts/` | 生成题库的中间批次源文件（**本地工作目录，不入库**，已加入 `.gitignore`） |
-| `tools/build_questions.py` | 合并 + 校验脚本（**本地工具，不入库**），用于重新生成 `questions.json` |
-| `questions.template.json` | 单题结构模板示例 |
+| `v1/` | **题库版本 v1**（当前正式版本）：包含分桶源文件、构建脚本与合并产物 |
+| `v1/questions/` | **分桶源文件**（按主维度分目录，每桶 4 题；`freedom` 每桶 8 题拆 2 桶；`must` 40 题拆 10 桶；`experimental` 20 题不分桶），随仓库入库 |
+| `v1/questions.json` | **正式题库**（500 题，`Q00001`~`Q00500`），合并产物，后端唯一数据源 |
+| `v1/questions.index.json` | **分桶索引**（结构记录）：各组题数、桶（bank）数、每桶数量与文件位置，随仓库入库 |
+| `v1/build_questions.py` | 合并 + 校验脚本（入库），从 `questions/` 构建 `questions.json` 与 `questions.index.json` |
+| `templates/` | **范例题库框架**：与版本目录同构的模板框架，演示分层分桶 + 构建脚本 + 索引（全占位数据，可直接复制为新版本骨架） |
+| `schema.json` | 题目数据结构规范（版本无关的字段约束） |
+| `drafts/` | 历史中间批次源文件（**已废弃，本地保留，不入库**，已加入 `.gitignore`） |
 
-> 后端请只依赖 `questions.json`。`drafts/`、`tools/` 不随仓库分发，仅用于本地维护与重新生成。
+> 后端请只依赖题库版本的 `questions.json`（当前为 `v1/questions.json`）。维护题库时**不要直接改 `questions.json`**，而是编辑对应版本 `questions/` 下的桶文件，再运行该版本下的 `python build_questions.py` 重新生成。
+
+### 1.1 版本目录结构
+
+```text
+question-bank/
+├── v1/                        # 题库版本 v1（当前正式版本）
+│   ├── questions/
+│   │   ├── self_protection/   SP_Bnk-5.json ... SP_Bnk5.json    # 每桶 4 题（主权重桶）
+│   │   ├── freedom/           FD_Bnk-5_1.json ... FD_Bnk5_2.json  # 每桶 8 题，拆 2 桶各 4 题
+│   │   ├── ...                # 其余维度同 self_protection
+│   │   ├── must/              Must_Bnk01.json ... Must_Bnk10.json  # 40 题，每桶 4 题
+│   │   └── experimental/      Exp_Bnk01.json                     # 20 题，不分桶
+│   ├── questions.json         # 合并后的正式题库（500 题）
+│   ├── questions.index.json   # 分桶索引（结构记录）
+│   └── build_questions.py     # 从 questions/ 构建 questions.json
+├── templates/                 # 范例题库框架（与版本目录同构，全占位数据）
+│   ├── questions/
+│   │   ├── self_protection/   SP_Bnk-5.json, SP_Bnk5.json   # 2 桶 x 2 题
+│   │   └── altruism/          AL_Bnk-5.json, AL_Bnk5.json   # 2 桶 x 2 题
+│   ├── questions.json         # 合并产物（8 题占位）
+│   ├── questions.index.json   # 分桶索引（结构记录）
+│   └── build_questions.py     # 模板构建脚本（2 维度 x 2 桶 x 2 题）
+├── schema.json                # 题目数据结构规范
+└── question_bank_readme.md    # 本说明
+```
+
+> `templates/` 作为**新版本骨架**：复制为 `v2/` 后，按需增删维度目录与桶文件、调整 `build_questions.py` 顶部的 `DIMENSIONS` / `EXPECTED_PER_BUCKET` / `ID_PREFIX` 等常量，再运行构建即可。
+
+- 常规维度目录以维度名命名，桶文件名 `{ABBR}_Bnk{权重}.json`（缩写：`self_protection→SP`、`altruism→AL`、`freedom→FD`、`security→SE`、`privacy→PR`、`wealth→WE`、`rule_orientation→RO`、`pragmatism→PG`、`collectivism→CO`、`long_term→LT`）；
+- `freedom` 每个权重桶 8 题，拆成 `FD_Bnk{权重}_1.json` / `FD_Bnk{权重}_2.json` 两个文件（各 4 题）；
+- `must` 按 `Q00441~Q00480` 顺序每 4 题一桶，对应后端组卷的 `MUST_BUCKET_SIZE=4` 抽样逻辑；
+- `experimental` 20 题不分桶，放单个文件。
+
+### 1.2 新增题库版本
+
+新增一个题库版本（如 `v2`）时：
+1. 从 `templates/` 复制框架为 `v2/`（或复制 `v1/` 为 `v2/` 后清空真实题目）；
+2. 按需增删 `v2/questions/` 下的维度目录与桶文件，保持每桶题数与 `build_questions.py` 顶部常量（`DIMENSIONS` / `EXPECTED_PER_BUCKET` / `BUCKET_FILE_SIZE` / `ID_PREFIX`）一致、`id` 唯一连续；
+3. 运行 `cd v2 && python build_questions.py` 生成 `v2/questions.json` 与 `v2/questions.index.json`；
+4. 后端切换数据源为 `v2/questions.json`（读取逻辑更新属后续任务）。
 
 ---
 

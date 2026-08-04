@@ -11,7 +11,7 @@
 - **Y/N 二选一**：极端两难情境，无正确答案、不评善恶，只记录你的取舍
 - **题量可选**：30 / 50 / 70 题（默认 50），支持按维度筛选组卷
 - **结果只描述倾向**：10 维度画像 + 矛盾组合分析 + 情境依赖提示，不做人格定性；维度条以 50 中线向两侧展开、颜色区分倾向强度
-- **题库与代码分离**：500 题独立于代码库，按场景分类 + 难度分层组卷，跨用户可比较（默认 50 题 = 5 锚定 + 1 实验 + 44 常规）
+- **题库与代码分离**：500 题按版本目录 + 分桶管理，后端抽题依赖分桶索引（`questions.index.json`）桶驱动组卷、按需懒加载桶文件，跨用户可比较（默认 50 题 = 5 锚定 + 1 实验 + 44 常规）
 - **可修改答案**：价值观测试不是考试，允许修改已提交的答案，修改记录保留在 `answer_history`，不影响答题进度
 - **维度级置信度**：每个维度除分数外，还给出 0~1 的 `confidence`（综合题量、一致性、权重覆盖）
 - **本地存档**：答完自动保存结果到本机（localStorage），首页「我的存档」可随时查看 / 删除历史结果
@@ -40,11 +40,12 @@ ValuesUnderPressure/
 
 **题库是数据，不是代码。**
 
-- 正式题库独立存放于 `question-bank/questions.json`（500 题，`Q00001`~`Q00500`），后端与前端统一从此读取，避免在代码库中维护多份副本。
+- 正式题库独立存放于 `question-bank/v1/questions.json`（500 题，`Q00001`~`Q00500`），后端与前端统一从此读取，避免在代码库中维护多份副本。
+- 题库按版本文件夹 + 主维度**分桶管理**：题库版本 `v1/` 内含分桶源文件 `v1/questions/`（每桶 4 题，随仓库入库），由 `v1/build_questions.py` 合并生成 `v1/questions.json`；分桶索引见 `v1/questions.index.json`。范例题库框架（与版本目录同构，全占位数据，可复制为新版本骨架）见 `templates/`。维护题库时编辑分桶文件后重新运行构建脚本。
 - 题目格式定义见 `question-bank/schema.json`（每个问题可同时影响多个维度，支持 yes/no 双向、正负权重）。
 - 题目结构说明见 `question-bank/question_bank_readme.md`。
 - `backend/app/data/questions.json` 仅为**开发环境回退样例**（真实题库的子集），用于正式题库缺失时让服务可启动；它不是正式题库。
-- 题库生成工作目录（`question-bank/drafts/`、`question-bank/tools/`）不随仓库分发，已加入 `.gitignore`。
+- 分桶改造前的历史批次目录（`question-bank/drafts/`）已废弃，不随仓库分发，已加入 `.gitignore`。
 
 ## 快速开始（后端）
 
@@ -145,8 +146,8 @@ crontab -e
 ## 测试与校验
 
 ```bash
-# 题库合并与格式校验（生成正式题库）
-cd question-bank && python tools/build_questions.py
+# 题库合并与格式校验（从 v1/questions/ 分桶生成正式题库）
+cd question-bank/v1 && python build_questions.py
 
 # 题库加载校验 + 核心流程冒烟测试（backend 目录下）
 cd ../backend

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00349",
+    "content": "你愿意为了自己的职业前途，离开需要你留守的团队吗？",
+    "type": "YN",
+    "category": "future",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00350",
+    "content": "你愿意为了个人的财富，拒绝为集体分担经济负担吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "wealth",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00351",
+    "content": "你愿意为了自己的独立，不参与集体的任何义务活动吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "collectivism",
+      "freedom"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "freedom",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00352",
+    "content": "你愿意为了自己的利益，在集体决策中坚持己见吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "hard",
+    "tags": [
+      "collectivism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "collectivism",
+        "yes": -3,
+        "no": 3
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 3,
+        "no": -3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

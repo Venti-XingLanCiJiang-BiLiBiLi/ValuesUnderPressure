@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00057",
+    "content": "你愿意为了帮朋友查资料，牺牲自己午休的半小时吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00058",
+    "content": "你愿意为了给邻座同学讲解难题，晚一点去吃饭吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00059",
+    "content": "你愿意为了陪同事走一段回家的路，自己绕一点远吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00060",
+    "content": "你愿意为了帮家人跑腿办事，放下手头正玩到一半的游戏吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": 1,
+        "no": -1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

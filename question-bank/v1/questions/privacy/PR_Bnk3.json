@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00169",
+    "content": "你愿意为了隐藏自己的健康状况，放弃一些需要提供体检记录的优惠福利吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "wealth",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00170",
+    "content": "你愿意为了保护自己的消费隐私，拒绝使用会收集购物习惯的会员卡吗？",
+    "type": "YN",
+    "category": "wealth",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00171",
+    "content": "你愿意为了保住自己的社交隐私，拒绝参加公司要求的社交软件统一绑定吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -2,
+        "no": 2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00172",
+    "content": "你愿意为了守护家人的私人空间，拒绝安装社区要求的公共监控吗？",
+    "type": "YN",
+    "category": "safety",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "security"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": 3,
+        "no": -3
+      },
+      {
+        "dimension": "security",
+        "yes": -3,
+        "no": 3
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

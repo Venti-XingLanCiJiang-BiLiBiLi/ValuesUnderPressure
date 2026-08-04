@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00185",
+    "content": "你愿意为了获得免费的定制服务，同意平台分析你的全部数据吗？",
+    "type": "YN",
+    "category": "privacy",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "pragmatism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "pragmatism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00186",
+    "content": "你愿意为了增加自己的曝光度，公开分享日常生活的全部细节吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00187",
+    "content": "你愿意为了获得工作上的便利，让公司查看你的私人通讯记录吗？",
+    "type": "YN",
+    "category": "control",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "wealth"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "wealth",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00188",
+    "content": "你愿意为了更快地融入群体，公开自己的收入情况吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "medium",
+    "tags": [
+      "privacy",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "privacy",
+        "yes": -2,
+        "no": 2
+      },
+      {
+        "dimension": "collectivism",
+        "yes": 2,
+        "no": -2
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]

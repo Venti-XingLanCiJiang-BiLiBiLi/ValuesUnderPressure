@@ -1,0 +1,110 @@
+[
+  {
+    "id": "Q00061",
+    "content": "你愿意为了省下自己的时间，拒绝帮同事传一份无关紧要的话吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00062",
+    "content": "你愿意为了自己的便利，不帮陌生的路人指路吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00063",
+    "content": "你愿意为了少一点麻烦，不参加同事们组织的爱心捐赠吗？",
+    "type": "YN",
+    "category": "social",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "collectivism"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "collectivism",
+        "yes": -1,
+        "no": 1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  },
+  {
+    "id": "Q00064",
+    "content": "你愿意为了自己的安静，拒绝听朋友倾诉他的烦恼吗？",
+    "type": "YN",
+    "category": "personal_boundary",
+    "difficulty": "easy",
+    "tags": [
+      "altruism",
+      "self_protection"
+    ],
+    "weights": [
+      {
+        "dimension": "altruism",
+        "yes": -1,
+        "no": 1
+      },
+      {
+        "dimension": "self_protection",
+        "yes": 1,
+        "no": -1
+      }
+    ],
+    "metadata": {
+      "version": 1,
+      "status": "active"
+    }
+  }
+]
