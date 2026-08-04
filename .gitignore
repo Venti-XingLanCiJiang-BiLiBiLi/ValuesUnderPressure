@@ -233,7 +233,13 @@ backend/app/data/app.db
 # ValuesUnderPressure —— 运行时生成的前端打包产物（不入库）
 frontend.zip
 
+# ValuesUnderPressure —— 数据库备份产物（不入库）
+backups/
+
 #开发用临时文件
 TODO
 .vscode
 backend/ruff_errors.txt
+AGENTS.md
+backend/bandit-report.json
+agent.md

@@ -31,6 +31,7 @@
 |id|string|测试ID|
 |created_at|datetime|创建时间|
 |question_version|string|题库版本|
+|expires_at|datetime|过期时间（UTC ISO-8601）。创建时默认 `now + SESSION_TTL_DAYS` 天，完成时延长到 `now + COMPLETED_SESSION_TTL_DAYS` 天；后台任务定期清理已过期 session 及其关联数据（见 `cleanup_expired_sessions`）|
 
 ## answers
 

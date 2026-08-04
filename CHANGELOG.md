@@ -2,6 +2,94 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.7] - 2026-08-04
+
+### 新增
+
+- **Session 过期与数据清理机制（对应 issue #10）**（`backend/app/db.py`、`backend/app/main.py`、`backend/tests/test_cleanup.py`）：
+  - `test_sessions` 新增 `expires_at` 字段（UTC ISO-8601）及索引 `idx_sessions_expires` / `idx_sessions_status`；`_migrate` 为旧库自动补列并回填历史行（`created_at + TTL`）；
+  - `create_session` 默认写入 `now + SESSION_TTL_DAYS` 天（默认 3）；`mark_completed` 完成时延长到 `now + COMPLETED_SESSION_TTL_DAYS` 天（默认 15，已完成结果长期保留）；
+  - 新增 `cleanup_expired_sessions()`：删除过期 session 及其关联数据（`answers` / `results` / `answer_history`，因无外键级联需逐表删），返回删除条数；
+  - `main.py` lifespan 启动后台定期清理任务 `_periodic_cleanup()`：启动即清理一次，之后每 `CLEANUP_INTERVAL_HOURS`（默认 3）小时清理，随应用关闭取消，单次异常不中断循环；
+  - 过期策略/周期均支持环境变量覆盖（`SESSION_TTL_DAYS` / `COMPLETED_SESSION_TTL_DAYS` / `CLEANUP_INTERVAL_HOURS`）。
+
+### 变更
+
+- 项目版本号升至 **1.4.7**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `docs/DatabaseSchema.md`：`test_sessions` 表补充 `expires_at` 字段说明；
+- `deploy/.env.example`：补充 Session 过期与清理的可选配置项说明。
+
+## [1.4.6] - 2026-08-04
+
+### 变更
+
+- **数据库备份可靠性提升（对应 issue #12）**（`deploy/backup.sh`、新增 `deploy/backup.ps1`、`.gitignore`）：
+  - `backup.sh` 由「直接拷贝容器内 DB 文件」改为**一致性在线备份**：在容器内用 Python `sqlite3` 在线备份 API（等价 `sqlite3 .backup`）备份 → `PRAGMA integrity_check` 完整性校验（失败删除临时文件并报错退出）→ `gzip` 压缩，再经 `docker cp` 取出；
+  - 备份产物改为 `app_<时间戳>.db.gz`（解压即 SQLite 文件），宿主机无需额外安装 `sqlite3` / `gzip`；
+  - 保留策略由「保留最近 14 份」改为**按天清理（默认 14 天）**，支持环境变量 `BACKUP_DIR` / `KEEP_DAYS` / `DB_PATH` 覆盖；
+  - 新增 Windows 版 `deploy/backup.ps1`（与 `backup.sh` 逻辑一致，支持 `-BackupsDir` / `-KeepDays` 参数）；
+  - `.gitignore` 新增忽略 `backups/` 备份产物。
+- 项目版本号升至 **1.4.6**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `README.md`：更新备份相关说明——目录树与维护章节补充 Windows 版 `backup.ps1`，备份脚本描述改为「一致性在线备份 + 压缩 + 按天保留 14 天」。
+
+## [1.4.5] - 2026-08-04
+
+### 重构
+
+- **后端路由模块化拆分（对应 issue #15）**（`backend/app/main.py`、新增 `backend/app/bank_state.py`、`backend/app/routers/`）：
+  - `main.py` 瘦身为入口（日志初始化 / lifespan / CORS / 路由挂载），业务路由按域拆分到 `app/routers/`：`meta.py`（健康检查 / 维度元数据）、`admin.py`（题库热更新）、`sessions.py`（测试流程）；
+  - 共享题库实例状态抽到 `app/bank_state.py`（`get_bank()` / `set_bank()`），供各路由复用并支持热更新替换；
+  - `main.py` 保留 re-export（`get_answers` / `get_result` / `submit_answer` / `reload_bank`）以兼容既有测试导入路径。
+
+### 新增
+
+- **后端数据库异步化（对应 issue #8）**（`backend/app/db.py`、`backend/app/routers/sessions.py`、`backend/scripts/smoke_test.py`、`backend/tests/`）：
+  - 持久化层由同步 `sqlite3` 迁移到 `aiosqlite`，全部 db 函数改为 `async def`，沿用「每函数一次连接」短连接模式，由事件循环串行调度，规避 SQLite 并发写锁竞争；
+  - 测试流程路由全部改为 `async def` 并 `await` 数据库调用；`smoke_test.py` 以 `asyncio.run` 驱动；
+  - 测试适配：`pytest.ini` 启用 `asyncio_mode = auto`，`conftest.py` 与 `test_main.py` 异步化。
+- **API 限流与防滥用（对应 issue #9）**（新增 `backend/app/rate_limit.py`、`backend/app/main.py`、`backend/app/routers/*`、`frontend/nginx.conf`、`backend/requirements.txt`）：
+  - 集成 slowapi（内存存储），按客户端真实 IP 限流；限流键优先取 Nginx 注入的 `X-Real-IP`，回退 `X-Forwarded-For` / `client.host`（避免反代下所有用户共用一个限流桶）；
+  - 限流阈值：`POST /api/test/session` 10 次/分钟、`POST /api/test/session/{id}/answer` 60 次/分钟、`GET /api/health` 100 次/分钟、只读接口 120 次/分钟、`POST /api/admin/reload-bank` 10 次/分钟（叠加 token 鉴权）；
+  - 超限返回 HTTP 429（slowapi 默认 `_rate_limit_exceeded_handler`）；
+  - Nginx 增加请求体大小限制 `client_max_body_size 1M`。
+
+### 变更
+
+- 项目版本号升至 **1.4.5**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `docs/API.md`：新增「限流（Rate Limiting）」说明（阈值与 429 行为）；
+- `backend/README.md`：补充 API 限流说明。
+
+## [1.4.4] - 2026-08-04
+
+### 新增
+
+- **结构化日志与监控（对应 issue #24）**（`backend/app/main.py`、`backend/requirements.txt`）：
+  - 新增 JSON 结构化日志：设置 `JSON_LOGS=1` 时经 `python-json-logger`（`JsonFormatter`）输出 JSON 格式日志，便于 ELK / 集中日志采集；未开启或依赖缺失时回退为纯文本格式；
+  - 日志初始化收敛到 `init_logging()`，在应用 `lifespan` 启动时统一配置 handler 并跨热重载去重；模块级 logger 先于 lifespan 定义，避免 `reload_bank` 等被直接调用时报 `NameError`。
+- **CORS 生产环境配置收紧（对应 issue #11）**（`backend/app/main.py`、`docker-compose.yml`、`deploy/.env.example`）：
+  - CORS 来源改为环境驱动：`CORS_ALLOWED_ORIGINS`（逗号分隔）显式配置；未配置时非生产环境（`ENV != production`）默认放开 `*`，生产环境默认严格（空列表）并记录 warning；
+  - 容器间服务互访通常不带 `Origin` 请求头，不受 CORSMiddleware 限制，Docker 内部互访不受影响。
+
+### 变更
+
+- **部署脚本生产检查**（`deploy/deploy.sh`、`deploy/deploy.ps1`）：检测到 `ENV/APP_ENV=production` 且 `CORS_ALLOWED_ORIGINS` 或 `ADMIN_TOKEN` 未设置时输出警告，提示可能影响可用性与安全性。
+- **部署配置变量**（`docker-compose.yml`、`deploy/.env.example`）：后端服务新增 `ENV`（与 `APP_ENV` 同步）、`CORS_ALLOWED_ORIGINS`、`JSON_LOGS`、`ADMIN_TOKEN` 环境变量，生产部署可按需配置。
+- **后端 CI 冒烟流水线**（新增 `.github/workflows/backend-smoke.yml`）：push / pull_request 命中 `backend/**` 时安装依赖（含 pytest）并运行完整后端测试套件。
+- 项目版本号升至 **1.4.4**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 修复
+
+- **`backend/app/main.py` 代码规范修复**（本地复现 CI 时发现并修正）：修复 ruff 告警——import 块排序（I001）、移除废弃且未使用的 `typing.List`（UP035 / F401）、`setattr` 常量属性改为直接赋值（B010）、导入块与注释之间补空行；修复后 ruff 与 mypy 均通过。
+
 ## [1.4.3] - 2026-08-04
 
 ### 新增

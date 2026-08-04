@@ -90,7 +90,8 @@ ValuesUnderPressure/
 └── deploy/
     ├── deploy.sh             # 一键部署（Linux 云服务器）
     ├── deploy.ps1            # 一键部署（Windows + Docker Desktop 本地自测）
-    ├── backup.sh             # 数据库备份（保留最近 14 份）
+    ├── backup.sh             # 数据库备份（Linux：一致性在线备份 + 压缩，保留 14 天）
+    ├── backup.ps1            # 数据库备份（Windows + Docker Desktop 本地自测）
     └── .env.example          # 部署配置样例
 ```
 
@@ -128,17 +129,23 @@ API 文档在 `http://<服务器IP>:8080/docs`，健康检查在 `/api/health`�
 
 ```bash
 ./deploy/deploy.sh            # 代码更新后重新构建并滚动升级
-./deploy/backup.sh            # 手动备份数据库到 backups/
+./deploy/backup.sh            # 手动备份数据库（一致性在线备份 + 压缩）到 backups/
 docker compose logs -f        # 查看日志
 docker compose down           # 停止（数据仍保留在卷中）
 ```
 
-定时备份（可选）：
+Windows（Docker Desktop）本地备份：`\deploy\backup.ps1`（参数 `-BackupsDir` / `-KeepDays`，默认保留 14 天）
+
+定时备份（可选，Linux）：
 
 ```bash
 crontab -e
 0 3 * * * /path/to/ValuesUnderPressure/deploy/backup.sh >> /var/log/vup-backup.log 2>&1
 ```
+
+> 备份脚本说明：在容器内用 Python `sqlite3` 在线备份 API 生成一致性副本（等价 `sqlite3 .backup`），
+> 经 `PRAGMA integrity_check` 完整性校验后 `gzip` 压缩输出 `app_<时间戳>.db.gz`（解压即 SQLite 文件），
+> 并按天清理旧备份（默认 14 天，可用环境变量 `BACKUP_DIR` / `KEEP_DAYS` / `DB_PATH` 覆盖）。
 
 > 前端构建默认 `VITE_API_BASE_URL=/api`（同源反代）。仅当采用前后端分离部署时才在 `.env`
 > 里覆盖 `VITE_API_BASE_URL=https://你的后端域名/api`，详见 `deploy/.env.example`。

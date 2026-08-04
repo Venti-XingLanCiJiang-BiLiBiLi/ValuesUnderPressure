@@ -12,7 +12,7 @@
 
 [project]
 name = "values-under-pressure-backend"
-version = "1.4.3"
+version = "1.4.7"
 description = "Values Under Pressure（取舍之间）后端服务"
 requires-python = ">=3.11"
 
@@ -29,8 +29,8 @@ line-length = 100
 # dimensions.py：维度元数据结构错误用 ValueError 语义更贴切；
 #   global 仅读取（模块级缓存设计），非赋值
 "app/dimensions.py" = ["TRY004", "PLW0602"]
-# main.py：热更新接口 catch-all 是兜底设计，统一转 500
-"app/main.py" = ["BLE001"]
+# admin.py：热更新接口 catch-all 是兜底设计，统一转 500
+"app/routers/admin.py" = ["BLE001"]
 # 测试夹具使用 dict() 关键字风格，可读性优先
 "tests/*" = ["C408"]
 # scripts/ 通过 `python scripts/*.py` 调用（CI 亦然）；Windows 无法设置 Unix
