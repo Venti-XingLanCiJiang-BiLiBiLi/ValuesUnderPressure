@@ -18,9 +18,9 @@ os.environ["QUESTION_BANK_PATH"] = os.path.join(
     os.path.dirname(__file__), "fixtures", "questions.json"
 )
 
-import pytest  # noqa: E402
+import pytest
 
-from app import db  # noqa: E402
+from app import db
 
 
 @pytest.fixture(scope="session", autouse=True)

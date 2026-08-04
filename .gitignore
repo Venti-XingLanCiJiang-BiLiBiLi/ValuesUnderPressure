@@ -236,3 +236,4 @@ frontend.zip
 #开发用临时文件
 TODO
 .vscode
+backend/ruff_errors.txt

@@ -8,7 +8,7 @@
 import json
 
 from app import dimensions
-from app.dimensions import DIMENSIONS, DIMENSION_IDS, reload_dimensions
+from app.dimensions import DIMENSION_IDS, DIMENSIONS, reload_dimensions
 
 CORE_IDS = {
     "self_protection", "altruism", "freedom", "security", "privacy",

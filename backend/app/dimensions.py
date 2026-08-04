@@ -19,7 +19,6 @@ from __future__ import annotations
 import json
 import logging
 import os
-from typing import Dict, List, Tuple
 
 from .bank_paths import resolve_bank_dir
 
@@ -30,7 +29,7 @@ logger = logging.getLogger("dimensions")
 # 正式数据以题库 question-bank/<version>/dimensions.json 为准；本字典仅用于题库
 # 文件缺失时的降级，避免 import 时因找不到题库而崩溃。
 # ---------------------------------------------------------------------------
-_DEFAULT_DIMENSIONS: Dict[str, Dict] = {
+_DEFAULT_DIMENSIONS: dict[str, dict] = {
     "self_protection": {
         "name": "自我保护",
         "description": "优先保护自身利益、资源和安全的倾向",
@@ -105,7 +104,7 @@ _DEFAULT_DIMENSIONS: Dict[str, Dict] = {
 
 # 维度元数据（对象引用保持稳定：重载时就地 clear/update，依赖方 `from .dimensions
 # import DIMENSIONS` 仍能观察到更新）。
-DIMENSIONS: Dict[str, Dict] = dict(_DEFAULT_DIMENSIONS)
+DIMENSIONS: dict[str, dict] = dict(_DEFAULT_DIMENSIONS)
 
 
 def _validate_meta(raw: dict) -> None:
@@ -144,10 +143,10 @@ def _load_dimensions() -> None:
 
 _load_dimensions()
 
-DIMENSION_IDS: List[str] = list(DIMENSIONS.keys())
+DIMENSION_IDS: list[str] = list(DIMENSIONS.keys())
 
 # 结果解读中用于"矛盾分析"的典型高分冲突组合 (docs/ResultInterpretation.md 举例)
-CONFLICT_PAIRS: List[Tuple[str, str]] = [
+CONFLICT_PAIRS: list[tuple[str, str]] = [
     ("freedom", "security"),
     ("altruism", "self_protection"),
     ("rule_orientation", "pragmatism"),
@@ -157,7 +156,7 @@ CONFLICT_PAIRS: List[Tuple[str, str]] = [
     ("collectivism", "self_protection"),
 ]
 
-CATEGORIES: List[str] = [
+CATEGORIES: list[str] = [
     "personal_boundary",
     "privacy",
     "freedom",
@@ -176,7 +175,7 @@ VALID_STATUS = {"draft", "active", "experimental", "deprecated"}
 VALID_DIFFICULTY = {"easy", "medium", "hard"}
 
 
-def reload_dimensions() -> Dict[str, Dict]:
+def reload_dimensions() -> dict[str, dict]:
     """运行时重新加载维度元数据（配合题库热更新 #14）。
 
     就地更新 DIMENSIONS / DIMENSION_IDS，保持对象引用稳定，让已导入的模块立即生效。

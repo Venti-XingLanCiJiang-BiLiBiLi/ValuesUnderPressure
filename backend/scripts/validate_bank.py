@@ -9,12 +9,12 @@
     0 -> 全部题目通过校验
     1 -> 存在被剔除的题目（详见标准输出）
 """
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from app.question_bank import load_question_bank  # noqa: E402
+from app.question_bank import load_question_bank
 
 
 def main() -> int:

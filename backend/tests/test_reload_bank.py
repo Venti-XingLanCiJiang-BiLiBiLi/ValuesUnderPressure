@@ -6,8 +6,9 @@
   - 题库损坏返回 500
 """
 import os
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
 from fastapi import HTTPException
 
 from app.main import reload_bank

@@ -11,10 +11,10 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from app import db  # noqa: E402
-from app.question_bank import load_bucket_bank  # noqa: E402
-from app.scoring import score_session  # noqa: E402
-from app.selection import build_test, coverage_report  # noqa: E402
+from app import db
+from app.question_bank import load_bucket_bank
+from app.scoring import score_session
+from app.selection import build_test, coverage_report
 
 
 def main():
