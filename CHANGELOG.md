@@ -2,6 +2,22 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.6] - 2026-08-04
+
+### 变更
+
+- **数据库备份可靠性提升（对应 issue #12）**（`deploy/backup.sh`、新增 `deploy/backup.ps1`、`.gitignore`）：
+  - `backup.sh` 由「直接拷贝容器内 DB 文件」改为**一致性在线备份**：在容器内用 Python `sqlite3` 在线备份 API（等价 `sqlite3 .backup`）备份 → `PRAGMA integrity_check` 完整性校验（失败删除临时文件并报错退出）→ `gzip` 压缩，再经 `docker cp` 取出；
+  - 备份产物改为 `app_<时间戳>.db.gz`（解压即 SQLite 文件），宿主机无需额外安装 `sqlite3` / `gzip`；
+  - 保留策略由「保留最近 14 份」改为**按天清理（默认 14 天）**，支持环境变量 `BACKUP_DIR` / `KEEP_DAYS` / `DB_PATH` 覆盖；
+  - 新增 Windows 版 `deploy/backup.ps1`（与 `backup.sh` 逻辑一致，支持 `-BackupsDir` / `-KeepDays` 参数）；
+  - `.gitignore` 新增忽略 `backups/` 备份产物。
+- 项目版本号升至 **1.4.6**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `README.md`：更新备份相关说明——目录树与维护章节补充 Windows 版 `backup.ps1`，备份脚本描述改为「一致性在线备份 + 压缩 + 按天保留 14 天」。
+
 ## [1.4.5] - 2026-08-04
 
 ### 重构
