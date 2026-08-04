@@ -2,6 +2,26 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.7] - 2026-08-04
+
+### 新增
+
+- **Session 过期与数据清理机制（对应 issue #10）**（`backend/app/db.py`、`backend/app/main.py`、`backend/tests/test_cleanup.py`）：
+  - `test_sessions` 新增 `expires_at` 字段（UTC ISO-8601）及索引 `idx_sessions_expires` / `idx_sessions_status`；`_migrate` 为旧库自动补列并回填历史行（`created_at + TTL`）；
+  - `create_session` 默认写入 `now + SESSION_TTL_DAYS` 天（默认 3）；`mark_completed` 完成时延长到 `now + COMPLETED_SESSION_TTL_DAYS` 天（默认 15，已完成结果长期保留）；
+  - 新增 `cleanup_expired_sessions()`：删除过期 session 及其关联数据（`answers` / `results` / `answer_history`，因无外键级联需逐表删），返回删除条数；
+  - `main.py` lifespan 启动后台定期清理任务 `_periodic_cleanup()`：启动即清理一次，之后每 `CLEANUP_INTERVAL_HOURS`（默认 3）小时清理，随应用关闭取消，单次异常不中断循环；
+  - 过期策略/周期均支持环境变量覆盖（`SESSION_TTL_DAYS` / `COMPLETED_SESSION_TTL_DAYS` / `CLEANUP_INTERVAL_HOURS`）。
+
+### 变更
+
+- 项目版本号升至 **1.4.7**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 文档
+
+- `docs/DatabaseSchema.md`：`test_sessions` 表补充 `expires_at` 字段说明；
+- `deploy/.env.example`：补充 Session 过期与清理的可选配置项说明。
+
 ## [1.4.6] - 2026-08-04
 
 ### 变更
