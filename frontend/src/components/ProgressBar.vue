@@ -10,8 +10,10 @@ const props = withDefaults(
     current: number
     total: number
     showLabel?: boolean
+    /** 无障碍标签（#22）：屏幕阅读器可感知当前进度 */
+    ariaLabel?: string
   }>(),
-  { showLabel: true },
+  { showLabel: true, ariaLabel: '答题进度' },
 )
 
 const percent = computed(() => {
@@ -21,7 +23,12 @@ const percent = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div
+    role="progressbar"
+    :aria-valuenow="current"
+    :aria-valuemax="total"
+    :aria-label="ariaLabel"
+  >
     <div
       v-if="showLabel"
       class="flex items-center justify-between mb-2 text-sm text-ink-600 dark:text-ink-400"

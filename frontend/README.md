@@ -95,9 +95,10 @@ frontend/
     ├── types/
     │   └── api.ts             # 与后端 schemas.py 1:1 对应的 TS 类型
     ├── composables/
-    │   ├── useSessionRestore.ts # 会话进度恢复（sessionStorage）
-    │   ├── useArchives.ts       # 本地存档（localStorage，答完自动保存）
-    │   └── useTheme.ts          # 主题切换
+    │   ├── useSessionRestore.ts    # 会话进度恢复（sessionStorage）
+    │   ├── useArchives.ts          # 本地存档（localStorage，答完自动保存）
+    │   ├── useTheme.ts             # 主题切换
+    │   └── useKeyboardShortcuts.ts # 答题页键盘快捷键（Y/N、↑/Backspace、↓）
     ├── components/
     │   ├── ProgressBar.vue    # 进度条
     │   ├── DimensionBar.vue   # 单维度条 + 一致性标记
