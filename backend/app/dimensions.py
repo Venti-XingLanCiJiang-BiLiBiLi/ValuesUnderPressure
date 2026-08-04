@@ -147,7 +147,7 @@ def _load_dimensions() -> None:
         DIMENSIONS.clear()
         DIMENSIONS.update(raw)
         logger.info("已从题库加载维度元数据: %s（%d 个维度）", path, len(raw))
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         if is_production():
             # 生产环境：文件存在但 JSON 非法 / 结构不符同样禁止回退，直接抛错
             bank_version = os.path.basename(os.path.normpath(resolve_bank_dir()))
