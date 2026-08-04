@@ -53,40 +53,81 @@ http.interceptors.response.use(
   },
 )
 
+/**
+ * 带指数退避的请求重试（#20）
+ * ============================================================================
+ * - 仅对「网络层错误」重试：超时 / 断连 / 无 HTTP 响应
+ *   （拦截器已把 axios 错误转成 ApiError，此时 status === 0）。
+ * - 业务错误（4xx/5xx，status !== 0，如 404/409/422）不重试，
+ *   避免无意义地重复提交或掩盖业务语义。
+ * - 默认最多重试 3 次，退避 1s → 2s → 4s。
+ * ============================================================================
+ */
+async function requestWithRetry<T>(
+  fn: () => Promise<T>,
+  retries = 3,
+  delay = 1000,
+): Promise<T> {
+  try {
+    return await fn()
+  } catch (e) {
+    const retriable = e instanceof ApiError && e.status === 0
+    if (retries <= 0 || !retriable) throw e
+    await new Promise((r) => setTimeout(r, delay))
+    return requestWithRetry(fn, retries - 1, delay * 2)
+  }
+}
+
 export const testApi = {
   async health(): Promise<HealthResponse> {
-    const { data } = await http.get<HealthResponse>('/health')
-    return data
+    return requestWithRetry(async () => {
+      const { data } = await http.get<HealthResponse>('/health')
+      return data
+    })
   },
 
   async getDimensions(): Promise<Record<string, DimensionMeta>> {
-    const { data } = await http.get<Record<string, DimensionMeta>>('/dimensions')
-    return data
+    return requestWithRetry(async () => {
+      const { data } = await http.get<Record<string, DimensionMeta>>('/dimensions')
+      return data
+    })
   },
 
   async createSession(req: CreateSessionRequest = {}): Promise<CreateSessionResponse> {
-    const { data } = await http.post<CreateSessionResponse>('/test/session', {
-      length: req.length ?? 40,
-      dimensions: req.dimensions ?? null,
+    return requestWithRetry(async () => {
+      const { data } = await http.post<CreateSessionResponse>('/test/session', {
+        length: req.length ?? 40,
+        dimensions: req.dimensions ?? null,
+      })
+      return data
     })
-    return data
   },
 
   async nextQuestion(sessionId: string): Promise<QuestionResponse> {
-    const { data } = await http.get<QuestionResponse>(`/test/session/${sessionId}/question`)
-    return data
+    return requestWithRetry(async () => {
+      const { data } = await http.get<QuestionResponse>(`/test/session/${sessionId}/question`)
+      return data
+    })
   },
 
   async submitAnswer(sessionId: string, req: SubmitAnswerRequest): Promise<SubmitAnswerResponse> {
-    const { data } = await http.post<SubmitAnswerResponse>(
-      `/test/session/${sessionId}/answer`,
-      req,
+    // 提交属写操作：网络波动时重试 2 次（退避 1s → 2s）；业务错误不重试
+    return requestWithRetry(
+      async () => {
+        const { data } = await http.post<SubmitAnswerResponse>(
+          `/test/session/${sessionId}/answer`,
+          req,
+        )
+        return data
+      },
+      2,
     )
-    return data
   },
 
   async getResult(sessionId: string): Promise<ResultResponse> {
-    const { data } = await http.get<ResultResponse>(`/test/session/${sessionId}/result`)
-    return data
+    return requestWithRetry(async () => {
+      const { data } = await http.get<ResultResponse>(`/test/session/${sessionId}/result`)
+      return data
+    })
   },
 }

@@ -2,6 +2,28 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.8] - 2026-08-04
+
+### 重构
+
+- **前端 Store 模块化拆分（对应 issue #18）**（`frontend/src/stores/`）：
+  - `stores/test.ts` 由「单一大 store」重构为**组合门面**，具体状态与请求逻辑下沉到四个单一职责 store：`session.ts`（会话元数据：`sessionId` / `total` / `status`）、`progress.ts`（题目进度与导航：当前题 / 浏览位置 / 已显示缓存 / 回退前进）、`answers.ts`（答案与修改历史）、`result.ts`（结果获取、缓存与自动存档）；
+  - `test.ts` 仅保留编排（创建会话→取题→提交→取结果），对外 API 与拆分前完全一致，视图层无需改动，各子 store 可独立测试。
+
+### 新增
+
+- **前端错误边界与重试机制（对应 issue #20）**（`frontend/src/api/client.ts`、`frontend/src/stores/test.ts`、新增 `frontend/src/components/ErrorBoundary.vue`、`frontend/src/App.vue`）：
+  - `api/client.ts` 新增 `requestWithRetry()`：带指数退避（1s→2s→4s）的请求重试，**仅对网络层错误（超时 / 断连 / 无响应，`ApiError.status === 0`）重试**，业务错误（4xx/5xx）不重试；所有 API 方法接入（写操作 `submitAnswer` 重试 2 次）；
+  - `test.ts` 加载状态由单个 `loading` boolean 细化为 `loadingState`（`idle / creating / fetching / submitting / result`），新增语义化 `isLoading`，旧 `loading` 保留兼容；
+  - 新增全局错误边界 `ErrorBoundary.vue`（`onErrorCaptured`），在 `App.vue` 包裹路由视图，后代组件异常不再整页白屏，并提供「重试」按钮。
+
+### 变更
+
+- **前端构建优化（对应 issue #23）**（`frontend/vite.config.ts`、`frontend/nginx.conf`）：
+  - `vite.config.ts`：`manualChunks` 增加 `vendor: ['axios']`，第三方依赖不再全部打入主包；开启 `reportCompressedSize` 输出 gzip 体积；
+  - `nginx.conf`：gzip 增加 `gzip_comp_level 6` / `gzip_buffers`，并补充 `text/xml` / `application/xml+rss` 等 MIME 类型。
+- 项目版本号升至 **1.4.8**（`frontend/package.json`、`backend/pyproject.toml`）。
+
 ## [1.4.7] - 2026-08-04
 
 ### 新增
