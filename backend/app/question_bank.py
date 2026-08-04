@@ -13,8 +13,9 @@ import os
 import warnings
 from dataclasses import dataclass, field
 
-from .bank_paths import resolve_bank_dir
+from .bank_paths import is_production, resolve_bank_dir
 from .dimensions import DIMENSION_IDS, VALID_DIFFICULTY, VALID_STATUS
+from .manifest import ManifestError, validate_manifest
 
 logger = logging.getLogger("question_bank")
 
@@ -110,9 +111,9 @@ def build_virtual_index(raw_list: list[dict], bucket_size: int = 4) -> dict:
 PRODUCTION_BANK_PATH = os.path.join(resolve_bank_dir(), "questions.json")
 FALLBACK_BANK_PATH = os.path.join(os.path.dirname(__file__), "data", "questions.json")
 
-
-def _is_production() -> bool:
-    return os.environ.get("APP_ENV", "").strip().lower() in ("production", "prod")
+# 生产/开发判定：统一复用共享模块 bank_paths.is_production
+# （question_bank / dimensions 共用同一判定来源，避免循环依赖与重复配置）。
+_is_production = is_production
 
 
 def _candidates(path: str | None) -> list[tuple]:
@@ -329,6 +330,22 @@ class QuestionBank:
         return str(max(versions)) if versions else "1"
 
 
+def _require_valid_manifest(bank_dir: str) -> None:
+    """生产环境加载版本目录题库前强制校验 manifest，确保 questions 与 dimensions 同版本。
+
+    开发环境跳过（保留回退与热更新便利）；生产环境 manifest 校验失败即抛
+    ManifestError，拒绝加载不匹配的题库。启动（get_bank）与热更新（reload_bank）
+    均经 load_bucket_bank 覆盖。
+    """
+    if not is_production():
+        return
+    try:
+        validate_manifest(bank_dir)
+    except ManifestError:
+        logger.error("生产环境题库 manifest 校验失败，拒绝加载: %s", bank_dir)
+        raise
+
+
 def load_bucket_bank(path: str | None = None) -> BucketBank:
     """加载 BucketBank（抽题主数据源），按以下优先级：
 
@@ -349,6 +366,9 @@ def load_bucket_bank(path: str | None = None) -> BucketBank:
     bank_dir = resolve_bank_dir()
     index_path = os.path.join(bank_dir, "questions.index.json")
     if os.path.isfile(index_path):
+        # 生产环境强制校验 manifest，确保 questions.json 与 dimensions.json 属于同一版本
+        # （启动 get_bank() 与热更新 reload_bank() 均经 load_bucket_bank 覆盖）。
+        _require_valid_manifest(bank_dir)
         logger.info("Loaded bank index: %s", index_path)
         return BucketBank.from_index_file(index_path)
     # [DEPRECATED] 开发回退：索引缺失时从合并题库 questions.json 构建虚拟索引

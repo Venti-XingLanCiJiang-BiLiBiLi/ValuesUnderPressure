@@ -38,6 +38,36 @@
 }
 ```
 
+## 题库版本清单（manifest.json）
+
+每个题库版本目录（`question-bank/<version>/`）除 `questions.json` / `dimensions.json` /
+`questions.index.json` 外，还包含 `manifest.json`（版本清单），用于保证 `questions.json`
+与 `dimensions.json` 属于同一题库版本：
+
+```json
+{
+  "schema_version": "1",
+  "bank_version": "v1",
+  "questions_file": "questions.json",
+  "dimensions_file": "dimensions.json",
+  "questions_sha256": "e38f...f685",
+  "dimensions_sha256": "34a0...3fa"
+}
+```
+
+| 字段 | 说明 |
+| --- | --- |
+| `schema_version` | manifest 结构版本（当前 `"1"`），升级结构时递增 |
+| `bank_version` | 题库版本名（对应版本目录名，如 `v1`） |
+| `questions_file` | 题目文件名引用（通常 `questions.json`） |
+| `dimensions_file` | 维度文件名引用（通常 `dimensions.json`） |
+| `questions_sha256` | `questions.json` 的 sha256 摘要 |
+| `dimensions_sha256` | `dimensions.json` 的 sha256 摘要 |
+
+校验逻辑见 `docs/DataValidation.md` 第 6 节与 `backend/app/manifest.py`；生成方式：
+`python scripts/generate_manifest.py [bank_dir]`，或运行各版本 `build_questions.py`
+（生成 `questions.json` 后自动联动产出 manifest）。
+
 ## 权重规则
 
 推荐范围：

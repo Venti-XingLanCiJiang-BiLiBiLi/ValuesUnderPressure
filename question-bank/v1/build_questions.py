@@ -364,6 +364,27 @@ def main():
     _write_index(index_groups, grand_total)
     print(f"✓ 已生成 {INDEX_PATH}")
 
+    # 联动生成 manifest（记录 questions.json / dimensions.json 的 sha256）
+    _write_manifest()
+
+
+def _write_manifest():
+    """生成 manifest.json：记录 questions.json 与 dimensions.json 的 sha256。
+
+    复用后端 app.manifest.build_manifest（唯一实现），确保版本目录内的 manifest
+    与 scripts/validate_bank.py / 运行时校验使用同一套逻辑。
+    """
+    backend_dir = os.path.abspath(os.path.join(ROOT, "..", "..", "backend"))
+    if backend_dir not in sys.path:
+        sys.path.insert(0, backend_dir)
+    from app.manifest import MANIFEST_FILENAME, build_manifest
+
+    manifest = build_manifest(ROOT)
+    with open(os.path.join(ROOT, MANIFEST_FILENAME), "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    print(f"✓ 已生成 {os.path.join(ROOT, MANIFEST_FILENAME)}")
+
 
 def _write_index(index_groups, total):
     """把桶文件清单整理成按组(group)聚合的结构记录。"""
