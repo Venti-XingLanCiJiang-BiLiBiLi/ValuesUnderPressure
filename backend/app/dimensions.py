@@ -1,13 +1,36 @@
 """
-十个核心价值维度的静态元数据。
+十个核心价值维度的元数据。
 
 来源: docs/DimensionSystem.md
+
+**数据源（单一数据源）**：维度元数据（英文 ID → 中文 name/description/direction/
+high/low 等）存放在题库版本目录 `question-bank/<QUESTION_BANK_VERSION>/dimensions.json`，
+与题目同版本管理、随题库统一调用。本模块启动时从该文件加载 `DIMENSIONS`；
+文件缺失/非法时回退到内置 `_DEFAULT_DIMENSIONS`（仅开发/测试兜底，正式数据以题库为准）。
+`reload_dimensions()` 可在运行时重载（配合题库热更新 #14），保持「题库 + 维度元数据」
+同源一致。
+
+逻辑常量（与展示无关）保留在本模块：
+  CONFLICT_PAIRS / CATEGORIES / VALID_STATUS / VALID_DIFFICULTY
 """
 
+from __future__ import annotations
+
+import json
+import logging
+import os
 from typing import Dict, List, Tuple
 
-# 维度 ID 必须与 question-bank/questions.json 中 weights[].dimension 保持一致
-DIMENSIONS: Dict[str, Dict] = {
+from .bank_paths import resolve_bank_dir
+
+logger = logging.getLogger("dimensions")
+
+# ---------------------------------------------------------------------------
+# 内置默认维度元数据（开发/测试兜底）
+# 正式数据以题库 question-bank/<version>/dimensions.json 为准；本字典仅用于题库
+# 文件缺失时的降级，避免 import 时因找不到题库而崩溃。
+# ---------------------------------------------------------------------------
+_DEFAULT_DIMENSIONS: Dict[str, Dict] = {
     "self_protection": {
         "name": "自我保护",
         "description": "优先保护自身利益、资源和安全的倾向",
@@ -80,6 +103,47 @@ DIMENSIONS: Dict[str, Dict] = {
     },
 }
 
+# 维度元数据（对象引用保持稳定：重载时就地 clear/update，依赖方 `from .dimensions
+# import DIMENSIONS` 仍能观察到更新）。
+DIMENSIONS: Dict[str, Dict] = dict(_DEFAULT_DIMENSIONS)
+
+
+def _validate_meta(raw: dict) -> None:
+    """校验 dimensions.json 结构；非法时抛 ValueError。"""
+    if not isinstance(raw, dict) or not raw:
+        raise ValueError("dimensions.json 顶层应为非空对象")
+    for dim, meta in raw.items():
+        if not isinstance(meta, dict):
+            raise ValueError(f"维度 {dim} 的元数据应为对象")
+        for key in ("abbr", "name", "description", "direction", "high", "low"):
+            if key not in meta:
+                raise ValueError(f"维度 {dim} 缺少字段: {key}")
+        if not (isinstance(meta["direction"], list) and len(meta["direction"]) == 2):
+            raise ValueError(f"维度 {dim} 的 direction 应为长度为 2 的数组")
+
+
+def _load_dimensions() -> None:
+    """从当前题库版本目录的 dimensions.json 加载维度元数据，就地更新 DIMENSIONS。
+
+    失败（文件缺失 / JSON 非法 / 结构不符）时回退内置默认，保证运行不中断。
+    """
+    global DIMENSIONS
+    path = os.path.join(resolve_bank_dir(), "dimensions.json")
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+        _validate_meta(raw)
+        DIMENSIONS.clear()
+        DIMENSIONS.update(raw)
+        logger.info("已从题库加载维度元数据: %s（%d 个维度）", path, len(raw))
+    except Exception as e:  # noqa: BLE001
+        logger.warning("加载题库维度元数据失败，回退内置默认: %s", e)
+        DIMENSIONS.clear()
+        DIMENSIONS.update(_DEFAULT_DIMENSIONS)
+
+
+_load_dimensions()
+
 DIMENSION_IDS: List[str] = list(DIMENSIONS.keys())
 
 # 结果解读中用于"矛盾分析"的典型高分冲突组合 (docs/ResultInterpretation.md 举例)
@@ -110,3 +174,15 @@ CATEGORIES: List[str] = [
 
 VALID_STATUS = {"draft", "active", "experimental", "deprecated"}
 VALID_DIFFICULTY = {"easy", "medium", "hard"}
+
+
+def reload_dimensions() -> Dict[str, Dict]:
+    """运行时重新加载维度元数据（配合题库热更新 #14）。
+
+    就地更新 DIMENSIONS / DIMENSION_IDS，保持对象引用稳定，让已导入的模块立即生效。
+    """
+    global DIMENSIONS
+    _load_dimensions()
+    DIMENSION_IDS.clear()
+    DIMENSION_IDS.extend(list(DIMENSIONS.keys()))
+    return DIMENSIONS

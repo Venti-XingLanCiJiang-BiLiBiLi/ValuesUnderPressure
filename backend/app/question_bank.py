@@ -14,6 +14,7 @@ import warnings
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
+from .bank_paths import DEFAULT_BANK_VERSION, resolve_bank_dir
 from .dimensions import DIMENSION_IDS, VALID_STATUS, VALID_DIFFICULTY
 
 logger = logging.getLogger("question_bank")
@@ -28,18 +29,6 @@ logger = logging.getLogger("question_bank")
 # 抽题（selection）现在依赖分桶索引 questions.index.json，按需加载桶文件，
 # 不再全量加载 questions.json。
 #
-# 版本由环境变量 QUESTION_BANK_VERSION 控制，默认 v1（docker-compose / Dockerfile 中可覆盖）。
-DEFAULT_BANK_VERSION = os.environ.get("QUESTION_BANK_VERSION", "").strip() or "v1"
-
-
-def resolve_bank_dir() -> str:
-    """返回题库版本目录：<repo>/question-bank/<QUESTION_BANK_VERSION>。"""
-    version = os.environ.get("QUESTION_BANK_VERSION", "").strip() or DEFAULT_BANK_VERSION
-    return os.path.join(
-        os.path.dirname(__file__), "..", "..", "question-bank", version
-    )
-
-
 def load_bank_index() -> dict:
     """加载当前题库版本的 questions.index.json（分桶索引）。
 

@@ -23,12 +23,24 @@
 
 ## 3. 维度数据格式
 
+维度元数据（英文 ID → 中文 name/description/direction 等）存放在**题库版本目录**
+`question-bank/<version>/dimensions.json`，与题目同版本管理，作为前后端统一的单一数据源：
+
+- 后端启动时从该文件加载 `DIMENSIONS`（`backend/app/dimensions.py`），并通过
+  `GET /api/dimensions` 提供给前端；
+- 前端结果页/首页的维度中文标签均来自后端返回，不单独维护副本；
+- 修改维度名称、描述或方向时，只需改 `question-bank/<version>/dimensions.json`。
+
 ```json
 {
-  "id": "privacy",
-  "name": "隐私保护",
-  "description": "保护个人信息和边界的倾向",
-  "direction": ["开放共享", "隐私保护"]
+  "privacy": {
+    "abbr": "PR",
+    "name": "隐私保护",
+    "description": "对个人边界和信息控制的需求",
+    "direction": ["开放共享", "隐私保护"],
+    "high": "…",
+    "low": "…"
+  }
 }
 ```
 

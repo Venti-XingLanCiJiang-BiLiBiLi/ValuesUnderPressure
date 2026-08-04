@@ -41,11 +41,44 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 QUESTIONS_DIR = os.path.join(ROOT, "questions")
 OUTPUT_PATH = os.path.join(ROOT, "questions.json")
 INDEX_PATH = os.path.join(ROOT, "questions.index.json")
+DIMENSIONS_FILE = os.path.join(ROOT, "dimensions.json")
 
-DIMENSIONS = {
-    "self_protection", "altruism", "freedom", "security", "privacy",
-    "wealth", "rule_orientation", "pragmatism", "collectivism", "long_term",
-}
+errors = []
+
+
+def error(msg):
+    errors.append(msg)
+
+
+def load_dimensions_meta():
+    """从 dimensions.json 读取维度元数据（英文 ID → 中文元数据 + abbr）。
+
+    作为本版本题库的单一数据源：维度集合 DIMENSIONS、文件名缩写 ABBR 均由它派生。
+    返回 {dim: meta}；文件缺失/非法时记录错误并返回 {}。
+    """
+    if not os.path.isfile(DIMENSIONS_FILE):
+        error(f"缺少维度元数据文件: {DIMENSIONS_FILE}")
+        return {}
+    with open(DIMENSIONS_FILE, "r", encoding="utf-8") as f:
+        raw = json.load(f)
+    if not isinstance(raw, dict) or not raw:
+        error(f"dimensions.json 顶层应为非空对象: {DIMENSIONS_FILE}")
+        return {}
+    for dim, meta in raw.items():
+        if not isinstance(meta, dict):
+            error(f"维度 {dim} 的元数据应为对象")
+            continue
+        for key in ("abbr", "name", "description", "direction", "high", "low"):
+            if key not in meta:
+                error(f"维度 {dim} 缺少字段: {key}")
+        direction = meta.get("direction")
+        if not (isinstance(direction, list) and len(direction) == 2):
+            error(f"维度 {dim} 的 direction 应为长度为 2 的数组")
+    return raw
+
+
+DIMENSIONS_META = load_dimensions_meta()
+DIMENSIONS = set(DIMENSIONS_META.keys())
 # 分桶目录按主维度组织，目录名 = 维度名；must / experimental 为特殊目录
 DIMENSION_DIRS = sorted(DIMENSIONS)
 SPECIAL_DIRS = ["must", "experimental"]
@@ -74,19 +107,8 @@ MUST_BUCKET_SIZE = 4
 # experimental 分类（实验性）：20 题, 不分桶
 EXP_TOTAL = 20
 
-# 维度目录 -> 文件名前缀
-ABBR = {
-    "self_protection": "SP",
-    "altruism": "AL",
-    "freedom": "FD",
-    "security": "SE",
-    "privacy": "PR",
-    "wealth": "WE",
-    "rule_orientation": "RO",
-    "pragmatism": "PG",
-    "collectivism": "CO",
-    "long_term": "LT",
-}
+# 维度目录 -> 文件名前缀（由 dimensions.json 的 abbr 字段派生）
+ABBR = {d: meta["abbr"] for d, meta in DIMENSIONS_META.items()}
 
 # 桶文件名模式：
 #   常规维度: {ABBR}_Bnk-5.json / {ABBR}_Bnk5.json
@@ -94,12 +116,6 @@ ABBR = {
 #   must    : Must_Bnk01.json
 #   exp     : Exp_Bnk01.json
 BUCKET_FILE_RE = re.compile(r"^(?P<prefix>[A-Za-z]+)_Bnk(?P<bucket>-?\d+)(?:_(?P<part>\d+))?\.json$")
-
-errors = []
-
-
-def error(msg):
-    errors.append(msg)
 
 
 def _bucket_files(group_dir: str):

@@ -17,6 +17,7 @@
 | `v1/questions/` | **分桶源文件**（按主维度分目录，每桶 4 题；`freedom` 每桶 8 题拆 2 桶；`must` 40 题拆 10 桶；`experimental` 20 题不分桶），随仓库入库 |
 | `v1/questions.json` | **合并产物 / 构建快照**（`@deprecated`，500 题，`Q00001`~`Q00500`）：仅用于全量校验（`validate_bank.py`）与分桶索引缺失时的开发回退；**非抽题运行时数据源**（前后端正常运行不依赖它） |
 | `v1/questions.index.json` | **分桶索引（抽题主数据源）**：记录各组题数、桶（bank）数、每桶数量与文件位置；后端按此懒加载桶文件 |
+| `v1/dimensions.json` | **维度元数据（单一数据源）**：英文维度 ID → 中文 name/description/direction 等；后端 `GET /api/dimensions` 与构建脚本均以它为权威 |
 | `v1/build_questions.py` | 合并 + 校验脚本（入库），从 `questions/` 构建 `questions.json` 与 `questions.index.json` |
 | `templates/` | **范例题库框架**：与版本目录同构的模板框架，演示分层分桶 + 构建脚本 + 索引（全占位数据，可直接复制为新版本骨架） |
 | `schema.json` | 题目数据结构规范（版本无关的字段约束） |
@@ -24,6 +25,7 @@
 
 > 后端**抽题**依赖分桶索引 `questions.index.json`（懒加载桶文件）；`questions.json` 为合并快照，仅用于全量校验（`scripts/validate_bank.py`）与索引缺失时的开发回退，**不是抽题数据源**。
 > 维护题库时**不要直接改 `questions.json`**，而是编辑对应版本 `questions/` 下的桶文件，再运行该版本下的 `python build_questions.py` 重新生成（同时产出 `questions.json` 与 `questions.index.json`）。
+> **维度元数据**（英文 ID → 中文名称/描述/方向等）维护在各版本的 `dimensions.json`，与题目同版本管理；后端 `GET /api/dimensions` 与构建脚本均以它为单一数据源——修改维度名称/描述只需改该文件。
 
 ### 1.1 版本目录结构
 
@@ -36,6 +38,7 @@ question-bank/
 │   │   ├── ...                # 其余维度同 self_protection
 │   │   ├── must/              Must_Bnk01.json ... Must_Bnk10.json  # 40 题，每桶 4 题
 │   │   └── experimental/      Exp_Bnk01.json                     # 20 题，不分桶
+│   ├── dimensions.json        # 维度元数据（英文 ID → 中文名称/描述/方向，单一数据源）
 │   ├── questions.json         # 合并后的正式题库（500 题）
 │   ├── questions.index.json   # 分桶索引（结构记录）
 │   └── build_questions.py     # 从 questions/ 构建 questions.json
@@ -43,6 +46,7 @@ question-bank/
 │   ├── questions/
 │   │   ├── self_protection/   SP_Bnk-5.json, SP_Bnk5.json   # 2 桶 x 2 题
 │   │   └── altruism/          AL_Bnk-5.json, AL_Bnk5.json   # 2 桶 x 2 题
+│   ├── dimensions.json        # 维度元数据（模板含 2 维度，结构同 v1）
 │   ├── questions.json         # 合并产物（8 题占位）
 │   ├── questions.index.json   # 分桶索引（结构记录）
 │   └── build_questions.py     # 模板构建脚本（2 维度 x 2 桶 x 2 题）
