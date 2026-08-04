@@ -23,6 +23,49 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+# 模块级 logger：handler 在 init_logging()（lifespan 启动时）配置。
+# 先在此定义，避免 reload_bank 等函数在 lifespan 之前被调用时 NameError。
+logger = logging.getLogger("apersonalitytest")
+
+
+def init_logging():
+    """Configure the application logger based on environment variables.
+
+    - JSON_LOGS=1 enables structured JSON output via pythonjsonlogger.
+    - Uses the module-level `apersonalitytest` logger and deduplicates handlers
+      across reloads.
+    """
+    # Remove duplicate handlers on reload, but keep other loggers intact.
+    if getattr(logger, "_vup_handlers_cleared", False) is not True:
+        logger.handlers.clear()
+        logger._vup_handlers_cleared = True
+
+    try:
+        if os.environ.get("JSON_LOGS", "0") == "1":
+            from pythonjsonlogger import jsonlogger
+
+            handler = logging.StreamHandler()
+            fmt = jsonlogger.JsonFormatter(
+                "%(asctime)s %(levelname)s %(name)s %(message)s"
+            )
+            handler.setFormatter(fmt)
+        else:
+            handler = logging.StreamHandler()
+            handler.setFormatter(
+                logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
+            )
+    except ImportError:
+        # Fallback to simple logging if json logger is unavailable
+        handler = logging.StreamHandler()
+        handler.setFormatter(
+            logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
+        )
+
+    logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
+    return logger
+
+
 from . import db
 from .dimensions import DIMENSIONS, reload_dimensions
 from .question_bank import BucketBank, load_bucket_bank
@@ -41,16 +84,11 @@ from .schemas import (
 from .scoring import score_session
 from .selection import build_test
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("apersonalitytest")
-
 _bank: BucketBank | None = None
 _bank_lock = threading.Lock()
 # 保留备用：模块级缓存 ADMIN_TOKEN，供后续其它 admin 接口复用。
 # 当前 reload_bank 的鉴权在函数内实时读取环境变量（便于测试动态注入）。
 ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
-
-
 def get_bank() -> BucketBank:
     global _bank
     if _bank is None:
@@ -63,6 +101,9 @@ def get_bank() -> BucketBank:
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    # Initialize logging early so startup logs follow configured format.
+    init_logging()
+
     db.init_db()
     bank = get_bank()
     logger.info(
@@ -93,9 +134,27 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Configure CORS from environment for production safety.
+# - `CORS_ALLOWED_ORIGINS` can be a comma-separated list of allowed origins.
+# - If not set and `ENV` != "production", default to permissive `[*]` for dev.
+# Reminder: server-to-server/container internal calls often omit the `Origin`
+# header and are not blocked by CORSMiddleware; this preserves docker internal
+# inter-service communication.
+cors_env = os.environ.get("CORS_ALLOWED_ORIGINS", "")
+env_mode = os.environ.get("ENV", "development").lower()
+if cors_env:
+    # split and strip
+    allowed_origins = [o.strip() for o in cors_env.split(",") if o.strip()]
+elif env_mode != "production":
+    allowed_origins = ["*"]
+else:
+    # In production, be strict by default. Operators should set CORS_ALLOWED_ORIGINS.
+    logging.getLogger("apersonalitytest").warning("CORS_ALLOWED_ORIGINS not set in production; all browser requests will be blocked")
+    allowed_origins = []
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )

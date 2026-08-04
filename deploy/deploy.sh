@@ -47,6 +47,22 @@ if [ ! -f .env ]; then
   cp deploy/.env.example .env
 fi
 
+# --- 生产检查提示 -----------------------------------------------------------
+# 如果在生产环境（ENV=production 或 APP_ENV=production），强制检查必要的 env
+ENV_MODE=$(grep -E '^ENV=' .env 2>/dev/null | tail -n1 | cut -d= -f2 | tr -d '[:space:]"' || true)
+APP_ENV_MODE=$(grep -E '^APP_ENV=' .env 2>/dev/null | tail -n1 | cut -d= -f2 | tr -d '[:space:]"' || true)
+if [ "${ENV_MODE:-$APP_ENV_MODE}" = "production" ]; then
+  echo "[deploy] 生产模式检测: 请确保已在 .env 中设置 CORS_ALLOWED_ORIGINS 和 ADMIN_TOKEN"
+  CORS_VAL=$(grep -E '^CORS_ALLOWED_ORIGINS=' .env 2>/dev/null | tail -n1 | cut -d= -f2- || true)
+  ADMIN_VAL=$(grep -E '^ADMIN_TOKEN=' .env 2>/dev/null | tail -n1 | cut -d= -f2- || true)
+  if [ -z "${CORS_VAL}" ] || [ "${CORS_VAL// /}" = "" ]; then
+    echo "  警告: CORS_ALLOWED_ORIGINS 未设置 —— 生产环境将阻止浏览器请求。"
+  fi
+  if [ -z "${ADMIN_VAL}" ] || [ "${ADMIN_VAL// /}" = "" ]; then
+    echo "  警告: ADMIN_TOKEN 未设置 —— 热更新接口将无效或不安全。"
+  fi
+fi
+
 # --- 拉取最新代码 ------------------------------------------------------------
 if [ "$PULL" = "1" ]; then
   echo "[deploy] git pull ..."

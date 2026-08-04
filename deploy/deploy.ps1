@@ -56,6 +56,21 @@ if (-not (Test-Path $envFile)) {
     Copy-Item (Join-Path $Root 'deploy\.env.example') $envFile
 }
 
+# --- 2.1 生产环境检查 --------------------------------------------------------
+$envContent = Get-Content $envFile -ErrorAction SilentlyContinue -Raw
+$envMode = ''
+if ($envContent -match '^ENV=(.+)$') { $envMode = $Matches[1].Trim() }
+if (-not $envMode -and $envContent -match '^APP_ENV=(.+)$') { $envMode = $Matches[1].Trim() }
+if ($envMode -eq 'production') {
+    Write-Host "[deploy] 生产模式检测: 请确保已在 .env 中设置 CORS_ALLOWED_ORIGINS 和 ADMIN_TOKEN"
+    if ($envContent -notmatch '^CORS_ALLOWED_ORIGINS=.+') {
+        Write-Host '  警告: CORS_ALLOWED_ORIGINS 未设置 —— 生产环境将阻止浏览器请求。' -ForegroundColor Yellow
+    }
+    if ($envContent -notmatch '^ADMIN_TOKEN=.+') {
+        Write-Host '  警告: ADMIN_TOKEN 未设置 —— 热更新接口将无效或不安全。' -ForegroundColor Yellow
+    }
+}
+
 # --- 3. 拉取最新代码（可选）----------------------------------------------------
 if (-not $NoPull) {
     if (Test-Path (Join-Path $Root '.git')) {
