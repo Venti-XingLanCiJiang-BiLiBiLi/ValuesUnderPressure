@@ -1,0 +1,58 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+      - 'question-bank/**'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - 'question-bank/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        # requirements-dev.txt 锁定校验工具版本（ruff/mypy/bandit/pytest），
+        # 保证 CI 行为可复现，不随最新版漂移
+        run: pip install -r requirements-dev.txt
+
+      - name: Lint with ruff
+        run: ruff check app/ tests/ scripts/
+
+      - name: Type check with mypy
+        run: mypy app/ --ignore-missing-imports
+
+      - name: Security scan with bandit
+        # 保留 || true：安全问题不阻断合并，但报告会上传供人工查看
+        run: bandit -r app/ -f json -o bandit-report.json || true
+
+      - name: Upload bandit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: backend/bandit-report.json
+          if-no-files-found: ignore
+
+      - name: Validate question bank
+        run: python scripts/validate_bank.py ../question-bank/v1/questions.json
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
+
+      - name: Smoke test
+        run: python scripts/smoke_test.py

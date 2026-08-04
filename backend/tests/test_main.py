@@ -49,7 +49,7 @@ def test_result_ok_when_all_answered():
     assert res.answered_count == len(questions)
     assert res.total == len(questions)
     assert res.dimensions
-    for dim, d in res.dimensions.items():
+    for d in res.dimensions.values():
         assert 0.0 <= d.score <= 100.0
         assert 0.0 <= d.confidence <= 1.0
 

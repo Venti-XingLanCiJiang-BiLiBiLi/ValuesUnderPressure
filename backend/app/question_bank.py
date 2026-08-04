@@ -12,9 +12,9 @@ import logging
 import os
 import warnings
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
 
-from .dimensions import DIMENSION_IDS, VALID_STATUS, VALID_DIFFICULTY
+from .bank_paths import resolve_bank_dir
+from .dimensions import DIMENSION_IDS, VALID_DIFFICULTY, VALID_STATUS
 
 logger = logging.getLogger("question_bank")
 
@@ -28,18 +28,6 @@ logger = logging.getLogger("question_bank")
 # 抽题（selection）现在依赖分桶索引 questions.index.json，按需加载桶文件，
 # 不再全量加载 questions.json。
 #
-# 版本由环境变量 QUESTION_BANK_VERSION 控制，默认 v1（docker-compose / Dockerfile 中可覆盖）。
-DEFAULT_BANK_VERSION = os.environ.get("QUESTION_BANK_VERSION", "").strip() or "v1"
-
-
-def resolve_bank_dir() -> str:
-    """返回题库版本目录：<repo>/question-bank/<QUESTION_BANK_VERSION>。"""
-    version = os.environ.get("QUESTION_BANK_VERSION", "").strip() or DEFAULT_BANK_VERSION
-    return os.path.join(
-        os.path.dirname(__file__), "..", "..", "question-bank", version
-    )
-
-
 def load_bank_index() -> dict:
     """加载当前题库版本的 questions.index.json（分桶索引）。
 
@@ -65,7 +53,7 @@ def load_bank_index() -> dict:
     raise FileNotFoundError(f"未找到题库索引文件: {index_path}")
 
 
-def build_virtual_index(raw_list: List[dict], bucket_size: int = 4) -> dict:
+def build_virtual_index(raw_list: list[dict], bucket_size: int = 4) -> dict:
     """从全量题库列表构建虚拟分桶索引（无 index 文件时的开发/测试回退）。
 
     按主维度（weights[0].dimension）分组，组内按 bucket_size 分桶；
@@ -73,7 +61,7 @@ def build_virtual_index(raw_list: List[dict], bucket_size: int = 4) -> dict:
     """
     from collections import OrderedDict
 
-    groups: "OrderedDict[str, List[dict]]" = OrderedDict()
+    groups: OrderedDict[str, list[dict]] = OrderedDict()
     for raw in raw_list:
         if not raw.get("weights"):
             continue
@@ -127,12 +115,12 @@ def _is_production() -> bool:
     return os.environ.get("APP_ENV", "").strip().lower() in ("production", "prod")
 
 
-def _candidates(path: Optional[str]) -> List[tuple]:
+def _candidates(path: str | None) -> list[tuple]:
     """返回 [(kind, path), ...]，kind ∈ {custom, production, fallback}。
 
     生产环境下不列入开发回退候选，避免静默 fallback。
     """
-    candidates: List[tuple] = []
+    candidates: list[tuple] = []
     if path:
         candidates.append(("custom", path))
     env_path = os.environ.get("QUESTION_BANK_PATH", "")
@@ -158,16 +146,16 @@ class Question:
     type: str
     category: str
     difficulty: str
-    tags: List[str]
-    weights: List[Weight]
-    metadata: Dict = field(default_factory=dict)
+    tags: list[str]
+    weights: list[Weight]
+    metadata: dict = field(default_factory=dict)
 
     @property
     def status(self) -> str:
         return self.metadata.get("status", "draft")
 
     @property
-    def dimensions(self) -> List[str]:
+    def dimensions(self) -> list[str]:
         return [w.dimension for w in self.weights]
 
 
@@ -175,7 +163,7 @@ class ValidationError(Exception):
     pass
 
 
-def _validate_raw(raw: dict, seen_ids: set) -> List[str]:
+def _validate_raw(raw: dict, seen_ids: set) -> list[str]:
     """对单条原始题目做 schema/权重/内容层面的校验，返回问题列表（不抛异常）。"""
     errors = []
     qid = raw.get("id")
@@ -222,7 +210,7 @@ def _validate_raw(raw: dict, seen_ids: set) -> List[str]:
     return errors
 
 
-def load_question_bank(path: Optional[str] = None) -> "QuestionBank":
+def load_question_bank(path: str | None = None) -> QuestionBank:
     """[DEPRECATED] 全量加载合并题库 questions.json 的旧接口（@deprecated）。
 
     已被 load_bucket_bank()（基于分桶索引懒加载）取代，正常运行时不再使用。
@@ -265,7 +253,7 @@ def load_question_bank(path: Optional[str] = None) -> "QuestionBank":
     )
 
 
-def _to_question(raw: dict) -> Optional[Question]:
+def _to_question(raw: dict) -> Question | None:
     """把单条原始题目转换为 Question 对象；字段非法时返回 None。"""
     if not raw.get("weights"):
         return None
@@ -291,17 +279,17 @@ class QuestionBank:
     全量校验与测试兼容。新代码请使用 BucketBank。
     """
 
-    def __init__(self, questions: List[Question], invalid: List[str], source: str):
+    def __init__(self, questions: list[Question], invalid: list[str], source: str):
         self.questions = questions
         self.invalid = invalid  # 校验失败被剔除的原因列表（仅记录，不阻断启动）
         self.source = source
-        self.by_id: Dict[str, Question] = {q.id: q for q in questions}
+        self.by_id: dict[str, Question] = {q.id: q for q in questions}
 
     @classmethod
-    def from_raw(cls, raw_list: List[dict], source: str) -> "QuestionBank":
-        questions: List[Question] = []
-        invalid: List[str] = []
-        seen_ids = set()
+    def from_raw(cls, raw_list: list[dict], source: str) -> QuestionBank:
+        questions: list[Question] = []
+        invalid: list[str] = []
+        seen_ids: set[str] = set()
         for raw in raw_list:
             errors = _validate_raw(raw, seen_ids)
             if errors:
@@ -319,10 +307,10 @@ class QuestionBank:
                 logger.warning("题库校验失败并已跳过: %s", err)
         return cls(questions, invalid, source)
 
-    def active_questions(self) -> List[Question]:
+    def active_questions(self) -> list[Question]:
         return [q for q in self.questions if q.status in ("active", "experimental")]
 
-    def by_dimension(self, dimension: str, exclude_ids: Optional[set] = None) -> List[Question]:
+    def by_dimension(self, dimension: str, exclude_ids: set | None = None) -> list[Question]:
         exclude_ids = exclude_ids or set()
         return [
             q
@@ -330,10 +318,10 @@ class QuestionBank:
             if dimension in q.dimensions and q.id not in exclude_ids
         ]
 
-    def by_category(self, category: str) -> List[Question]:
+    def by_category(self, category: str) -> list[Question]:
         return [q for q in self.active_questions() if q.category == category]
 
-    def get(self, question_id: str) -> Optional[Question]:
+    def get(self, question_id: str) -> Question | None:
         return self.by_id.get(question_id)
 
     def version(self) -> str:
@@ -341,7 +329,7 @@ class QuestionBank:
         return str(max(versions)) if versions else "1"
 
 
-def load_bucket_bank(path: Optional[str] = None) -> "BucketBank":
+def load_bucket_bank(path: str | None = None) -> BucketBank:
     """加载 BucketBank（抽题主数据源），按以下优先级：
 
     1. 显式传入 path / 环境变量 QUESTION_BANK_PATH（自定义/测试题库文件，
@@ -393,22 +381,22 @@ class BucketBank:
     def __init__(self, index: dict, base_dir: str):
         self.index = index
         self.base_dir = base_dir
-        self._bucket_cache: Dict[str, List[Question]] = {}
-        self._group_cache: Dict[str, List[Question]] = {}
-        self._mem_buckets: Dict[str, List[dict]] = {}
-        self._by_id: Dict[str, Question] = {}
+        self._bucket_cache: dict[str, list[Question]] = {}
+        self._group_cache: dict[str, list[Question]] = {}
+        self._mem_buckets: dict[str, list[dict]] = {}
+        self._by_id: dict[str, Question] = {}
 
     # ------------------------------------------------------------------
     # 构造
     # ------------------------------------------------------------------
     @classmethod
-    def from_index_file(cls, index_path: str) -> "BucketBank":
+    def from_index_file(cls, index_path: str) -> BucketBank:
         with open(index_path, "r", encoding="utf-8") as f:
             index = json.load(f)
         return cls(index, base_dir=os.path.dirname(index_path))
 
     @classmethod
-    def from_questions(cls, raw_list: List[dict], bucket_size: int = 4) -> "BucketBank":
+    def from_questions(cls, raw_list: list[dict], bucket_size: int = 4) -> BucketBank:
         """从全量题目列表构建虚拟分桶索引（开发/测试回退，无需 index 文件）。"""
         index = build_virtual_index(raw_list, bucket_size=bucket_size)
         bank = cls(index, base_dir="")
@@ -428,10 +416,10 @@ class BucketBank:
     # ------------------------------------------------------------------
     # 索引访问
     # ------------------------------------------------------------------
-    def groups(self) -> List[dict]:
+    def groups(self) -> list[dict]:
         return list(self.index.get("groups", []))
 
-    def group(self, name: str) -> Optional[dict]:
+    def group(self, name: str) -> dict | None:
         for g in self.index.get("groups", []):
             if g["name"] == name:
                 return g
@@ -447,7 +435,7 @@ class BucketBank:
     # ------------------------------------------------------------------
     # 桶 / 组懒加载
     # ------------------------------------------------------------------
-    def load_bucket(self, rel_path: str) -> List[Question]:
+    def load_bucket(self, rel_path: str) -> list[Question]:
         """按需加载单个桶文件（磁盘或 __mem__ 虚拟桶），带缓存。"""
         if rel_path in self._bucket_cache:
             return self._bucket_cache[rel_path]
@@ -464,19 +452,19 @@ class BucketBank:
             self._by_id[q.id] = q
         return qs
 
-    def questions_in_group(self, name: str) -> List[Question]:
+    def questions_in_group(self, name: str) -> list[Question]:
         """加载某组全部桶的题目（懒加载 + 缓存）。"""
         if name in self._group_cache:
             return self._group_cache[name]
         group = self.group(name)
-        qs: List[Question] = []
+        qs: list[Question] = []
         if group:
             for f in group["files"]:
                 qs.extend(self.load_bucket(f["path"]))
         self._group_cache[name] = qs
         return qs
 
-    def get(self, question_id: str) -> Optional[Question]:
+    def get(self, question_id: str) -> Question | None:
         """按 id 取题；未加载时懒加载各组直到命中。"""
         if question_id in self._by_id:
             return self._by_id[question_id]
@@ -486,9 +474,9 @@ class BucketBank:
                 return self._by_id[question_id]
         return None
 
-    def active_questions(self) -> List[Question]:
+    def active_questions(self) -> list[Question]:
         """全量加载所有组题目（统计用，注意会加载全部桶）。"""
-        qs: List[Question] = []
+        qs: list[Question] = []
         for g in self.groups():
             qs.extend(self.questions_in_group(g["name"]))
         return qs

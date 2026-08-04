@@ -2,6 +2,7 @@ import axios, { type AxiosError, type AxiosInstance } from 'axios'
 import type {
   CreateSessionRequest,
   CreateSessionResponse,
+  DimensionMeta,
   HealthResponse,
   QuestionResponse,
   ResultResponse,
@@ -55,6 +56,11 @@ http.interceptors.response.use(
 export const testApi = {
   async health(): Promise<HealthResponse> {
     const { data } = await http.get<HealthResponse>('/health')
+    return data
+  },
+
+  async getDimensions(): Promise<Record<string, DimensionMeta>> {
+    const { data } = await http.get<Record<string, DimensionMeta>>('/dimensions')
     return data
   },
 

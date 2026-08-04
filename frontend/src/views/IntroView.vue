@@ -4,12 +4,13 @@
  * --------------------------------------------------------------------------
  * 选择题量 (30/50/70) → 创建会话 → 跳转 /test
  */
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useArchives } from '@/composables/useArchives'
 import { BRAND } from '@/config/branding'
-import type { DimensionScore, ResultResponse } from '@/types/api'
+import { testApi } from '@/api/client'
+import type { DimensionMeta, DimensionScore, ResultResponse } from '@/types/api'
 
 const router = useRouter()
 const store = useTestStore()
@@ -18,6 +19,18 @@ const { archives, deleteArchive } = useArchives()
 const questionCount = ref(50)
 const starting = ref(false)
 const localError = ref<string | null>(null)
+
+/** #16：维度元数据来自后端 GET /api/dimensions（单一数据源，避免前端硬编码漂移）。 */
+const dimensionMeta = ref<Record<string, DimensionMeta> | null>(null)
+
+onMounted(async () => {
+  try {
+    dimensionMeta.value = await testApi.getDimensions()
+  } catch (e) {
+    // 后端不可用时静默隐藏维度区块，不影响开屏页其余功能
+    console.warn('[IntroView] 拉取维度元数据失败：', e)
+  }
+})
 
 /** 格式化存档时间戳为 "YYYY-MM-DD HH:mm"。 */
 function formatDate(ts: number) {
@@ -92,6 +105,31 @@ async function handleStart() {
           给你贴上"INFP"或"完美主义"这样的标签。
           你的答案允许矛盾、允许随情境变化——这本身就被记录下来。
         </p>
+      </div>
+    </div>
+
+    <!-- ============== 价值维度（#16：由后端 /api/dimensions 同步） ============== -->
+    <div v-if="dimensionMeta" class="card p-6 sm:p-8 mb-6 animate-fade-in">
+      <h2 class="font-serif text-xl font-semibold text-ink-900 dark:text-ink-100 mb-4">
+        {{ Object.keys(dimensionMeta).length }} 个价值维度
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div
+          v-for="(meta, id) in dimensionMeta"
+          :key="id"
+          class="rounded-xl border border-ink-200 bg-ink-50/60 p-4
+                 dark:border-ink-700 dark:bg-ink-900/40"
+        >
+          <h3 class="font-serif text-sm font-semibold text-ink-900 dark:text-ink-100 mb-1">
+            {{ meta.name }}
+          </h3>
+          <p class="mb-1.5 font-mono text-xs text-ink-500 dark:text-ink-400">
+            {{ meta.direction[0] }} ⇄ {{ meta.direction[1] }}
+          </p>
+          <p class="text-[13px] leading-relaxed text-ink-700 dark:text-ink-300">
+            {{ meta.description }}
+          </p>
+        </div>
       </div>
     </div>
 

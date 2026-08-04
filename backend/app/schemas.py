@@ -1,13 +1,10 @@
 from __future__ import annotations
 
-from typing import Dict, List, Optional
-
 from pydantic import BaseModel, Field, field_validator
 
-
 __all__ = [
-    "AnswersResponse",
     "AnswerHistoryEntry",
+    "AnswersResponse",
     "ConflictItem",
     "CreateSessionRequest",
     "CreateSessionResponse",
@@ -21,7 +18,7 @@ __all__ = [
 
 class CreateSessionRequest(BaseModel):
     length: int = Field(default=50, ge=10, le=120, description="试卷题量，默认 50")
-    dimensions: Optional[List[str]] = Field(
+    dimensions: list[str] | None = Field(
         default=None, description="仅覆盖指定维度，默认覆盖全部 10 个核心维度"
     )
 
@@ -42,7 +39,7 @@ class QuestionResponse(BaseModel):
 class SubmitAnswerRequest(BaseModel):
     question_id: str
     answer: str
-    duration: Optional[int] = Field(default=None, ge=0)
+    duration: int | None = Field(default=None, ge=0)
 
     @field_validator("answer")
     @classmethod
@@ -66,7 +63,7 @@ class SubmitAnswerResponse(BaseModel):
     answered_count: int
     total: int
     completed: bool
-    answer_history: List[AnswerHistoryEntry] = Field(
+    answer_history: list[AnswerHistoryEntry] = Field(
         default_factory=list,
         description="本次会话的答案修改历史（多次提交时累计返回）",
     )
@@ -76,8 +73,8 @@ class AnswersResponse(BaseModel):
     """当前答案 + 修改历史（docs/API.md 答题修改规则）。"""
 
     session_id: str
-    answers: Dict[str, str]
-    answer_history: List[AnswerHistoryEntry]
+    answers: dict[str, str]
+    answer_history: list[AnswerHistoryEntry]
 
 
 class DimensionScore(BaseModel):
@@ -86,14 +83,14 @@ class DimensionScore(BaseModel):
     score: float
     tendency: str
     description: str
-    consistency: Optional[float]
+    consistency: float | None
     question_count: int
     confidence: float  # 0-1，维度级可信度
 
 
 class ConflictItem(BaseModel):
-    dimensions: List[str]
-    names: List[str]
+    dimensions: list[str]
+    names: list[str]
     description: str
 
 
@@ -102,7 +99,7 @@ class ResultResponse(BaseModel):
     completed: bool
     answered_count: int
     total: int
-    dimensions: Dict[str, DimensionScore]
+    dimensions: dict[str, DimensionScore]
     confidence: float
-    conflicts: List[ConflictItem]
-    uncertain_dimensions: List[str]
+    conflicts: list[ConflictItem]
+    uncertain_dimensions: list[str]

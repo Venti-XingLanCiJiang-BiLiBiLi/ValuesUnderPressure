@@ -16,10 +16,10 @@ import json
 import os
 import sqlite3
 import uuid
+from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import Iterator, List, Optional
 
-_UTC = datetime.timezone.utc
+_UTC = datetime.UTC
 
 DB_PATH = os.environ.get(
     "APERSONALITYTEST_DB_PATH",
@@ -112,7 +112,7 @@ def get_conn() -> Iterator[sqlite3.Connection]:
 
 
 def create_session(
-    question_version: str, length: int, dimensions: List[str], question_ids: List[str]
+    question_version: str, length: int, dimensions: list[str], question_ids: list[str]
 ) -> str:
     session_id = uuid.uuid4().hex
     with get_conn() as conn:
@@ -133,7 +133,7 @@ def create_session(
     return session_id
 
 
-def get_session(session_id: str) -> Optional[sqlite3.Row]:
+def get_session(session_id: str) -> sqlite3.Row | None:
     with get_conn() as conn:
         cur = conn.execute("SELECT * FROM test_sessions WHERE id = ?", (session_id,))
         return cur.fetchone()
@@ -154,7 +154,7 @@ def mark_completed(session_id: str) -> None:
         )
 
 
-def save_answer(session_id: str, question_id: str, answer: str, duration: Optional[int]) -> None:
+def save_answer(session_id: str, question_id: str, answer: str, duration: int | None) -> None:
     with get_conn() as conn:
         conn.execute(
             """INSERT INTO answers (session_id, question_id, answer, duration, answered_at)
@@ -174,7 +174,7 @@ def get_answers(session_id: str) -> dict:
         return {row["question_id"]: row["answer"] for row in cur.fetchall()}
 
 
-def get_answer(session_id: str, question_id: str) -> Optional[str]:
+def get_answer(session_id: str, question_id: str) -> str | None:
     """返回某题当前答案；尚未作答返回 None。"""
     with get_conn() as conn:
         cur = conn.execute(
@@ -204,7 +204,7 @@ def record_answer_change(
         )
 
 
-def get_answer_history(session_id: str) -> List[dict]:
+def get_answer_history(session_id: str) -> list[dict]:
     """按时间顺序返回该会话的答案修改历史。"""
     with get_conn() as conn:
         cur = conn.execute(

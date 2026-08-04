@@ -1,0 +1,46 @@
+# ============================================================================
+# backend 代码质量配置（ruff + mypy）
+# 统一管理规则，保证本地开发与 CI 行为一致、可预测。
+#
+# ruff：不显式 select，沿用 ruff 官方默认的精选规则集（覆盖
+#   E/F/W、DTZ 时区、TRY 异常、PLW pylint、BLE 裸异常、PERF 性能、C408 等）。
+#   个别业务上有意为之的写法通过 per-file-ignores 精确豁免（见下）。
+#   —— 若日后需要收紧/放宽规则，在此追加 select/ignore 即可。
+#
+# mypy：python_version 与 CI 一致（3.11），ignore_missing_imports 放宽三方库。
+# ============================================================================
+
+[project]
+name = "values-under-pressure-backend"
+version = "1.4.2"
+description = "Values Under Pressure（取舍之间）后端服务"
+requires-python = ">=3.11"
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint.per-file-ignores]
+# db.py：记录"本地时间"是业务有意选择（不强制 UTC）
+"app/db.py" = ["DTZ005"]
+# dimensions.py：维度元数据结构错误用 ValueError 语义更贴切；
+#   global 仅读取（模块级缓存设计），非赋值
+"app/dimensions.py" = ["TRY004", "PLW0602"]
+# main.py：热更新接口 catch-all 是兜底设计，统一转 500
+"app/main.py" = ["BLE001"]
+# 测试夹具使用 dict() 关键字风格，可读性优先
+"tests/*" = ["C408"]
+# scripts/ 通过 `python scripts/*.py` 调用（CI 亦然）；Windows 无法设置 Unix
+# 执行位，保留 shebang 便于 Unix 上 chmod 后直接执行，故豁免 EXE001
+"scripts/*" = ["EXE001"]
+
+# ---------------------------------------------------------------------------
+# mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_configs = true

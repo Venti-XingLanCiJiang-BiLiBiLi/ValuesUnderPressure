@@ -1,0 +1,8 @@
+# 开发 / CI 校验工具依赖
+# 版本锁定，保证本地与 CI 行为一致、可复现（避免 ruff/mypy 规则集随版本漂移）。
+-r requirements.txt
+
+pytest==9.1.1
+ruff==0.16.1
+mypy==2.3.0
+bandit==1.9.4

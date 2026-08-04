@@ -19,7 +19,6 @@
 from __future__ import annotations
 
 import random
-from typing import List, Optional
 
 from .dimensions import DIMENSION_IDS
 from .question_bank import BucketBank, Question
@@ -44,7 +43,7 @@ def _draw_from_group(
     rng: random.Random,
     bank: BucketBank,
     exclude_ids: set,
-) -> List[Question]:
+) -> list[Question]:
     """从某组（m 桶、d 题）抽 n 题（桶驱动）。
 
     规则（d >= n 时）：
@@ -62,7 +61,7 @@ def _draw_from_group(
         return []
 
     exclude_ids = set(exclude_ids)
-    pool: List[Question] = []
+    pool: list[Question] = []
     seen = set(exclude_ids)
     loaded_paths: set = set()
 
@@ -95,18 +94,19 @@ def _draw_from_group(
 
 def _dedupe_with_fallback(
     bank: BucketBank,
-    selected: List[Question],
+    selected: list[Question],
     rng: random.Random,
-    dim_set: Optional[set],
-) -> List[Question]:
+    dim_set: set | None,
+) -> list[Question]:
     """去重校验：若出现重复题，该题按 fallback 从未选题目中重抽替换。"""
     seen: set = set()
-    result: List[Question] = []
+    result: list[Question] = []
 
-    extra_pool: List[Question] = []
-    for g in bank.groups():
-        for q in bank.questions_in_group(g["name"]):
-            extra_pool.append(q)
+    extra_pool = [
+        q
+        for g in bank.groups()
+        for q in bank.questions_in_group(g["name"])
+    ]
     if dim_set is not None:
         extra_pool = [q for q in extra_pool if any(d in dim_set for d in q.dimensions)]
     rng.shuffle(extra_pool)
@@ -131,9 +131,9 @@ def _dedupe_with_fallback(
 def build_test(
     bank: BucketBank,
     length: int = DEFAULT_LENGTH,
-    dimensions: Optional[List[str]] = None,
-    seed: Optional[int] = None,
-) -> List[Question]:
+    dimensions: list[str] | None = None,
+    seed: int | None = None,
+) -> list[Question]:
     """按分桶索引生成一份随机试卷（桶驱动，无难度分层）。
 
     - must: 固定抽 MUST_TARGET(5) 题（桶驱动）；
@@ -156,7 +156,7 @@ def build_test(
     must_group = bank.group(MUST_GROUP)
     exp_group = bank.group(EXP_GROUP)
 
-    selected: List[Question] = []
+    selected: list[Question] = []
     taken: set = set()
 
     # 辅助：判断题目是否匹配指定维度（未指定时全部通过）
@@ -165,7 +165,7 @@ def build_test(
             return True
         return any(d in dim_set for d in q.dimensions)
 
-    def _take(qs: List[Question]) -> None:
+    def _take(qs: list[Question]) -> None:
         for q in qs:
             if q is not None and q.id not in taken:
                 selected.append(q)
@@ -204,7 +204,7 @@ def build_test(
     # 4) 回补缺口（优先级：维度组 → must → experimental）
     shortfall = length - len(selected)
     if shortfall > 0:
-        fb: List[Question] = []
+        fb: list[Question] = []
         for g in pool_groups:
             for q in bank.questions_in_group(g["name"]):
                 if q.id not in taken and _matches_dim(q):
@@ -233,7 +233,7 @@ def build_test(
     return selected
 
 
-def coverage_report(questions: List[Question]) -> dict:
+def coverage_report(questions: list[Question]) -> dict:
     """返回本次试卷对各维度的覆盖题数，便于调试/单测。"""
     report = {d: 0 for d in DIMENSION_IDS}
     for q in questions:

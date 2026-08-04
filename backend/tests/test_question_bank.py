@@ -11,6 +11,10 @@ import pytest
 
 from app import question_bank as qb
 
+# 本模块用例专测已弃用的兼容 API（load_question_bank）行为，属于兼容回归保护，
+# 保留 API 本身，仅抑制其 DeprecationWarning，避免测试输出被警告刷屏。
+pytestmark = pytest.mark.filterwarnings("ignore::DeprecationWarning")
+
 
 def _valid_question(qid="Q1"):
     return {

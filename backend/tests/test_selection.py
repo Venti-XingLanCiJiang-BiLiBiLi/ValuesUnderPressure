@@ -25,7 +25,6 @@ from app.selection import (
     build_test,
 )
 
-
 INDEX_PATH = os.path.join(resolve_bank_dir(), "questions.index.json")
 
 
