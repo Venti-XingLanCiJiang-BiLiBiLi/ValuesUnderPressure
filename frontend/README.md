@@ -98,7 +98,10 @@ frontend/
     │   ├── useSessionRestore.ts    # 会话进度恢复（sessionStorage）
     │   ├── useArchives.ts          # 本地存档（localStorage，答完自动保存）
     │   ├── useTheme.ts             # 主题切换
-    │   └── useKeyboardShortcuts.ts # 答题页键盘快捷键（Y/N、↑/Backspace、↓）
+    │   ├── useKeyboardShortcuts.ts # 答题页键盘快捷键（Y/N、↑/Backspace、↓）
+    │   └── useShareResult.ts       # 结果分享（Web Share / 下载降级）
+    ├── utils/
+    │   └── shareCard.ts            # 结果分享卡片 Canvas 渲染（零依赖）
     ├── components/
     │   ├── ProgressBar.vue    # 进度条
     │   ├── DimensionBar.vue   # 单维度条 + 一致性标记

@@ -2,6 +2,20 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.10] - 2026-08-04
+
+### 新增
+
+- **前端结果分享功能（对应 issue #17）**（新增 `frontend/src/utils/shareCard.ts`、`frontend/src/composables/useShareResult.ts`、`frontend/src/views/ResultView.vue`）：
+  - 结果页新增「分享结果」按钮：在**浏览器本地**用 Canvas 2D 手绘一张品牌风格的结果卡片（1080×1440 高清 PNG），全程零依赖、不上传任何结果数据；
+  - 分享卡片内容与结果页一致：品牌标题 + 10 维度条（按 `|score-50|` 降序、以 50 中线对称展开、高/中/低三档配色，阈值与 `config/theme.ts` 对齐）+ 底部统计（作答进度 / 置信度 / 矛盾数）+ 站点水印；
+  - 保存引导：移动端优先走 Web Share API（系统分享面板，可直接「存储图像 / 分享到微信 / 邮件」），桌面端降级为浏览器下载 PNG；用户取消分享面板不视为失败；
+  - 卡片本地生成，不含题目与原始回答，仅展示倾向与分值，符合「结果只描述倾向」的产品定位。
+
+### 变更
+
+- 项目版本号升至 **1.4.10**（`frontend/package.json`、`backend/pyproject.toml`）。
+
 ## [1.4.9] - 2026-08-04
 
 ### 新增
