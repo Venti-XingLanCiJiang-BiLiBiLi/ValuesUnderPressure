@@ -55,3 +55,49 @@
 ```
 
 低区分度问题进入淘汰或重新校准流程。
+
+## 6. 题库版本一致性校验（manifest.json）
+
+**目标**：确保 `questions.json` 与 `dimensions.json` 永远属于同一个题库版本，避免
+「题库版本与维度定义不匹配」导致测评结果错误。每个题库版本目录下存放 manifest：
+
+```text
+question-bank/
+  v1/
+    manifest.json       # 版本清单
+    questions.json
+    dimensions.json
+```
+
+`manifest.json` 内容：
+
+```json
+{
+  "schema_version": "1",
+  "bank_version": "v1",
+  "questions_file": "questions.json",
+  "dimensions_file": "dimensions.json",
+  "questions_sha256": "...",
+  "dimensions_sha256": "..."
+}
+```
+
+**校验项**（`backend/app/manifest.py` 的 `validate_manifest()`）：
+
+1. 文件存在检查（`manifest.json` 存在且可解析）；
+2. `schema_version` 与当前版本一致；
+3. `questions_file` / `dimensions_file` 文件名引用检查（引用的文件必须存在）；
+4. `questions.json` sha256 校验；
+5. `dimensions.json` sha256 校验。
+
+**校验入口**：
+
+- `scripts/validate_bank.py`（默认优先校验 manifest，再全量校验题目；manifest 缺失
+  输出明确错误并返回非零退出码）；
+- **生产环境运行时**（`APP_ENV=production|prod`）：`load_bucket_bank()` 加载版本目录
+  题库前强制校验 manifest，失败即拒绝加载（覆盖启动与热更新 `/api/admin/reload-bank`）；
+  自定义 `QUESTION_BANK_PATH` 与开发环境不强制，保持回退与测试便利。
+
+**生成**：`python scripts/generate_manifest.py [bank_dir]`，或直接运行各版本
+`build_questions.py`（生成 `questions.json` 后自动联动产出 manifest）。修改
+`questions.json` / `dimensions.json` 后必须重新生成 manifest，否则校验失败。

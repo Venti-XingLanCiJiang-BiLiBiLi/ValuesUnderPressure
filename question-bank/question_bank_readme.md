@@ -18,13 +18,15 @@
 | `v1/questions.json` | **合并产物 / 构建快照**（`@deprecated`，500 题，`Q00001`~`Q00500`）：仅用于全量校验（`validate_bank.py`）与分桶索引缺失时的开发回退；**非抽题运行时数据源**（前后端正常运行不依赖它） |
 | `v1/questions.index.json` | **分桶索引（抽题主数据源）**：记录各组题数、桶（bank）数、每桶数量与文件位置；后端按此懒加载桶文件 |
 | `v1/dimensions.json` | **维度元数据（单一数据源）**：英文维度 ID → 中文 name/description/direction 等；后端 `GET /api/dimensions` 与构建脚本均以它为权威 |
+| `v1/manifest.json` | **版本清单（manifest）**：记录 `questions.json` / `dimensions.json` 的 sha256，供 `scripts/validate_bank.py` 校验两者属于同一题库版本，避免版本与维度定义不匹配 |
 | `v1/build_questions.py` | 合并 + 校验脚本（入库），从 `questions/` 构建 `questions.json` 与 `questions.index.json` |
-| `templates/` | **范例题库框架**：与版本目录同构的模板框架，演示分层分桶 + 构建脚本 + 索引（全占位数据，可直接复制为新版本骨架） |
+| `templates/` | **范例题库框架**：与版本目录同构的模板框架，演示分层分桶 + 构建脚本 + 索引 + manifest（全占位数据，可直接复制为新版本骨架） |
 | `schema.json` | 题目数据结构规范（版本无关的字段约束） |
 | `drafts/` | 历史中间批次源文件（**已废弃，本地保留，不入库**，已加入 `.gitignore`） |
 
 > 后端**抽题**依赖分桶索引 `questions.index.json`（懒加载桶文件）；`questions.json` 为合并快照，仅用于全量校验（`scripts/validate_bank.py`）与索引缺失时的开发回退，**不是抽题数据源**。
 > 维护题库时**不要直接改 `questions.json`**，而是编辑对应版本 `questions/` 下的桶文件，再运行该版本下的 `python build_questions.py` 重新生成（同时产出 `questions.json` 与 `questions.index.json`）。
+> 修改 `questions.json` 或 `dimensions.json` 后，记得重新生成 manifest（`python scripts/generate_manifest.py`），否则 `scripts/validate_bank.py` 的 sha256 校验会失败。
 > **维度元数据**（英文 ID → 中文名称/描述/方向等）维护在各版本的 `dimensions.json`，与题目同版本管理；后端 `GET /api/dimensions` 与构建脚本均以它为单一数据源——修改维度名称/描述只需改该文件。
 
 ### 1.1 版本目录结构
@@ -39,6 +41,7 @@ question-bank/
 │   │   ├── must/              Must_Bnk01.json ... Must_Bnk10.json  # 40 题，每桶 4 题
 │   │   └── experimental/      Exp_Bnk01.json                     # 20 题，不分桶
 │   ├── dimensions.json        # 维度元数据（英文 ID → 中文名称/描述/方向，单一数据源）
+│   ├── manifest.json          # 版本清单：questions.json / dimensions.json 的 sha256
 │   ├── questions.json         # 合并后的正式题库（500 题）
 │   ├── questions.index.json   # 分桶索引（结构记录）
 │   └── build_questions.py     # 从 questions/ 构建 questions.json
@@ -47,6 +50,7 @@ question-bank/
 │   │   ├── self_protection/   SP_Bnk-5.json, SP_Bnk5.json   # 2 桶 x 2 题
 │   │   └── altruism/          AL_Bnk-5.json, AL_Bnk5.json   # 2 桶 x 2 题
 │   ├── dimensions.json        # 维度元数据（模板含 2 维度，结构同 v1）
+│   ├── manifest.json          # 版本清单：questions.json / dimensions.json 的 sha256
 │   ├── questions.json         # 合并产物（8 题占位）
 │   ├── questions.index.json   # 分桶索引（结构记录）
 │   └── build_questions.py     # 模板构建脚本（2 维度 x 2 桶 x 2 题）
@@ -54,7 +58,7 @@ question-bank/
 └── question_bank_readme.md    # 本说明
 ```
 
-> `templates/` 作为**新版本骨架**：复制为 `v2/` 后，按需增删维度目录与桶文件、调整 `build_questions.py` 顶部的 `DIMENSIONS` / `EXPECTED_PER_BUCKET` / `ID_PREFIX` 等常量，再运行构建即可。
+> `templates/` 作为**新版本骨架**：复制为 `v2/` 后，按需增删维度目录与桶文件、调整 `build_questions.py` 顶部的 `DIMENSIONS` / `EXPECTED_PER_BUCKET` / `ID_PREFIX` 等常量，再运行构建、生成 manifest 即可。
 
 - 常规维度目录以维度名命名，桶文件名 `{ABBR}_Bnk{权重}.json`（缩写：`self_protection→SP`、`altruism→AL`、`freedom→FD`、`security→SE`、`privacy→PR`、`wealth→WE`、`rule_orientation→RO`、`pragmatism→PG`、`collectivism→CO`、`long_term→LT`）；
 - `freedom` 每个权重桶 8 题，拆成 `FD_Bnk{权重}_1.json` / `FD_Bnk{权重}_2.json` 两个文件（各 4 题）；
@@ -67,7 +71,8 @@ question-bank/
 1. 从 `templates/` 复制框架为 `v2/`（或复制 `v1/` 为 `v2/` 后清空真实题目）；
 2. 按需增删 `v2/questions/` 下的维度目录与桶文件，保持每桶题数与 `build_questions.py` 顶部常量（`DIMENSIONS` / `EXPECTED_PER_BUCKET` / `BUCKET_FILE_SIZE` / `ID_PREFIX`）一致、`id` 唯一连续；
 3. 运行 `cd v2 && python build_questions.py` 生成 `v2/questions.json` 与 `v2/questions.index.json`；
-4. 后端切换数据源为 `v2/questions.json`（读取逻辑更新属后续任务）。
+4. 运行 `python scripts/generate_manifest.py v2` 生成 `v2/manifest.json`（记录 questions/dimensions 的 sha256）；
+5. 后端切换数据源为 `v2/questions.json`（读取逻辑更新属后续任务）。
 
 ---
 

@@ -3,9 +3,12 @@
 覆盖：
   - DIMENSIONS 从题库加载（10 个核心维度、字段完整）
   - reload_dimensions 就地更新、引用稳定、DIMENSION_IDS 同步
-  - 题库缺少 dimensions.json 时回退内置默认不崩溃
+  - 开发环境题库缺少 dimensions.json 时回退内置默认不崩溃
+  - 生产环境（APP_ENV=production|prod）题库缺少 dimensions.json 时禁止回退、必须抛错
 """
 import json
+
+import pytest
 
 from app import dimensions
 from app.dimensions import DIMENSION_IDS, DIMENSIONS, reload_dimensions
@@ -65,9 +68,61 @@ def test_reload_dimensions_in_place(monkeypatch):
 
 
 def test_load_fallback_on_missing_file(tmp_path, monkeypatch):
-    """题库目录缺少 dimensions.json 时回退内置默认，不崩溃。"""
+    """开发环境题库目录缺少 dimensions.json 时回退内置默认，不崩溃。"""
+    monkeypatch.setenv("APP_ENV", "development")
     monkeypatch.setattr(dimensions, "resolve_bank_dir", lambda: str(tmp_path))
     dimensions._load_dimensions()
     assert len(DIMENSIONS) == 10
     assert "self_protection" in DIMENSIONS
+    _restore(monkeypatch)
+
+
+def test_load_fallback_on_missing_file_default_env(tmp_path, monkeypatch):
+    """未设置 APP_ENV（默认开发）时缺少 dimensions.json 仍可回退，保持既有行为。"""
+    monkeypatch.delenv("APP_ENV", raising=False)
+    monkeypatch.setattr(dimensions, "resolve_bank_dir", lambda: str(tmp_path))
+    dimensions._load_dimensions()
+    assert len(DIMENSIONS) == 10
+    _restore(monkeypatch)
+
+
+@pytest.mark.parametrize("env", ["production", "prod"])
+def test_load_raises_when_missing_in_production(tmp_path, monkeypatch, env):
+    """生产环境缺少 dimensions.json 时禁止回退，必须抛明确异常。"""
+    monkeypatch.setenv("APP_ENV", env)
+    monkeypatch.setattr(dimensions, "resolve_bank_dir", lambda: str(tmp_path))
+    with pytest.raises(FileNotFoundError) as exc:
+        dimensions._load_dimensions()
+    msg = str(exc.value)
+    assert "dimensions.json" in msg        # 缺失文件路径
+    assert "禁止回退" in msg                # 明确禁止回退语义
+    assert "修复建议" in msg                # 含修复建议
+    _restore(monkeypatch)
+
+
+def test_load_raises_when_corrupt_json_in_production(tmp_path, monkeypatch):
+    """生产环境 dimensions.json JSON 非法时禁止回退，必须抛异常。"""
+    monkeypatch.setenv("APP_ENV", "production")
+    monkeypatch.setattr(dimensions, "resolve_bank_dir", lambda: str(tmp_path))
+    (tmp_path / "dimensions.json").write_text("{invalid json", encoding="utf-8")
+    with pytest.raises(RuntimeError) as exc:
+        dimensions._load_dimensions()
+    msg = str(exc.value)
+    assert "禁止回退" in msg
+    assert "修复建议" in msg
+    _restore(monkeypatch)
+
+
+def test_load_raises_when_invalid_structure_in_production(tmp_path, monkeypatch):
+    """生产环境 dimensions.json 结构不符时禁止回退，必须抛异常。"""
+    monkeypatch.setenv("APP_ENV", "prod")
+    monkeypatch.setattr(dimensions, "resolve_bank_dir", lambda: str(tmp_path))
+    (tmp_path / "dimensions.json").write_text(
+        json.dumps({"broken": {"no_required_fields": True}}), encoding="utf-8"
+    )
+    with pytest.raises(RuntimeError) as exc:
+        dimensions._load_dimensions()
+    msg = str(exc.value)
+    assert "禁止回退" in msg
+    assert "修复建议" in msg
     _restore(monkeypatch)
