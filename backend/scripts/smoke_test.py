@@ -8,6 +8,15 @@
 import os
 import random
 import sys
+import tempfile
+
+# 使用临时数据库，避免冒烟测试在仓库内留下 app/data/app.db 污染。
+# 注意：db.DB_PATH 在 import 时由环境变量 APERSONALITYTEST_DB_PATH 决定，
+# 因此必须在 `from app import db` 之前设置，并清理上次残留。
+_TMP_DB = os.path.join(tempfile.gettempdir(), "vup_smoke_test.db")
+os.environ["APERSONALITYTEST_DB_PATH"] = _TMP_DB
+if os.path.exists(_TMP_DB):
+    os.remove(_TMP_DB)
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 

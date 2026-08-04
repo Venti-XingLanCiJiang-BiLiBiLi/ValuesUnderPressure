@@ -26,9 +26,9 @@ jobs:
           cache: 'pip'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest ruff mypy bandit
+        # requirements-dev.txt 锁定校验工具版本（ruff/mypy/bandit/pytest），
+        # 保证 CI 行为可复现，不随最新版漂移
+        run: pip install -r requirements-dev.txt
 
       - name: Lint with ruff
         run: ruff check app/ tests/ scripts/
