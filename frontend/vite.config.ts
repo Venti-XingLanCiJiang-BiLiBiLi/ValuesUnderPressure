@@ -36,11 +36,16 @@ export default defineConfig(({ mode }) => ({
   build: {
     // 兼容老浏览器
     target: 'es2020',
-    // 把所有 JS 拆成更小的 chunk
+    // 输出 gzip/brotli 压缩后的体积，便于评估优化效果
+    reportCompressedSize: true,
+    // 把所有第三方依赖拆成更小的 chunk（避免全塞进主包）
     rollupOptions: {
       output: {
         manualChunks: {
+          // Vue 生态单独一份，方便长期缓存
           vue: ['vue', 'vue-router', 'pinia'],
+          // axios 等其余第三方依赖单独一份
+          vendor: ['axios'],
         },
       },
     },

@@ -16,6 +16,7 @@ import { useSessionRestore } from '@/composables/useSessionRestore'
 import { useTestStore } from '@/stores/test'
 import { BRAND } from '@/config/branding'
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import ErrorBoundary from '@/components/ErrorBoundary.vue'
 
 const route = useRoute()
 useTheme() // 副作用：mount 时初始化主题
@@ -81,17 +82,20 @@ onMounted(async () => {
 
     <!-- ============================== Main ============================== -->
     <main class="flex-1">
-      <RouterView v-slot="{ Component, route: r }">
-        <Transition
-          mode="out-in"
-          enter-active-class="transition-all duration-300 ease-out"
-          leave-active-class="transition-all duration-200 ease-in"
-          enter-from-class="opacity-0 translate-y-2"
-          leave-to-class="opacity-0 -translate-y-2"
-        >
-          <component :is="Component" :key="r.path" />
-        </Transition>
-      </RouterView>
+      <!-- #20：全局错误边界，避免后代组件异常导致整页白屏 -->
+      <ErrorBoundary>
+        <RouterView v-slot="{ Component, route: r }">
+          <Transition
+            mode="out-in"
+            enter-active-class="transition-all duration-300 ease-out"
+            leave-active-class="transition-all duration-200 ease-in"
+            enter-from-class="opacity-0 translate-y-2"
+            leave-to-class="opacity-0 -translate-y-2"
+          >
+            <component :is="Component" :key="r.path" />
+          </Transition>
+        </RouterView>
+      </ErrorBoundary>
     </main>
 
     <!-- ============================== Footer ============================== -->
