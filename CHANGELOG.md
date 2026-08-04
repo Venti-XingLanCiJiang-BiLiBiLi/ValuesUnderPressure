@@ -2,6 +2,24 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.5.0] - 2026-08-04
+
+### 新增
+
+- **前端隐私政策页与页脚链接**（新增 `frontend/src/views/PrivacyView.vue`；修改 `frontend/src/App.vue`、`frontend/src/router/index.ts`、`frontend/src/api/client.ts`、`frontend/src/types/api.ts`）：
+  - 全站页脚（含首页底部）新增「隐私政策」链接，跳转到新路由 `/privacy`；
+  - 新增隐私政策页：从后端 `GET /api/meta/privacy` 拉取政策正文（保留期按运行期配置返回），后端不可用时回退内置文案，纯静态托管 / 离线也能正常展示；
+  - 政策内容严格依据实际数据实践编写：不收集姓名 / 邮箱等个人身份信息、无第三方追踪与广告；服务端进行中会话保留 3 天、已完成结果保留 15 天后自动删除；结果存档仅存浏览器本地且可随时删除等。
+
+- **后端隐私政策接口**（`backend/app/routers/meta.py`，新增 `backend/tests/test_privacy.py`）：
+  - 新增 `GET /api/meta/privacy`：返回结构化隐私政策（版本 / 生效日期 / 保留期 / 章节正文）；
+  - 保留期取自运行期环境变量（`SESSION_TTL_DAYS` / `COMPLETED_SESSION_TTL_DAYS`），政策文案与部署配置始终一致；
+  - 配套单测覆盖接口结构、保留期正文与实际配置一致、章节标题唯一。
+
+### 变更
+
+- 项目版本号升至 **1.5.0**（`frontend/package.json`、`backend/pyproject.toml`）。
+
 ## [1.4.10] - 2026-08-04
 
 ### 新增

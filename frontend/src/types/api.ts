@@ -95,3 +95,22 @@ export interface HealthResponse {
   /** 当前题库版本总题数（来自分桶索引） */
   active_questions: number
 }
+
+/** 隐私政策：一个章节（标题 + 正文，正文用 \n 分段） */
+export interface PrivacySection {
+  title: string
+  body: string
+}
+
+/** 服务端数据保留期（天），由后端按运行期配置返回 */
+export interface PrivacyRetention {
+  session_ttl_days: number
+  completed_session_ttl_days: number
+}
+
+export interface PrivacyResponse {
+  version: string
+  effective_date: string
+  retention: PrivacyRetention
+  sections: PrivacySection[]
+}

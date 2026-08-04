@@ -4,6 +4,7 @@ import type {
   CreateSessionResponse,
   DimensionMeta,
   HealthResponse,
+  PrivacyResponse,
   QuestionResponse,
   ResultResponse,
   SubmitAnswerRequest,
@@ -89,6 +90,14 @@ export const testApi = {
   async getDimensions(): Promise<Record<string, DimensionMeta>> {
     return requestWithRetry(async () => {
       const { data } = await http.get<Record<string, DimensionMeta>>('/dimensions')
+      return data
+    })
+  },
+
+  /** 拉取隐私政策（含实际保留期），供 /privacy 页展示。 */
+  async getPrivacy(): Promise<PrivacyResponse> {
+    return requestWithRetry(async () => {
+      const { data } = await http.get<PrivacyResponse>('/meta/privacy')
       return data
     })
   },
