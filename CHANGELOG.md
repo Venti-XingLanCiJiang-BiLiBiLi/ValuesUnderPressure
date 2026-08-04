@@ -2,6 +2,27 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.4.2] - 2026-08-04
+
+### 新增
+
+- **前后端 CI/CD 流水线**（`.github/workflows/`，对应 issue #13）：
+  - 新增 `backend-ci.yml`：push / pull_request 命中 `backend/**`、`question-bank/**` 时自动执行 ruff 代码检查、mypy 类型检查、bandit 安全扫描、题库校验（`scripts/validate_bank.py`）、pytest 单元测试与冒烟测试（`scripts/smoke_test.py`）；bandit 报告（`bandit-report.json`）作为 artifact 上传，`|| true` 不阻断合并，供人工查看；
+  - 新增 `frontend-ci.yml`：命中 `frontend/**` 时执行 `vue-tsc` 类型检查与 `vite build`；修复 `cache-dependency-path`（锁文件在 `frontend/` 子目录，此前缓存不生效），Node 版本统一为 24（与部署工作流一致）。
+
+### 变更
+
+- **后端代码质量配置**（新增 `backend/pyproject.toml`）：统一管理 ruff / mypy 规则，保证本地与 CI 行为一致；`per-file-ignores` 豁免业务上有意为之的写法（`db.py` 的 `DTZ005` 本地时间、`dimensions.py` 的 `TRY004` / `PLW0602`、`main.py` 的 `BLE001` 兜底、测试的 `C408`）。
+- **校验工具链锁版本**（新增 `backend/requirements-dev.txt`）：锁定 `pytest==9.1.1` / `ruff==0.16.1` / `mypy==2.3.0` / `bandit==1.9.4`，CI 改用 `pip install -r requirements-dev.txt`，避免规则集随最新版漂移。
+- **`scripts/validate_bank.py` 改用非弃用校验路径**：复用 `question_bank._validate_raw` / `_to_question` 自实现全量校验，不再调用已弃用的 `load_question_bank` / `QuestionBank`；兼容 API 保留，其测试（`tests/test_question_bank.py`）加 `pytestmark` 抑制 `DeprecationWarning`；默认校验路径改为 `question-bank/<版本>/questions.json`。
+- **`scripts/smoke_test.py` 使用临时数据库**：通过 `APERSONALITYTEST_DB_PATH` 指向系统临时目录并清理残留，不再在仓库内生成 `app/data/app.db`。
+- 项目版本号升至 **1.4.2**（`frontend/package.json`、`backend/pyproject.toml`）。
+
+### 修复
+
+- 修复 ruff 检查告警：删除 `scoring.py` 未使用变量 `by_id`（F841）；`selection.py` 手写循环改列表推导式（PERF402）；`test_main.py` 的 `.items()` 改 `.values()`（PERF102）；`db.py` 的 `datetime.timezone.utc` 改用 `datetime.UTC` 别名（UP017）。
+- 修复 mypy 类型告警：`question_bank.py` 的 `seen_ids` 补充类型注解（`set[str]`）。
+
 ## [1.4.1] - 2026-08-04
 
 ### 变更

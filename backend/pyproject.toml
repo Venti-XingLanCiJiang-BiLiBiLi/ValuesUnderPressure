@@ -12,7 +12,7 @@
 
 [project]
 name = "values-under-pressure-backend"
-version = "1.2.0"
+version = "1.4.2"
 description = "Values Under Pressure（取舍之间）后端服务"
 requires-python = ">=3.11"
 
