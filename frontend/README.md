@@ -83,9 +83,13 @@ frontend/
     ├── style.css              # Tailwind 三段式 + 组件类
     ├── env.d.ts
     ├── api/
-    │   └── client.ts          # Axios 实例 + testApi（严格对齐后端 Pydantic schema）
+    │   └── client.ts          # Axios 实例 + testApi（严格对齐后端 Pydantic schema，带网络重试）
     ├── stores/
-    │   └── test.ts            # Pinia store：会话/进度/答案/结果
+    │   ├── test.ts            # 组合门面：编排 创建会话→取题→提交→结果（对外 API 不变）
+    │   ├── session.ts         # 会话元数据（sessionId / total / status）
+    │   ├── progress.ts        # 题目进度与导航（当前题 / 已显示缓存 / 回退前进）
+    │   ├── answers.ts         # 答案与修改历史（answer_history）
+    │   └── result.ts          # 结果获取、缓存与自动存档
     ├── router/
     │   └── index.ts           # 路由：/ (开屏) → /test → /result → /archive/:sessionId
     ├── types/
@@ -99,7 +103,8 @@ frontend/
     │   ├── DimensionBar.vue   # 单维度条 + 一致性标记
     │   ├── ConflictCard.vue   # 矛盾组合提示
     │   ├── ResultContent.vue  # 结果内容渲染（结果页/存档页复用）
-    │   └── LoadingState.vue   # 加载态
+    │   ├── LoadingState.vue   # 加载态
+    │   └── ErrorBoundary.vue  # 全局错误边界（onErrorCaptured + 重试按钮）
     └── views/
         ├── IntroView.vue      # 开屏 + 题量选择 + 存档列表
         ├── TestView.vue       # 逐题 Y/N + 过渡动画
