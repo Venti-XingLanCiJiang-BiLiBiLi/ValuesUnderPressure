@@ -19,6 +19,7 @@ from app.manifest import (
     ManifestError,
     build_manifest,
     compute_sha256,
+    compute_text_sha256,
     validate_manifest,
 )
 
@@ -52,6 +53,21 @@ def test_compute_sha256_matches_known_value(tmp_path):
     p = tmp_path / "f.txt"
     p.write_text("hello", encoding="utf-8")
     assert compute_sha256(str(p)) == _sha256_text("hello")
+
+
+def test_compute_text_sha256_normalizes_crlf(tmp_path):
+    """LF 与 CRLF 内容的文本哈希一致（跨平台 manifest 校验的关键）。
+
+    回归保护：Windows（core.autocrlf=true）工作区为 CRLF、git/Linux 为 LF，
+    若按原始字节哈希会因换行符不同而不一致，导致生产环境误报 manifest 不对应。
+    """
+    lf = tmp_path / "lf.json"
+    crlf = tmp_path / "crlf.json"
+    lf.write_bytes(b'{"a": 1}\n{"b": 2}\n')
+    crlf.write_bytes(b'{"a": 1}\r\n{"b": 2}\r\n')
+    assert compute_text_sha256(str(lf)) == compute_text_sha256(str(crlf))
+    # 纯 LF 内容下规范化无影响，文本哈希与原始字节哈希一致
+    assert compute_text_sha256(str(lf)) == compute_sha256(str(lf))
 
 
 def test_valid_manifest_passes(tmp_path):

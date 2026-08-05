@@ -355,7 +355,7 @@ def main():
     for q in questions:
         output.append({k: v for k, v in q.items() if not k.startswith("_")})
 
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+    with open(OUTPUT_PATH, "w", encoding="utf-8", newline="\n") as f:
         f.write(_dump_json(output))
         f.write("\n")
     print(f"✓ 全部校验通过！已生成 {OUTPUT_PATH}（{len(output)} 题）")
@@ -380,7 +380,7 @@ def _write_manifest():
     from app.manifest import MANIFEST_FILENAME, build_manifest
 
     manifest = build_manifest(ROOT)
-    with open(os.path.join(ROOT, MANIFEST_FILENAME), "w", encoding="utf-8") as f:
+    with open(os.path.join(ROOT, MANIFEST_FILENAME), "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
         f.write("\n")
     print(f"✓ 已生成 {os.path.join(ROOT, MANIFEST_FILENAME)}")
@@ -427,7 +427,7 @@ def _write_index(index_groups, total):
         "total_questions": total,
         "groups": group_list,
     }
-    with open(INDEX_PATH, "w", encoding="utf-8") as f:
+    with open(INDEX_PATH, "w", encoding="utf-8", newline="\n") as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
 
 
