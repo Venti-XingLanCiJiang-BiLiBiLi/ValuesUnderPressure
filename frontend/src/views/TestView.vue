@@ -133,28 +133,51 @@ function confirmQuit() {
         </div>
 
         <div role="group" aria-label="作答选项" class="grid sm:grid-cols-2 gap-3 sm:gap-4">
-          <button
-            type="button"
-            class="btn-y min-h-[88px] text-lg flex-col gap-1"
-            :disabled="store.loading"
-            aria-label="选择是"
-            :aria-pressed="answered === 'Y'"
-            @click="choose('Y')"
+          <!-- 选中态：外圈暖色渐变边框（wrapper 包边，不影响未选中样式） -->
+          <div
+            class="rounded-xl transition-all duration-200"
+            :class="
+              answered === 'Y'
+                ? 'p-[2.5px] bg-gradient-to-r from-amber-400 via-orange-400 to-ember-500 shadow-lg shadow-orange-500/30'
+                : ''
+            "
           >
-            <span class="text-2xl font-semibold">Y</span>
-            <span class="text-xs opacity-80">是 · 我会这么做</span>
-          </button>
-          <button
-            type="button"
-            class="btn-n min-h-[88px] text-lg flex-col gap-1"
-            :disabled="store.loading"
-            aria-label="选择否"
-            :aria-pressed="answered === 'N'"
-            @click="choose('N')"
+            <button
+              type="button"
+              class="btn-y w-full min-h-[88px] text-lg flex-col gap-1"
+              :disabled="store.loading"
+              aria-label="选择是"
+              :aria-pressed="answered === 'Y'"
+              @click="choose('Y')"
+            >
+              <span class="text-2xl font-semibold">Y</span>
+              <span class="text-xs opacity-80">
+                {{ answered === 'Y' ? '是 · 已选择 ✓' : '是 · 我会这么做' }}
+              </span>
+            </button>
+          </div>
+          <div
+            class="rounded-xl transition-all duration-200"
+            :class="
+              answered === 'N'
+                ? 'p-[2.5px] bg-gradient-to-r from-amber-400 via-orange-400 to-ember-500 shadow-lg shadow-orange-500/30'
+                : ''
+            "
           >
-            <span class="text-2xl font-semibold">N</span>
-            <span class="text-xs opacity-70">否 · 我不会</span>
-          </button>
+            <button
+              type="button"
+              class="btn-n w-full min-h-[88px] text-lg flex-col gap-1"
+              :disabled="store.loading"
+              aria-label="选择否"
+              :aria-pressed="answered === 'N'"
+              @click="choose('N')"
+            >
+              <span class="text-2xl font-semibold">N</span>
+              <span class="text-xs opacity-70">
+                {{ answered === 'N' ? '否 · 已选择 ✓' : '否 · 我不会' }}
+              </span>
+            </button>
+          </div>
         </div>
 
         <p class="mt-6 text-center text-xs text-ink-400 dark:text-ink-500">
@@ -199,8 +222,8 @@ function confirmQuit() {
         >
           <span><kbd class="kbd">Y</kbd> 是</span>
           <span><kbd class="kbd">N</kbd> 否</span>
-          <span><kbd class="kbd">↑</kbd> 上一题</span>
-          <span><kbd class="kbd">↓</kbd> 下一题</span>
+          <span><kbd class="kbd">←</kbd> 上一题</span>
+          <span><kbd class="kbd">→</kbd> 下一题</span>
         </div>
       </article>
     </Transition>

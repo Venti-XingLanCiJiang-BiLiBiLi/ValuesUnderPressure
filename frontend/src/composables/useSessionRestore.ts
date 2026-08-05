@@ -87,6 +87,12 @@ export function useSessionRestore() {
 
   function clear() {
     try {
+      // 顺带清掉该会话的答案/进度本地缓存（stores 内的定向清除与这里互补）
+      const data = read()
+      if (data) {
+        localStorage.removeItem(`quxu:answers:${data.sessionId}`)
+        sessionStorage.removeItem(`quxu:progress:${data.sessionId}`)
+      }
       sessionStorage.removeItem(STORAGE_KEY)
       sessionStorage.removeItem(RESULT_KEY)
     } catch {

@@ -11,12 +11,18 @@
  * 保证两处结果展示一致。
  */
 import { computed } from 'vue'
-import type { DimensionScore, ResultResponse } from '@/types/api'
+import type { DimensionMeta, DimensionScore, ResultResponse } from '@/types/api'
 import { BRAND } from '@/config/branding'
+import { useDimensionMeta } from '@/composables/useDimensionMeta'
 import DimensionBar from '@/components/DimensionBar.vue'
 import ConflictCard from '@/components/ConflictCard.vue'
 
 const props = defineProps<{ result: ResultResponse }>()
+
+// 维度元数据（来自题库 dimensions.json，单一数据源）：高分/低分表现标签与描述。
+// 拉取失败（后端不可用）时保持 null，DimensionBar 自动降级为不展示两端标签。
+const { meta, load } = useDimensionMeta()
+void load()
 
 // 按 |score - 50| 降序排序：偏离中间值 50 越远（越极端）排在最前，
 // 最贴近 50 的排在最后。结合"条长 = 偏差"，页面顶部展示最强的倾向。
@@ -29,6 +35,25 @@ const sortedDimensions = computed<DimensionScore[]>(() =>
 const confidencePercent = computed(() =>
   Math.round((props.result.confidence ?? 0) * 100),
 )
+
+/**
+ * 面向用户展示的维度名统一用中文标签：
+ * 优先取结果对象内的 name（后端由题库 label 填充），
+ * 缺失（旧存档）时回退到维度元数据 label，再兜底显示英文 id 本身。
+ */
+function dimensionLabel(dimId: string): string {
+  const scored = props.result.dimensions[dimId]
+  if (scored?.name) return scored.name
+  return meta.value?.[dimId]?.label ?? dimId
+}
+
+const uncertainLabels = computed(() =>
+  props.result.uncertain_dimensions.map(dimensionLabel),
+)
+
+function metaOf(dimId: string): DimensionMeta | null {
+  return meta.value?.[dimId] ?? null
+}
 </script>
 
 <template>
@@ -81,6 +106,7 @@ const confidencePercent = computed(() =>
       v-for="(dim, idx) in sortedDimensions"
       :key="dim.dimension"
       :dim="dim"
+      :meta="metaOf(dim.dimension)"
       :rank="idx + 1"
     />
   </div>
@@ -115,7 +141,7 @@ const confidencePercent = computed(() =>
     <p class="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
       以下维度在不同题目间的作答方向不一致，可能受具体情境影响较大：
       <span class="text-ink-900 dark:text-ink-100 font-medium ml-1">
-        {{ result.uncertain_dimensions.join('、') }}
+        {{ uncertainLabels.join('、') }}
       </span>
     </p>
   </div>

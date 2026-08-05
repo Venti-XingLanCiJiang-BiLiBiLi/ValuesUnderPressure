@@ -26,14 +26,14 @@ def health(request: Request):
 @router.get("/api/dimensions")
 @limiter.limit("120/minute")
 def list_dimensions(request: Request):
-    return {
-        dim: {
-            "name": meta["name"],
-            "description": meta["description"],
-            "direction": meta["direction"],
-        }
-        for dim, meta in DIMENSIONS.items()
-    }
+    """维度元数据（单一数据源：题库 dimensions.json，内存中含兼容别名）。
+
+    每个维度包含：
+      - abbr / label / description
+      - low_score_label / low_score_description / high_score_label / high_score_description
+      - 兼容别名 name / direction / high / low（旧版消费方使用）
+    """
+    return DIMENSIONS
 
 
 # 隐私政策（结构化正文；保留期在接口内按运行期配置填充，保证与部署一致）。

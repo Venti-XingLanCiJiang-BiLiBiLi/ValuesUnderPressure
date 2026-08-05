@@ -98,15 +98,16 @@ frontend/
     │   ├── useSessionRestore.ts    # 会话进度恢复（sessionStorage）
     │   ├── useArchives.ts          # 本地存档（localStorage，答完自动保存）
     │   ├── useTheme.ts             # 主题切换
-    │   ├── useKeyboardShortcuts.ts # 答题页键盘快捷键（Y/N、↑/Backspace、↓）
-    │   └── useShareResult.ts       # 结果分享（Web Share / 下载降级）
+    │   ├── useDimensionMeta.ts     # 维度元数据（题库单一数据源，模块级缓存）
+    │   └── useKeyboardShortcuts.ts # 答题页键盘快捷键（Y/N、←/→）
     ├── utils/
-    │   └── shareCard.ts            # 结果分享卡片 Canvas 渲染（零依赖）
+    │   └── shareCard.ts            # 结果分享卡片 Canvas 渲染 + 下载（零依赖）
     ├── components/
     │   ├── ProgressBar.vue    # 进度条
-    │   ├── DimensionBar.vue   # 单维度条 + 一致性标记
+    │   ├── DimensionBar.vue   # 单维度条 + 两端倾向标签 + 一致性标记
     │   ├── ConflictCard.vue   # 矛盾组合提示
     │   ├── ResultContent.vue  # 结果内容渲染（结果页/存档页复用）
+    │   ├── ShareResultModal.vue  # 分享预览弹窗（结果页/存档页共用）
     │   ├── LoadingState.vue   # 加载态
     │   └── ErrorBoundary.vue  # 全局错误边界（onErrorCaptured + 重试按钮）
     └── views/

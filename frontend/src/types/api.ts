@@ -80,10 +80,28 @@ export interface ResultResponse {
   uncertain_dimensions: string[]
 }
 
+/**
+ * 维度元数据（来源：后端 GET /api/dimensions ← 题库 dimensions.json，单一数据源）
+ * 规范字段：label（中文展示名）+ 高低分表现标签/描述；
+ * name / direction 为兼容别名，由后端在返回前补齐。
+ */
 export interface DimensionMeta {
-  name: string
-  description: string
-  direction: [string, string]
+  abbr?: string
+  /** 中文展示名（唯一数据源的规范字段） */
+  label: string
+  /** 低分端倾向标签（分值条左端） */
+  low_score_label: string
+  /** 低分端表现描述 */
+  low_score_description: string
+  /** 高分端倾向标签（分值条右端） */
+  high_score_label: string
+  /** 高分端表现描述 */
+  high_score_description: string
+  /** 兼容别名：== label */
+  name?: string
+  /** 兼容别名：[low_score_label, high_score_label] */
+  direction?: [string, string]
+  description?: string
 }
 
 export interface HealthResponse {
