@@ -73,7 +73,8 @@ npm run dev
 
 ## 在线体验（GitHub Pages）
 
-<http://vup.starrylan.cn/#/test>
+<https://Venti-XingLanCiJiang-BiLiBiLi.github.io/ValuesUnderPressure/>
+<http://vup.starrylan.cn>
 
 ## 一键部署（Docker Compose，推荐）
 
