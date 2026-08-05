@@ -244,3 +244,6 @@ AGENTS.md
 backend/bandit-report.json
 agent.md
 frontend/card-preview.html
+frontend/_tmp_dim_new.py
+frontend/_tmp_dim_old.py
+frontend/_tmp_dim.diff

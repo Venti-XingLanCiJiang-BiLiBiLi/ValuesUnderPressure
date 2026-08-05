@@ -2,6 +2,41 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.5.1] - 2026-08-05
+
+### 新增
+
+- **分享卡片分值条两端高低分标签**（`frontend/src/utils/shareCard.ts`、`frontend/src/components/ShareResultModal.vue`）：
+  - 分享卡片每条分值条底部两端新增高低分标签：左端低分倾向、右端高分倾向、中间「低 ← → 高」方向提示，与结果页 `DimensionBar` 布局一致；
+  - 标签文案来自题库维度配置（`dimensions.json`），分享弹窗复用 `useDimensionMeta` 模块级缓存拉取；元数据缺失（后端不可用时）自动降级为仅显示方向提示；
+  - 当前倾向落在哪一端（score < 40 / > 60）用暖橘高亮，配色与结果页阈值（`config/theme.ts`）对齐。
+
+### 变更
+
+- **维度元数据 v1.6 规范化（对应 issue #16）**（`backend/app/dimensions.py`、`backend/app/routers/meta.py`、`backend/app/scoring.py`、`frontend/src/components/DimensionBar.vue`、`frontend/src/components/ResultContent.vue`、`frontend/src/composables/useDimensionMeta.ts`、`frontend/src/views/IntroView.vue`、`frontend/src/types/api.ts`、`question-bank/v1/dimensions.json`、`question-bank/*/build_questions.py` 等）：
+  - 题库维度元数据改用规范字段：`abbr` / `label` / `description` / `low_score_label` / `low_score_description` / `high_score_label` / `high_score_description`；
+  - 后端加载时 `_normalize_meta` 在内存补全旧版兼容别名（`name` = `label`、`direction` = `[low_score_label, high_score_label]`、`high`/`low` = 高低分描述），历史调用方（评分、测试、脚本）零改动，**新增展示一律使用规范字段**；`_validate_meta` 校验规范字段非空；
+  - 前端新增 `useDimensionMeta` composable：模块级缓存 + 请求去重（结果页 / 存档页 / 开屏页共享一次后端请求），拉取失败静默降级；结果页 `DimensionBar` / 结果内容 / 开屏页维度区块全部改用规范字段展示。
+
+- **分享重构与键盘快捷键调整**：
+  - 结果页与存档页共用 `ShareResultModal` 分享预览弹窗（原 `useShareResult.ts` 删除），图片生成 / 下载逻辑统一收口到 `shareCard.ts`（`renderShareCard` / `canvasToBlob` / `downloadBlob`）；
+  - 键盘快捷键调整（`frontend/src/composables/useKeyboardShortcuts.ts`）：方向键改为仅用于题目导航——`←` 上一题、`→` 下一题（不再用于选是 / 否）；作答仍为 `Y` / `N`；移除 `↑` / `Backspace` / `↓` 映射，避免与浏览器默认行为冲突。
+
+- **刷新恢复增强（对应 issue #4）**（`frontend/src/stores/answers.ts`、`frontend/src/stores/progress.ts`、`frontend/src/composables/useSessionRestore.ts`）：
+  - `answers` store 每次提交后把已答答案写入 `localStorage`（`quxu:answers:<sessionId>`），新增 `restoreFromStorage` / `clearPersisted`；
+  - `progress` store 把题目缓存与浏览位置写入 `sessionStorage`（`quxu:progress:<sessionId>`），新增 `restoreFromStorage` / `clearPersisted`；
+  - 刷新后恢复已答答案选中态与「返回上一题」浏览位置；重新开始 / 退出测试时统一清除缓存（`useSessionRestore.clear` 顺带清理对应 key）。
+
+- **manifest 哈希跨平台规范化（修复 Windows 生成 / Linux 校验不一致）**（`backend/app/manifest.py`、新增 `.gitattributes`、`backend/tests/test_manifest.py`、`question-bank/v1/build_questions.py`）：
+  - `compute_text_sha256` 计算前将 CRLF 规范化为 LF：Windows（`core.autocrlf=true`）工作区题库 JSON 为 CRLF、仓库 / 服务器为 LF，此前在 Windows 生成的 manifest 会在 Linux 生产环境启动校验失败；
+  - `.gitattributes` 强制题库 JSON 为 LF；构建脚本写产物统一 `newline="\n"`；新增回归测试。
+
+### 文档
+
+- `docs/DimensionSystem.md`：维度元数据更新为 v1.6 规范字段说明（含兼容别名补全策略）；
+- `frontend/README.md`：目录结构补充 `useDimensionMeta`、`ShareResultModal`、store 拆分说明；
+- `README.md`：新增在线 Demo 链接与「结果分享」功能说明。
+
 ## [1.5.0] - 2026-08-04
 
 ### 新增
