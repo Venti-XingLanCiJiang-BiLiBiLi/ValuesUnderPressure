@@ -22,7 +22,7 @@ const router = createRouter({
       component: () => import('@/views/ResultView.vue'),
     },
     {
-      path: '/archive/:sessionId',
+      path: '/archive/:sessionId?',
       name: 'archive',
       component: () => import('@/views/ArchiveView.vue'),
     },
