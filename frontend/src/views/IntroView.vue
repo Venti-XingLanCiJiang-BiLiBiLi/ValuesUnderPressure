@@ -101,6 +101,11 @@ function viewArchive(sessionId: string) {
   router.push({ name: 'archive', params: { sessionId } })
 }
 
+/** 查看云端存档：复用 ArchiveView，以 query.cloud 传时间戳。 */
+function viewCloudArchive(ts: number) {
+  router.push({ name: 'archive', query: { cloud: String(ts) } })
+}
+
 async function handleStart() {
   starting.value = true
   localError.value = null
@@ -368,15 +373,24 @@ async function handleStart() {
               </span>
             </div>
           </div>
-          <button
-            type="button"
-            class="btn-ghost shrink-0 !px-3 !py-2 text-sm text-red-600 hover:bg-red-50
-                   dark:text-red-400 dark:hover:bg-red-950/40"
-            :title="`删除 ${formatDate(e.t)} 的云端存档`"
-            @click="removeCloudArchive(e.t)"
-          >
-            删除
-          </button>
+          <div class="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              class="btn-primary !px-4 !py-2 text-sm"
+              @click="viewCloudArchive(e.t)"
+            >
+              查看
+            </button>
+            <button
+              type="button"
+              class="btn-ghost shrink-0 !px-3 !py-2 text-sm text-red-600 hover:bg-red-50
+                     dark:text-red-400 dark:hover:bg-red-950/40"
+              :title="`删除 ${formatDate(e.t)} 的云端存档`"
+              @click="removeCloudArchive(e.t)"
+            >
+              删除
+            </button>
+          </div>
         </div>
       </div>
       <p

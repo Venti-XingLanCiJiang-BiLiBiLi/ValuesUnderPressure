@@ -66,23 +66,24 @@ frontend/
     │   └── toy.d.ts           # B 站 Toy SDK 类型声明（window.toy）
     ├── composables/
     │   ├── useToy.ts              # Toy SDK 安全访问（能力检测）
-    │   ├── useShareResult.ts      # 结果分享：保存到相册 → Web Share → 下载
-    │   ├── useToyCloudArchive.ts  # 云端存档（latest + 历史，128 条上限）
+    │   ├── useDimensionMeta.ts    # 维度元数据加载（v1.6：label + 高低分标签/描述）
+    │   ├── useToyCloudArchive.ts  # 云端存档（摘要 + 完整结果分块，128 key 上限）
     │   ├── useArchives.ts         # 本地存档（localStorage）
     │   ├── useSessionRestore.ts   # 会话进度恢复
     │   ├── useTheme.ts / useKeyboardShortcuts.ts
-    ├── utils/shareCard.ts     # 结果分享卡片 Canvas 渲染（零依赖）
-    ├── components/            # ProgressBar / DimensionBar / ConflictCard / ResultContent ...
+    ├── utils/shareCard.ts     # 结果分享卡片 Canvas 渲染（零依赖，条底两端高低分标签）
+    ├── components/            # ProgressBar / DimensionBar / ConflictCard / ResultContent / ShareResultModal ...
     └── views/                 # IntroView（含云端存档）/ TestView / ResultView / ArchiveView / PrivacyView
 ```
 
 ## B 站 Toy 适配
 
 - `index.html` 加载 `toy-sdk.js`，运行时经 `useToy.ts` 检测 `window.toy` 能力，全部调用安全降级：
-  - **保存到相册**：结果页优先 `toy.saveImageToAlbum`（base64 ≤ 1.8MB，过大自动 JPEG
+  - **保存到相册**：结果分享弹窗（`ShareResultModal.vue`）优先 `toy.saveImageToAlbum`（base64 ≤ 1.8MB，过大自动 JPEG
     压缩/缩放降级），非 Toy 环境回退 Web Share API / 浏览器下载；
-  - **云端存档**：完成测试后自动把结果摘要备份到 B 站云存储（`latest` + `h<ts>` 双写、
-    按账号隔离、128 key 上限、删除时同步清理 latest），首页「云端存档」可查看 / 删除；
+  - **云端存档**：完成测试后自动把结果备份到 B 站云存储（摘要 `latest` + `h<ts>` 双写、完整结果按字节分块存
+    `r<ts>_<n>`、按账号隔离、128 key 上限、删除时同步清理 latest 与分块）；首页「云端存档」可
+    **查看（复用 ArchiveView，`/archive?cloud=<ts>`）/ 删除**，换设备也能回顾完整结果；
   - 普通浏览器（无 Toy）所有功能自动降级，不影响使用。
 
 ## 题库说明
@@ -98,7 +99,7 @@ frontend/
 1. **不人格分类**——文案里从不出现"你是 XX 型人"，只用"倾向"。
 2. **矛盾是常态**——`result.conflicts` 不是错误而是洞察，UI 给到独立板块。
 3. **可逆可重测**——任何阶段都允许退出，不强制注册。
-4. **隐私优先**——原始答案只存本机；云端仅存结果摘要，按账号隔离可删除。
+4. **隐私优先**——原始答案只存本机；云端仅备份结果（摘要 + 完整结果分块），按账号隔离可删除。
 
 ## 浏览器支持
 

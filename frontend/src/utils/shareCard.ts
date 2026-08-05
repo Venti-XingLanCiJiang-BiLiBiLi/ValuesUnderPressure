@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 结果分享卡片生成（纯浏览器 Canvas 2D，零依赖）
  * ============================================================================
  * 在浏览器端把一份 ResultResponse 渲染成一张品牌风格的结果卡片 PNG，
@@ -12,7 +12,7 @@
  *   score > 60 → 蓝色渐变、score < 40 → 粉色渐变、其余 → 灰色渐变。
  * ============================================================================
  */
-import type { ResultResponse, DimensionScore } from '@/types/api'
+import type { DimensionMeta, DimensionScore, ResultResponse } from '@/types/api'
 import { BRAND } from '@/config/branding'
 import { SCORE_THRESHOLDS } from '@/config/theme'
 
@@ -46,6 +46,8 @@ const SERIF = '"Source Han Serif SC","Noto Serif CJK SC",Georgia,serif'
 export interface ShareCardOptions {
   /** 导出倍率（默认 2 → 1080×1440） */
   scale?: number
+  /** 维度元数据（题库 dimensions.json，单一数据源）：用于在条底两端绘制高低分标签；缺失时降级为方向提示 */
+  meta?: Record<string, DimensionMeta> | null
 }
 
 /** 生成分享卡片 canvas（可继续转 Blob / DataURL） */
@@ -63,7 +65,7 @@ export function renderShareCard(
   ctx.scale(scale, scale)
   drawBackground(ctx)
   drawHeader(ctx)
-  drawDimensions(ctx, result)
+  drawDimensions(ctx, result, options.meta)
   drawFooter(ctx, result)
   return canvas
 }
@@ -165,7 +167,11 @@ function drawHeader(ctx: CanvasRenderingContext2D) {
 }
 
 /** 维度区：10 条，按 |score-50| 降序（越极端越靠前，与结果页一致） */
-function drawDimensions(ctx: CanvasRenderingContext2D, result: ResultResponse) {
+function drawDimensions(
+  ctx: CanvasRenderingContext2D,
+  result: ResultResponse,
+  meta: Record<string, DimensionMeta> | null | undefined,
+) {
   const dims: DimensionScore[] = Object.values(result.dimensions).sort(
     (a, b) => Math.abs(b.score - 50) - Math.abs(a.score - 50),
   )
@@ -175,9 +181,9 @@ function drawDimensions(ctx: CanvasRenderingContext2D, result: ResultResponse) {
   const trackWidth = trackRight - trackLeft
   const midX = trackLeft + trackWidth / 2
   const trackHeight = 8
-  const rowHeight = 44
+  const rowHeight = 46
 
-  let y = 188
+  let y = 184
   for (const dim of dims) {
     // 维度名（左）
     ctx.fillStyle = C.label
@@ -193,9 +199,53 @@ function drawDimensions(ctx: CanvasRenderingContext2D, result: ResultResponse) {
     ctx.fillText(String(Math.round(dim.score)), W - PAD, y)
 
     // 条形（50 中线对称展开）
-    drawBar(ctx, dim.score, midX, y + 15, trackWidth, trackHeight)
+    drawBar(ctx, dim.score, midX, y + 14, trackWidth, trackHeight)
+
+    // 条底两端高低分标签（数据来自题库维度配置；meta 缺失时降级为方向提示）
+    drawBarLabels(ctx, meta?.[dim.dimension], dim.score, midX, y + 28, trackWidth)
 
     y += rowHeight
+  }
+}
+
+/**
+ * 条底两端标签：低分端（左）+ 高分端（右）+ 中间方向提示，与页面 DimensionBar 一致。
+ * 标签文案来自题库 dimensions.json；当前倾向落在哪一端用暖橘高亮。
+ */
+function drawBarLabels(
+  ctx: CanvasRenderingContext2D,
+  meta: DimensionMeta | null | undefined,
+  score: number,
+  midX: number,
+  baselineY: number,
+  trackWidth: number,
+) {
+  const half = trackWidth / 2
+  const low = meta?.low_score_label
+  const high = meta?.high_score_label
+  const isLow = score < SCORE_THRESHOLDS.low
+  const isHigh = score > SCORE_THRESHOLDS.high
+
+  // 中间方向提示（两端标签各留出 half - 30 空间，避免与方向文字重叠）
+  ctx.font = `400 9px ${SANS}`
+  ctx.fillStyle = C.sub
+  ctx.textAlign = 'center'
+  ctx.fillText('低 ← → 高', midX, baselineY)
+
+  // 低分端（左）
+  if (low) {
+    ctx.font = `500 9px ${SANS}`
+    ctx.fillStyle = isLow ? C.eyebrow : C.muted
+    ctx.textAlign = 'left'
+    ctx.fillText(low, midX - half, baselineY, half - 30)
+  }
+
+  // 高分端（右）
+  if (high) {
+    ctx.font = `500 9px ${SANS}`
+    ctx.fillStyle = isHigh ? C.eyebrow : C.muted
+    ctx.textAlign = 'right'
+    ctx.fillText(high, midX + half, baselineY, half - 30)
   }
 }
 

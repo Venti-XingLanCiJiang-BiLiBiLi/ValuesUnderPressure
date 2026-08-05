@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * ShareResultModal — 结果分享弹窗（结果页 / 存档页共用）
  * ============================================================================
@@ -18,6 +18,10 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import type { ResultResponse } from '@/types/api'
 import { getToy } from '@/composables/useToy'
 import { renderShareCard, canvasToBlob, downloadBlob } from '@/utils/shareCard'
+import { useDimensionMeta } from '@/composables/useDimensionMeta'
+
+// 维度元数据（题库 dimensions.json）：供卡片条底两端高低分标签使用
+const { meta, load } = useDimensionMeta()
 
 const props = defineProps<{
   show: boolean
@@ -37,32 +41,10 @@ const blob = ref<Blob | null>(null)
 const previewUrl = ref<string | null>(null)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const albumSupported = ref(false)
-const checkingAlbumSupport = ref(true)
 const albumSaving = ref(false)
 const albumSaved = ref(false)
 
-/**
- * 环境探测（是否支持 saveImageToAlbum）缓存：组件可能在结果页/存档页被多次创建，
- * 用模块级 Promise 保证整个页面生命周期只探测一次，避免重复请求 SDK。
- */
-let albumSupportPromise: Promise<boolean> | null = null
-function detectAlbumSupport(): Promise<boolean> {
-  if (!albumSupportPromise) {
-    albumSupportPromise = (async () => {
-      const toy = getToy()
-      if (!toy || typeof toy.isSupport !== 'function') return false
-      try {
-        return await toy.isSupport('saveImageToAlbum')
-      } catch {
-        return false
-      }
-    })()
-  }
-  return albumSupportPromise
-}
-
 const primaryLabel = computed(() => {
-  if (checkingAlbumSupport.value) return '检测环境…'
   if (albumSupported.value) return '保存到相册'
   return '下载结果'
 })
@@ -78,7 +60,9 @@ async function generate() {
   failed.value = false
   albumSaved.value = false
   try {
-    const nextCanvas = renderShareCard(props.result)
+    // 拉取维度元数据（幂等，已缓存则直接复用），供卡片条底两端高低分标签使用
+    await load()
+    const nextCanvas = renderShareCard(props.result, { meta: meta.value })
     const nextBlob = await canvasToBlob(nextCanvas)
     if (previewUrl.value) URL.revokeObjectURL(previewUrl.value)
     canvas.value = nextCanvas
@@ -110,10 +94,10 @@ async function saveToAlbum() {
       dataUrl = canvas.value.toDataURL('image/jpeg', 0.9)
     }
     if (dataUrl.length > MAX_ALBUM_BASE64) {
-      dataUrl = renderShareCard(props.result, { scale: 1 }).toDataURL(
-        'image/jpeg',
-        0.85,
-      )
+      dataUrl = renderShareCard(props.result, {
+        scale: 1,
+        meta: meta.value,
+      }).toDataURL('image/jpeg', 0.85)
     }
     // SDK 字段为裸 base64 数据（不含 data:...;base64, 前缀）
     const base64Data = dataUrl.slice(dataUrl.indexOf(',') + 1)
@@ -138,11 +122,12 @@ function primaryAction() {
 }
 
 onMounted(async () => {
+  const toy = getToy()
   try {
-    albumSupported.value = await detectAlbumSupport()
-  } finally {
-    // 无论成功与否都结束探测态，避免主按钮一直禁用/文案误导
-    checkingAlbumSupport.value = false
+    albumSupported.value =
+      !!toy && typeof toy.isSupport === 'function' && (await toy.isSupport('saveImageToAlbum'))
+  } catch {
+    albumSupported.value = false
   }
 })
 
@@ -152,7 +137,7 @@ watch(
     if (visible) {
       void generate()
     } else {
-      // 关闭时释放预览图对象 URL 与画布，避免隐藏期间持有大图内存
+      // 关闭时释放预览图 Object URL 与画布，避免隐藏期间持有大图内存
       if (previewUrl.value) URL.revokeObjectURL(previewUrl.value)
       previewUrl.value = null
       blob.value = null
@@ -238,7 +223,7 @@ onUnmounted(() => {
             <button
               type="button"
               class="btn-primary w-full"
-              :disabled="checkingAlbumSupport || generating || failed || !previewUrl || albumSaving"
+              :disabled="generating || failed || !previewUrl || albumSaving"
               @click="primaryAction"
             >
               <span v-if="albumSaving">保存中…</span>

@@ -2,6 +2,49 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.5.1] - 2026-08-05
+
+> **B 站 Toy 适配版**（`bilitoy_adapt` 分支）：引擎、题库、结果生成全部在浏览器本地完成，无后端服务。
+
+### 新增
+
+- **纯前端组卷引擎**（新增 `frontend/src/engine/` 六个模块：`bank.ts` / `rng.ts` / `selection.ts` / `scoring.ts` / `session.ts` / `index.ts`）：
+  - 将服务器版 Python 后端（FastAPI + 随机组卷 + 评分）整体移植为 TypeScript：题库内嵌（构建时打入 bundle）、mulberry32 种子随机对齐原 `random.Random` 语义、121 桶分桶索引校验、累加 + 归一化 + 一致性 + 矛盾分析，行为与原后端逐题一致；
+  - `api/client.ts` 改为本地引擎适配器（`testApi` / `ApiError` 签名不变），移除 axios 及其 vendor 分块，主包 gzip ≈ 38KB，**全程零网络请求**。
+
+- **B 站 Toy SDK 适配**（`frontend/src/types/toy.d.ts`、`index.html` SDK 引入、`frontend/src/composables/useToy.ts`）：
+  - 运行时能力检测（`window.toy.isSupport`）安全启用，普通浏览器全部自动降级：
+  - **保存到相册**：结果分享弹窗优先 `toy.saveImageToAlbum`（base64 ≤ 1.8MB，超限自动 JPEG 压缩/缩放降级链），非 Toy 环境回退 Web Share API / 浏览器下载；
+  - **云端存档**：完成测试后自动把结果摘要备份到 B 站云存储（`latest` + `h<ts>` 双写、按「登录用户 + Toy」隔离、128 key 上限、删除时同步清理 latest 与分块）。
+
+- **云端存档完整结果可查看**（`frontend/src/composables/useToyCloudArchive.ts`、`frontend/src/views/ArchiveView.vue`、`frontend/src/views/IntroView.vue`）：
+  - 完整结果按字节分块存入 `r<ts>_<n>` keys（单块 ≤900B，TextEncoder 切分、不拆散代理对），`getCloudResult()` 跨块重组；完整结果过大（>21KB）时自动降级为仅备份摘要，latest / 历史仍正常写入；
+  - 首页「云端存档」新增「查看」按钮 → 复用存档查看页（`/archive?cloud=<ts>`，含加载 / 失败态），支持删除与分享；旧摘要数据无分块时提示「数据不完整」。
+
+- **维度元数据 v1.6 规范化**（`question-bank/v1/dimensions.json`、`frontend/src/composables/useDimensionMeta.ts`、`docs/DimensionSystem.md`）：
+  - 元数据字段升级为 `label` + 低/高分端标签与描述（`low_score_label` / `low_score_description` / `high_score_label` / `high_score_description`），`name` / `direction` 仅作兼容别名；
+  - 首页维度区块、结果页、存档页全部改由 `useDimensionMeta` 单一数据源驱动。
+
+- **统一分享弹窗与卡片升级**（新增 `frontend/src/components/ShareResultModal.vue`、`frontend/src/utils/shareCard.ts`）：
+  - 结果页 / 存档页共用同一个分享弹窗（`ShareResultModal.vue`），替换原 `useShareResult.ts` 内联逻辑；
+  - 分享卡片分值条底部两端新增**高低分标签**（低分端 / 高分端中文标签，当前倾向所在端暖橘高亮），数据来自 v1.6 维度元数据，缺失时自动降级。
+
+- **刷新恢复增强**（`frontend/src/composables/useSessionRestore.ts`）：清除会话时一并清理本地答案与进度存储（`quxu:answers:<sessionId>` / `quxu:progress:<sessionId>`）。
+
+- 封面图（`frontend/cover-4x3.png`）、`index.html` 修复（Toy SDK `defer` 加载、favicon 相对路径）。
+
+### 变更
+
+- 项目版本号升至 **1.5.1**（`frontend/package.json`）。
+- 打包脚本：Toy 上传包 `frontend/vup-toy.zip` 改用 bsdtar 生成（`Compress-Archive` 产生反斜杠路径导致 Toy 白屏），产物全部为相对路径引用。
+
+### 移除
+
+- **后端与部署**：`backend/`、`deploy/`、`docker-compose.yml`、`.dockerignore`、`frontend/Dockerfile`、`frontend/nginx.conf`、后端相关 CI workflows（`backend-ci` / `backend-smoke` / `deploy-frontend`）；
+- **后端文档**：`docs/API.md`、`docs/DatabaseSchema.md`、`docs/Analytics.md`、`docs/Calibration.md`、`docs/DataValidation.md`（保留 6 篇算法 / 设计文档）；
+- **题库生成链**：`question-bank/v1/` 下 121 个分桶文件、`build_questions.py`、模板与 schema，仅保留随包内嵌的三个 JSON（`questions.json` / `questions.index.json` / `dimensions.json`）；
+- **前端依赖**：axios 与 `vite.config.ts` 的 `/api` 代理。
+
 ## [1.5.0] - 2026-08-04
 
 ### 新增
