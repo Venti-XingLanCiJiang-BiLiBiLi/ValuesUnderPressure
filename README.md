@@ -72,10 +72,7 @@ npm run dev
 
 ## 在线体验（GitHub Pages）
 
-前端静态站点通过 CI 工作流（`.github/workflows/deploy-frontend.yml`）自动部署到 GitHub Pages：
-
-- 访问地址：<https://Venti-XingLanCiJiang-BiLiBiLi.github.io/ValuesUnderPressure/>
-- 注意：GitHub Pages 是**纯静态托管，不含后端**。未配置 `VITE_API_BASE_URL` 时仅能浏览页面；完整功能需另行部署后端（Render / Railway / VPS 等）并用该变量指向后端地址，详见 `frontend/README.md`。
+<http://vup.starrylan.cn/#/test>
 
 ## 一键部署（Docker Compose，推荐）
 
