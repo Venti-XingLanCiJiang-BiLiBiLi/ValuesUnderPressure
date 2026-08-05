@@ -1,0 +1,87 @@
+# ============================================================================
+# Deploy Frontend to GitHub Pages (纯前端版 / bilitoy_adapt)
+# ----------------------------------------------------------------------------
+# 触发：push 到 bilitoy_adapt / 手动触发 (workflow_dispatch)
+# 流程：frontend/ → npm ci → npm run build → 上传 artifact → 部署到 Pages
+# 访问：https://<user>.github.io/ValuesUnderPressure/
+#
+# 说明：bilitoy_adapt 为纯前端应用（引擎与题库全部本地打包，无后端 API），
+#       构建时无需 VITE_API_BASE_URL。
+#
+# 一次性配置（在 GitHub 仓库页面）：
+#   Settings → Pages → Source 选择 "GitHub Actions"
+# ============================================================================
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [bilitoy_adapt]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch:
+
+# 并发控制：取消上一次正在跑的部署，避免多次部署冲突
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+# 权限：部署到 GitHub Pages 需要 pages: write 和 id-token: write
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # --------------------------------------------------------------------------
+  # 1. 构建
+  # --------------------------------------------------------------------------
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+  # --------------------------------------------------------------------------
+  # 2. 部署
+  # --------------------------------------------------------------------------
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
