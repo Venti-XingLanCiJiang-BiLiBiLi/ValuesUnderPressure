@@ -12,6 +12,10 @@
 import { onUnmounted, ref, watch } from 'vue'
 import type { ResultResponse } from '@/types/api'
 import { renderShareCard, canvasToBlob, downloadBlob } from '@/utils/shareCard'
+import { useDimensionMeta } from '@/composables/useDimensionMeta'
+
+// 维度元数据（题库 dimensions.json）：供卡片条底两端高低分标签使用
+const { meta, load } = useDimensionMeta()
 
 const props = defineProps<{
   show: boolean
@@ -37,7 +41,9 @@ async function generate() {
   generating.value = true
   failed.value = false
   try {
-    const canvas = renderShareCard(props.result)
+    // 拉取维度元数据（幂等，已缓存则直接复用），供卡片条底两端高低分标签使用
+    await load()
+    const canvas = renderShareCard(props.result, { meta: meta.value })
     const nextBlob = await canvasToBlob(canvas)
     if (previewUrl.value) URL.revokeObjectURL(previewUrl.value)
     blob.value = nextBlob
