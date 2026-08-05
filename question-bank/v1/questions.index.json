@@ -1,7 +1,7 @@
 {
   "version": 1,
   "description": "题库分桶索引：记录各组题数、桶（bank）数与每桶数量、文件位置。后端仍以 questions.json（合并产物）为唯一数据源。",
-  "generated_at": "2026-08-04T01:13:42.925815+00:00",
+  "generated_at": "2026-08-05T10:45:16.939240+00:00",
   "total_questions": 500,
   "groups": [
     {

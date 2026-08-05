@@ -58,6 +58,11 @@ export const useTestStore = defineStore('test', () => {
   const error = ref<string | null>(null)
 
   function reset() {
+    // 先清除当前会话的本地缓存（答案 + 题目浏览位置），按 sessionId 定向清除
+    if (session.sessionId) {
+      answers.clearPersisted(session.sessionId)
+      progress.clearPersisted(session.sessionId)
+    }
     session.reset()
     progress.reset()
     answers.reset()
@@ -88,6 +93,9 @@ export const useTestStore = defineStore('test', () => {
    */
   async function hydrate(payload: { sessionId: string; total: number }) {
     session.restore(payload.sessionId, payload.total)
+    // 恢复已提交答案与题目浏览位置的本地缓存（刷新后返回上一题可看到选中态）
+    answers.restoreFromStorage(payload.sessionId)
+    progress.restoreFromStorage(payload.sessionId)
     loadingState.value = 'fetching'
     try {
       const [q, r] = await Promise.allSettled([

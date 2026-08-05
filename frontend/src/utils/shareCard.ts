@@ -78,6 +78,28 @@ export function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
   })
 }
 
+/** 分享文件名：VUP-result-YYYYMMDD.png */
+export function shareFileName(): string {
+  const d = new Date()
+  const pad = (n: number) => String(n).padStart(2, '0')
+  const stamp = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`
+  return `${BRAND.shortName}-result-${stamp}.png`
+}
+
+/** 触发浏览器下载（下载按钮与降级路径共用，唯一实现）。 */
+export function downloadBlob(blob: Blob) {
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = shareFileName()
+  a.rel = 'noopener'
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  // 延迟释放对象 URL，确保下载已开始
+  window.setTimeout(() => URL.revokeObjectURL(url), 5000)
+}
+
 /* ============================================================================
  * 绘制实现
  * ========================================================================== */

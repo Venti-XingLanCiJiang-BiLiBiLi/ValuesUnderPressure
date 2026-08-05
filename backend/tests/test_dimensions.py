@@ -17,7 +17,13 @@ CORE_IDS = {
     "self_protection", "altruism", "freedom", "security", "privacy",
     "wealth", "rule_orientation", "pragmatism", "collectivism", "long_term",
 }
-REQUIRED_KEYS = ("abbr", "name", "description", "direction", "high", "low")
+REQUIRED_KEYS = (
+    "abbr", "label", "description",
+    "low_score_label", "low_score_description",
+    "high_score_label", "high_score_description",
+)
+# 兼容别名：由规范字段在加载时派生，历史调用方依赖
+LEGACY_ALIAS_KEYS = ("name", "direction", "high", "low")
 
 
 def _restore(monkeypatch):
@@ -32,7 +38,12 @@ def test_dimensions_loaded_from_bank_file():
     for dim, meta in DIMENSIONS.items():
         for key in REQUIRED_KEYS:
             assert key in meta, f"维度 {dim} 缺少字段: {key}"
-        assert len(meta["direction"]) == 2
+        for key in LEGACY_ALIAS_KEYS:
+            assert key in meta, f"维度 {dim} 缺少兼容别名: {key}"
+        assert meta["name"] == meta["label"]
+        assert meta["direction"] == [meta["low_score_label"], meta["high_score_label"]]
+        assert meta["high"] == meta["high_score_description"]
+        assert meta["low"] == meta["low_score_description"]
 
 
 def test_dimension_ids_matches_keys():
@@ -40,17 +51,27 @@ def test_dimension_ids_matches_keys():
 
 
 def test_dimensions_carry_chinese_labels():
-    """英文维度 ID → 中文标签映射随题库提供（网页展示用）。"""
-    assert DIMENSIONS["self_protection"]["name"] == "自我保护"
+    """英文维度 ID → 中文标签/高低分表现映射随题库提供（网页展示用）。"""
+    assert DIMENSIONS["self_protection"]["label"] == "自我保护"
+    assert DIMENSIONS["self_protection"]["name"] == "自我保护"  # 兼容别名
     assert DIMENSIONS["altruism"]["direction"] == ["自我优先", "利他优先"]
+    assert DIMENSIONS["privacy"]["low_score_label"] == "开放共享"
+    assert DIMENSIONS["privacy"]["high_score_label"] == "隐私保护"
+    assert DIMENSIONS["privacy"]["low_score_description"]
+    assert DIMENSIONS["privacy"]["high_score_description"]
 
 
 def test_reload_dimensions_in_place(monkeypatch):
     """reload_dimensions 就地更新：对象引用稳定、新维度生效、DIMENSION_IDS 同步。"""
     meta = {
         "new_dim": {
-            "abbr": "ND", "name": "新维度", "description": "占位描述",
-            "direction": ["低端", "高端"], "high": "高端文案", "low": "低端文案",
+            "abbr": "ND",
+            "label": "新维度",
+            "description": "占位描述",
+            "low_score_label": "低端",
+            "low_score_description": "低端文案",
+            "high_score_label": "高端",
+            "high_score_description": "高端文案",
         },
     }
     import tempfile
@@ -64,6 +85,10 @@ def test_reload_dimensions_in_place(monkeypatch):
         assert reloaded is before_ref  # 就地更新，保持引用
         assert set(DIMENSIONS.keys()) == {"new_dim"}
         assert DIMENSION_IDS == ["new_dim"]
+        # 规范字段 + 兼容别名都被补齐
+        assert DIMENSIONS["new_dim"]["label"] == "新维度"
+        assert DIMENSIONS["new_dim"]["name"] == "新维度"
+        assert DIMENSIONS["new_dim"]["direction"] == ["低端", "高端"]
     _restore(monkeypatch)
 
 

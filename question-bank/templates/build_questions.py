@@ -41,7 +41,21 @@ def load_dimensions_meta():
 
     作为本版本题库的单一数据源：维度集合 DIMENSIONS、文件名缩写 ABBR 均由它派生。
     返回 {dim: meta}；文件缺失/非法时记录错误并返回 {}。
+
+    规范字段（v1.6 起）：
+      abbr / label / description
+      low_score_label / low_score_description
+      high_score_label / high_score_description
     """
+    REQUIRED_KEYS = (
+        "abbr",
+        "label",
+        "description",
+        "low_score_label",
+        "low_score_description",
+        "high_score_label",
+        "high_score_description",
+    )
     if not os.path.isfile(DIMENSIONS_FILE):
         error(f"缺少维度元数据文件: {DIMENSIONS_FILE}")
         return {}
@@ -54,12 +68,15 @@ def load_dimensions_meta():
         if not isinstance(meta, dict):
             error(f"维度 {dim} 的元数据应为对象")
             continue
-        for key in ("abbr", "name", "description", "direction", "high", "low"):
+        for key in REQUIRED_KEYS:
             if key not in meta:
                 error(f"维度 {dim} 缺少字段: {key}")
-        direction = meta.get("direction")
-        if not (isinstance(direction, list) and len(direction) == 2):
-            error(f"维度 {dim} 的 direction 应为长度为 2 的数组")
+        for key in ("label", "low_score_label", "high_score_label"):
+            if key in meta and (not isinstance(meta[key], str) or not meta[key].strip()):
+                error(f"维度 {dim} 的 {key} 应为非空字符串")
+        for key in ("low_score_description", "high_score_description", "description"):
+            if key in meta and (not isinstance(meta[key], str) or not meta[key].strip()):
+                error(f"维度 {dim} 的 {key} 应为非空字符串")
     return raw
 
 

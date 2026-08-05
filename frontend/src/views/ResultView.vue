@@ -5,20 +5,20 @@
  * 顶部：概览三卡（进度 / 置信度 / 矛盾数）
  * 中部：10 维度按分数降序排列
  * 底部：矛盾分析 + 不确定维度提示
+ * 分享：打开 ShareResultModal → 预览生成图片 →「下载结果」（与存档页共用组件）
  * （结果内容渲染复用 ResultContent 组件）
  */
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useSessionRestore } from '@/composables/useSessionRestore'
-import { useShareResult } from '@/composables/useShareResult'
 import ResultContent from '@/components/ResultContent.vue'
+import ShareResultModal from '@/components/ShareResultModal.vue'
 import LoadingState from '@/components/LoadingState.vue'
 
 const router = useRouter()
 const store = useTestStore()
 const { clear, loadCachedResult } = useSessionRestore()
-const { phase, isMobile, share } = useShareResult()
 
 onMounted(async () => {
   // 已有结果，直接展示
@@ -41,21 +41,8 @@ onMounted(async () => {
   router.replace({ name: 'intro' })
 })
 
+const showShare = ref(false)
 const showShareHint = ref(false)
-
-/** 分享按钮文案随流程状态变化 */
-const shareLabel = computed(() => {
-  switch (phase.value) {
-    case 'generating':
-      return '生成中…'
-    case 'ready':
-      return '已生成 ✓'
-    case 'error':
-      return '重试'
-    default:
-      return '分享结果'
-  }
-})
 
 function startOver() {
   clear()
@@ -63,10 +50,10 @@ function startOver() {
   router.push({ name: 'intro' })
 }
 
-/** 浏览器端生成结果卡片 PNG，引导保存/分享 */
-async function shareResult() {
-  if (!store.result || phase.value === 'generating') return
-  await share(store.result)
+/** 打开分享预览弹窗（图片在弹窗内生成）。 */
+function shareResult() {
+  if (!store.result) return
+  showShare.value = true
 }
 
 async function copyLink() {
@@ -90,13 +77,8 @@ async function copyLink() {
 
     <!-- ============================== 行动 ============================== -->
     <div class="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
-      <button
-        type="button"
-        class="btn-primary flex-1"
-        :disabled="phase === 'generating'"
-        @click="shareResult"
-      >
-        {{ shareLabel }}
+      <button type="button" class="btn-primary flex-1" @click="shareResult">
+        分享结果
       </button>
       <button type="button" class="btn-ghost flex-1" @click="copyLink">
         <span v-if="!showShareHint">复制链接</span>
@@ -107,34 +89,11 @@ async function copyLink() {
       </button>
     </div>
 
-    <!-- 分享流程反馈（短暂提示） -->
-    <p
-      v-if="phase === 'ready'"
-      class="mt-4 text-center text-sm text-emerald-600 dark:text-emerald-400"
-      role="status"
-    >
-      {{
-        isMobile
-          ? '图片已生成，请在分享面板中选择「存储图像」或发送到任意应用。'
-          : '图片已下载，可分享到任意平台。'
-      }}
-    </p>
-    <p
-      v-if="phase === 'error'"
-      class="mt-4 text-center text-sm text-red-500 dark:text-red-400"
-      role="alert"
-    >
-      图片生成失败，请重试。
-    </p>
-
     <p
       class="mt-8 text-center text-xs text-ink-500 dark:text-ink-400 leading-relaxed"
     >
       这份结果不是你的"人格标签"。<br />
       允许自己在不同情境下呈现不同倾向，这就是真实的人。
-    </p>
-    <p class="mt-2 text-center text-xs text-ink-400 dark:text-ink-500">
-      分享卡片在浏览器本地生成，不含题目与原始回答，仅展示倾向与分值。
     </p>
   </section>
 
@@ -147,4 +106,7 @@ async function copyLink() {
       </button>
     </div>
   </section>
+
+  <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
+  <ShareResultModal v-model:show="showShare" :result="store.result" />
 </template>
