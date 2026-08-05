@@ -18,7 +18,7 @@ import LoadingState from '@/components/LoadingState.vue'
 const router = useRouter()
 const store = useTestStore()
 const { clear, loadCachedResult } = useSessionRestore()
-const { phase, isMobile, share } = useShareResult()
+const { phase, mode, isMobile, share } = useShareResult()
 
 onMounted(async () => {
   // 已有结果，直接展示
@@ -114,9 +114,11 @@ async function copyLink() {
       role="status"
     >
       {{
-        isMobile
-          ? '图片已生成，请在分享面板中选择「存储图像」或发送到任意应用。'
-          : '图片已下载，可分享到任意平台。'
+        mode === 'album'
+          ? '结果卡片已保存到相册，可分享到任意平台。'
+          : isMobile
+            ? '图片已生成，请在分享面板中选择「存储图像」或发送到任意应用。'
+            : '图片已下载，可分享到任意平台。'
       }}
     </p>
     <p

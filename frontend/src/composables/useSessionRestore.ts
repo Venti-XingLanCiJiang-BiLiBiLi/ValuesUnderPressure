@@ -17,7 +17,7 @@
  */
 
 import { ref } from 'vue'
-import { testApi, ApiError } from '@/api/client'
+import { sessionManager } from '@/engine'
 import type { ResultResponse } from '@/types/api'
 
 const STORAGE_KEY = 'quxu:session'
@@ -104,19 +104,15 @@ export function useSessionRestore() {
     restoring.value = true
     restoreError.value = null
     try {
-      // 探活：向后端要下一题
-      const q = await testApi.nextQuestion(data.sessionId)
-      // 成功 — 顺便更新 total（防止题库版本变化）
-      persist(q.total === data.total ? data.sessionId : data.sessionId, q.total)
-      return { ...data, total: q.total }
-    } catch (e) {
-      // 会话已失效 / 已完成 — 清缓存
-      if (e instanceof ApiError && (e.status === 404 || e.status === 409)) {
+      // 本地探活：会话持久化在 localStorage（引擎 sessionManager），
+      // 无需网络。会话已删除或已完成时清缓存（与后端 404/409 语义一致）。
+      const info = sessionManager.getSessionInfo(data.sessionId)
+      if (!info || info.completed) {
         clear()
         return null
       }
-      restoreError.value = e instanceof ApiError ? e.message : '恢复失败'
-      return null
+      // 顺便更新 total（防止题库版本变化导致题数不一致）
+      return { ...data, total: info.total }
     } finally {
       restoring.value = false
     }

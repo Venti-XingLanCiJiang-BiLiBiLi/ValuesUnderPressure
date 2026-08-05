@@ -1,4 +1,3 @@
-import axios, { type AxiosError, type AxiosInstance } from 'axios'
 import type {
   CreateSessionRequest,
   CreateSessionResponse,
@@ -10,22 +9,23 @@ import type {
   SubmitAnswerRequest,
   SubmitAnswerResponse,
 } from '@/types/api'
+import { localTestApi } from '@/engine'
+import { SessionError } from '@/engine/session'
 
 /**
- * Axios 实例
- * - 开发环境：baseURL 走 Vite proxy (/api → http://127.0.0.1:8000)
- * - 生产环境：使用 import.meta.env.VITE_API_BASE_URL（部署时由 CI 注入）
- *            默认 '/api'，意味着前端和后端部署在同源（通过 nginx/cloudflare 等反代）
- *            部署到 GitHub Pages（静态托管）时，需在 CI 中设为后端公网 URL，例如：
- *              VITE_API_BASE_URL=https://api.your-domain.com/api
+ * 本地引擎 API 门面（替代原 axios REST 客户端）
+ * ============================================================================
+ * Toy 静态托管没有后端，所有「API」改由本地引擎（frontend/src/engine/）承担：
+ * 组卷、计分、会话状态机全部在浏览器内完成。
+ *
+ * - 方法签名与原 axios 版 testApi 完全一致，调用方（stores / views）无需改动；
+ * - 保留 ApiError 语义：引擎抛出的 SessionError 统一转换为 ApiError
+ *   （status / message），让现有 `e instanceof ApiError && e.status === 409`
+ *   之类的判断继续生效；
+ * - 无网络错误（status 0）场景，故原 requestWithRetry 重试逻辑不再需要。
+ * ============================================================================
  */
-const http: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
-  timeout: 15000,
-  headers: { 'Content-Type': 'application/json' },
-})
 
-// 统一错误：把后端 message 提取出来
 export class ApiError extends Error {
   status: number
   data: unknown
@@ -37,106 +37,49 @@ export class ApiError extends Error {
   }
 }
 
-http.interceptors.response.use(
-  (resp) => resp,
-  (error: AxiosError<{ detail?: string | { msg: string }[] }>) => {
-    const status = error.response?.status ?? 0
-    const payload = error.response?.data
-    let message = error.message
-    if (payload) {
-      if (typeof payload.detail === 'string') {
-        message = payload.detail
-      } else if (Array.isArray(payload.detail) && payload.detail[0]?.msg) {
-        message = payload.detail[0].msg
-      }
-    }
-    return Promise.reject(new ApiError(message, status, payload))
-  },
-)
-
-/**
- * 带指数退避的请求重试（#20）
- * ============================================================================
- * - 仅对「网络层错误」重试：超时 / 断连 / 无 HTTP 响应
- *   （拦截器已把 axios 错误转成 ApiError，此时 status === 0）。
- * - 业务错误（4xx/5xx，status !== 0，如 404/409/422）不重试，
- *   避免无意义地重复提交或掩盖业务语义。
- * - 默认最多重试 3 次，退避 1s → 2s → 4s。
- * ============================================================================
- */
-async function requestWithRetry<T>(
-  fn: () => Promise<T>,
-  retries = 3,
-  delay = 1000,
-): Promise<T> {
+/** 把引擎错误统一转换为 ApiError，保持调用方错误处理不变。 */
+async function adapt<T>(fn: () => Promise<T>): Promise<T> {
   try {
     return await fn()
   } catch (e) {
-    const retriable = e instanceof ApiError && e.status === 0
-    if (retries <= 0 || !retriable) throw e
-    await new Promise((r) => setTimeout(r, delay))
-    return requestWithRetry(fn, retries - 1, delay * 2)
+    if (e instanceof SessionError) {
+      throw new ApiError(e.message, e.status, e)
+    }
+    throw e
   }
 }
 
 export const testApi = {
   async health(): Promise<HealthResponse> {
-    return requestWithRetry(async () => {
-      const { data } = await http.get<HealthResponse>('/health')
-      return data
-    })
+    return adapt(() => localTestApi.health())
   },
 
   async getDimensions(): Promise<Record<string, DimensionMeta>> {
-    return requestWithRetry(async () => {
-      const { data } = await http.get<Record<string, DimensionMeta>>('/dimensions')
-      return data
-    })
+    return adapt(() => localTestApi.getDimensions())
   },
 
-  /** 拉取隐私政策（含实际保留期），供 /privacy 页展示。 */
   async getPrivacy(): Promise<PrivacyResponse> {
-    return requestWithRetry(async () => {
-      const { data } = await http.get<PrivacyResponse>('/meta/privacy')
-      return data
-    })
+    return adapt(() => localTestApi.getPrivacy())
   },
 
-  async createSession(req: CreateSessionRequest = {}): Promise<CreateSessionResponse> {
-    return requestWithRetry(async () => {
-      const { data } = await http.post<CreateSessionResponse>('/test/session', {
-        length: req.length ?? 40,
-        dimensions: req.dimensions ?? null,
-      })
-      return data
-    })
+  async createSession(
+    req: CreateSessionRequest = {},
+  ): Promise<CreateSessionResponse> {
+    return adapt(() => localTestApi.createSession(req))
   },
 
   async nextQuestion(sessionId: string): Promise<QuestionResponse> {
-    return requestWithRetry(async () => {
-      const { data } = await http.get<QuestionResponse>(`/test/session/${sessionId}/question`)
-      return data
-    })
+    return adapt(() => localTestApi.nextQuestion(sessionId))
   },
 
-  async submitAnswer(sessionId: string, req: SubmitAnswerRequest): Promise<SubmitAnswerResponse> {
-    // 提交属写操作：网络波动时重试 2 次（退避 1s → 2s）；业务错误不重试
-    return requestWithRetry(
-      async () => {
-        const { data } = await http.post<SubmitAnswerResponse>(
-          `/test/session/${sessionId}/answer`,
-          req,
-        )
-        return data
-      },
-      2,
-    )
+  async submitAnswer(
+    sessionId: string,
+    req: SubmitAnswerRequest,
+  ): Promise<SubmitAnswerResponse> {
+    return adapt(() => localTestApi.submitAnswer(sessionId, req))
   },
 
   async getResult(sessionId: string): Promise<ResultResponse> {
-    return requestWithRetry(async () => {
-      const { data } = await http.get<ResultResponse>(`/test/session/${sessionId}/result`)
-      return data
-    })
+    return adapt(() => localTestApi.getResult(sessionId))
   },
 }

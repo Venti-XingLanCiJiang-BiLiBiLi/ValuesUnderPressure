@@ -2,16 +2,13 @@
  * 维度元数据（前端本地副本）
  * ============================================================================
  * 10 个核心价值维度的元数据。前端在结果页用作"维度名 → 颜色 / 图标"映射，
- * 以及"分数 → 倾向文案"的回退（当后端 description 为空时）。
+ * 以及"分数 → 倾向文案"的回退（当描述为空时）。
  *
- * **权威源**：`backend/app/dimensions.py`（后端）/ `docs/DimensionSystem.md`
- * 后端会通过 `GET /api/dimensions` 返回完整元数据，本文件仅做前端展示层
- * 需要的样式映射，避免每个组件都写一份 switch。
+ * **权威源**：`question-bank/v1/dimensions.json`（构建期内嵌）/
+ * `docs/DimensionSystem.md`。本文件仅做前端展示层需要的样式映射，
+ * 避免每个组件都写一份 switch。
  *
- * 保持本文件与 `backend/app/dimensions.py` 的 DIMENSIONS 字典 ID 一致。
- *
- * @deprecated DIMENSION_BAR_COLOR 和 DIMENSION_EMOJI 是纯前端样式映射，
- *   不应由后端生成。如需新增维度，请同时更新此文件和后端 dimensions.py。
+ * 保持本文件与 `question-bank/v1/dimensions.json` 的维度 ID 一致。
  * ============================================================================
  */
 

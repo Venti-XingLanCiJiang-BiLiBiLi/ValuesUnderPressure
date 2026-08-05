@@ -1,8 +1,0 @@
-{
-  "schema_version": "1",
-  "bank_version": "v1",
-  "questions_file": "questions.json",
-  "dimensions_file": "dimensions.json",
-  "questions_sha256": "0171939fb5367b115aae1a6fc0254aea48dae14c96e6659dd0bb6a6f3bae83b7",
-  "dimensions_sha256": "425e154be8a1ac60f414af07da2e9c91302a1c74e78af34f19b4feb6f661ab1e"
-}

@@ -4,6 +4,7 @@ import { testApi } from '@/api/client'
 import { useSessionStore } from '@/stores/session'
 import { useSessionRestore } from '@/composables/useSessionRestore'
 import { useArchives } from '@/composables/useArchives'
+import { useToyCloudArchive } from '@/composables/useToyCloudArchive'
 import type { ResultResponse } from '@/types/api'
 
 /**
@@ -35,6 +36,10 @@ export const useResultStore = defineStore('result', () => {
     if (res.completed) {
       const { saveArchive } = useArchives()
       saveArchive(res)
+      // Toy 环境：结果摘要自动备份到云端（按 B 站账号隔离）。
+      // fire-and-forget：失败（未登录 / 非 Toy 环境）不影响主流程。
+      const { saveToCloud } = useToyCloudArchive()
+      void saveToCloud(res).catch(() => undefined)
     }
     return res
   }

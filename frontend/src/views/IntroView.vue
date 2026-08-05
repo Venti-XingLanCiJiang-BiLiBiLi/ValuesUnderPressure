@@ -8,6 +8,7 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTestStore } from '@/stores/test'
 import { useArchives } from '@/composables/useArchives'
+import { useToyCloudArchive, type CloudArchiveEntry } from '@/composables/useToyCloudArchive'
 import { BRAND } from '@/config/branding'
 import { testApi } from '@/api/client'
 import type { DimensionMeta, DimensionScore, ResultResponse } from '@/types/api'
@@ -23,6 +24,16 @@ const localError = ref<string | null>(null)
 /** #16：维度元数据来自后端 GET /api/dimensions（单一数据源，避免前端硬编码漂移）。 */
 const dimensionMeta = ref<Record<string, DimensionMeta> | null>(null)
 
+/** Toy 云存档（结果云备份，按 B 站账号隔离）。 */
+const {
+  supported: cloudSupported,
+  refreshSupported,
+  listCloudArchives,
+  deleteCloudArchive,
+} = useToyCloudArchive()
+const cloudArchives = ref<CloudArchiveEntry[]>([])
+const cloudLoading = ref(false)
+
 onMounted(async () => {
   try {
     dimensionMeta.value = await testApi.getDimensions()
@@ -30,7 +41,36 @@ onMounted(async () => {
     // 后端不可用时静默隐藏维度区块，不影响开屏页其余功能
     console.warn('[IntroView] 拉取维度元数据失败：', e)
   }
+  await loadCloudArchives()
 })
+
+async function loadCloudArchives() {
+  await refreshSupported()
+  if (!cloudSupported.value) return
+  cloudLoading.value = true
+  try {
+    cloudArchives.value = await listCloudArchives()
+  } finally {
+    cloudLoading.value = false
+  }
+}
+
+/** 从云端摘要取分数最高的前 3 个维度（列表快速预览）。 */
+function topCloudDimensions(entry: CloudArchiveEntry) {
+  return Object.entries(entry.dims)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([id, score]) => {
+      const meta = dimensionMeta.value?.[id]
+      return { id, name: meta?.name ?? id, score }
+    })
+}
+
+async function removeCloudArchive(ts: number) {
+  if (await deleteCloudArchive(ts)) {
+    cloudArchives.value = cloudArchives.value.filter((e) => e.t !== ts)
+  }
+}
 
 /** 格式化存档时间戳为 "YYYY-MM-DD HH:mm"。 */
 function formatDate(ts: number) {
@@ -273,6 +313,68 @@ async function handleStart() {
     >
       完成一次测试后，结果会自动保存为本地存档，方便以后回顾。
     </p>
+
+    <!-- ============================== 云端存档（Toy） ============================== -->
+    <div v-if="cloudSupported" class="mt-10 animate-fade-in">
+      <div class="flex items-baseline justify-between gap-3 mb-3">
+        <h2 class="font-serif text-xl font-semibold text-ink-900 dark:text-ink-100">
+          ☁️ 云端存档
+        </h2>
+        <span class="text-xs text-ink-500 dark:text-ink-400">
+          {{ cloudArchives.length }} 条 · 按 B 站账号隔离
+        </span>
+      </div>
+      <div v-if="cloudLoading" class="text-sm text-ink-500 dark:text-ink-400">
+        加载中…
+      </div>
+      <div v-else-if="cloudArchives.length > 0" class="space-y-3">
+        <div
+          v-for="e in cloudArchives"
+          :key="e.t"
+          class="card p-4 sm:p-5 flex items-center gap-4"
+        >
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="text-xs font-mono text-ink-500 dark:text-ink-400 tabular-nums">
+                {{ formatDate(e.t) }}
+              </span>
+              <span class="text-xs text-ink-400 dark:text-ink-500">·</span>
+              <span class="text-xs text-ink-500 dark:text-ink-400">
+                {{ e.q }} 题 · 置信度 {{ Math.round(e.c * 100) }}%
+              </span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span
+                v-for="d in topCloudDimensions(e)"
+                :key="d.id"
+                class="inline-flex items-center gap-1 rounded-full bg-ink-100 px-2.5 py-0.5 text-xs
+                       text-ink-700 dark:bg-ink-800 dark:text-ink-200"
+              >
+                {{ d.name }}
+                <span class="font-mono text-ink-500 dark:text-ink-400">
+                  {{ Math.round(d.score) }}
+                </span>
+              </span>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn-ghost shrink-0 !px-3 !py-2 text-sm text-red-600 hover:bg-red-50
+                   dark:text-red-400 dark:hover:bg-red-950/40"
+            :title="`删除 ${formatDate(e.t)} 的云端存档`"
+            @click="removeCloudArchive(e.t)"
+          >
+            删除
+          </button>
+        </div>
+      </div>
+      <p
+        v-else
+        class="text-xs text-ink-400 dark:text-ink-500"
+      >
+        完成测试后，结果摘要会自动备份到云端（需登录 B 站），换设备也能查看。
+      </p>
+    </div>
 
     <p class="mt-4 text-center text-xs text-ink-500 dark:text-ink-400">
       本测试不需要登录，答案仅用于生成你的结果。
