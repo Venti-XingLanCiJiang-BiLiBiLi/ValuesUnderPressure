@@ -111,14 +111,20 @@ export interface BankIndex {
   groups: BankIndexGroup[]
 }
 
-/** 维度元数据（dimensions.json，abbr 为展示层字段，引擎保留原样）。 */
+/** 维度元数据（dimensions.json v1.6 规范字段，引擎保留原样）。 */
 export interface RawDimensionMeta {
   abbr: string
-  name: string
+  /** 中文展示名（规范字段） */
+  label: string
   description: string
-  direction: [string, string]
-  high: string
-  low: string
+  /** 低分端倾向标签（分值条左端） */
+  low_score_label: string
+  /** 低分端表现描述 */
+  low_score_description: string
+  /** 高分端倾向标签（分值条右端） */
+  high_score_label: string
+  /** 高分端表现描述 */
+  high_score_description: string
 }
 
 export type RawDimensionsJson = Record<string, RawDimensionMeta>

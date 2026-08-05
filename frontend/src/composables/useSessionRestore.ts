@@ -85,8 +85,34 @@ export function useSessionRestore() {
     }
   }
 
+  /** 清扫残留的答案/进度本地缓存：按命名空间前缀全量清除，不依赖会话数据是否存在。 */
+  function sweepLocalCaches() {
+    try {
+      // localStorage 持久、可能跨会话残留（旧标签页/崩溃/会话数据已过期），全量清扫
+      const answerKeys: string[] = []
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i)
+        if (k && k.startsWith('quxu:answers:')) answerKeys.push(k)
+      }
+      answerKeys.forEach((k) => localStorage.removeItem(k))
+
+      // 进度缓存随标签页关闭自动清除，这里兜底清当前标签页的残留
+      const progressKeys: string[] = []
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const k = sessionStorage.key(i)
+        if (k && k.startsWith('quxu:progress:')) progressKeys.push(k)
+      }
+      progressKeys.forEach((k) => sessionStorage.removeItem(k))
+    } catch {
+      // ignore
+    }
+  }
+
   function clear() {
     try {
+      // 即使会话数据已丢失（sessionStorage 被清 / 24h 过期 / 跨标签页），
+      // 也能清掉 localStorage 里残留的答案缓存，避免脏数据累积。
+      sweepLocalCaches()
       sessionStorage.removeItem(STORAGE_KEY)
       sessionStorage.removeItem(RESULT_KEY)
     } catch {

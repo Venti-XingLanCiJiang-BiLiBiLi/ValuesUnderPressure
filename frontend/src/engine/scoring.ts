@@ -172,7 +172,7 @@ export function scoreSession(
 
     dimResults[dim] = {
       dimension: dim,
-      name: meta.name,
+      name: meta.label,
       raw_score: raw,
       min_possible: lo,
       max_possible: hi,
@@ -271,14 +271,14 @@ export function describe(
   }
 
   if (score >= HIGH_SCORE_THRESHOLD) {
-    return [meta.direction[1], meta.high]
+    return [meta.high_score_label, meta.high_score_description]
   }
   if (score <= LOW_SCORE_THRESHOLD) {
-    return [meta.direction[0], meta.low]
+    return [meta.low_score_label, meta.low_score_description]
   }
   return [
     '中间地带',
-    `你在「${meta.direction[0]} vs ${meta.direction[1]}」之间没有非常明确的倾向，更可能依据具体情境权衡。`,
+    `你在「${meta.low_score_label} vs ${meta.high_score_label}」之间没有非常明确的倾向，更可能依据具体情境权衡。`,
   ]
 }
 

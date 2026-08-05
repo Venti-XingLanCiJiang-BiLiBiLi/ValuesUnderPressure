@@ -1,15 +1,16 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * ArchiveView — 存档查看页
  * --------------------------------------------------------------------------
  * 从 localStorage 读取指定 sessionId 的存档结果并展示，
- * 支持返回首页与删除该条存档。
+ * 支持返回首页、删除该条存档与生成分享图片（复用 ShareResultModal）。
  * 数据完全来自本地，无需后端。
  */
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useArchives } from '@/composables/useArchives'
 import ResultContent from '@/components/ResultContent.vue'
+import ShareResultModal from '@/components/ShareResultModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -17,6 +18,8 @@ const { getArchive, deleteArchive } = useArchives()
 
 const sessionId = computed(() => String(route.params.sessionId))
 const archive = computed(() => getArchive(sessionId.value))
+
+const showShare = ref(false)
 
 const formattedDate = computed(() => {
   const t = archive.value?.savedAt
@@ -62,7 +65,10 @@ function remove() {
     <ResultContent :result="archive.result" />
 
     <div class="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
-      <button type="button" class="btn-primary flex-1" @click="goBack">
+      <button type="button" class="btn-primary flex-1" @click="showShare = true">
+        分享结果
+      </button>
+      <button type="button" class="btn-ghost flex-1" @click="goBack">
         返回首页
       </button>
     </div>
@@ -80,4 +86,7 @@ function remove() {
       <button type="button" class="btn-primary" @click="goBack">返回首页</button>
     </div>
   </section>
+
+  <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
+  <ShareResultModal v-model:show="showShare" :result="archive?.result ?? null" />
 </template>

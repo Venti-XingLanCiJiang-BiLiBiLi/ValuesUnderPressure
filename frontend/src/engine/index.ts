@@ -118,9 +118,16 @@ export const localTestApi = {
     const payload: Record<string, DimensionMeta> = {}
     for (const [dim, meta] of Object.entries(DIMENSIONS)) {
       payload[dim] = {
-        name: meta.name,
+        abbr: meta.abbr,
+        label: meta.label,
         description: meta.description,
-        direction: meta.direction,
+        low_score_label: meta.low_score_label,
+        low_score_description: meta.low_score_description,
+        high_score_label: meta.high_score_label,
+        high_score_description: meta.high_score_description,
+        // 兼容别名：历史调用方（旧存档/旧组件）零改动
+        name: meta.label,
+        direction: [meta.low_score_label, meta.high_score_label],
       }
     }
     return payload

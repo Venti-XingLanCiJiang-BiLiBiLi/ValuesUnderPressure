@@ -10,7 +10,7 @@ import { useTestStore } from '@/stores/test'
 import { useArchives } from '@/composables/useArchives'
 import { useToyCloudArchive, type CloudArchiveEntry } from '@/composables/useToyCloudArchive'
 import { BRAND } from '@/config/branding'
-import { testApi } from '@/api/client'
+import { useDimensionMeta } from '@/composables/useDimensionMeta'
 import type { DimensionMeta, DimensionScore, ResultResponse } from '@/types/api'
 
 const router = useRouter()
@@ -21,8 +21,8 @@ const questionCount = ref(50)
 const starting = ref(false)
 const localError = ref<string | null>(null)
 
-/** #16：维度元数据来自后端 GET /api/dimensions（单一数据源，避免前端硬编码漂移）。 */
-const dimensionMeta = ref<Record<string, DimensionMeta> | null>(null)
+/** #16：维度元数据来自本地引擎 GET /api/dimensions（单一数据源，复用模块级缓存）。 */
+const { meta: dimensionMeta, load } = useDimensionMeta()
 
 /** Toy 云存档（结果云备份，按 B 站账号隔离）。 */
 const {
@@ -34,15 +34,26 @@ const {
 const cloudArchives = ref<CloudArchiveEntry[]>([])
 const cloudLoading = ref(false)
 
-onMounted(async () => {
-  try {
-    dimensionMeta.value = await testApi.getDimensions()
-  } catch (e) {
-    // 后端不可用时静默隐藏维度区块，不影响开屏页其余功能
-    console.warn('[IntroView] 拉取维度元数据失败：', e)
-  }
-  await loadCloudArchives()
+onMounted(() => {
+  // 幂等拉取：失败时静默，维度区块自动隐藏，不影响开屏页其余功能
+  void load()
+  void loadCloudArchives()
 })
+
+/** 维度中文名：优先规范字段 label，兼容旧 name，最后兜底英文 id。 */
+function dimLabel(id: string, meta: DimensionMeta): string {
+  return meta.label || meta.name || id
+}
+
+/** 低分端倾向标签：优先 low_score_label，兼容旧 direction[0]，兜底英文 id。 */
+function dimLow(id: string, meta: DimensionMeta): string {
+  return meta.low_score_label || meta.direction?.[0] || id
+}
+
+/** 高分端倾向标签：优先 high_score_label，兼容旧 direction[1]，兜底英文 id。 */
+function dimHigh(id: string, meta: DimensionMeta): string {
+  return meta.high_score_label || meta.direction?.[1] || id
+}
 
 async function loadCloudArchives() {
   await refreshSupported()
@@ -62,7 +73,7 @@ function topCloudDimensions(entry: CloudArchiveEntry) {
     .slice(0, 3)
     .map(([id, score]) => {
       const meta = dimensionMeta.value?.[id]
-      return { id, name: meta?.name ?? id, score }
+      return { id, name: meta?.label ?? meta?.name ?? id, score }
     })
 }
 
@@ -148,7 +159,7 @@ async function handleStart() {
       </div>
     </div>
 
-    <!-- ============== 价值维度（#16：由后端 /api/dimensions 同步） ============== -->
+    <!-- ============== 价值维度（#16：由本地引擎 /api/dimensions 同步） ============== -->
     <div v-if="dimensionMeta" class="card p-6 sm:p-8 mb-6 animate-fade-in">
       <h2 class="font-serif text-xl font-semibold text-ink-900 dark:text-ink-100 mb-4">
         {{ Object.keys(dimensionMeta).length }} 个价值维度
@@ -161,10 +172,10 @@ async function handleStart() {
                  dark:border-ink-700 dark:bg-ink-900/40"
         >
           <h3 class="font-serif text-sm font-semibold text-ink-900 dark:text-ink-100 mb-1">
-            {{ meta.name }}
+            {{ dimLabel(id, meta) }}
           </h3>
           <p class="mb-1.5 font-mono text-xs text-ink-500 dark:text-ink-400">
-            {{ meta.direction[0] }} ⇄ {{ meta.direction[1] }}
+            {{ dimLow(id, meta) }} ⇄ {{ dimHigh(id, meta) }}
           </p>
           <p class="text-[13px] leading-relaxed text-ink-700 dark:text-ink-300">
             {{ meta.description }}
@@ -240,7 +251,7 @@ async function handleStart() {
         {{ localError }}
         <br />
         <span class="text-xs text-red-600 dark:text-red-400">
-          请确认后端服务已启动（默认 http://127.0.0.1:8000）。
+          本地引擎初始化失败，请刷新页面重试。
         </span>
       </p>
     </div>

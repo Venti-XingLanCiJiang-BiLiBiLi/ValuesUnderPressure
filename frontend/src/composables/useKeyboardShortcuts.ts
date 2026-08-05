@@ -1,18 +1,19 @@
-import { onMounted, onUnmounted } from 'vue'
+﻿import { onMounted, onUnmounted } from 'vue'
 
 /**
- * 答题键盘快捷键（#19）
+ * 答题键盘快捷键（#19 演进）
  * ============================================================================
  * 在挂载时注册全局 keydown 监听，卸载时移除。
  * 按键映射（与视觉提示一致）：
- *   Y / →        → onYes
- *   N / ←        → onNo
- *   ↑ / Backspace → onBack
- *   ↓            → onNext
+ *   Y             → onYes
+ *   N             → onNo
+ *   ← (ArrowLeft) → onBack（上一题）
+ *   → (ArrowRight)→ onNext（下一题）
  * 规则：
+ * - 只在挂载该 composable 的页面（答题页）生效；
  * - 焦点在输入框（INPUT / TEXTAREA / SELECT）时不触发，避免干扰输入；
- * - 长按连发（e.repeat）不触发，防止按住 Y 连续答多题；
- * - 触发时 preventDefault，避免 Backspace 触发浏览器后退。
+ * - 长按连发（e.repeat）不触发，防止按住按键连续操作多题；
+ * - 触发时 preventDefault，避免方向键滚动页面。
  * ============================================================================
  */
 
@@ -34,21 +35,18 @@ export function useKeyboardShortcuts(handlers: KeyboardShortcutHandlers) {
 
     switch (e.key.toLowerCase()) {
       case 'y':
-      case 'arrowright':
         e.preventDefault()
         handlers.onYes?.()
         break
       case 'n':
-      case 'arrowleft':
         e.preventDefault()
         handlers.onNo?.()
         break
-      case 'arrowup':
-      case 'backspace':
+      case 'arrowleft':
         e.preventDefault()
         handlers.onBack?.()
         break
-      case 'arrowdown':
+      case 'arrowright':
         e.preventDefault()
         handlers.onNext?.()
         break

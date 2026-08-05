@@ -1,4 +1,4 @@
-# 性格测试价值维度体系设计
+﻿# 性格测试价值维度体系设计
 
 ## 1. 设计原则
 
@@ -23,13 +23,35 @@
 
 ## 3. 维度数据格式
 
-维度元数据（英文 ID → 中文 name/description/direction 等）存放在**题库版本目录**
+维度元数据（英文 ID → 中文 label/description 及高低分表现）存放在**题库版本目录**
 `question-bank/<version>/dimensions.json`，与题目同版本管理，作为前后端统一的单一数据源：
 
 - 后端启动时从该文件加载 `DIMENSIONS`（`backend/app/dimensions.py`），并通过
   `GET /api/dimensions` 提供给前端；
-- 前端结果页/首页的维度中文标签均来自后端返回，不单独维护副本；
+- 前端结果页/首页的维度中文标签与高低分表现均来自后端返回，不单独维护副本；
 - 修改维度名称、描述或方向时，只需改 `question-bank/<version>/dimensions.json`。
+
+**数据结构（规范字段）**：每个维度固定包含英文 ID（对象键）、中文展示标签与
+高低分两端的表现标签/描述：
+
+```json
+{
+  "privacy": {
+    "abbr": "PR",
+    "label": "隐私保护",
+    "description": "对个人边界和信息控制的需求",
+    "low_score_label": "开放共享",
+    "low_score_description": "…",
+    "high_score_label": "隐私保护",
+    "high_score_description": "…"
+  }
+}
+```
+
+后端加载时会在内存中补全旧版兼容别名（`name` = `label`、
+`direction` = `[low_score_label, high_score_label]`、`high`/`low` =
+`high_score_description`/`low_score_description`），历史调用方零改动；
+**新增展示一律使用规范字段**。
 
 **加载失败处理**（`backend/app/dimensions.py`）：
 
@@ -38,19 +60,6 @@
 - **生产环境**（`APP_ENV=production|prod`）：`dimensions.json` **缺失或损坏**时
   **禁止回退内置默认**，直接抛错（含当前题库版本、文件路径与修复建议），避免题库
   版本与维度定义不匹配导致测评结果错误。
-
-```json
-{
-  "privacy": {
-    "abbr": "PR",
-    "name": "隐私保护",
-    "description": "对个人边界和信息控制的需求",
-    "direction": ["开放共享", "隐私保护"],
-    "high": "…",
-    "low": "…"
-  }
-}
-```
 
 ## 4. 输出原则
 
