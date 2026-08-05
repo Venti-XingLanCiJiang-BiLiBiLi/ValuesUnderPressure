@@ -71,6 +71,19 @@ def compute_sha256(path: str) -> str:
     return h.hexdigest()
 
 
+def compute_text_sha256(path: str) -> str:
+    """计算文本文件（UTF-8）的 sha256，计算前先把换行规范化为 LF（CRLF -> LF）。
+
+    题库 JSON 在 Windows（core.autocrlf=true）工作区为 CRLF，而 git 仓库与
+    Linux 服务器/CI checkout 出来是 LF；若按原始字节哈希，manifest 会因换行符
+    不同而跨平台不一致。规范化后无论在哪台机器生成/校验，questions.json 与
+    dimensions.json 的哈希都稳定等于 git 版本，生产环境不再误报"manifest 不对应"。
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        text = f.read().replace("\r\n", "\n")
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
 def load_manifest(bank_dir: str) -> dict:
     """读取题库版本目录的 manifest.json；缺失或非法时抛 ManifestError。"""
     path = os.path.join(bank_dir, MANIFEST_FILENAME)
@@ -105,8 +118,9 @@ def build_manifest(bank_dir: str) -> dict:
         "bank_version": bank_version,
         "questions_file": "questions.json",
         "dimensions_file": "dimensions.json",
-        "questions_sha256": compute_sha256(questions_path),
-        "dimensions_sha256": compute_sha256(dimensions_path),
+        # 用换行规范化（LF）后的哈希，保证跨平台（Windows/Linux/CI）一致
+        "questions_sha256": compute_text_sha256(questions_path),
+        "dimensions_sha256": compute_text_sha256(dimensions_path),
     }
 
 
@@ -164,8 +178,11 @@ def validate_manifest(bank_dir: str) -> dict:
 
 
 def _verify_hash(bank_version: str, path: str, expected: str, label: str) -> None:
-    """校验单文件 sha256；不一致时抛 ManifestError（含实际/期望哈希与修复建议）。"""
-    actual = compute_sha256(path)
+    """校验单文件 sha256（与生成端一致，按 LF 规范化换行计算）。
+
+    不一致时抛 ManifestError（含实际/期望哈希与修复建议）。
+    """
+    actual = compute_text_sha256(path)
     if actual.lower() != expected.lower():
         raise ManifestError(
             f"[{bank_version}] {label} 与 manifest 不一致（题库数据已变更）:\n"

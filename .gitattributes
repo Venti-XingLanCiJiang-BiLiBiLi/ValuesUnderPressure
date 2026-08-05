@@ -17,3 +17,6 @@ docker-compose*.yaml  text eol=lf
 
 # 服务单元 / 其它 Linux 配置文件
 *.service             text eol=lf
+
+# 题库 JSON：强制 LF（manifest 哈希基于 LF 规范化内容，避免 Windows 生成差异）
+question-bank/**/*.json   text eol=lf
