@@ -7,6 +7,10 @@
 > 本分支为 **B 站 Toy 适配版**：引擎、题库、结果生成全部在浏览器本地完成，无后端服务。
 > 服务器版（FastAPI + SQLite）见主分支。
 
+## 在线体验（GitHub Pages）
+
+<https://Venti-XingLanCiJiang-BiLiBiLi.github.io/ValuesUnderPressure/>
+
 ## 功能特性
 
 - **10 个核心价值维度**：自我保护 🛡️ / 利他 🤝 / 自由 🕊️ / 安全 🔒 / 隐私 👁️ / 财富 💰 / 规则 ⚖️ / 务实 🎯 / 集体 👥 / 长期 🌱
