@@ -29,4 +29,6 @@ agent.md
 
 # B 站 Toy 的 SDK / 帮助文件（本地查阅，不入库）
 bilitoy_help
-frontend/vup-toy.zip
+
+# B 站 Toy 打包产物（pack-toy.ps1 输出到根目录）
+vup-toy.zip
