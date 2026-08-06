@@ -71,7 +71,9 @@ async function copyLink() {
 </script>
 
 <template>
-  <section v-if="store.result" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
+  <!-- 单根包裹：避免 fragment 根节点导致 <Transition> 无法对组件根执行过渡 -->
+  <div>
+    <section v-if="store.result" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
     <!-- ============================== 结果内容 ============================== -->
     <ResultContent :result="store.result" />
 
@@ -107,6 +109,7 @@ async function copyLink() {
     </div>
   </section>
 
-  <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
-  <ShareResultModal v-model:show="showShare" :result="store.result" />
+    <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
+    <ShareResultModal v-model:show="showShare" :result="store.result" />
+  </div>
 </template>
