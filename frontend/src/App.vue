@@ -85,8 +85,12 @@ onMounted(async () => {
       <!-- #20：全局错误边界，避免后代组件异常导致整页白屏 -->
       <ErrorBoundary>
         <RouterView v-slot="{ Component, route: r }">
+          <!--
+            不使用 mode="out-in"：out-in 需等旧组件离开完成才挂载新组件，
+            当新旧组件根节点类型不同（如结果页 <div> → 首页 <section>）时，
+            该 Vue 版本会卡死在离开阶段导致页面空白。改用默认过渡模式。
+          -->
           <Transition
-            mode="out-in"
             enter-active-class="transition-all duration-300 ease-out"
             leave-active-class="transition-all duration-200 ease-in"
             enter-from-class="opacity-0 translate-y-2"

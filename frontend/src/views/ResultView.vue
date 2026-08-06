@@ -71,42 +71,45 @@ async function copyLink() {
 </script>
 
 <template>
-  <section v-if="store.result" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
-    <!-- ============================== 结果内容 ============================== -->
-    <ResultContent :result="store.result" />
+  <!-- 单根包裹：避免 fragment 根节点导致 App.vue 的 <Transition> 离开动画卡死 -->
+  <div>
+    <section v-if="store.result" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
+      <!-- ============================== 结果内容 ============================== -->
+      <ResultContent :result="store.result" />
 
-    <!-- ============================== 行动 ============================== -->
-    <div class="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
-      <button type="button" class="btn-primary flex-1" @click="shareResult">
-        分享结果
-      </button>
-      <button type="button" class="btn-ghost flex-1" @click="copyLink">
-        <span v-if="!showShareHint">复制链接</span>
-        <span v-else>已复制 ✓</span>
-      </button>
-      <button type="button" class="btn-ghost flex-1" @click="startOver">
-        再测一次
-      </button>
-    </div>
+      <!-- ============================== 行动 ============================== -->
+      <div class="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <button type="button" class="btn-primary flex-1" @click="shareResult">
+          分享结果
+        </button>
+        <button type="button" class="btn-ghost flex-1" @click="copyLink">
+          <span v-if="!showShareHint">复制链接</span>
+          <span v-else>已复制 ✓</span>
+        </button>
+        <button type="button" class="btn-ghost flex-1" @click="startOver">
+          再测一次
+        </button>
+      </div>
 
-    <p
-      class="mt-8 text-center text-xs text-ink-500 dark:text-ink-400 leading-relaxed"
-    >
-      这份结果不是你的"人格标签"。<br />
-      允许自己在不同情境下呈现不同倾向，这就是真实的人。
-    </p>
-  </section>
+      <p
+        class="mt-8 text-center text-xs text-ink-500 dark:text-ink-400 leading-relaxed"
+      >
+        这份结果不是你的"人格标签"。<br />
+        允许自己在不同情境下呈现不同倾向，这就是真实的人。
+      </p>
+    </section>
 
-  <section v-else class="mx-auto max-w-3xl px-6 py-20">
-    <LoadingState v-if="store.loading" label="正在生成你的价值画像…" />
-    <div v-else class="text-center">
-      <p class="text-ink-500 dark:text-ink-400">还没有测试结果</p>
-      <button class="btn-primary mt-4" @click="router.push({ name: 'intro' })">
-        开始测试
-      </button>
-    </div>
-  </section>
+    <section v-else class="mx-auto max-w-3xl px-6 py-20">
+      <LoadingState v-if="store.loading" label="正在生成你的价值画像…" />
+      <div v-else class="text-center">
+        <p class="text-ink-500 dark:text-ink-400">还没有测试结果</p>
+        <button class="btn-primary mt-4" @click="router.push({ name: 'intro' })">
+          开始测试
+        </button>
+      </div>
+    </section>
 
-  <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
-  <ShareResultModal v-model:show="showShare" :result="store.result" />
+    <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
+    <ShareResultModal v-model:show="showShare" :result="store.result" />
+  </div>
 </template>

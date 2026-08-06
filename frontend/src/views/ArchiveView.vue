@@ -87,77 +87,80 @@ async function remove() {
 </script>
 
 <template>
-  <!-- 云端加载中 -->
-  <section
-    v-if="cloudLoading"
-    class="mx-auto max-w-3xl px-6 py-20 flex flex-col items-center gap-3"
-    role="status"
-  >
-    <span
-      class="inline-block h-8 w-8 animate-spin rounded-full border-2 border-ink-200 border-t-ember-500"
-    />
-    <p class="text-sm text-ink-500 dark:text-ink-400">正在加载云端存档…</p>
-  </section>
-
-  <section v-else-if="result" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
-    <!-- ============================== 存档头部 ============================== -->
-    <div class="flex items-center justify-between gap-3 mb-6 animate-fade-in">
-      <button type="button" class="btn-ghost shrink-0" @click="goBack">← 返回</button>
+  <!-- 单根包裹：避免 fragment 根节点导致 App.vue 的 <Transition> 离开动画卡死 -->
+  <div>
+    <!-- 云端加载中 -->
+    <section
+      v-if="cloudLoading"
+      class="mx-auto max-w-3xl px-6 py-20 flex flex-col items-center gap-3"
+      role="status"
+    >
       <span
-        class="text-xs text-ink-500 dark:text-ink-400 font-mono tabular-nums truncate"
-        :title="`存档时间：${formattedDate}`"
-      >
-        {{ isCloud ? '☁️' : '📁' }} {{ formattedDate }}
-      </span>
-      <button
-        type="button"
-        class="btn-ghost shrink-0 text-red-600 hover:bg-red-50
-               dark:text-red-400 dark:hover:bg-red-950/40"
-        @click="remove"
-      >
-        删除存档
-      </button>
-    </div>
+        class="inline-block h-8 w-8 animate-spin rounded-full border-2 border-ink-200 border-t-ember-500"
+      />
+      <p class="text-sm text-ink-500 dark:text-ink-400">正在加载云端存档…</p>
+    </section>
 
-    <!-- ============================== 存档内容 ============================== -->
-    <ResultContent :result="result" />
+    <section v-else-if="result" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
+      <!-- ============================== 存档头部 ============================== -->
+      <div class="flex items-center justify-between gap-3 mb-6 animate-fade-in">
+        <button type="button" class="btn-ghost shrink-0" @click="goBack">← 返回</button>
+        <span
+          class="text-xs text-ink-500 dark:text-ink-400 font-mono tabular-nums truncate"
+          :title="`存档时间：${formattedDate}`"
+        >
+          {{ isCloud ? '☁️' : '📁' }} {{ formattedDate }}
+        </span>
+        <button
+          type="button"
+          class="btn-ghost shrink-0 text-red-600 hover:bg-red-50
+                 dark:text-red-400 dark:hover:bg-red-950/40"
+          @click="remove"
+        >
+          删除存档
+        </button>
+      </div>
 
-    <div class="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
-      <button type="button" class="btn-primary flex-1" @click="showShare = true">
-        分享结果
-      </button>
-      <button type="button" class="btn-ghost flex-1" @click="goBack">
-        返回首页
-      </button>
-    </div>
-  </section>
+      <!-- ============================== 存档内容 ============================== -->
+      <ResultContent :result="result" />
 
-  <section v-else-if="cloudFailed" class="mx-auto max-w-3xl px-6 py-20">
-    <div class="text-center animate-fade-in">
-      <div class="text-4xl mb-3">☁️</div>
-      <p class="text-ink-500 dark:text-ink-400 mb-2">
-        云端存档读取失败或数据不完整
-      </p>
-      <p class="text-xs text-ink-400 dark:text-ink-500 mb-6">
-        可能未登录 B 站、存储被清理或仅剩摘要数据，请返回重新查看。
-      </p>
-      <button type="button" class="btn-primary" @click="goBack">返回首页</button>
-    </div>
-  </section>
+      <div class="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <button type="button" class="btn-primary flex-1" @click="showShare = true">
+          分享结果
+        </button>
+        <button type="button" class="btn-ghost flex-1" @click="goBack">
+          返回首页
+        </button>
+      </div>
+    </section>
 
-  <section v-else class="mx-auto max-w-3xl px-6 py-20">
-    <div class="text-center animate-fade-in">
-      <div class="text-4xl mb-3">🗂️</div>
-      <p class="text-ink-500 dark:text-ink-400 mb-2">
-        存档不存在或已被删除
-      </p>
-      <p class="text-xs text-ink-400 dark:text-ink-500 mb-6">
-        完成一次测试后，结果会自动保存为本地存档。
-      </p>
-      <button type="button" class="btn-primary" @click="goBack">返回首页</button>
-    </div>
-  </section>
+    <section v-else-if="cloudFailed" class="mx-auto max-w-3xl px-6 py-20">
+      <div class="text-center animate-fade-in">
+        <div class="text-4xl mb-3">☁️</div>
+        <p class="text-ink-500 dark:text-ink-400 mb-2">
+          云端存档读取失败或数据不完整
+        </p>
+        <p class="text-xs text-ink-400 dark:text-ink-500 mb-6">
+          可能未登录 B 站、存储被清理或仅剩摘要数据，请返回重新查看。
+        </p>
+        <button type="button" class="btn-primary" @click="goBack">返回首页</button>
+      </div>
+    </section>
 
-  <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
-  <ShareResultModal v-model:show="showShare" :result="result" />
+    <section v-else class="mx-auto max-w-3xl px-6 py-20">
+      <div class="text-center animate-fade-in">
+        <div class="text-4xl mb-3">🗂️</div>
+        <p class="text-ink-500 dark:text-ink-400 mb-2">
+          存档不存在或已被删除
+        </p>
+        <p class="text-xs text-ink-400 dark:text-ink-500 mb-6">
+          完成一次测试后，结果会自动保存为本地存档。
+        </p>
+        <button type="button" class="btn-primary" @click="goBack">返回首页</button>
+      </div>
+    </section>
+
+    <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
+    <ShareResultModal v-model:show="showShare" :result="result" />
+  </div>
 </template>
