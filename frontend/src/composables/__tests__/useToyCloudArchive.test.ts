@@ -3,14 +3,16 @@
  * ============================================================================
  * 通过注入假 window.toy（内存存储）验证：
  *   - saveToCloud：latest + h<ts> 双写、摘要符合 value ≤1024B 约束、完整结果分块写入；
+ *   - saveToCloud 幂等：同 session 重复保存只留一份（旧 h<ts> 与分块被删除）；
  *   - 容量管理：占满 128 key 时先删最旧历史份（含其分块）再写；
  *   - listCloudArchives：按时间倒序、latest 与 h 同时间戳去重；
+ *   - listCloudArchives 清理旧重复数据：内容相同的多条历史仅保留最新，云端删除其余（含分块）；
  *   - getCloudResult：跨 r<ts>_<n> 分块重组完整结果，缺块返回 null；
  *   - deleteCloudArchive：删除 h、结果分块并清理指向它的 latest；
  *   - 非 Toy 环境（无 window.toy）：静默降级不抛错。
  */
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   entrySizeOk,
   historyTimestamp,
@@ -166,6 +168,35 @@ describe('saveToCloud', () => {
     expect(restored).toEqual(source)
   })
 
+  it('同 session 重复保存幂等：旧 h<ts> 与分块被删除，云端只留一份', async () => {
+    vi.useFakeTimers()
+    try {
+      const fake = makeFakeToy()
+      mountToy(fake)
+      const { saveToCloud } = useToyCloudArchive()
+      const source = makeResult({ confidence: 0.88, answered_count: 70, total: 70 })
+
+      // 第一次保存：t=1000
+      vi.setSystemTime(1000)
+      const first = await saveToCloud(source)
+      expect(first.ok).toBe(true)
+      expect(Object.keys(fake.store).filter((k) => k.startsWith('h'))).toEqual(['h1000'])
+
+      // 再次保存同一结果（模拟 fetchResult 被多次触发）：t=2000
+      vi.setSystemTime(2000)
+      const second = await saveToCloud(source)
+      expect(second.ok).toBe(true)
+      // 同 session 只留一份历史，旧份 h1000 与其完整结果分块已被删除
+      expect(Object.keys(fake.store).filter((k) => k.startsWith('h'))).toEqual(['h2000'])
+      expect(fake.store.h1000).toBeUndefined()
+      expect(Object.keys(fake.store).some((k) => k.startsWith('r1000_'))).toBe(false)
+      // 新份完整结果分块已写入
+      expect(Object.keys(fake.store).some((k) => k.startsWith('r2000_'))).toBe(true)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
   it('完整结果过大时降级：仅备份摘要、不写分块，latest 仍正常写入', async () => {
     const fake = makeFakeToy()
     mountToy(fake)
@@ -238,6 +269,34 @@ describe('listCloudArchives', () => {
     const list = await listCloudArchives()
     expect(list).toHaveLength(1)
     expect(list[0]!.t).toBe(3000)
+  })
+
+  it('清理旧重复数据：内容相同的多条历史仅保留最新，云端删除其余（含分块）', async () => {
+    // 模拟旧数据：同一次结果被多次保存产生的重复（无 session_id），时间戳仅毫秒级差异
+    const entry = (t: number) =>
+      JSON.stringify({ v: 1, t, q: 70, c: 0.21, cf: 0, dims: { a: 10, b: 20, c: 30 } })
+    const fake = makeFakeToy({
+      h1000: entry(1000),
+      h1001: entry(1001),
+      h1002: entry(1002),
+      latest: entry(1002),
+      r1000_0: '{',
+      r1001_0: '{',
+      r1002_0: '{',
+    })
+    mountToy(fake)
+    const { listCloudArchives } = useToyCloudArchive()
+    const list = await listCloudArchives()
+    // 只保留最新一份
+    expect(list.map((e) => e.t)).toEqual([1002])
+    // 云端已清理：旧历史与旧分块被删除，最新份与 latest 指针保留
+    expect(fake.store.h1000).toBeUndefined()
+    expect(fake.store.h1001).toBeUndefined()
+    expect(fake.store.h1002).toBeDefined()
+    expect(fake.store.r1000_0).toBeUndefined()
+    expect(fake.store.r1001_0).toBeUndefined()
+    expect(fake.store.r1002_0).toBeDefined()
+    expect(fake.store.latest).toBeDefined()
   })
 })
 
