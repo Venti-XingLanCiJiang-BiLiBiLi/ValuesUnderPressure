@@ -41,7 +41,9 @@ function remove() {
 </script>
 
 <template>
-  <section v-if="archive" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
+  <!-- 单根包裹：避免 fragment 根节点导致 App.vue 的 <Transition mode="out-in"> 离开动画卡死 -->
+  <div>
+    <section v-if="archive" class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
     <!-- ============================== 存档头部 ============================== -->
     <div class="flex items-center justify-between gap-3 mb-6 animate-fade-in">
       <button type="button" class="btn-ghost shrink-0" @click="goBack">← 返回</button>
@@ -87,6 +89,7 @@ function remove() {
     </div>
   </section>
 
-  <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
-  <ShareResultModal v-model:show="showShare" :result="archive?.result ?? null" />
+    <!-- 分享预览弹窗（结果页与存档页共用的唯一分享实现） -->
+    <ShareResultModal v-model:show="showShare" :result="archive?.result ?? null" />
+  </div>
 </template>

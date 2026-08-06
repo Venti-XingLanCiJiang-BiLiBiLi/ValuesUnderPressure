@@ -2,6 +2,15 @@
 
 本文件记录取舍之间 (Values Under Pressure, VUP) 项目的变更（题库、后端、前端与部署）。格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.5.2] - 2026-08-06
+
+### 修复
+
+- **「再测一次」后页面空白卡死**（`frontend/src/App.vue`、`frontend/src/views/ResultView.vue`、`frontend/src/views/ArchiveView.vue`）：
+  - 修复从结果页 / 存档页通过 SPA 导航离开（如点击「再测一次」、点 Logo 返回首页）时页面主体变空白、必须刷新才能恢复的问题；
+  - 根因：`App.vue` 的 `<Transition mode="out-in">` 在旧组件根节点类型与新组件不同（结果页根 `<div>` → 首页根 `<section>`）时，卡死在离开阶段，导致新页面组件不再渲染；
+  - 修复方式：`<Transition>` 去掉 `mode="out-in"`（改用默认过渡模式，新旧组件同时过渡，不再等待离开完成）；`ResultView` / `ArchiveView` 模板统一改为单根节点（外层包 `<div>`），消除 fragment 根节点在 `<Transition>` 内不可动画的警告。
+
 ## [1.5.1] - 2026-08-05
 
 ### 新增
